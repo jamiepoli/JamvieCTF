@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jamvie, of CTF practise</title>
+    <title>Jamvie</title>
     <link>https://jamvie.net/</link>
-    <description>Recent content on Jamvie, of CTF practise</description>
+    <description>Recent content on Jamvie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 21 Apr 2020 00:23:24 -0600</lastBuildDate>
@@ -17,8 +17,8 @@
       <pubDate>Tue, 21 Apr 2020 00:23:24 -0600</pubDate>
       
       <guid>https://jamvie.net/about/</guid>
-      <description>Hello! I am a software developer based in Canada with a passion for all things computer security. I&amp;rsquo;m currently studying to finish my Computer Science degree - hopefully, after graduating I&amp;rsquo;ll end up in the cybersec field doing something I love.
-Here, I post all my writeups and other related content - I figured it would be better to have them here than just in a folder in my desktop, collecting clutter.</description>
+      <description>Hello! I am a software developer based in Canada with a passion for all things computer security. I&amp;rsquo;m currently studying to finish my Computer Science degree - hopefully, after graduating I&amp;rsquo;ll end up in the field doing something I love.
+What is a CTF? Short for &amp;ldquo;Capture the Flag&amp;rdquo;, CTFs are competitions that involve solving challenges using methods that would pertain to the general practise of cybersecurity. Challenges you might see include things like cryptography of all varieties, web-based pwns such as SQL injection, and even the classic stack overflows given a program.</description>
     </item>
     
     <item>

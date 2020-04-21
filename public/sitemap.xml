@@ -3,12 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jamvie.net/about/</loc>
+    <loc>https://jamvie.net/</loc>
     <lastmod>2020-04-21T00:23:24-06:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://jamvie.net/</loc>
+    <loc>https://jamvie.net/about/</loc>
     <lastmod>2020-04-21T00:23:24-06:00</lastmod>
   </url>
   
