@@ -1,0 +1,12 @@
+---
+title: "About"
+date: 2020-04-21T00:23:24-06:00
+draft: false
+---
+
+Hello! I am a software developer based in Canada with a passion for all things computer security. I'm currently studying to finish my Computer Science degree - hopefully, after graduating I'll end up in the field doing something I love.
+
+<h2>**What is a CTF?**</h2>
+Short for "Capture the Flag", CTFs are competitions that involve solving challenges using methods that would pertain to the general practise of cybersecurity. Challenges you might see include things like cryptography of all varieties, web-based pwns such as SQL injection, and even the classic stack overflows given a program. While all in the name of good fun, CTFs are a great way to improve upon your ethical security skills and hopefully assist in making you a more security-conscious person. 
+
+Here, I post all my writeups and other related content - I figured it would be better to have them here than just in a folder in my desktop, collecting clutter. I mainly like to do web-based CTF challenges, however I hope to grow my skills into the fields of CTF topics as well! 

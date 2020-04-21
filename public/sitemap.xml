@@ -3,26 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/posts/initialpost00/</loc>
+    <loc>https://jamvie.net/about/</loc>
+    <lastmod>2020-04-21T00:23:24-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2020-04-21T00:23:24-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/posts/initialpost00/</loc>
     <lastmod>2020-04-20T21:27:12-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>https://jamvie.net/posts/</loc>
     <lastmod>2020-04-20T21:27:12-06:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/posts/</loc>
-    <lastmod>2020-04-20T21:27:12-06:00</lastmod>
+    <loc>https://jamvie.net/categories/</loc>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://jamvie.net/tags/</loc>
   </url>
   
 </urlset>

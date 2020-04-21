@@ -1,4 +1,19 @@
 baseURL = "https://jamvie.net/"
 languageCode = "en-us"
-title = "Jamvie, of CTF practise"
+title = "Jamvie"
 theme = "casper3" 
+author = "Jam Polintan"
+
+
+[params]
+github = "https://github.com/jamiepoli"
+description = "A blog about Capture the Flag competitions from a software dev who does it for fun."
+mainSections = ["posts"]
+
+
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 10
