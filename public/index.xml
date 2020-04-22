@@ -6,10 +6,21 @@
     <description>Recent content on Jamvie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Apr 2020 00:23:24 -0600</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2020 00:46:19 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>UTCTF 2020: Epic Admin Pwn  </title>
+      <link>https://jamvie.net/posts/utctf01/</link>
+      <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/utctf01/</guid>
+      <description>I particpated in UTCTF with my team in March 2020. A very fun SQLi-based attack!
+We are presented with a clean and minimal login page. The challenge&amp;rsquo;s description says that &amp;ldquo;the password is the flag&amp;rdquo;. Well, since this is only a login page, I&amp;rsquo;d figure to try and get into admin somehow.
+Initial attempts to do some scoping for SQL vulnerabilities didn&amp;rsquo;t do anything. Inputting a single quote &amp;lsquo; mark wouldn&amp;rsquo;t show anything useful.</description>
+    </item>
     
     <item>
       <title>About</title>
@@ -17,8 +28,8 @@
       <pubDate>Tue, 21 Apr 2020 00:23:24 -0600</pubDate>
       
       <guid>https://jamvie.net/about/</guid>
-      <description>Hello! I am a software developer based in Canada with a passion for all things computer security. I&amp;rsquo;m currently studying to finish my Computer Science degree - hopefully, after graduating I&amp;rsquo;ll end up in the field doing something I love.
-What is a CTF? Short for &amp;ldquo;Capture the Flag&amp;rdquo;, CTFs are competitions that involve solving challenges using methods that would pertain to the general practise of cybersecurity. Challenges you might see include things like cryptography of all varieties, web-based pwns such as SQL injection, and even the classic stack overflows given a program.</description>
+      <description>Hello! I&amp;rsquo;m Jamvie, a software developer based in Canada with a passion for all things computer security. I&amp;rsquo;m currently studying to finish my Computer Science degree - hopefully, after graduating I&amp;rsquo;ll end up in the field doing something I love. Besides cybersecurity, I like to do art, keep up with fashion, and talk about nature.
+What is a CTF? Short for &amp;ldquo;Capture the Flag&amp;rdquo;, CTFs are competitions that involve solving challenges using methods that would pertain to the general practise of cybersecurity.</description>
     </item>
     
     <item>

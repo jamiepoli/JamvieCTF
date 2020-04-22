@@ -6,7 +6,7 @@
 
     
     
-    <title>Jamvie&#39;s first post · Jamvie</title>
+    <title>UTCTF 2020: Epic Admin Pwn   · Jamvie</title>
 
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,7 +49,7 @@
 
                 
 
-                <h1 class="post-full-title">Jamvie&#39;s first post</h1>
+                <h1 class="post-full-title">UTCTF 2020: Epic Admin Pwn  </h1>
 
                 
 
@@ -75,8 +75,8 @@
                                 <h4 class="author-name">Jamvie</h4>
                             
                             <div class="byline-meta-content">
-                                <time class="byline-meta-date" datetime="2020-94-04">20 April 2020</time>
-                                <span class="byline-reading-time"><span class="bull">&bull;</span> 1 min read</span>
+                                <time class="byline-meta-date" datetime="2020-124-04">22 April 2020</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 2 min read</span>
                             </div>
                         </section>
 
@@ -90,12 +90,27 @@
 
             <section class="post-full-content">
                 <div class="post-content">
-                    <p>Hi, and welcome to my CTF blog. I&rsquo;m just a software dev with a hobby for CTFs, and I thought a blog would be a good way to stash all my long-archived writeups for CTF challenges I participated in. I&rsquo;m by no means an expert on the topic, but if someone stumbles upon here and gains a newfound interest in cybersecurity, that would be pretty cool.</p>
+                    <p>I particpated in UTCTF with my team in March 2020. A very fun SQLi-based attack!</p>
 
-<p>Over the next few weeks I will upload my old writeups for some CTFs that occurred this year and last, so stay tuned!</p>
+<p>We are presented with a clean and minimal login page. The challenge&rsquo;s description says that &ldquo;the password is the flag&rdquo;. Well, since this is only a login page, I&rsquo;d figure to try and get into admin somehow.</p>
 
-<p>Jam
-:)</p>
+<p>Initial attempts to do some scoping for SQL vulnerabilities didn&rsquo;t do anything. Inputting a single quote &lsquo; mark wouldn&rsquo;t show anything useful. So, I went in kinda blind, and did a pretty standard SQL attack: <code>admin--</code> which, if there was vulnerable SQL queries to be had, would malform the query to only return the entries where the username == admin.
+And it worked!</p>
+
+<p>It&rsquo;s a static welcome page, so I didn&rsquo;t get anything useful past learning that the admin&rsquo;s username was, in fact, admin. And the challenge&rsquo;s description told me as such - if I wanted the password, I needed to do something else.</p>
+
+<p>The fact that I got into admin meant that I malformed the SQL query so that it would ignore any sort of password checking. But, I kinda need some form of password validation in order to get any headstart on what it was. Luckily, SQL utilizes alot of logic-based keywords that lets us essentially guess the password with custom SQL we inject into it. We would want to inject rogue SQL so that the underlying query would look like,</p>
+
+<pre><code class="language-SQL">
+admin' AND password LIKE .....
+
+</code></pre>
+
+<p>While I use the SQL &lsquo;LIKE&rsquo; keyword here, another keyword called &ldquo;substr&rdquo; exists that I prefer. A teammate of mine actually created a script that bruteforced the alphanumerics letter by letter until we printed the password, but I decided to take a shot at creating one myself using binary search <del>because I haven&rsquo;t properly and correctly implemented that algorithm since 2nd year</del>:</p>
+
+<pre><code class="language-python"></code></pre>
+
+<p>The idea here is to test out every character against the password&rsquo;s character at the given index. If they match, store it into our buffer array. When we reach the nullbyte character which terminates strings, then we print out the buffer, which should have correctly found the password!</p>
 
                 </div>
             </section>
@@ -106,9 +121,7 @@
 </main>
 <aside class="read-next outer">
     <div class="inner">
-        <div class="read-next-feed">
-
-            <article class="post-card post
+        <div class="read-next-feed"><article class="post-card post
  no-image
  ">
 
@@ -116,18 +129,17 @@
     
         <div class="post-card-content">
     
-            <a class="post-card-content-link" href="https://jamvie.net/posts/utctf01/">
+            <a class="post-card-content-link" href="https://jamvie.net/posts/initialpost00/">
     
                 <header class="post-card-header">
                     
 
-                    <h2 class="post-card-title">UTCTF 2020: Epic Admin Pwn  </h2>
+                    <h2 class="post-card-title">Jamvie&#39;s first post</h2>
                 </header>
     
                 <section class="post-card-excerpt">
-                    <p>I particpated in UTCTF with my team in March 2020. A very fun SQLi-based attack!
-We are presented with a clean and minimal login page. The challenge&rsquo;s description says that &ldquo;the password is the flag&rdquo;. Well, since this is only a login page, I&rsquo;d figure to try and get into admin somehow.
-Initial attempts to do some scoping for SQL vulnerabilities didn&rsquo;t do anything. Inputting a single quote &lsquo; mark wouldn&rsquo;t show anything useful.</p>
+                    <p>Hi, and welcome to my CTF blog. I&rsquo;m just a software dev with a hobby for CTFs, and I thought a blog would be a good way to stash all my long-archived writeups for CTF challenges I participated in. I&rsquo;m by no means an expert on the topic, but if someone stumbles upon here and gains a newfound interest in cybersecurity, that would be pretty cool.
+Over the next few weeks I will upload my old writeups for some CTFs that occurred this year and last, so stay tuned!</p>
                 </section>
     
             </a>
@@ -141,8 +153,8 @@ Initial attempts to do some scoping for SQL vulnerabilities didn&rsquo;t do anyt
                     </ul>
                     <div class="post-card-byline-content">
                         <span>Jamvie</span>
-                        <span class="post-card-byline-date"><time datetime="2020-124-04">22 April 2020</time>
-                            <span class="bull">&bull;</span> 2 min read</span>
+                        <span class="post-card-byline-date"><time datetime="2020-94-04">20 April 2020</time>
+                            <span class="bull">&bull;</span> 1 min read</span>
                     </div>
                 </footer>
     
@@ -150,6 +162,8 @@ Initial attempts to do some scoping for SQL vulnerabilities didn&rsquo;t do anyt
 
 </article>
     
+
+            
         </div>
     </div>
 </aside>

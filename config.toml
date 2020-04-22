@@ -9,6 +9,7 @@ author = "Jam Polintan"
 github = "https://github.com/jamiepoli"
 description = "A blog about Capture the Flag competitions from a software dev who does it for fun."
 mainSections = ["posts"]
+profile = "https://jamiepoli.github.io/img/profile.png"
 
 
 [menu]
