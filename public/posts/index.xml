@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Jamvie</title>
+    <title>Posts on Jamvie: CTF writeups and more</title>
     <link>https://jamvie.net/posts/</link>
-    <description>Recent content in Posts on Jamvie</description>
+    <description>Recent content in Posts on Jamvie: CTF writeups and more</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 22 Apr 2020 00:46:19 -0600</lastBuildDate>
@@ -12,14 +12,21 @@
     
     
     <item>
+      <title>CONfidence 2020: CatWeb</title>
+      <link>https://jamvie.net/posts/confidence2020_01/</link>
+      <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/confidence2020_01/</guid>
+      <description>&lt;p&gt;I participated in CONfidence CTF 2020 in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>UTCTF 2020: Epic Admin Pwn  </title>
       <link>https://jamvie.net/posts/utctf01/</link>
       <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
       
       <guid>https://jamvie.net/posts/utctf01/</guid>
-      <description>I particpated in UTCTF with my team in March 2020. A very fun SQLi-based attack!
-We are presented with a clean and minimal login page. The challenge&amp;rsquo;s description says that &amp;ldquo;the password is the flag&amp;rdquo;. Well, since this is only a login page, I&amp;rsquo;d figure to try and get into admin somehow.
-Initial attempts to do some scoping for SQL vulnerabilities didn&amp;rsquo;t do anything. Inputting a single quote &amp;lsquo; mark wouldn&amp;rsquo;t show anything useful.</description>
+      <description>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</description>
     </item>
     
     <item>

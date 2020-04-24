@@ -8,6 +8,9 @@ author: "Jamvie"
 I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas [ISSS](https://www.isss.io/). My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.
 
 
+Let's Begin!
+----
+
 We are presented with a clean and minimal login page. The challenge's description says that "the password is the flag". Well, since this is only a login page, I'd figure to try and get into admin somehow.
 
 
@@ -59,6 +62,10 @@ for index in range(0, 40):
 ```
 
 The "req" var here is our custom SQL. The idea here is to test out every character against the password's character at the given index. If they match, store it into our buffer array. When we reach the nullbyte character which terminates strings, then we print out the buffer, which should have correctly found the password! 
+
+```
+utflag{dual1pa1sp3rf3ct}
+```
 
 Note that, we could technically put anything we wanted into the password field - our input to it never gets checked, because we override whatever checking existed for it with our custom SQL. 
 
