@@ -6,7 +6,7 @@ author: "Jamvie"
 feature_image: https://images.pexels.com/photos/1643456/pexels-photo-1643456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 ---
 
-I participated in CONfidence CTF 2020 in March of this year, hosted by [P4](https://p4.team/). I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise. 
+I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise. 
 <!--more-->
 
 Let's Begin!
@@ -89,7 +89,7 @@ file:///app/templates/index.html?", "status": "ok", "content":["\u0022><script s
 ```flag:p4{can_i_haz_a_piece_of_flag_pliz?}```
 
 
-This was a cool challenge to do that really helped me stretch my XSS skills and teach me how to be thorough when scoping out webpages for possible XSS attacks. I quite enjoyed this challenge! :)
+This was a cool challenge to do that really helped me stretch my XSS skills and teach me how to be thorough when scoping out webpages for possible XSS attacks. I quite enjoyed this challenge! Thank you to [P4](https://p4.team/) for hosting the CONfidence 2020 teaser :) 
 
 References
 ----
