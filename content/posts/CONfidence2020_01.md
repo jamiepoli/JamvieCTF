@@ -61,13 +61,10 @@ I traversed through the directories, but in the templates subfolder...
 
 ![flagLocn](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebFlagLocn.png)
 
-Aha! The ```flag.txt``` file is in there. Now we just need to somehow read it from the browser. The fact that I was able to find the local files like this means something: the path of templates looks alot like
+Aha! The ```flag.txt``` file is in there. Now we just need to somehow read it from the browser. The fact that I was able to find the local files like this means something: the path of templates looks alot like ```file:///app/templates/flag.txt``` - Note the root path name: file. A same-origin policy here could treat all files with this starting origin as from the same place. 
 
-```
-file:///app/templates/flag.txt
-```
 
-```flag.txt``` is locally saved - everything in ```templates``` is locally saved. We can use this to our advantage: create an XSS attack on the ``file://`` path.
+We can use this to our advantage: create an XSS attack on the ```file://``` path.
 
 Since an XSS endpoint was found using the JSON vulnerabilities in the URL, and there exists a report function, this is all a pretty classic XSS attack from here:
 
@@ -91,6 +88,10 @@ Now we wait for our server to retrieve the flag for us once someone checks out o
 
 
 This was a cool challenge to do that really helped me stretch my XSS skills and teach me how to be thorough when scoping out webpages for possible XSS attacks. I quite enjoyed this challenge! Thank you to [P4](https://p4.team/) for hosting the CONfidence 2020 teaser :) 
+
+
+Jam 
+
 
 References
 ----
