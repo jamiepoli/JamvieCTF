@@ -1,6 +1,6 @@
 baseURL = "https://jamvie.net/"
 languageCode = "en-us"
-title = "Jamvie"
+title = "Jamvie: CTF writeups and more"
 theme = "casper3" 
 author = "Jam Polintan"
 
