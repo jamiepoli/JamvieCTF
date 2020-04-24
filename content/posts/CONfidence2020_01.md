@@ -67,7 +67,7 @@ Aha! The ```flag.txt``` file is in there. Now we just need to somehow read it fr
 file:///app/templates/flag.txt
 ```
 
-````flag.txt``` is locally saved - everything in ```templates``` is locally saved. We can use this to our advantage: create an XSS attack on the ``file://`` path.
+```flag.txt``` is locally saved - everything in ```templates``` is locally saved. We can use this to our advantage: create an XSS attack on the ``file://`` path.
 
 Since an XSS endpoint was found using the JSON vulnerabilities in the URL, and there exists a report function, this is all a pretty classic XSS attack from here:
 
