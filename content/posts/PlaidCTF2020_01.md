@@ -38,7 +38,7 @@ I spent a long time trying to figure out how to send a rogue request to the rabb
 
 Until I came across this piece of code in the api index.ts file: 
 
-```typescript
+```js
     app.get("/image", async (req, res) => {
         let { url } = req.query;
         if (typeof url !== "string") {
@@ -51,7 +51,10 @@ Until I came across this piece of code in the api index.ts file:
         if (parsed.protocol === "http:" || parsed.protocol === "https:") {
             const imageReq = await fetch(parsed.toString(), { method: "GET" });
             image = await (imageReq as any).buffer();
-        } else if (parsed.protocol === "ftp:") {
+        } 
+        
+         //THIS PART HERE!
+        else if (parsed.protocol === "ftp:") {
             let username = decodeURIComponent(parsed.username);
             let password = decodeURIComponent(parsed.password);
             let filename = decodeURIComponent(parsed.pathname);
@@ -84,3 +87,5 @@ Here's something I learned in my internet computing class about the FTP protocol
 We are going to hide FTP commands in an HTTP message that we hide in our profile picture png, and through some working around, will let the FTP server open a connection with the rabbitmq server that will allow us to send the request to send an email with the flag.txt as an attachment to it. Confused? Same! 
 
 But nonetheless I had a vague idea of what I wanted to do so I began working on my exploit.
+
+TODO: finish
