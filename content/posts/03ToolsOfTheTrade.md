@@ -22,6 +22,8 @@ Let's Begin!
 
 <h3> 1. Curl </h3>
 
+![cURL_Logo](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/curl-logo.svg)
+
 https://curl.haxx.se/
 
 A must! Curl is short for "Client URL". It's a simple and lightweight command-line tool to transfer data using various network protocols. I use it for basic GET and POST HTTP requests, but its so versatile it can be used for much more! In its simplest form, Curl is amazing to send data to and from a specified server. 
@@ -29,6 +31,8 @@ A must! Curl is short for "Client URL". It's a simple and lightweight command-li
 [In my CONfidence 2020 write-up for the "Cat Web" problem](https://jamvie.net/posts/confidence2020_01/), I use cURL heavily to examine the response data from the server with each post request I make. 
 
 <h3> 2. Wireshark </h3>
+
+![WireShark_Logo]()
 
 https://www.wireshark.org/
 
