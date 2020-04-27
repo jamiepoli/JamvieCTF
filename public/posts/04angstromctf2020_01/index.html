@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>AngstromCTF 2020: UBI · Jamvie: CTF writeups and more</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    <link rel="stylesheet" href="https://jamvie.net/style.main.min.d17e80797ff527ead27a684535a2ae633c413f520c03a563651145b43345ecf3.css" />
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        
+            <a class="site-nav-logo" href="https://jamvie.net/">Jamvie: CTF writeups and more</a>
+        
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="/about/">About</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post  no-image ">
+
+            <header class="post-full-header">
+
+                
+
+                <h1 class="post-full-title">AngstromCTF 2020: UBI</h1>
+
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        
+
+                        <section class="post-full-byline-meta">
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2020-14-04">26 April 2020</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 2 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="https://cdn.hausarzt.digital/wp-content/uploads/2019/07/AdobeStock_239849231_burnout_nadia_snopek_jpeg-lowres-150dpi-rgb-1000x1000.jpg" alt="AngstromCTF 2020: UBI" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>This challenge was easily one of the most complex ones I came across. It was so complex, in fact, I didn&rsquo;t end up solving it during the CTF, I had finished it 3 days after.</p>
+
+<p>Have you ever heard of appcache poisoning?</p>
+
+<p>I guess, the first thing to ask, is do you know about the cache manifest in HTML5?</p>
+
+<p>the tl;dr of it is that your appcache dramatically imrpoves the performance of your browser by caching your most recently accessed file pages, predicated on the assumption that you&rsquo;ll most likely visit those sites again in the near future. It&rsquo;s the same ruleset as any other cache example in computer science, like in operating systems, the cache will keep a copy of any relevant data from memory that you are known to constantly access. So, instead of constantly returning to the same server/same place in memory, your cache just serves up the data instead, saving you the trip.</p>
+
+<p>The cache manifest lets you access webpages even without a network connection, provided you visited them recently when you had one.</p>
+
+<p>The idea here is to copy the relevant addresses into a manifest file, and so if you&rsquo;re offline, the browser only needs to check out this manifest file and rebuild the site with the metadata in it.</p>
+
+<p>Typically, your manifest file might look something like this:</p>
+
+<pre><code>&lt;html.manifest = cache.manifest&gt;
+CACHE MANIFEST 
+    /stylesheet.css
+    /index.html
+    /test.js
+    /test.png
+</code></pre>
+
+<p>So with that being said, one can possibly visit a server with malicious payloads in their manifest file that the cache will then save, and serve to others who use the program/client.</p>
+
+<p>TODO: Finish</p>
+
+<p>And that is the exploit of UBI in its entirety.</p>
+
+<p><em>incoherent screaming</em></p>
+
+<p>Jam</p>
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed"><article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://jamvie.net/posts/03toolsofthetrade/">
+                <img class="post-card-image"src="https://tinyurl.com/syqrnv6" alt="Commonly Used Software"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://jamvie.net/posts/03toolsofthetrade/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">Commonly Used Software</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p><p>I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.</p></p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Jamvie</div>
+                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Jamvie</span>
+                        <span class="post-card-byline-date"><time datetime="2020-14-04">26 April 2020</time>
+                            <span class="bull">&bull;</span> 4 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jamvie.net/">Jamvie: CTF writeups and more</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="https://jamvie.net/">Latest Posts</a>
+                    
+                    
+                    <a href="https://github.com/jamiepoli" target="_blank" rel="noopener">Github</a>
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

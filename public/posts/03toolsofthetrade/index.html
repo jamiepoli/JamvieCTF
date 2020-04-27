@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>Commonly Used Software · Jamvie: CTF writeups and more</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    <link rel="stylesheet" href="https://jamvie.net/style.main.min.d17e80797ff527ead27a684535a2ae633c413f520c03a563651145b43345ecf3.css" />
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        
+            <a class="site-nav-logo" href="https://jamvie.net/">Jamvie: CTF writeups and more</a>
+        
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="/about/">About</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post  no-image ">
+
+            <header class="post-full-header">
+
+                
+
+                <h1 class="post-full-title">Commonly Used Software</h1>
+
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Jamvie</h2>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="author-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Jamvie</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2020-14-04">26 April 2020</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 4 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+            <figure class="post-full-image">
+                <img src="https://tinyurl.com/syqrnv6" alt="Commonly Used Software" />
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.</p>
+
+<p>I typically take over the web challenges while my teammates delve into other topics - sometimes I look at the pwn problems, and hopefully I&rsquo;ll include some pwn writeups here! Eventually :P Anyway, as someone who focuses on web stuff, I found myself constantly utilizing the same types of tools and software to help me with challenges. I thought I&rsquo;d share them here!</p>
+
+<p>Web exploits are broad in topic and there definitely doesn&rsquo;t exist one tool for all sploits. However, as I got exposed to more challenges I found patterns in the problems. These patterns indicated the vulnerability that I should be taking advantage of, and therefore, what types of tools I needed to further investigate those vulnerabilities.</p>
+
+<p>However, before I get into the list I would like to make a statement about the nature of this post. This is NOT a cheatsheet on how to hack into your friend&rsquo;s facebook. &ldquo;Hacking&rdquo; for malicious purposes is illegal and can cost you <a href="https://criminal.findlaw.com/criminal-charges/hacking-laws-and-punishments.html">jail time and hefty fines</a>.</p>
+
+<p><strong>I will not divulge information on how to compromise the privacy of individuals without their consent.</strong>
+This is a CTF and ethical hacking blog only - what this post is, is a list of tools I found useful when scoping out web challenges for various CTFs!</p>
+
+<h2 id="let-s-begin">Let&rsquo;s Begin!</h2>
+
+<p><em>These are not ordered by priority or &ldquo;most utilized&rdquo;.</em></p>
+
+<hr />
+
+<h3> 1. Curl </h3>
+
+<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/curl-logo.svg" alt="cURL_Logo" /></p>
+
+<p align="center">
+<a href=https://curl.haxx.se>cURL</a>
+</p>
+
+<p>A must! cURL is short for &ldquo;Client URL&rdquo;. It&rsquo;s a simple and lightweight command-line tool to transfer data using various network protocols. I use it for basic GET and POST HTTP requests, but its so versatile it can be used for much more! In its simplest form, cURL is amazing to send data to and from a specified server.</p>
+
+<p><a href="https://jamvie.net/posts/02confidence2020_01/">In my CONfidence 2020 write-up for the &ldquo;Cat Web&rdquo; problem</a>, I use cURL heavily to examine the response data from the server with each post request I make.</p>
+
+<h3> 2. Wireshark </h3>
+
+<p align="center">
+<img width="460" height="300" src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/WireSharkLogo.png">
+</p>
+
+<p align="center">
+<a href= https://www.wireshark.org>WireShark Home Page</a>
+</p>
+
+<p>I gained knowledge in Wireshark back in my internet computing course days. I recieved a tutorial on the basics of how to use this software - it&rsquo;s a protocol analyzer designed to examine web traffic and capture packet data between two endpoints. This software can show and display packets on all levels of the OSI hierarchy structure - you can see your common HTTP packets, TCP, DNS, to name a common few&hellip;</p>
+
+<p>Plenty of forensic-based problems will give you a capture of internet traffic and hide a flag in there, so wireshark is useful even beyond the web challenges I use it for!</p>
+
+<h3> 3. Burp Suite </h3>
+
+<p align="center">
+<img width="460" height="300" src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/Burpsuite_card.png">
+</p>
+
+<p align="center">
+<a href=https://portswigger.net/burp>Burp Suite</a>
+</p>
+
+<p>From <a href="https://portswigger.net/support/how-to-use-burp-suite">PortSwigger, creators of BurpSuite</a>:</p>
+
+<blockquote>
+<p>Burp Suite is an integrated platform for performing security testing of web applications. It is designed to be used by hands-on testers to support the testing process.</p>
+</blockquote>
+
+<p>Burp Suite is perfect for testing out all sorts of exploits. It has much more use in testing non-production projects by enterprisal companies, and its a powerful tool for scoping out any possible vulnerabilities of an application. The community version comes with all the basic and necessary tools a CTFer or pentester would need to gauge the security of their application!</p>
+
+<p>Back in my <a href="https://jamvie.net/posts/01utctf01/">UTCTF &ldquo;Epic Admin Pwn&rdquo; writeup</a>, I mentioned using Burp Suite to scope out the SQLi attack vector and using SQLmap to further exploit it - which is a much faster way than creating your own script to utilize the attack vector that was found in it!</p>
+
+<h3> 4. Postman </h3>
+
+<p align="center">
+<img width="460" height="300" src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/Postman.png">
+</p>
+
+<p align="center">
+<a href=https://www.postman.com>Postman</a>
+</p>
+
+<p>If I need to send more complex requests that might make cURL more complex to use, Postman is my go to software. I don&rsquo;t just use Postman to send heavier requests to a server, it&rsquo;s also great for testing out RESTful APIs if you&rsquo;re creating one for a personal project. It has a clean UI and is extremely beginner-friendly, so Postman is my go-to for literally anything requiring RESTful API testing.</p>
+
+<h3> 5. SQLMap </h3>
+
+<p align="center">
+<img width="460" height="300" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Sqlmap_logo.png">
+</p>
+
+<p align="center">
+<a href=http://sqlmap.org>SQLmap</a>
+<p>
+
+SQLmap is a suite of great utilities specifically for SQL-injection based attacks. It automates the detection and exploitation of any SQL-based flaws in an application. It supports most if not all major databases (MySQL, SQLite, etc) and can do everything from simple detection to database table dumping.
+
+<h3> 6. Webhook.site </h3>
+
+<p align="center">
+<img width="250" height="300" src="https://d2.alternativeto.net/dist/icons/webhook-site_144103.jpg?width=200&height=200&mode=crop&upscale=false">
+</p>
+
+<p><p align="center">
+<a href=https://docs.webhook.site>Webhook.site Docs</a>
+<p></p>
+
+<p>I frequently alternate between generating a quick python-made server for XSS attacks, or using Webhook.site. This is a great tool if you don&rsquo;t want to make your own server or don&rsquo;t have your own website to host your payload javascript files for certain XSS attacks!</p>
+
+<hr />
+
+<p>While this is not an exhaustive list of all the tools I use, these are definitely among the most commonly used softwares that I go to when I need to test and utilize any vulnerabilities in a given CTF challenge. I hope these prove useful to you!</p>
+
+<p>Jam</p>
+
+<h2 id="references">References</h2>
+
+<p><a href="https://knowyourmeme.com/memes/hackerman">Feature Image</a></p>
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed"><article class="post-card post
+ no-image
+ ">
+
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://jamvie.net/posts/05plaidctf2020_01/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">PlaidCTF 2020: Contrived Web Problem</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p><p>This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unqiue problem, and I&rsquo;m glad they did!</p></p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip"></div>
+                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span></span>
+                        <span class="post-card-byline-date"><time datetime="2020-124-04">26 April 2020</time>
+                            <span class="bull">&bull;</span> 4 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://jamvie.net/posts/04angstromctf2020_01/">
+                <img class="post-card-image"src="https://cdn.hausarzt.digital/wp-content/uploads/2019/07/AdobeStock_239849231_burnout_nadia_snopek_jpeg-lowres-150dpi-rgb-1000x1000.jpg" alt="AngstromCTF 2020: UBI"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://jamvie.net/posts/04angstromctf2020_01/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">AngstromCTF 2020: UBI</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p><p>This challenge was easily one of the most complex ones I came across. It was so complex, in fact, I didn&rsquo;t end up solving it during the CTF, I had finished it 3 days after.</p></p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip"></div>
+                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span></span>
+                        <span class="post-card-byline-date"><time datetime="2020-14-04">26 April 2020</time>
+                            <span class="bull">&bull;</span> 2 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jamvie.net/">Jamvie: CTF writeups and more</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="https://jamvie.net/">Latest Posts</a>
+                    
+                    
+                    <a href="https://github.com/jamiepoli" target="_blank" rel="noopener">Github</a>
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

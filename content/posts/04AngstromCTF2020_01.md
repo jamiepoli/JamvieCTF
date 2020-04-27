@@ -2,6 +2,7 @@
 title: "AngstromCTF 2020: UBI"
 date: 2020-04-26T01:30:30-06:00
 draft: true
+feature_image: https://cdn.hausarzt.digital/wp-content/uploads/2019/07/AdobeStock_239849231_burnout_nadia_snopek_jpeg-lowres-150dpi-rgb-1000x1000.jpg
 ---
 
 This challenge was easily one of the most complex ones I came across. It was so complex, in fact, I didn't end up solving it during the CTF, I had finished it 3 days after.

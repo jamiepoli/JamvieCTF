@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>PlaidCTF 2020: Contrived Web Problem · Jamvie: CTF writeups and more</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    <link rel="stylesheet" href="https://jamvie.net/style.main.min.d17e80797ff527ead27a684535a2ae633c413f520c03a563651145b43345ecf3.css" />
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        
+            <a class="site-nav-logo" href="https://jamvie.net/">Jamvie: CTF writeups and more</a>
+        
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="/about/">About</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post  no-image ">
+
+            <header class="post-full-header">
+
+                
+
+                <h1 class="post-full-title">PlaidCTF 2020: Contrived Web Problem</h1>
+
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        
+
+                        <section class="post-full-byline-meta">
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2020-124-04">26 April 2020</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 4 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unqiue problem, and I&rsquo;m glad they did!</p>
+
+<p>This was a journey in understanding internet protocols that deepened my knowledge of them to completely new levels, so I&rsquo;m really grateful I got the chance to try this problem out - even though I tried it after the CTF ended :P</p>
+
+<h2 id="let-s-begin">Let&rsquo;s Begin!</h2>
+
+<p>This problem really holds up to its name. The website is simple - you have the option to login or register as a new user. Uniquely, we are given the source code for the problem.</p>
+
+<p>First things first then, since we have the source code, let&rsquo;s see if we can find any flag.txt files in it!</p>
+
+<p>That was really easy to find&hellip;
+It&rsquo;s in the services dockerfile, which is only used by api, email and server services. So, the vulnerability probably is within one of these services.</p>
+
+<p>I checked out api first - and I see that the only protocols that it allows are http, https and ftp.</p>
+
+<p>Looking at email next, which uses nodemailer. I&rsquo;m not too familiar with it, so I check out its documentation:</p>
+
+<p>This seems like a good loophole to exploit - we just need to specify the filepath and nodemailer will send an email with an attachment of whatever file we specified by the filepath. So, we will literally ask it to email us flag.txt!</p>
+
+<p>Now the hard part - how do we send a request to the server to send us the email with the flag as an attachment?</p>
+
+<p>I spent a long time trying to figure out how to send a rogue request to the rabbitmq server that will send us the email we want. I spent hours just browsing through the source code, not really paying attention&hellip;</p>
+
+<p>Until I came across this piece of code in the api index.ts file:</p>
+
+<pre><code class="language-js">    app.get(&quot;/image&quot;, async (req, res) =&gt; {
+        let { url } = req.query;
+        if (typeof url !== &quot;string&quot;) {
+            return res.status(500).send(&quot;Bad body&quot;);
+        }
+
+        let parsed = new URL(url);
+
+        let image: Buffer;
+        if (parsed.protocol === &quot;http:&quot; || parsed.protocol === &quot;https:&quot;) {
+            const imageReq = await fetch(parsed.toString(), { method: &quot;GET&quot; });
+            image = await (imageReq as any).buffer();
+        } 
+        
+         //THIS PART HERE!
+        else if (parsed.protocol === &quot;ftp:&quot;) {
+            let username = decodeURIComponent(parsed.username);
+            let password = decodeURIComponent(parsed.password);
+            let filename = decodeURIComponent(parsed.pathname);
+            let ftpClient = await connectFtp({
+                host: parsed.hostname,
+                port: parsed.port !== &quot;&quot; ? parseInt(parsed.port) : undefined,
+                user: username !== &quot;&quot; ? username : undefined,
+                password: password !== &quot;&quot; ? password : undefined,
+            });
+            image = await ftpClient.get(filename);
+        } else {
+            return res.status(500).send(&quot;Bad image url&quot;);
+        }
+                if (!isPNG(image)) {
+            return res.status(500).send(&quot;Bad image (not a png)&quot;);
+        }
+
+        res.type(&quot;.png&quot;).status(200).send(image);
+    })
+
+    app.listen(&quot;4101&quot;);
+
+</code></pre>
+
+<p>Image: the profile picture we would upload when we register as a new user. For HTTP and HTTPS protocols it&rsquo;s a simple GET method, not much to do there. But for ftp?
+It asks for the username, password and filename, <em>unchecked</em>, then asynchronously asks the server for the image that matches the filename of the image.
+FTP is a text-based protocol, and since username and password fields are passed to it unchecked, we could definitely inject some protocol commands and make ftp do things the user didn&rsquo;t intend for us to do.</p>
+
+<p>Here&rsquo;s something I learned in my internet computing class about the FTP protocol: the client must send the server the name/address and port that they want the server to connect to and send files to. Know where this is going?</p>
+
+<p>We are going to hide FTP commands in an HTTP message that we hide in our profile picture png, and through some working around, will let the FTP server open a connection with the rabbitmq server that will allow us to send the request to send an email with the flag.txt as an attachment to it. Confused? Same!</p>
+
+<p>But nonetheless I had a vague idea of what I wanted to do so I began working on my exploit.</p>
+
+<p>TODO: finish</p>
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed"><article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://jamvie.net/posts/02confidence2020_01/">
+                <img class="post-card-image"src="https://images.pexels.com/photos/1643456/pexels-photo-1643456.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" alt="CONfidence 2020: CatWeb"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://jamvie.net/posts/02confidence2020_01/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">CONfidence 2020: CatWeb</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p><p>I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.</p></p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Jamvie</div>
+                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Jamvie</span>
+                        <span class="post-card-byline-date"><time datetime="2020-124-04">22 April 2020</time>
+                            <span class="bull">&bull;</span> 3 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://jamvie.net/posts/03toolsofthetrade/">
+                <img class="post-card-image"src="https://tinyurl.com/syqrnv6" alt="Commonly Used Software"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://jamvie.net/posts/03toolsofthetrade/">
+    
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">Commonly Used Software</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p><p>I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.</p></p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Jamvie</div>
+                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Jamvie</span>
+                        <span class="post-card-byline-date"><time datetime="2020-14-04">26 April 2020</time>
+                            <span class="bull">&bull;</span> 4 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jamvie.net/">Jamvie: CTF writeups and more</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="https://jamvie.net/">Latest Posts</a>
+                    
+                    
+                    <a href="https://github.com/jamiepoli" target="_blank" rel="noopener">Github</a>
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
