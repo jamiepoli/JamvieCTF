@@ -5,7 +5,7 @@ draft: true
 feature_image: https://cdn.hausarzt.digital/wp-content/uploads/2019/07/AdobeStock_239849231_burnout_nadia_snopek_jpeg-lowres-150dpi-rgb-1000x1000.jpg
 ---
 
-This challenge was easily one of the most complex ones I came across. It was so complex, in fact, I didn't end up solving it during the CTF, I had finished it 3 days after.
+This challenge was easily one of the most complex ones I came across. It was so complex, in fact, I didn't end up solving it during the CTF, I had finished it 3 days after. 
 
 <!--more-->
 
@@ -31,6 +31,25 @@ CACHE MANIFEST
 ```
 
 So with that being said, one can possibly visit a server with malicious payloads in their manifest file that the cache will then save, and serve to others who use the program/client. 
+
+
+Anyway, keep this factoid about appcaches in mind. Now, on to the actual challenge itself...
+
+
+UBI stands for "Universal Build Integrator". The challenge has it's own-
+
+
+_Nice._
+
+Anyway, AngstromCTF's UBI is already being utilized by a site that hosts flags from other CTFs.
+
+
+We're also given the source code for this flags site, which, right off the bat, tells you this:
+
+
+Well that's neat. Obviously, the angstromCTF flag is hidden and otherwise inaccessible from the flags site. I mean, if it wasn't, this wouldn't be the hardest challenge I have ever done. _Ahaha._
+
+Now, I can play around with the headers in the flags site and put in some custom ones, and make an admin see these requests. So the first thing that comes to mind is an XSS of sorts. 
 
 TODO: Finish
 
