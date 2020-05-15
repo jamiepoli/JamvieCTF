@@ -1,7 +1,7 @@
 baseURL = "https://jamvie.net/"
-title = "Jamvie: CTF writeups and more"
+title = "Jamvie's CTF blog'"
 theme = "newsroom" 
-author = "Jam Polintan"
+author = "JamVie"
 
 paginate = 5
 DefaultContentLanguage = "en"
@@ -13,7 +13,6 @@ pygmentsOptions = "linenos=table"
 
 [params]
 github = "https://github.com/jamiepoli"
-description = "A blog about Capture the Flag competitions from a software dev who does it for fun."
 mainSections = ["posts"]
 
   
