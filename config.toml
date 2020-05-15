@@ -2,6 +2,7 @@ baseURL = "https://jamvie.net/"
 title = "Jamvie: CTF writeups and more"
 theme = "newsroom" 
 author = "Jam Polintan"
+
 paginate = 5
 DefaultContentLanguage = "en"
 languageCode = "en-us"
@@ -15,7 +16,7 @@ github = "https://github.com/jamiepoli"
 description = "A blog about Capture the Flag competitions from a software dev who does it for fun."
 mainSections = ["posts"]
 
-
+  
 
 [taxonomies]
 category = "categories"

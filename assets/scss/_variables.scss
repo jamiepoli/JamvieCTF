@@ -1,14 +1,14 @@
 :root {
   --color-mode: 'lit';
-  --light: #fff;
+  --light: #e4e4e4;
   --dark: #000;
-  --gray: #f5f5f5;
+  --gray: #e7e7e7;
   --bubble: #131313;
   --accent: var(--gray);
   --bg: var(--light);
   --text: var(--dark);
   --font: 'Metropolis', sans-serif;
-  --theme: #04a763;
+  --theme: #2fd49d;
   --ease: cubic-bezier(.19,1,.22,1);
 
   @mixin darkmode {

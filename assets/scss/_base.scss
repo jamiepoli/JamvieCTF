@@ -27,7 +27,7 @@ body{
 
 a{
   text-decoration: none;
-  color:inherit;
+  color: var(--theme);
 }
 blockquote {
   opacity: 0.8;

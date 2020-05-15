@@ -20,7 +20,7 @@
 <meta name='theme-color' content='#ffffff'>
 
   <link rel='canonical' href='https://jamvie.net/post/01utctf01/'>
-  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.a9f0d07ece0d4b9cee910125ba1579a4e144c2cb962e6398f53fc29c8db92527c9ab161c6fe73daafaa5ab29c6ba46a739f7855ed85797338a9852614bc4dfaa.css' integrity = 'sha512-qfDQfs4NS5zukQEluhV5pOFEwsuWLmOY9T/CnI25JSfJqxYcb&#43;c9qvqlqynGukanOfeFXthXlzOKmFJhS8Tfqg=='>
+  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.ea4727d0a2789f5863e9374bcd11ab90889c85553afd9e1d39ff31ea4e6c6302629fea79658673d32dc743de329389ac715d966c6817ae8605951bd9c267ac15.css' integrity = 'sha512-6kcn0KJ4n1hj6TdLzRGrkIichVU6/Z4dOf8x6k5sYwJin&#43;p5ZYZz0y3HQ94yk4mscV2WbGgXroYFlRvZwmesFQ=='>
 </head>
 
   <body>
@@ -68,10 +68,20 @@
           <p>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas <a href="https://www.isss.io/">ISSS</a>. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</p>
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <p>We are presented with a clean and minimal login page. The challenge&rsquo;s description says that &ldquo;the password is the flag&rdquo;. Well, since this is only a login page, I&rsquo;d figure to try and get into admin somehow.</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/UTCTFscreenshot1.png" alt="login"></p>
+
+<picture class = 'nav_logo'>
+  <source srcset = 'https://jamvie.net/images/UTCTFscreenshot1.png' media="(prefers-color-scheme: dark)">
+  <img srcset = 'https://jamvie.net/images/UTCTFscreenshot1.png' alt = 'UTCTF LOGIN'>
+</picture>
+
 <p>Initial attempts to do some scoping for SQL vulnerabilities didn&rsquo;t do anything. Inputting a single quote ' mark wouldn&rsquo;t show anything useful. So, I went in kinda blind, and did a pretty standard SQL attack: <code>admin--</code> If there were vulnerable SQL queries to be had, my input would malform the query to only return the entries where the username == admin.
 And it worked!</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/UTCTFscreenshot2.png" alt="adminpage"></p>
+
+<picture class = 'nav_logo'>
+  <source srcset = 'https://jamvie.net/images/UTCTFscreenshot2.png' media="(prefers-color-scheme: dark)">
+  <img srcset = 'https://jamvie.net/images/UTCTFscreenshot2.png' alt = 'UTCTF LOGIN 2'>
+</picture>
+
 <p>It&rsquo;s a static welcome page, so I didn&rsquo;t get anything useful past learning that the admin&rsquo;s username was, in fact, admin. And the challenge&rsquo;s description told me as such - if I wanted the password, I needed to do something else.</p>
 <p>The fact that I got into admin meant that I malformed the SQL query so that it would ignore any sort of password checking. But, I kinda need some form of password validation in order to get any headstart on what it was. Luckily, SQL utilizes alot of logic-based keywords that lets us essentially guess the password with custom SQL we inject into it. We would want to inject rogue SQL so that the underlying query would look like,</p>
 <div class="highlight"><div class="chroma">

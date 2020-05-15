@@ -17,13 +17,14 @@ Let's Begin!
 We are presented with a clean and minimal login page. The challenge's description says that "the password is the flag". Well, since this is only a login page, I'd figure to try and get into admin somehow.
 
 
-![login](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/UTCTFscreenshot1.png)
+
+{{< picture "UTCTFscreenshot1.png" "UTCTFscreenshot1.png" "UTCTF LOGIN" >}}
 
 Initial attempts to do some scoping for SQL vulnerabilities didn't do anything. Inputting a single quote ' mark wouldn't show anything useful. So, I went in kinda blind, and did a pretty standard SQL attack: ```admin--``` If there were vulnerable SQL queries to be had, my input would malform the query to only return the entries where the username == admin. 
 And it worked! 
 
-![adminpage](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/UTCTFscreenshot2.png)
 
+{{< picture "UTCTFscreenshot2.png" "UTCTFscreenshot2.png" "UTCTF LOGIN 2" >}}
 
 It's a static welcome page, so I didn't get anything useful past learning that the admin's username was, in fact, admin. And the challenge's description told me as such - if I wanted the password, I needed to do something else. 
 

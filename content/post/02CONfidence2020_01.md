@@ -16,7 +16,8 @@ The link to the webpage is: ```http://catweb.zajebistyc.tf/```
 
 We have a basic webpage with photos of cute cats filtered by their color. The drop down menu will give us black, red, grey and white cats. At the bottom is a report button, which will take whatever input we get, send it to some server, and respond to us that our report has been...well. Reported. 
 
-![HomePage](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWeb_HomePage.png)
+
+{{< picture "CatWeb_HomePage.png" "CatWeb_HomePage.png" "Some Cats" >}}
 
 
 Checking out the response content as I was clicking about the page showed me the requests for the "kind" (colour) of cats I chose based on the drop down menu. The request was just a small JSON string stipulating what kind I asked for, and I guess the server takes that input and returns whatever. 
@@ -31,7 +32,9 @@ Editing the request to change the kind from a colour to just absolute garbage...
 ```
 curl "http://catweb.zajebistyc.tf/?kind=djfa"
 ```
-![brokenrequest](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/NotFound.png)
+
+
+{{< picture "NotFound.png" "NotFound.png" "brokenrequest" >}}
 
 Aha! Our text got echoed back to us in the response. There isn't any input validation in the JSON request! This must be a way in. 
 
@@ -45,7 +48,8 @@ http://catweb.zajebistyc.tf/?","status":"ok","content":["\"<img src=deadbeef one
 
 If there was a JSON vulnerability here, then going to this website would load up an alert with the title of the webpage ("my cats"). What would happen is it would attempt to load an image from the source called "deadbeef", and when it can't find the source, it would load as an error. If the image loaded as an error, pop up an alert with the name of the webpage. 
 
-![XSS](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/XSSJsonInCatWeb.png)
+
+{{< picture "XSSJsonInCatWeb.png" "XSSJsonInCatWeb.png" "XSS" >}}
 
 
 :) Great! There is definitely JSON injection in play here. Let's see what we can do with it! 
@@ -56,11 +60,12 @@ Using curl to delve deeper into the webpage, I tried to make it list directories
 curl "http://catweb.zajebistyc.tf/cats?kind=.."
 ```
 
-![templates](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebTemplates.png)
+{{< picture "CatWebTemplates.png" "CatWebTemplates.png" "templates" >}}
+
 
 I traversed through the directories, but in the templates subfolder...
 
-![flagLocn](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebFlagLocn.png)
+{{< picture "CatWebFlagLocn.png" "CatWebFlagLocn.png" "flagLocn" >}}
 
 Aha! The ```flag.txt``` file is in there. Now we just need to somehow read it from the browser. The fact that I was able to find the local files like this means something: the path of templates looks alot like ```file:///app/templates/flag.txt``` - Note the root path name: file. A same-origin policy here could treat all files with this starting origin as from the same place. 
 

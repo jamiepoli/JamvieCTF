@@ -20,7 +20,7 @@
 <meta name='theme-color' content='#ffffff'>
 
   <link rel='canonical' href='https://jamvie.net/post/02confidence2020_01/'>
-  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.a9f0d07ece0d4b9cee910125ba1579a4e144c2cb962e6398f53fc29c8db92527c9ab161c6fe73daafaa5ab29c6ba46a739f7855ed85797338a9852614bc4dfaa.css' integrity = 'sha512-qfDQfs4NS5zukQEluhV5pOFEwsuWLmOY9T/CnI25JSfJqxYcb&#43;c9qvqlqynGukanOfeFXthXlzOKmFJhS8Tfqg=='>
+  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.ea4727d0a2789f5863e9374bcd11ab90889c85553afd9e1d39ff31ea4e6c6302629fea79658673d32dc743de329389ac715d966c6817ae8605951bd9c267ac15.css' integrity = 'sha512-6kcn0KJ4n1hj6TdLzRGrkIichVU6/Z4dOf8x6k5sYwJin&#43;p5ZYZz0y3HQ94yk4mscV2WbGgXroYFlRvZwmesFQ=='>
 </head>
 
   <body>
@@ -69,7 +69,12 @@
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <p>The link to the webpage is: <code>http://catweb.zajebistyc.tf/</code></p>
 <p>We have a basic webpage with photos of cute cats filtered by their color. The drop down menu will give us black, red, grey and white cats. At the bottom is a report button, which will take whatever input we get, send it to some server, and respond to us that our report has been&hellip;well. Reported.</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWeb_HomePage.png" alt="HomePage"></p>
+
+<picture class = 'nav_logo'>
+  <source srcset = 'https://jamvie.net/images/CatWeb_HomePage.png' media="(prefers-color-scheme: dark)">
+  <img srcset = 'https://jamvie.net/images/CatWeb_HomePage.png' alt = 'Some Cats'>
+</picture>
+
 <p>Checking out the response content as I was clicking about the page showed me the requests for the &ldquo;kind&rdquo; (colour) of cats I chose based on the drop down menu. The request was just a small JSON string stipulating what kind I asked for, and I guess the server takes that input and returns whatever.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -89,7 +94,12 @@ Editing the request to change the kind from a colour to just absolute garbage&he
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">curl &#34;http://catweb.zajebistyc.tf/?kind=djfa&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/NotFound.png" alt="brokenrequest"></p>
+</div>
+<picture class = 'nav_logo'>
+  <source srcset = 'https://jamvie.net/images/NotFound.png' media="(prefers-color-scheme: dark)">
+  <img srcset = 'https://jamvie.net/images/NotFound.png' alt = 'brokenrequest'>
+</picture>
+
 <p>Aha! Our text got echoed back to us in the response. There isn&rsquo;t any input validation in the JSON request! This must be a way in.</p>
 <p>To test how far I could go with it, I decided to hide an XSS in the JSON, seeing as how the URL we are taken to after any sort of response also has the JSON text in it.</p>
 <p>I typed this in as the URL:</p>
@@ -102,7 +112,12 @@ Editing the request to change the kind from a colour to just absolute garbage&he
 </code></pre></td></tr></table>
 </div>
 </div><p>If there was a JSON vulnerability here, then going to this website would load up an alert with the title of the webpage (&ldquo;my cats&rdquo;). What would happen is it would attempt to load an image from the source called &ldquo;deadbeef&rdquo;, and when it can&rsquo;t find the source, it would load as an error. If the image loaded as an error, pop up an alert with the name of the webpage.</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/XSSJsonInCatWeb.png" alt="XSS"></p>
+
+<picture class = 'nav_logo'>
+  <source srcset = 'https://jamvie.net/images/XSSJsonInCatWeb.png' media="(prefers-color-scheme: dark)">
+  <img srcset = 'https://jamvie.net/images/XSSJsonInCatWeb.png' alt = 'XSS'>
+</picture>
+
 <p>:) Great! There is definitely JSON injection in play here. Let&rsquo;s see what we can do with it!</p>
 <p>Using curl to delve deeper into the webpage, I tried to make it list directories with the command:</p>
 <div class="highlight"><div class="chroma">
@@ -113,9 +128,19 @@ Editing the request to change the kind from a colour to just absolute garbage&he
 <pre class="chroma"><code class="language-fallback" data-lang="fallback">curl &#34;http://catweb.zajebistyc.tf/cats?kind=..&#34;
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebTemplates.png" alt="templates"></p>
+</div>
+<picture class = 'nav_logo'>
+  <source srcset = 'https://jamvie.net/images/CatWebTemplates.png' media="(prefers-color-scheme: dark)">
+  <img srcset = 'https://jamvie.net/images/CatWebTemplates.png' alt = 'templates'>
+</picture>
+
 <p>I traversed through the directories, but in the templates subfolder&hellip;</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebFlagLocn.png" alt="flagLocn"></p>
+
+<picture class = 'nav_logo'>
+  <source srcset = 'https://jamvie.net/images/CatWebFlagLocn.png' media="(prefers-color-scheme: dark)">
+  <img srcset = 'https://jamvie.net/images/CatWebFlagLocn.png' alt = 'flagLocn'>
+</picture>
+
 <p>Aha! The <code>flag.txt</code> file is in there. Now we just need to somehow read it from the browser. The fact that I was able to find the local files like this means something: the path of templates looks alot like <code>file:///app/templates/flag.txt</code> - Note the root path name: file. A same-origin policy here could treat all files with this starting origin as from the same place.</p>
 <p>We can use this to our advantage: create an XSS attack on the <code>file://</code> path.</p>
 <p>Since an XSS endpoint was found using the JSON vulnerabilities in the URL, and there exists a report function, this is all a pretty classic XSS attack from here:</p>

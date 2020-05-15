@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-  <title>De1ctf 2020 hard pentest 1 and animal crossing, part 1 | Jamvie: CTF writeups and more</title>
+  <title>De1ctf 2020 hard pentest 1 and animal crossing | Jamvie: CTF writeups and more</title>
   <meta charset='utf-8'>
   <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
   <meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
   <meta name = 'SKYPE_TOOLBAR' content = 'SKYPE_TOOLBAR_PARSER_COMPATIBLE' /><meta name = 'keywords' content = 'Jamvie: CTF writeups and more'>
 <meta property = 'og:locale' content = 'en_US' />
 <meta property = 'og:type' content = 'article' />
-<meta property = 'og:title' content = 'De1ctf 2020: Hard_Pentest_1 and Animal Crossing, Part 1' />
+<meta property = 'og:title' content = 'De1ctf 2020: Hard_Pentest_1 and Animal Crossing' />
 <meta property = 'og:description' content = 'The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&rsquo;m always surprised when I …'>
 <meta property = 'og:url' content = 'https://jamvie.net/post/05de1ctf2020_01/' />
 <meta property = 'og:image' content = 'https://jamvie.net/images/AnimalCrossing.jpg'/>
@@ -20,7 +20,7 @@
 <meta name='theme-color' content='#ffffff'>
 
   <link rel='canonical' href='https://jamvie.net/post/05de1ctf2020_01/'>
-  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.a9f0d07ece0d4b9cee910125ba1579a4e144c2cb962e6398f53fc29c8db92527c9ab161c6fe73daafaa5ab29c6ba46a739f7855ed85797338a9852614bc4dfaa.css' integrity = 'sha512-qfDQfs4NS5zukQEluhV5pOFEwsuWLmOY9T/CnI25JSfJqxYcb&#43;c9qvqlqynGukanOfeFXthXlzOKmFJhS8Tfqg=='>
+  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.ea4727d0a2789f5863e9374bcd11ab90889c85553afd9e1d39ff31ea4e6c6302629fea79658673d32dc743de329389ac715d966c6817ae8605951bd9c267ac15.css' integrity = 'sha512-6kcn0KJ4n1hj6TdLzRGrkIichVU6/Z4dOf8x6k5sYwJin&#43;p5ZYZz0y3HQ94yk4mscV2WbGgXroYFlRvZwmesFQ=='>
 </head>
 
   <body>
@@ -59,7 +59,7 @@
       
   <div class = 'wrap mt post'>
     <div><p class = 'post_date pale'>07. May 2020</p>
-      <h1 class = 'post_title'>De1ctf 2020: Hard_Pentest_1 and Animal Crossing, Part 1</h1>
+      <h1 class = 'post_title'>De1ctf 2020: Hard_Pentest_1 and Animal Crossing</h1>
       <div class = 'post_body'>
         <div class = 'post_inner'>
         
@@ -283,45 +283,22 @@ A
 <p>What does this mean for us?</p>
 <p>Because of the <code>Check()</code> function, we can&rsquo;t use alphanumerics or certain special characters. But for the list of valid special characters, <code>[]</code> square brackets are allowed, so we can declare arrays as normal. And we can still declare variables as usual, and the <code>+</code> operators are still valid so we can utilize string arithmetic.</p>
 <p>So, all in all, if we wanted to spell the word <code>GET</code> with all the restrictions above, it would look like</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_</span><span class="o">=</span><span class="p">[]</span> <span class="cp">?&gt;</span>
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_</span><span class="o">=@</span><span class="s2">&#34;</span><span class="si">$_</span><span class="s2">&#34;</span> <span class="cp">?&gt;</span>
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_</span><span class="o">=</span><span class="nv">$_</span><span class="p">[</span><span class="s1">&#39;!&#39;</span><span class="o">==</span><span class="s1">&#39;@&#39;</span><span class="p">]</span> <span class="cp">?&gt;</span>
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$___</span><span class="o">=</span><span class="nv">$_</span> <span class="cp">?&gt;</span>
-
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$__</span> <span class="o">=</span> <span class="nv">$_</span> <span class="cp">?&gt;</span>
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="o">@</span><span class="nv">$____</span> <span class="o">=</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="cp">?&gt;</span>   
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_______</span> <span class="o">=</span> <span class="nv">$__</span> <span class="cp">?&gt;</span>  \\G     
-
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$__</span> <span class="o">=</span> <span class="nv">$_</span> <span class="cp">?&gt;</span>
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="o">@</span><span class="nv">$____</span> <span class="o">=</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="cp">?&gt;</span>    \\E
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_______</span> <span class="o">.=</span> <span class="nv">$__</span> <span class="cp">?&gt;</span>
-
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$__</span> <span class="o">=</span> <span class="nv">$_</span> <span class="cp">?&gt;</span>
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="o">@</span><span class="nv">$____</span> <span class="o">=</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="cp">?&gt;</span>   \\T
-<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_______</span> <span class="o">.=</span> <span class="nv">$__</span>  <span class="cp">?&gt;</span> \\GET
-</code></pre></td></tr></table>
-</div>
-</div><p>Armed with this knowledge, we can write out entire lines of code of php that are just a series of various shorthand operators and symbols, and string arithmetic.</p>
+<p>``php</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>``</p>
+<p>Armed with this knowledge, we can write out entire lines of code of php that are just a series of various shorthand operators and symbols, and string arithmetic.</p>
 <p>The first hurdle is the existence of the php opening tag. All php code requires the <code>&lt;?php</code> opening tag before anything, kinda like the start of any HTML document needing <code>&lt;HTML&gt;</code> to be declared first at the top.</p>
 <p>Checking out php open tags, we come across the existence of shorthand tags for them, in the <a href="https://www.php.net/manual/en/language.basic-syntax.phptags.php">PHP documentation</a>:</p>
 <blockquote>
@@ -331,15 +308,24 @@ A
 <p>So we can work around saying <code>&lt;?php&gt;</code> with <code>&lt;?=</code> instead!</p>
 <p>The second hurdle is the semi-colon, which ends PHP statements. This can be worked around by simply creating new lines of PHP code for each time we want to make a new statement.</p>
 <p>So with this in mind we can easily craft a php script to open up a webshell on their server, and poke around.
-But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a shell on the server, but the scope of my pwn abilities isn&rsquo;t much to really comprehend what&rsquo;s going on here.</p>
-<p>To be continued&hellip;</p>
+But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a shell on the server, but the scope of my pwn abilities isn&rsquo;t much to really comprehend what&rsquo;s going on here. Unfortunately, this challenge will remain unsolved until I can figure out how to play around with a Microsoft webshell.</p>
 <hr>
 <!-- raw HTML omitted -->
 <p>The website allows you to make a passport. There are fields for your name, island name, and favourite fruit, I think.</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/DE1CTF01.png" alt="report"></p>
+
+<picture class = 'nav_logo'>
+  <source srcset = 'https://jamvie.net/images/DE1CTF01.png' media="(prefers-color-scheme: dark)">
+  <img srcset = 'https://jamvie.net/images/DE1CTF01.png' alt = 'Animal Crossing Passport'>
+</picture>
+
 <p>When we make a passport we are redirected to a URL where the contents of what we typed are reflected in it (a sign of XSS attacks). And, at the bottom, is a report function (A BIG sign of XSS attacks).</p>
 <p>When we go ahead and report it&hellip;</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/DE1CTF02.png" alt="report"></p>
+
+<picture class = 'nav_logo'>
+  <source srcset = 'https://jamvie.net/images/DE1CTF02.png' media="(prefers-color-scheme: dark)">
+  <img srcset = 'https://jamvie.net/images/DE1CTF02.png' alt = 'Animal Crossing Report'>
+</picture>
+
 <p>I thought my client broke for a second. I wasn&rsquo;t expecting just plain code to be printed on the front-end.</p>
 <p>It stumped me at first - the ability to report is blocked by this md5 code checking function. I needed to input some string whose md5 encoding&rsquo;s first 6 characters matched the randomized string. I didn&rsquo;t actually get what this was supposed to be doing, I was confused as to wether or not this was still a broken webpage or not, and I asked my team for help. Luckily, my teammate Filip, who&rsquo;s really good at pwn-based challenges, told me it was a &ldquo;proof of work&rdquo; - I just needed to brute-force my way in by finding a string with the md5 hash characters matching the random one. He gave me a script I could work with to start cracking it.</p>
 <p>The good thing (in this context, bad for others) about md5 is that it&rsquo;s a one-way hashing but there is no salting to the code value, it&rsquo;s just the hash. Therefore, a string put through md5 would always return the same md5 encoding. So I just needed to randomly generate a string, md5 it, then check the digest against the random one.</p>
@@ -371,9 +357,9 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
 </div><p>I create this and report it to the admin. When the admin visits the URL with the javascript payload, it will take a screenshot of the admin&rsquo;s interface and sends it back to my server. I get the address and download it for the other half of the flag:</p>
 <p><code>cool_GamE}</code></p>
 <p>So the full flag would be: <code>FLAG=De1CTF{I_l1k4_cool_GamE}</code></p>
-<hr>
-<p>Wow! That was a trip. If anything, these challenges taught me that I should probably spend a bit more time broadening my skills if I want to complete problems that intersect with other topics :P</p>
+<p>This was definitely a challenge that stretched my capabilities of XSS attacks past grabbing cookies and pretending to be admin. The 2nd half of taking a screenshot of the admin&rsquo;s interface was unique and certainly not something I would&rsquo;ve thought of immediately. All in all, I&rsquo;m glad I participated in DE1CTF despite the difficulty levels of the problems I faced!</p>
 <p>Jam</p>
+<hr>
 <h2 id="references">References</h2>
 <p>Feature Image by Sara Kurfeß on Unsplash</p>
         </div>
