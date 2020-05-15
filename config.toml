@@ -3,7 +3,8 @@ languageCode = "en-us"
 title = "Jamvie: CTF writeups and more"
 theme = "casper3" 
 author = "Jam Polintan"
-
+enableInlineShortcodes = true
+footnoteReturnLinkContents = "↩"
 
 [params]
 github = "https://github.com/jamiepoli"
@@ -11,6 +12,10 @@ description = "A blog about Capture the Flag competitions from a software dev wh
 mainSections = ["posts"]
 profile = "https://jamiepoli.github.io/img/profile.png"
 
+
+
+[taxonomies]
+tags = "tags"
 
 [menu]
   [[menu.main]]
@@ -21,7 +26,7 @@ profile = "https://jamiepoli.github.io/img/profile.png"
   [[menu.main]]
     identifier = "writeups"
     name = "Writeups"
-    url = "/tags/writeup"
+    url = "/tags/writeups"
     weight = 10
     [[menu.main]]
     identifier = "miscellaneous"
@@ -31,5 +36,3 @@ profile = "https://jamiepoli.github.io/img/profile.png"
 
 
 
-[taxonomies]
-tag = "tags"
