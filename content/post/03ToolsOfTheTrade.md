@@ -29,41 +29,23 @@ _These are not ordered by priority or "most utilized"._
 
 ---
 
-<h3> 1. Curl </h3>
+{{< picture "curl-logo.svg" "curl-logo.svg" "CURL LOGO" >}}
 
-![cURL_Logo](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/curl-logo.svg)\
-
-<p align="center">
-<a href=https://curl.haxx.se>cURL</a>
-</p>
-
-A must! cURL is short for "Client URL". It's a simple and lightweight command-line tool to transfer data using various network protocols. I use it for basic GET and POST HTTP requests, but its so versatile it can be used for much more! In its simplest form, cURL is amazing to send data to and from a specified server. 
+A must! [cURL](https://curl.haxx.se/) is short for "Client URL". It's a simple and lightweight command-line tool to transfer data using various network protocols. I use it for basic GET and POST HTTP requests, but its so versatile it can be used for much more! In its simplest form, cURL is amazing to send data to and from a specified server. 
 
 [In my CONfidence 2020 write-up for the "Cat Web" problem](https://jamvie.net/posts/02confidence2020_01/), I use cURL heavily to examine the response data from the server with each post request I make. 
 
-<h3> 2. Wireshark </h3>
 
-<p align="center">
-<img width="460" height="300" src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/WireSharkLogo.png">
-</p>
 
-<p align="center">
-<a href= https://www.wireshark.org>WireShark Home Page</a>
-</p>
+{{< picture  "WireSharkLogo.png" "WiresharkWhite.png" "WIRESHARK LOGO" >}}
 
-I gained knowledge in Wireshark back in my internet computing course days. I recieved a tutorial on the basics of how to use this software - it's a protocol analyzer designed to examine web traffic and capture packet data between two endpoints. This software can show and display packets on all levels of the OSI hierarchy structure - you can see your common HTTP packets, TCP, DNS, to name a common few...
+
+I gained knowledge in [Wireshark](https://www.wireshark.org/) back in my internet computing course days. I recieved a tutorial on the basics of how to use this software - it's a protocol analyzer designed to examine web traffic and capture packet data between two endpoints. This software can show and display packets on all levels of the OSI hierarchy structure - you can see your common HTTP packets, TCP, DNS, to name a common few...
 
 Plenty of forensic-based problems will give you a capture of internet traffic and hide a flag in there, so wireshark is useful even beyond the web challenges I use it for! 
 
-<h3> 3. Burp Suite </h3>
+{{< picture  "Burpsuite_card.png" "Burpsuite_card.png" "BURP LOGO" >}}
 
-<p align="center">
-<img width="460" height="300" src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/Burpsuite_card.png">
-</p>
-
-<p align="center">
-<a href=https://portswigger.net/burp>Burp Suite</a>
-</p>
 
 From [PortSwigger, creators of BurpSuite](https://portswigger.net/support/how-to-use-burp-suite):
 
@@ -73,44 +55,15 @@ Burp Suite is perfect for testing out all sorts of exploits. It has much more us
 
 Back in my [UTCTF "Epic Admin Pwn" writeup](https://jamvie.net/posts/01utctf01/), I mentioned using Burp Suite to scope out the SQLi attack vector and using SQLmap to further exploit it - which is a much faster way than creating your own script to utilize the attack vector that was found in it! 
 
+{{< picture  "Postman.png" "Postman.png" "POST LOGO" >}}
 
-<h3> 4. Postman </h3>
+If I need to send more complex requests that might make cURL more complex to use, [Postman](https://www.postman.com/) is my go to software. I don't just use Postman to send heavier requests to a server, it's also great for testing out RESTful APIs if you're creating one for a personal project. It has a clean UI and is extremely beginner-friendly, so Postman is my go-to for literally anything requiring RESTful API testing. 
 
-<p align="center">
-<img width="460" height="300" src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/Postman.png">
-</p>
 
-<p align="center">
-<a href=https://www.postman.com>Postman</a>
-</p>
 
-If I need to send more complex requests that might make cURL more complex to use, Postman is my go to software. I don't just use Postman to send heavier requests to a server, it's also great for testing out RESTful APIs if you're creating one for a personal project. It has a clean UI and is extremely beginner-friendly, so Postman is my go-to for literally anything requiring RESTful API testing. 
-
-<h3> 5. SQLMap </h3>
-
-<p align="center">
-<img width="460" height="300" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Sqlmap_logo.png">
-</p>
-
-<p align="center">
-<a href=http://sqlmap.org>SQLmap</a>
-<p>
+{{< picture  "Sqlmap_logo.png" "Sqlmap_logo.png" "SQLMAP LOGO" >}}
 
 SQLmap is a suite of great utilities specifically for SQL-injection based attacks. It automates the detection and exploitation of any SQL-based flaws in an application. It supports most if not all major databases (MySQL, SQLite, etc) and can do everything from simple detection to database table dumping.
-
-<h3> 6. Webhook.site </h3>
-
-<p align="center">
-<img width="250" height="300" src="https://d2.alternativeto.net/dist/icons/webhook-site_144103.jpg?width=200&height=200&mode=crop&upscale=false">
-</p>
-
-
-
-<p align="center">
-<a href=https://docs.webhook.site>Webhook.site Docs</a>
-<p>
-
-I frequently alternate between generating a quick python-made server for XSS attacks, or using Webhook.site. This is a great tool if you don't want to make your own server or don't have your own website to host your payload javascript files for certain XSS attacks! 
 
 ---
 
