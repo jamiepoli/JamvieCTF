@@ -15,7 +15,7 @@ profile = "https://jamiepoli.github.io/img/profile.png"
 [menu]
   [[menu.main]]
     identifier = "about"
-    name = "About"
+    name = "About Me"
     url = "/about/"
     weight = 10
   [[menu.main]]
@@ -27,6 +27,11 @@ profile = "https://jamiepoli.github.io/img/profile.png"
     identifier = "miscellaneous"
     name = "Misc"
     url = "/tags/misc"
+    weight = 10
+    [[menu.main]]
+    identifier = "maple bacon"
+    name = "My Team"
+    url = "https://ubcctf.github.io/"
     weight = 10
 
 
