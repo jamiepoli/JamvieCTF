@@ -4,6 +4,7 @@ date: 2020-04-22T00:46:19-06:00
 draft: false
 author: "Jamvie"
 feature_image: https://images.pexels.com/photos/1643456/pexels-photo-1643456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+tags: ["writeup", "web"]
 ---
 
 I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise. 

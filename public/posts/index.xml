@@ -6,18 +6,27 @@
     <description>Recent content in Posts on Jamvie: CTF writeups and more</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Apr 2020 01:30:30 -0600</lastBuildDate>
+    <lastBuildDate>Thu, 07 May 2020 15:20:38 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>AngstromCTF 2020: UBI</title>
-      <link>https://jamvie.net/posts/04angstromctf2020_01/</link>
-      <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
+      <title>De1CTF 2020: Hard_Pentest_1 and Animal Crossing, Part 1</title>
+      <link>https://jamvie.net/posts/05de1ctf2020_01/</link>
+      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/04angstromctf2020_01/</guid>
-      <description>&lt;p&gt;This challenge was easily one of the most complex ones I came across. It was so complex, in fact, I didn&amp;rsquo;t end up solving it during the CTF, I had finished it 3 days after.&lt;/p&gt;</description>
+      <guid>https://jamvie.net/posts/05de1ctf2020_01/</guid>
+      <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PlaidCTF 2020: Contrived Web Problem</title>
+      <link>https://jamvie.net/posts/04plaidctf2020_01/</link>
+      <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/04plaidctf2020_01/</guid>
+      <description>&lt;p&gt;This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&amp;rsquo;m glad they did!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -27,15 +36,6 @@
       
       <guid>https://jamvie.net/posts/03toolsofthetrade/</guid>
       <description>&lt;p&gt;I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>PlaidCTF 2020: Contrived Web Problem</title>
-      <link>https://jamvie.net/posts/05plaidctf2020_01/</link>
-      <pubDate>Sun, 26 Apr 2020 00:48:12 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/05plaidctf2020_01/</guid>
-      <description>&lt;p&gt;This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unqiue problem, and I&amp;rsquo;m glad they did!&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -3,6 +3,7 @@ title: "UTCTF 2020: Epic Admin Pwn  "
 date: 2020-04-22T00:46:19-06:00
 draft: false
 author: "Jamvie"
+tags: ["writeup", "web"]
 ---
 
 I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas [ISSS](https://www.isss.io/). My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.

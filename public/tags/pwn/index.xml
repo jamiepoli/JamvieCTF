@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pwn on Jamvie: CTF writeups and more</title>
+    <link>https://jamvie.net/tags/pwn/</link>
+    <description>Recent content in pwn on Jamvie: CTF writeups and more</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 May 2020 15:20:38 -0600</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/pwn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>De1CTF 2020: Hard_Pentest_1 and Animal Crossing, Part 1</title>
+      <link>https://jamvie.net/posts/05de1ctf2020_01/</link>
+      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/05de1ctf2020_01/</guid>
+      <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

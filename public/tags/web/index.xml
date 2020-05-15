@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jamvie: CTF writeups and more</title>
-    <link>https://jamvie.net/</link>
-    <description>Recent content on Jamvie: CTF writeups and more</description>
+    <title>web on Jamvie: CTF writeups and more</title>
+    <link>https://jamvie.net/tags/web/</link>
+    <description>Recent content in web on Jamvie: CTF writeups and more</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 07 May 2020 15:20:38 -0600</lastBuildDate>
     
-	<atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jamvie.net/tags/web/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -54,26 +54,6 @@
       
       <guid>https://jamvie.net/posts/01utctf01/</guid>
       <description>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://jamvie.net/about/</link>
-      <pubDate>Tue, 21 Apr 2020 00:23:24 -0600</pubDate>
-      
-      <guid>https://jamvie.net/about/</guid>
-      <description>Hello! I&amp;rsquo;m Jamvie, a software developer based in Canada with a passion for all things computer security. I&amp;rsquo;m currently studying to finish my Computer Science degree - hopefully, after graduating I&amp;rsquo;ll end up in the field doing something I love. Besides cybersecurity, I like to do art, keep up with fashion, and talk about nature.
-What is a CTF? Short for &amp;ldquo;Capture the Flag&amp;rdquo;, CTFs are competitions that involve solving challenges using methods that would pertain to the general practise of cybersecurity.</description>
-    </item>
-    
-    <item>
-      <title>Jamvie&#39;s first post</title>
-      <link>https://jamvie.net/posts/00initialpost/</link>
-      <pubDate>Mon, 20 Apr 2020 21:27:12 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/00initialpost/</guid>
-      <description>Hi, and welcome to my CTF blog. I&amp;rsquo;m just a software dev with a hobby for CTFs, and I thought a blog would be a good way to stash all my long-archived writeups for CTF challenges I participated in. I&amp;rsquo;m by no means an expert on the topic, but if someone stumbles upon here and gains a newfound interest in cybersecurity, that would be pretty cool.
-Over the next few weeks I will upload my old writeups for some CTFs that occurred this year and last, so stay tuned!</description>
     </item>
     
   </channel>

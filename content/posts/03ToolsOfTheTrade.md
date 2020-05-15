@@ -5,6 +5,7 @@ author: "Jamvie"
 date: 2020-04-26T01:30:30-06:00
 draft: false
 feature_image: https://tinyurl.com/syqrnv6
+tags: ["misc", "web"]
 ---
 
 I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.

@@ -18,3 +18,8 @@ profile = "https://jamiepoli.github.io/img/profile.png"
     name = "About"
     url = "/about/"
     weight = 10
+
+
+
+[taxonomies]
+tag = "tags"
