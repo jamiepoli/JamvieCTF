@@ -1,25 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jamvie.net/</loc>
-    <lastmod>2020-05-07T15:20:38-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/posts/05de1ctf2020_01/</loc>
+    <loc>https://jamvie.net/post/05de1ctf2020_01/</loc>
     <lastmod>2020-05-07T15:20:38-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/posts/</loc>
-    <lastmod>2020-05-07T15:20:38-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/pwn/</loc>
+    <loc>https://jamvie.net/post/</loc>
     <lastmod>2020-05-07T15:20:38-06:00</lastmod>
   </url>
   
@@ -29,22 +18,22 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/tags/web/</loc>
-    <lastmod>2020-05-07T15:20:38-06:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jamvie.net/tags/writeups/</loc>
     <lastmod>2020-05-07T15:20:38-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/posts/04plaidctf2020_01/</loc>
+    <loc>https://jamvie.net/post/04plaidctf2020_01/</loc>
     <lastmod>2020-04-28T00:48:12-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/posts/03toolsofthetrade/</loc>
+    <loc>https://jamvie.net/tags/web/</loc>
+    <lastmod>2020-04-28T00:48:12-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/post/03toolsofthetrade/</loc>
     <lastmod>2020-04-26T01:30:30-06:00</lastmod>
   </url>
   
@@ -54,13 +43,19 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/posts/02confidence2020_01/</loc>
+    <loc>https://jamvie.net/post/02confidence2020_01/</loc>
     <lastmod>2020-04-22T00:46:19-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/posts/01utctf01/</loc>
+    <loc>https://jamvie.net/post/01utctf01/</loc>
     <lastmod>2020-04-22T00:46:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2020-04-21T00:23:24-06:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -69,8 +64,16 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/posts/00initialpost/</loc>
+    <loc>https://jamvie.net/post/00initialpost/</loc>
     <lastmod>2020-04-20T21:27:12-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/series/</loc>
   </url>
   
 </urlset>

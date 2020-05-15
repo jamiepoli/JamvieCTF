@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Series on Jamvie: CTF writeups and more</title>
+    <link>https://jamvie.net/series/</link>
+    <description>Recent content in Series on Jamvie: CTF writeups and more</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://jamvie.net/series/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

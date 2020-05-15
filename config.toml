@@ -1,12 +1,15 @@
 baseURL = "https://jamvie.net/"
-languageCode = "en-us"
+
 title = "Jamvie: CTF writeups and more"
-theme = "casper3" 
+theme = "newsroom" 
 author = "Jam Polintan"
-paginate = 3
+paginate = 5
 DefaultContentLanguage = "en"
-enableInlineShortcodes = true
-footnoteReturnLinkContents = "^"
+languageCode = "en-us"
+pygmentsCodefences = true
+pygmentsCodefencesGuessSyntax = true
+pygmentsUseClasses=true
+pygmentsOptions = "linenos=table"
 
 [params]
 github = "https://github.com/jamiepoli"

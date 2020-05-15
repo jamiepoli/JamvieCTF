@@ -1,8 +1,9 @@
 ---
-title : "UTCTF 2020: Epic Admin Pwn"
+title : "utctf 2020: Epic Admin Pwn"
 date : 2020-04-22T00:46:19-06:00
 draft : false
 author : "JamVie"
+image: Database.jpg
 tags : [
     "writeups"]
 ---
@@ -75,3 +76,6 @@ There are admittedly faster ways to do this, for example, if you have burpsuite 
 
 Jam
 
+References
+----
+Feature Image: [Kevin Ku on Unsplash](https://unsplash.com/@ikukevk)

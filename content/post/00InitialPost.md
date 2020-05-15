@@ -3,7 +3,6 @@ title: "Jamvie's first post"
 date: 2020-04-20T21:27:12-06:00
 draft: false
 author: "Jamvie"
-feature_image: https://images.pexels.com/photos/1275929/pexels-photo-1275929.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
 tags: ["misc"]
 ---
 
@@ -16,6 +15,3 @@ Jam
 :)
 
 
-References
-----
-Feature Image credit to [Tyler Lastovich](https://www.pexels.com/@lastly) on Pexels

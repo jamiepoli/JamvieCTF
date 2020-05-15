@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>writeups on Jamvie: CTF writeups and more</title>
@@ -12,38 +12,38 @@
     
     
     <item>
-      <title>De1CTF 2020: Hard_Pentest_1 and Animal Crossing, Part 1</title>
-      <link>https://jamvie.net/posts/05de1ctf2020_01/</link>
+      <title>De1ctf 2020: Hard_Pentest_1 and Animal Crossing, Part 1</title>
+      <link>https://jamvie.net/post/05de1ctf2020_01/</link>
       <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/05de1ctf2020_01/</guid>
+      <guid>https://jamvie.net/post/05de1ctf2020_01/</guid>
       <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>PlaidCTF 2020: Contrived Web Problem</title>
-      <link>https://jamvie.net/posts/04plaidctf2020_01/</link>
+      <title>Plaidctf 2020: Contrived Web Problem</title>
+      <link>https://jamvie.net/post/04plaidctf2020_01/</link>
       <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/04plaidctf2020_01/</guid>
+      <guid>https://jamvie.net/post/04plaidctf2020_01/</guid>
       <description>&lt;p&gt;This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&amp;rsquo;m glad they did!&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>CONfidence 2020: CatWeb</title>
-      <link>https://jamvie.net/posts/02confidence2020_01/</link>
+      <link>https://jamvie.net/post/02confidence2020_01/</link>
       <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/02confidence2020_01/</guid>
+      <guid>https://jamvie.net/post/02confidence2020_01/</guid>
       <description>&lt;p&gt;I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>UTCTF 2020: Epic Admin Pwn  </title>
-      <link>https://jamvie.net/posts/01utctf01/</link>
+      <title>utctf 2020: Epic Admin Pwn</title>
+      <link>https://jamvie.net/post/01utctf01/</link>
       <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/01utctf01/</guid>
+      <guid>https://jamvie.net/post/01utctf01/</guid>
       <description>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</description>
     </item>
     

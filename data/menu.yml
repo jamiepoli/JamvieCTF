@@ -1,0 +1,10 @@
+- item: Blog
+  url: /
+- item: About Me
+  url: about/
+- item: Tags
+  url: tags
+- item: Archive
+  url: post/
+- item: Personal Site
+  url: "https://jamiepoli.github.io/"

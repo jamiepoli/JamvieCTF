@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jamvie: CTF writeups and more</title>
@@ -12,29 +12,20 @@
     
     
     <item>
-      <title>pwn</title>
-      <link>https://jamvie.net/tags/pwn/</link>
+      <title>writeups</title>
+      <link>https://jamvie.net/tags/writeups/</link>
       <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
       
-      <guid>https://jamvie.net/tags/pwn/</guid>
+      <guid>https://jamvie.net/tags/writeups/</guid>
       <description></description>
     </item>
     
     <item>
       <title>web</title>
       <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
+      <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writeups</title>
-      <link>https://jamvie.net/tags/writeups/</link>
-      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/writeups/</guid>
       <description></description>
     </item>
     

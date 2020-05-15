@@ -1,6 +1,6 @@
 [submodule "themes/casper3"]
 	path = themes/casper3
 	url = https://github.com/jonathanjanssens/hugo-casper3.git
-[submodule "themes/hugo-swift-theme"]
-	path = themes/hugo-swift-theme
-	url = https://github.com/onweru/hugo-swift-theme.git
+[submodule "themes/newsroom"]
+	path = themes/newsroom
+	url = https://github.com/onweru/newsroom.git

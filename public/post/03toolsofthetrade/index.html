@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+  <title>Commonly used software | Jamvie: CTF writeups and more</title>
+  <meta charset='utf-8'>
+  <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
+  <meta name = 'SKYPE_TOOLBAR' content = 'SKYPE_TOOLBAR_PARSER_COMPATIBLE' /><meta name = 'keywords' content = 'Jamvie: CTF writeups and more'>
+<meta property = 'og:locale' content = 'en_US' />
+<meta property = 'og:type' content = 'article' />
+<meta property = 'og:title' content = 'Commonly Used Software' />
+<meta property = 'og:description' content = 'I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.'>
+<meta property = 'og:url' content = 'https://jamvie.net/post/03toolsofthetrade/' />
+<meta property = 'og:image' content = 'https://jamvie.net/images/Hackerman.jpg'/>
+<link rel='apple-touch-icon' sizes='180x180' href='https://jamvie.net/images/icons/apple-touch-icon.png'>
+<link rel='icon' type='image/png' sizes='32x32' href='https://jamvie.net/images/icons/favicon-32x32.png'>
+<link rel='icon' type='image/png' sizes='16x16' href='https://jamvie.net/images/icons/favicon-16x16.png'>
+<link rel='manifest' href='https://jamvie.net/images/icons/site.webmanifest'>
+<meta name='msapplication-TileColor' content='#da532c'>
+<meta name='theme-color' content='#ffffff'>
+
+  <link rel='canonical' href='https://jamvie.net/post/03toolsofthetrade/'>
+  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.a9f0d07ece0d4b9cee910125ba1579a4e144c2cb962e6398f53fc29c8db92527c9ab161c6fe73daafaa5ab29c6ba46a739f7855ed85797338a9852614bc4dfaa.css' integrity = 'sha512-qfDQfs4NS5zukQEluhV5pOFEwsuWLmOY9T/CnI25JSfJqxYcb&#43;c9qvqlqynGukanOfeFXthXlzOKmFJhS8Tfqg=='>
+</head>
+
+  <body>
+    <div class = 'nav-drop'>
+  <div class = 'nav-body'>
+    
+      <a href = 'https://jamvie.net/' class = 'nav_item'>Blog</a>
+    
+      <a href = 'https://jamvie.net/about/' class = 'nav_item'>About Me</a>
+    
+      <a href = 'https://jamvie.net/tags' class = 'nav_item'>Tags</a>
+    
+      <a href = 'https://jamvie.net/post/' class = 'nav_item'>Archive</a>
+    
+      <a href = 'https://jamiepoli.github.io/' class = 'nav_item'>Personal Site</a>
+    
+    <div class = 'nav-close'></div>
+    <div class = 'color_mode'>
+<label for = 'mode'>Toggle Dark Mode</label>
+<input type = 'checkbox' class = 'color_choice' id = 'mode'>
+</div>
+
+  </div>
+</div>
+<header class = 'nav' >
+  <nav class = 'nav-menu'>
+    <a href='https://jamvie.net/' class = 'nav-brand nav_item'>Jamvie: CTF writeups and more</a>
+    <div class = 'nav_bar-wrap'>
+      <div class = 'nav_bar'></div>
+    </div>
+  </nav>
+</header>
+
+
+    <main>
+      
+  <div class = 'wrap mt post'>
+    <div><p class = 'post_date pale'>26. April 2020</p>
+      <h1 class = 'post_title'>Commonly Used Software</h1>
+      <div class = 'post_body'>
+        <div class = 'post_inner'>
+        
+          <img src = 'https://jamvie.net/images/Hackerman.jpg' alt = 'Hackerman.jpg' class = 'post_thumbnail'>
+        
+          <p>I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.</p>
+<p>I typically take over the web challenges while my teammates delve into other topics - sometimes I look at the pwn problems, and hopefully I&rsquo;ll include some pwn writeups here! Eventually :P Anyway, as someone who focuses on web stuff, I found myself constantly utilizing the same types of tools and software to help me with challenges. I thought I&rsquo;d share them here!</p>
+<p>Web exploits are broad in topic and there definitely doesn&rsquo;t exist one tool for all sploits. However, as I got exposed to more challenges I found patterns in the problems. These patterns indicated the vulnerability that I should be taking advantage of, and therefore, what types of tools I needed to further investigate those vulnerabilities.</p>
+<p>However, before I get into the list I would like to make a statement about the nature of this post. This is NOT a cheatsheet on how to hack into your friend&rsquo;s facebook. &ldquo;Hacking&rdquo; for malicious purposes is illegal and can cost you <a href="https://criminal.findlaw.com/criminal-charges/hacking-laws-and-punishments.html">jail time and hefty fines</a>.</p>
+<p><strong>I will not divulge information on how to compromise the privacy of individuals without their consent.</strong>
+This is a CTF and ethical hacking blog only - what this post is, is a list of tools I found useful when scoping out web challenges for various CTFs!</p>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p><em>These are not ordered by priority or &ldquo;most utilized&rdquo;.</em></p>
+<hr>
+<!-- raw HTML omitted -->
+<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/curl-logo.svg" alt="cURL_Logo">\</p>
+<!-- raw HTML omitted -->
+<p>A must! cURL is short for &ldquo;Client URL&rdquo;. It&rsquo;s a simple and lightweight command-line tool to transfer data using various network protocols. I use it for basic GET and POST HTTP requests, but its so versatile it can be used for much more! In its simplest form, cURL is amazing to send data to and from a specified server.</p>
+<p><a href="https://jamvie.net/posts/02confidence2020_01/">In my CONfidence 2020 write-up for the &ldquo;Cat Web&rdquo; problem</a>, I use cURL heavily to examine the response data from the server with each post request I make.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>I gained knowledge in Wireshark back in my internet computing course days. I recieved a tutorial on the basics of how to use this software - it&rsquo;s a protocol analyzer designed to examine web traffic and capture packet data between two endpoints. This software can show and display packets on all levels of the OSI hierarchy structure - you can see your common HTTP packets, TCP, DNS, to name a common few&hellip;</p>
+<p>Plenty of forensic-based problems will give you a capture of internet traffic and hide a flag in there, so wireshark is useful even beyond the web challenges I use it for!</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>From <a href="https://portswigger.net/support/how-to-use-burp-suite">PortSwigger, creators of BurpSuite</a>:</p>
+<blockquote>
+<p>Burp Suite is an integrated platform for performing security testing of web applications. It is designed to be used by hands-on testers to support the testing process.</p>
+</blockquote>
+<p>Burp Suite is perfect for testing out all sorts of exploits. It has much more use in testing non-production projects by enterprisal companies, and its a powerful tool for scoping out any possible vulnerabilities of an application. The community version comes with all the basic and necessary tools a CTFer or pentester would need to gauge the security of their application!</p>
+<p>Back in my <a href="https://jamvie.net/posts/01utctf01/">UTCTF &ldquo;Epic Admin Pwn&rdquo; writeup</a>, I mentioned using Burp Suite to scope out the SQLi attack vector and using SQLmap to further exploit it - which is a much faster way than creating your own script to utilize the attack vector that was found in it!</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>If I need to send more complex requests that might make cURL more complex to use, Postman is my go to software. I don&rsquo;t just use Postman to send heavier requests to a server, it&rsquo;s also great for testing out RESTful APIs if you&rsquo;re creating one for a personal project. It has a clean UI and is extremely beginner-friendly, so Postman is my go-to for literally anything requiring RESTful API testing.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>SQLmap is a suite of great utilities specifically for SQL-injection based attacks. It automates the detection and exploitation of any SQL-based flaws in an application. It supports most if not all major databases (MySQL, SQLite, etc) and can do everything from simple detection to database table dumping.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>I frequently alternate between generating a quick python-made server for XSS attacks, or using Webhook.site. This is a great tool if you don&rsquo;t want to make your own server or don&rsquo;t have your own website to host your payload javascript files for certain XSS attacks!</p>
+<hr>
+<p>While this is not an exhaustive list of all the tools I use, these are definitely among the most commonly used softwares that I go to when I need to test and utilize any vulnerabilities in a given CTF challenge. I hope these prove useful to you!</p>
+<p>Jam</p>
+<h2 id="references">References</h2>
+<p><a href="https://knowyourmeme.com/memes/hackerman">Feature Image</a></p>
+        </div>
+        <div class ='post_extra mb-2'>
+          <div class = 'copy'></div>
+
+        </div>
+        <div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href = 'https://jamvie.net/' class = 'post_nav'><span class = 'post_next'>The Latest</span>T</a>
+
+    </main>
+    <footer class = 'footer wrap pale'>
+  <p>&copy;&nbsp;<span class = 'year'></span>&nbsp;Jamvie: CTF writeups and more</p>
+  <p>Designed by  <a href = 'https://www.linkedin.com/in/dan-weru-profile/' target = '_blank' title = 'Linkedin Profile' rel = 'nonopener'>Weru</a></p>
+</footer>
+
+
+<script src = 'https://jamvie.net/js/index.min.d69f471ae38fbfddb2d849ebf49889f0b3b3060efe637469d94aed178db3e067313fbee0a083cbccb6941a1367f743bd80686414fd921175f0d60b52b68eaa67.js'></script>
+
+  </body>
+</html>

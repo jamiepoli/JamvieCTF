@@ -3,7 +3,7 @@ title: "CONfidence 2020: CatWeb"
 date: 2020-04-22T00:46:19-06:00
 draft: false
 author: "JamVie"
-feature_image: https://images.pexels.com/photos/1643456/pexels-photo-1643456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+image: CatWeb.jpg
 tags: ["writeups", "web"]
 ---
 

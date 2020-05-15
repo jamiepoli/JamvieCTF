@@ -1,361 +1,162 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<head>
-	<meta name="generator" content="Hugo 0.58.3" />
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<html lang='en'>
+  <head>
+	<meta name="generator" content="Hugo 0.70.0" />
+  <title>Jamvie: CTF writeups and more</title>
+  <meta charset='utf-8'>
+  <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
+  <meta name = 'SKYPE_TOOLBAR' content = 'SKYPE_TOOLBAR_PARSER_COMPATIBLE' /><meta name = 'keywords' content = 'Jamvie: CTF writeups and more'>
+<meta property = 'og:locale' content = 'en_US' />
+<meta property = 'og:type' content = 'article' />
+<meta property = 'og:title' content = '' />
+<meta property = 'og:description' content = 'author = &ldquo;Jamie Polintan&rdquo;'>
+<meta property = 'og:url' content = 'https://jamvie.net/' />
+<meta property = 'og:image' content = 'images/%!s()'/>
+<link rel='apple-touch-icon' sizes='180x180' href='https://jamvie.net/images/icons/apple-touch-icon.png'>
+<link rel='icon' type='image/png' sizes='32x32' href='https://jamvie.net/images/icons/favicon-32x32.png'>
+<link rel='icon' type='image/png' sizes='16x16' href='https://jamvie.net/images/icons/favicon-16x16.png'>
+<link rel='manifest' href='https://jamvie.net/images/icons/site.webmanifest'>
+<meta name='msapplication-TileColor' content='#da532c'>
+<meta name='theme-color' content='#ffffff'>
 
-    
-    
-    <title>Jamvie: CTF writeups and more</title>
-
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    
-    <link rel="stylesheet" href="https://jamvie.net/style.main.min.d17e80797ff527ead27a684535a2ae633c413f520c03a563651145b43345ecf3.css" />
-
+  <link rel='canonical' href='https://jamvie.net/'>
+  <link rel = 'stylesheet' href = 'https://jamvie.net/css/main.a9f0d07ece0d4b9cee910125ba1579a4e144c2cb962e6398f53fc29c8db92527c9ab161c6fe73daafaa5ab29c6ba46a739f7855ed85797338a9852614bc4dfaa.css' integrity = 'sha512-qfDQfs4NS5zukQEluhV5pOFEwsuWLmOY9T/CnI25JSfJqxYcb&#43;c9qvqlqynGukanOfeFXthXlzOKmFJhS8Tfqg=='>
 </head>
-<body class=" home-template ">
 
-    <div class="site-wrapper">
+  <body>
+    <div class = 'nav-drop'>
+  <div class = 'nav-body'>
+    
+      <a href = 'https://jamvie.net/' class = 'nav_item'>Blog</a>
+    
+      <a href = 'https://jamvie.net/about/' class = 'nav_item'>About Me</a>
+    
+      <a href = 'https://jamvie.net/tags' class = 'nav_item'>Tags</a>
+    
+      <a href = 'https://jamvie.net/post/' class = 'nav_item'>Archive</a>
+    
+      <a href = 'https://jamiepoli.github.io/' class = 'nav_item'>Personal Site</a>
+    
+    <div class = 'nav-close'></div>
+    <div class = 'color_mode'>
+<label for = 'mode'>Toggle Dark Mode</label>
+<input type = 'checkbox' class = 'color_choice' id = 'mode'>
+</div>
 
-<header class="site-home-header">
-    <div class="outer site-header-background no-image">
-
-<div class="inner"><nav class="site-nav">
-    <div class="site-nav-left">
-        
-            <a class="site-nav-logo" href="https://jamvie.net/">Jamvie: CTF writeups and more</a>
-        
-        
-        <div class="site-nav-content">
-            <ul class="nav" role="menu">
-                
-                <li class="nav-home" role="menuitem"><a href="/about/">About Me</a></li>
-                
-                <li class="nav-home" role="menuitem"><a href="/tags/misc">Misc</a></li>
-                
-                <li class="nav-home" role="menuitem"><a href="/tags/writeups">Writeups</a></li>
-                
-            </ul>
-        </div>
-        
+  </div>
+</div>
+<header class = 'nav' >
+  <nav class = 'nav-menu'>
+    <a href='https://jamvie.net/' class = 'nav-brand nav_item'>Jamvie: CTF writeups and more</a>
+    <div class = 'nav_bar-wrap'>
+      <div class = 'nav_bar'></div>
     </div>
-</nav>
-
-<div class="site-header-content">
-                <h1 class="site-title">
-                    
-                        Jamvie: CTF writeups and more
-                    
-                </h1>
-                <h2 class="site-description">A blog about Capture the Flag competitions from a software dev who does it for fun.</h2>
-
-            </div>
-        </div>
-    </div>
+  </nav>
 </header>
 
-<main id="site-main" class="site-main outer">
-    <div class="inner posts">
-        <div class="post-feed">
-            
-            <article class="post-card post
 
- post-card-large 
- ">
-
-        
-            <a class="post-card-image-link" href="https://jamvie.net/posts/05de1ctf2020_01/">
-                <img class="post-card-image"src="https://images.unsplash.com/photo-1585857188938-2f7ae5afb6f8?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=750&amp;q=80" alt="De1CTF 2020: Hard_Pentest_1 and Animal Crossing, Part 1"/>
-            </a>
-        
+    <main>
+      
+<div class = 'wrap pt-2 mt-2'>
+  
+  
     
-        <div class="post-card-content">
+      
     
-            <a class="post-card-content-link" href="https://jamvie.net/posts/05de1ctf2020_01/">
     
-                <header class="post-card-header">
-                    
-                        
-                        <div class="post-card-primary-tag">writeups</div>
-                    
-
-                    <h2 class="post-card-title">De1CTF 2020: Hard_Pentest_1 and Animal Crossing, Part 1</h2>
-                </header>
     
-                <section class="post-card-excerpt">
-                    <p><p>The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&rsquo;m always surprised when I see it in action.</p></p>
-                </section>
-    
-            </a>
-
-            <footer class="post-card-meta">
-                    <ul class="author-list">
-                        <li class="author-list-item">
-                            <div class="author-name-tooltip">Jamvie</div>
-                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
-                        </li>
-                    </ul>
-                    <div class="post-card-byline-content">
-                        <span>Jamvie</span>
-                        <span class="post-card-byline-date"><time datetime="2020-35-05">7 May 2020</time>
-                            <span class="bull">&bull;</span> 8 min read</span>
-                    </div>
-                </footer>
-    
+  <article class = 'article mb-2'>
+    <a href = 'https://jamvie.net/post/05de1ctf2020_01/'  class = 'grid-reverse' >
+      <div class = 'article_thumb' style='background-image: url(https://jamvie.net/images/AnimalCrossing.jpg)'></div>
+      <div class = 'article_meta  center_y '>
+        <time class = 'pale'>May 07, 2020</time>
+        <h3 class = 'article_title'>De1ctf 2020: Hard_Pentest_1 and Animal Crossing, Part 1</h3>
+        <div class = 'article_excerpt  visible '>
+        <p><p>The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, …</p></p>
         </div>
-
-</article>
-    <article class="post-card post
- no-image
- ">
-
-        
+      </div>
+    </a>
+  </article><div class = 'grid-2 article_showcase'>
     
-        <div class="post-card-content">
+      
     
-            <a class="post-card-content-link" href="https://jamvie.net/posts/04plaidctf2020_01/">
     
-                <header class="post-card-header">
-                    
-                        
-                        <div class="post-card-primary-tag">writeups</div>
-                    
-
-                    <h2 class="post-card-title">PlaidCTF 2020: Contrived Web Problem</h2>
-                </header>
     
-                <section class="post-card-excerpt">
-                    <p><p>This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&rsquo;m glad they did!</p></p>
-                </section>
-    
-            </a>
-
-            <footer class="post-card-meta">
-                    <ul class="author-list">
-                        <li class="author-list-item">
-                            <div class="author-name-tooltip">Jamvie</div>
-                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
-                        </li>
-                    </ul>
-                    <div class="post-card-byline-content">
-                        <span>Jamvie</span>
-                        <span class="post-card-byline-date"><time datetime="2020-124-04">28 April 2020</time>
-                            <span class="bull">&bull;</span> 6 min read</span>
-                    </div>
-                </footer>
-    
+  <article class = 'article mb-2'>
+    <a href = 'https://jamvie.net/post/04plaidctf2020_01/' >
+      <div class = 'article_thumb' style='background-image: url(https://jamvie.net/images/Gmail.jpg)'></div>
+      <div class = 'article_meta '>
+        <time class = 'pale'>April 28, 2020</time>
+        <h3 class = 'article_title'>Plaidctf 2020: Contrived Web Problem</h3>
+        <div class = 'article_excerpt '>
+        <p><p>This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April …</p></p>
         </div>
-
-</article>
-    <article class="post-card post
-
-
- ">
-
-        
-            <a class="post-card-image-link" href="https://jamvie.net/posts/03toolsofthetrade/">
-                <img class="post-card-image"src="https://tinyurl.com/syqrnv6" alt="Commonly Used Software"/>
-            </a>
-        
+      </div>
+    </a>
+  </article>
     
-        <div class="post-card-content">
+      
     
-            <a class="post-card-content-link" href="https://jamvie.net/posts/03toolsofthetrade/">
     
-                <header class="post-card-header">
-                    
-                        
-                        <div class="post-card-primary-tag">misc</div>
-                    
-
-                    <h2 class="post-card-title">Commonly Used Software</h2>
-                </header>
     
-                <section class="post-card-excerpt">
-                    <p><p>I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.</p></p>
-                </section>
-    
-            </a>
-
-            <footer class="post-card-meta">
-                    <ul class="author-list">
-                        <li class="author-list-item">
-                            <div class="author-name-tooltip">Jamvie</div>
-                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
-                        </li>
-                    </ul>
-                    <div class="post-card-byline-content">
-                        <span>Jamvie</span>
-                        <span class="post-card-byline-date"><time datetime="2020-14-04">26 April 2020</time>
-                            <span class="bull">&bull;</span> 4 min read</span>
-                    </div>
-                </footer>
-    
+  <article class = 'article mb-2'>
+    <a href = 'https://jamvie.net/post/03toolsofthetrade/' >
+      <div class = 'article_thumb' style='background-image: url(https://jamvie.net/images/Hackerman.jpg)'></div>
+      <div class = 'article_meta '>
+        <time class = 'pale'>April 26, 2020</time>
+        <h3 class = 'article_title'>Commonly Used Software</h3>
+        <div class = 'article_excerpt '>
+        <p><p>I really like web-based exploits, so I focus primarily on the web challenges when my team and I …</p></p>
         </div>
-
-</article>
-    <article class="post-card post
-
-
- ">
-
-        
-            <a class="post-card-image-link" href="https://jamvie.net/posts/02confidence2020_01/">
-                <img class="post-card-image"src="https://images.pexels.com/photos/1643456/pexels-photo-1643456.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" alt="CONfidence 2020: CatWeb"/>
-            </a>
-        
+      </div>
+    </a>
+  </article>
     
-        <div class="post-card-content">
+      
     
-            <a class="post-card-content-link" href="https://jamvie.net/posts/02confidence2020_01/">
     
-                <header class="post-card-header">
-                    
-                        
-                        <div class="post-card-primary-tag">writeups</div>
-                    
-
-                    <h2 class="post-card-title">CONfidence 2020: CatWeb</h2>
-                </header>
     
-                <section class="post-card-excerpt">
-                    <p><p>I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.</p></p>
-                </section>
-    
-            </a>
-
-            <footer class="post-card-meta">
-                    <ul class="author-list">
-                        <li class="author-list-item">
-                            <div class="author-name-tooltip">Jamvie</div>
-                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
-                        </li>
-                    </ul>
-                    <div class="post-card-byline-content">
-                        <span>Jamvie</span>
-                        <span class="post-card-byline-date"><time datetime="2020-124-04">22 April 2020</time>
-                            <span class="bull">&bull;</span> 3 min read</span>
-                    </div>
-                </footer>
-    
+  <article class = 'article mb-2'>
+    <a href = 'https://jamvie.net/post/02confidence2020_01/' >
+      <div class = 'article_thumb' style='background-image: url(https://jamvie.net/images/CatWeb.jpg)'></div>
+      <div class = 'article_meta '>
+        <time class = 'pale'>April 22, 2020</time>
+        <h3 class = 'article_title'>CONfidence 2020: CatWeb</h3>
+        <div class = 'article_excerpt '>
+        <p><p>I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this …</p></p>
         </div>
-
-</article>
-    <article class="post-card post
- no-image
- ">
-
-        
+      </div>
+    </a>
+  </article>
     
-        <div class="post-card-content">
+      
     
-            <a class="post-card-content-link" href="https://jamvie.net/posts/01utctf01/">
     
-                <header class="post-card-header">
-                    
-                        
-                        <div class="post-card-primary-tag">writeups</div>
-                    
-
-                    <h2 class="post-card-title">UTCTF 2020: Epic Admin Pwn  </h2>
-                </header>
     
-                <section class="post-card-excerpt">
-                    <p>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</p>
-                </section>
-    
-            </a>
-
-            <footer class="post-card-meta">
-                    <ul class="author-list">
-                        <li class="author-list-item">
-                            <div class="author-name-tooltip">Jamvie</div>
-                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
-                        </li>
-                    </ul>
-                    <div class="post-card-byline-content">
-                        <span>Jamvie</span>
-                        <span class="post-card-byline-date"><time datetime="2020-124-04">22 April 2020</time>
-                            <span class="bull">&bull;</span> 3 min read</span>
-                    </div>
-                </footer>
-    
+  <article class = 'article mb-2'>
+    <a href = 'https://jamvie.net/post/01utctf01/' >
+      <div class = 'article_thumb' style='background-image: url(https://jamvie.net/images/Database.jpg)'></div>
+      <div class = 'article_meta '>
+        <time class = 'pale'>April 22, 2020</time>
+        <h3 class = 'article_title'>utctf 2020: Epic Admin Pwn</h3>
+        <div class = 'article_excerpt '>
+        <p>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas …</p>
         </div>
+      </div>
+    </a>
+  </article></div>
+</div>
+<a href = 'https://jamvie.net/post/' class = 'post_nav'><span class = 'post_next'>View Archive</span></a>
 
-</article>
-    <article class="post-card post
-
-
- ">
-
-        
-            <a class="post-card-image-link" href="https://jamvie.net/posts/00initialpost/">
-                <img class="post-card-image"src="https://images.pexels.com/photos/1275929/pexels-photo-1275929.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" alt="Jamvie&#39;s first post"/>
-            </a>
-        
-    
-        <div class="post-card-content">
-    
-            <a class="post-card-content-link" href="https://jamvie.net/posts/00initialpost/">
-    
-                <header class="post-card-header">
-                    
-                        
-                        <div class="post-card-primary-tag">misc</div>
-                    
-
-                    <h2 class="post-card-title">Jamvie&#39;s first post</h2>
-                </header>
-    
-                <section class="post-card-excerpt">
-                    <p>Hi, and welcome to my CTF blog. I&rsquo;m just a software dev with a hobby for CTFs, and I thought a blog would be a good way to stash all my long-archived writeups for CTF challenges I participated in. I&rsquo;m by no means an expert on the topic, but if someone stumbles upon here and gains a newfound interest in cybersecurity, that would be pretty cool.
-Over the next few weeks I will upload my old writeups for some CTFs that occurred this year and last, so stay tuned!</p>
-                </section>
-    
-            </a>
-
-            <footer class="post-card-meta">
-                    <ul class="author-list">
-                        <li class="author-list-item">
-                            <div class="author-name-tooltip">Jamvie</div>
-                            <a href="https://jamiepoli.github.io" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="https://jamiepoli.github.io/img/profile.png"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg></a>
-                        </li>
-                    </ul>
-                    <div class="post-card-byline-content">
-                        <span>Jamvie</span>
-                        <span class="post-card-byline-date"><time datetime="2020-94-04">20 April 2020</time>
-                            <span class="bull">&bull;</span> 1 min read</span>
-                    </div>
-                </footer>
-    
-        </div>
-
-</article>
-    
-        </div>
-    </div>
-</main>
+    </main>
+    <footer class = 'footer wrap pale'>
+  <p>&copy;&nbsp;<span class = 'year'></span>&nbsp;Jamvie: CTF writeups and more</p>
+  <p>Designed by  <a href = 'https://www.linkedin.com/in/dan-weru-profile/' target = '_blank' title = 'Linkedin Profile' rel = 'nonopener'>Weru</a></p>
+</footer>
 
 
+<script src = 'https://jamvie.net/js/index.min.d69f471ae38fbfddb2d849ebf49889f0b3b3060efe637469d94aed178db3e067313fbee0a083cbccb6941a1367f743bd80686414fd921175f0d60b52b68eaa67.js'></script>
 
-
-        <footer class="site-footer outer">
-            <div class="site-footer-content inner">
-                <section class="copyright"><a href="https://jamvie.net/">Jamvie: CTF writeups and more</a> &copy; 2020</section>
-                <nav class="site-footer-nav">
-                    <a href="https://jamvie.net/">Latest Posts</a>
-                    
-                    
-                    <a href="https://github.com/jamiepoli" target="_blank" rel="noopener">Github</a>
-                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
-                </nav>
-            </div>
-        </footer>
-
-    </div>
-
-</body>
+  </body>
 </html>
