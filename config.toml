@@ -28,11 +28,6 @@ profile = "https://jamiepoli.github.io/img/profile.png"
     name = "Misc"
     url = "/tags/misc"
     weight = 10
-    [[menu.main]]
-    identifier = "maple bacon"
-    name = "My Team"
-    url = "https://ubcctf.github.io/"
-    weight = 10
 
 
 

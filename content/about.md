@@ -1,10 +1,10 @@
 ---
-title: "About"
+title: "About Me"
 date: 2020-04-21T00:23:24-06:00
 draft: false
 ---
 
-Hello! I'm Jamvie, a software developer based in Canada with a passion for all things computer security. I'm currently studying to finish my Computer Science degree - hopefully, after graduating I'll end up in the field doing something I love. 
+Hello! I'm Jamvie, a software developer based in Canada with a passion for all things computer security. I'm a part of the CTF [Maple Bacon](https://ubcctf.github.io/) team. I'm currently studying to finish my Computer Science degree - hopefully, after graduating I'll end up in the field doing something I love. 
 Besides cybersecurity, I like to do art, keep up with fashion, and talk about nature. 
 
 **What is a CTF?**
