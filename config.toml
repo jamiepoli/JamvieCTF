@@ -18,6 +18,16 @@ profile = "https://jamiepoli.github.io/img/profile.png"
     name = "About"
     url = "/about/"
     weight = 10
+  [[menu.main]]
+    identifier = "writeups"
+    name = "Writeups"
+    url = "/tags/writeup"
+    weight = 10
+    [[menu.main]]
+    identifier = "miscellaneous"
+    name = "Misc"
+    url = "/tags/misc"
+    weight = 10
 
 
 
