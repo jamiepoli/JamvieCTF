@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Jam Polintan</title>
+    <link>https://jamvie.net/tags/</link>
+    <description>Recent content in Tags on Jam Polintan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Thu, 07 May 2020 15:20:38 -0600</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>writeups</title>
+      <link>https://jamvie.net/tags/writeups/</link>
+      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/writeups/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://jamvie.net/tags/web/</link>
+      <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>misc</title>
+      <link>https://jamvie.net/tags/misc/</link>
+      <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/misc/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

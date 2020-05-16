@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>web on Jam Polintan</title>
+    <link>https://jamvie.net/tags/web/</link>
+    <description>Recent content in web on Jam Polintan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Tue, 28 Apr 2020 00:48:12 -0600</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Plaidctf 2020: Contrived Web Problem</title>
+      <link>https://jamvie.net/post/04plaidctf2020_01/</link>
+      <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/04plaidctf2020_01/</guid>
+      <description>&lt;p&gt;This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&amp;rsquo;m glad they did!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Commonly Used Software</title>
+      <link>https://jamvie.net/post/03toolsofthetrade/</link>
+      <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/03toolsofthetrade/</guid>
+      <description>&lt;p&gt;I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/Hackerman.jpg&#34; alt=&#34;haxor&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CONfidence 2020: CatWeb</title>
+      <link>https://jamvie.net/post/02confidence2020_01/</link>
+      <pubDate>Thu, 23 Apr 2020 00:46:19 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/02confidence2020_01/</guid>
+      <description>&lt;p&gt;I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
