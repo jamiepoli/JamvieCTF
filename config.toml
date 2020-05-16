@@ -98,11 +98,11 @@ disableHugoGeneratorInject = false
   # Social icons
   [[params.social]]
     name = "github"
-    url  = "https://github.com/"
+    url  = "https://github.com/jamiepoli"
 
   [[params.social]]
     name = "linkedin"
-    url  = "https://www.linkedin.com/"
+    url  = "https://www.linkedin.com/jamiepoli"
 
 [menu]
   [[menu.main]]
