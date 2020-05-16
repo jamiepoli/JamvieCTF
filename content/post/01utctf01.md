@@ -3,7 +3,6 @@ title : "utctf 2020: Epic Admin Pwn"
 date : 2020-04-22T00:46:19-06:00
 draft : false
 author : "JamVie"
-image: Database.jpg
 tags : [
     "writeups"]
 ---
@@ -16,15 +15,10 @@ Let's Begin!
 
 We are presented with a clean and minimal login page. The challenge's description says that "the password is the flag". Well, since this is only a login page, I'd figure to try and get into admin somehow.
 
-
-
-{{< picture "UTCTFscreenshot1.png" "UTCTFscreenshot1.png" "UTCTF LOGIN" >}}
+![LoginPage](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/UTCTFscreenshot2.png)
 
 Initial attempts to do some scoping for SQL vulnerabilities didn't do anything. Inputting a single quote ' mark wouldn't show anything useful. So, I went in kinda blind, and did a pretty standard SQL attack: ```admin--``` If there were vulnerable SQL queries to be had, my input would malform the query to only return the entries where the username == admin. 
 And it worked! 
-
-
-{{< picture "UTCTFscreenshot2.png" "UTCTFscreenshot2.png" "UTCTF LOGIN 2" >}}
 
 It's a static welcome page, so I didn't get anything useful past learning that the admin's username was, in fact, admin. And the challenge's description told me as such - if I wanted the password, I needed to do something else. 
 
@@ -76,7 +70,3 @@ Note that, we could technically put anything we wanted into the password field -
 There are admittedly faster ways to do this, for example, if you have burpsuite and sqlmap you could save the post request data into a text file and have sqlmap dump the underlying database for you, which should also return the flag. However, creating the script and testing it out was alot of fun! 
 
 Jam
-
-References
-----
-Feature Image: [Kevin Ku on Unsplash](https://unsplash.com/@ikukevk)

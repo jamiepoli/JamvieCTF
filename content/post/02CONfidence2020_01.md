@@ -1,23 +1,25 @@
 ---
 title: "CONfidence 2020: CatWeb"
-date: 2020-04-22T00:46:19-06:00
+date: 2020-04-23T00:46:19-06:00
 draft: false
 author: "JamVie"
-image: CatWeb.jpg
 tags: ["writeups", "web"]
 ---
 
 I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise. 
 <!--more-->
 
+
+![LoginPage](https://images.pexels.com/photos/3073690/pexels-photo-3073690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)
+
 Let's Begin!
 ----
 The link to the webpage is: ```http://catweb.zajebistyc.tf/```
 
+
+![CatWebHome](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWeb_HomePage.png)
+
 We have a basic webpage with photos of cute cats filtered by their color. The drop down menu will give us black, red, grey and white cats. At the bottom is a report button, which will take whatever input we get, send it to some server, and respond to us that our report has been...well. Reported. 
-
-
-{{< picture "CatWeb_HomePage.png" "CatWeb_HomePage.png" "Some Cats" >}}
 
 
 Checking out the response content as I was clicking about the page showed me the requests for the "kind" (colour) of cats I chose based on the drop down menu. The request was just a small JSON string stipulating what kind I asked for, and I guess the server takes that input and returns whatever. 
@@ -33,8 +35,7 @@ Editing the request to change the kind from a colour to just absolute garbage...
 curl "http://catweb.zajebistyc.tf/?kind=djfa"
 ```
 
-
-{{< picture "NotFound.png" "NotFound.png" "brokenrequest" >}}
+![NotFound](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/NotFound.png)
 
 Aha! Our text got echoed back to us in the response. There isn't any input validation in the JSON request! This must be a way in. 
 
@@ -48,9 +49,7 @@ http://catweb.zajebistyc.tf/?","status":"ok","content":["\"<img src=deadbeef one
 
 If there was a JSON vulnerability here, then going to this website would load up an alert with the title of the webpage ("my cats"). What would happen is it would attempt to load an image from the source called "deadbeef", and when it can't find the source, it would load as an error. If the image loaded as an error, pop up an alert with the name of the webpage. 
 
-
-{{< picture "XSSJsonInCatWeb.png" "XSSJsonInCatWeb.png" "XSS" >}}
-
+![XSS](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/XSSJsonInCatWeb.png)
 
 :) Great! There is definitely JSON injection in play here. Let's see what we can do with it! 
 
@@ -60,19 +59,19 @@ Using curl to delve deeper into the webpage, I tried to make it list directories
 curl "http://catweb.zajebistyc.tf/cats?kind=.."
 ```
 
-{{< picture "CatWebTemplates.png" "CatWebTemplates.png" "templates" >}}
-
+![Templates](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebTemplates.png)
 
 I traversed through the directories, but in the templates subfolder...
 
-{{< picture "CatWebFlagLocn.png" "CatWebFlagLocn.png" "flagLocn" >}}
+![Flag](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebFlagLocn.png)
+
 
 Aha! The ```flag.txt``` file is in there. Now we just need to somehow read it from the browser. The fact that I was able to find the local files like this means something: the path of templates looks alot like ```file:///app/templates/flag.txt``` - Note the root path name: file. A same-origin policy here could treat all files with this starting origin as from the same place. 
 
-
 We can use this to our advantage: create an XSS attack on the ```file://``` path.
 
-Since an XSS endpoint was found using the JSON vulnerabilities in the URL, and there exists a report function, this is all a pretty classic XSS attack from here:
+Since an XSS endpoint was found using the JSON vulnerabilities in the URL, and there exists a report function, this is all a pretty classic XSS attack from here.
+
 
 Craft our payload script to fetch the flag.txt from ```file://```. Here's mine called (xss.js):
 

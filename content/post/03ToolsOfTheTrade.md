@@ -10,6 +10,7 @@ tags: ["misc", "web"]
 
 I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.
 
+![haxor](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/Hackerman.jpg)
 <!--more-->
 
  
@@ -28,41 +29,31 @@ Let's Begin!
 _These are not ordered by priority or "most utilized"._
 
 ---
-
-{{< picture "curl-logo.svg" "curl-logo.svg" "CURL LOGO" >}}
+## cURL
 
 A must! [cURL](https://curl.haxx.se/) is short for "Client URL". It's a simple and lightweight command-line tool to transfer data using various network protocols. I use it for basic GET and POST HTTP requests, but its so versatile it can be used for much more! In its simplest form, cURL is amazing to send data to and from a specified server. 
 
 [In my CONfidence 2020 write-up for the "Cat Web" problem](https://jamvie.net/posts/02confidence2020_01/), I use cURL heavily to examine the response data from the server with each post request I make. 
 
-
-
-{{< picture  "WireSharkLogo.png" "WiresharkWhite.png" "WIRESHARK LOGO" >}}
-
-
+## Wireshark
 I gained knowledge in [Wireshark](https://www.wireshark.org/) back in my internet computing course days. I recieved a tutorial on the basics of how to use this software - it's a protocol analyzer designed to examine web traffic and capture packet data between two endpoints. This software can show and display packets on all levels of the OSI hierarchy structure - you can see your common HTTP packets, TCP, DNS, to name a common few...
 
 Plenty of forensic-based problems will give you a capture of internet traffic and hide a flag in there, so wireshark is useful even beyond the web challenges I use it for! 
 
-{{< picture  "Burpsuite_card.png" "Burpsuite_card.png" "BURP LOGO" >}}
-
-
+## Burpsuite 
 From [PortSwigger, creators of BurpSuite](https://portswigger.net/support/how-to-use-burp-suite):
 
 >Burp Suite is an integrated platform for performing security testing of web applications. It is designed to be used by hands-on testers to support the testing process.
 
-Burp Suite is perfect for testing out all sorts of exploits. It has much more use in testing non-production projects by enterprisal companies, and its a powerful tool for scoping out any possible vulnerabilities of an application. The community version comes with all the basic and necessary tools a CTFer or pentester would need to gauge the security of their application! 
+Burp Suite is perfect for testing out all sorts of exploits. It has much more use in testing non-production projects by enterprisal companies, and its a powerful tool for scoping out any possible vulnerabilities of an application. The community version comes with all the basic and necessary tools a CTFer or pentester would need to gauge the security of their application - often, i use it as a proxy when I'm trying to scope our API vulnerabilities.
 
 Back in my [UTCTF "Epic Admin Pwn" writeup](https://jamvie.net/posts/01utctf01/), I mentioned using Burp Suite to scope out the SQLi attack vector and using SQLmap to further exploit it - which is a much faster way than creating your own script to utilize the attack vector that was found in it! 
 
-{{< picture  "Postman.png" "Postman.png" "POST LOGO" >}}
 
+## Postman
 If I need to send more complex requests that might make cURL more complex to use, [Postman](https://www.postman.com/) is my go to software. I don't just use Postman to send heavier requests to a server, it's also great for testing out RESTful APIs if you're creating one for a personal project. It has a clean UI and is extremely beginner-friendly, so Postman is my go-to for literally anything requiring RESTful API testing. 
 
-
-
-{{< picture  "Sqlmap_logo.png" "Sqlmap_logo.png" "SQLMAP LOGO" >}}
-
+## SQLMap
 SQLmap is a suite of great utilities specifically for SQL-injection based attacks. It automates the detection and exploitation of any SQL-based flaws in an application. It supports most if not all major databases (MySQL, SQLite, etc) and can do everything from simple detection to database table dumping.
 
 ---

@@ -1,1 +1,0 @@
-author = "Jamie Polintan"
