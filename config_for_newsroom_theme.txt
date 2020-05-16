@@ -1,5 +1,5 @@
 baseURL = "https://jamvie.net/"
-title = "JamVie"
+title = "Jamvie's CTF blog"
 theme = "newsroom" 
 author = "JamVie"
 
