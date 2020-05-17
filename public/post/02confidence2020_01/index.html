@@ -145,29 +145,47 @@
 
             <div class="post-content">
                 <p>I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.</p>
-<p><img src="https://images.pexels.com/photos/3073690/pexels-photo-3073690.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940" alt="LoginPage"></p>
+
+    <img src="https://images.pexels.com/photos/3073690/pexels-photo-3073690.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=650&amp;w=940"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <p>The link to the webpage is: <code>http://catweb.zajebistyc.tf/</code></p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWeb_HomePage.png" alt="CatWebHome"></p>
+
+    <img src="https://jamvie.net/images/CatWeb_HomePage.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>We have a basic webpage with photos of cute cats filtered by their color. The drop down menu will give us black, red, grey and white cats. At the bottom is a report button, which will take whatever input we get, send it to some server, and respond to us that our report has been&hellip;well. Reported.</p>
 <p>Checking out the response content as I was clicking about the page showed me the requests for the &ldquo;kind&rdquo; (colour) of cats I chose based on the drop down menu. The request was just a small JSON string stipulating what kind I asked for, and I guess the server takes that input and returns whatever.</p>
 <pre><code>curl &quot;http://catweb.zajebistyc.tf/cats?kind=grey&quot;
 </code></pre><p>That got me thinking, can I ask for cats of a kind not in the drop down menu? 
 Editing the request to change the kind from a colour to just absolute garbage&hellip;</p>
 <pre><code>curl &quot;http://catweb.zajebistyc.tf/?kind=djfa&quot;
-</code></pre><p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/NotFound.png" alt="NotFound"></p>
+</code></pre>
+    <img src="https://jamvie.net/images/NotFound.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>Aha! Our text got echoed back to us in the response. There isn&rsquo;t any input validation in the JSON request! This must be a way in.</p>
 <p>To test how far I could go with it, I decided to hide an XSS in the JSON, seeing as how the URL we are taken to after any sort of response also has the JSON text in it.</p>
 <p>I typed this in as the URL:</p>
 <pre><code>http://catweb.zajebistyc.tf/?&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;content&quot;:[&quot;\&quot;&lt;img src=deadbeef onerror=alert(document.title)&gt; &lt;/img&gt;],&quot;ignore&quot;:&quot;
 </code></pre><p>If there was a JSON vulnerability here, then going to this website would load up an alert with the title of the webpage (&ldquo;my cats&rdquo;). What would happen is it would attempt to load an image from the source called &ldquo;deadbeef&rdquo;, and when it can&rsquo;t find the source, it would load as an error. If the image loaded as an error, pop up an alert with the name of the webpage.</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/XSSJsonInCatWeb.png" alt="XSS"></p>
+
+    <img src="https://jamvie.net/images/XSSJsonInCatWeb.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>:) Great! There is definitely JSON injection in play here. Let&rsquo;s see what we can do with it!</p>
 <p>Using curl to delve deeper into the webpage, I tried to make it list directories with the command:</p>
 <pre><code>curl &quot;http://catweb.zajebistyc.tf/cats?kind=..&quot;
-</code></pre><p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebTemplates.png" alt="Templates"></p>
+</code></pre>
+    <img src="https://jamvie.net/images/CatWebTemplates.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>I traversed through the directories, but in the templates subfolder&hellip;</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebFlagLocn.png" alt="Flag"></p>
+
+    <img src="https://jamvie.net/images/CatWebFlagLocn.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>Aha! The <code>flag.txt</code> file is in there. Now we just need to somehow read it from the browser. The fact that I was able to find the local files like this means something: the path of templates looks alot like <code>file:///app/templates/flag.txt</code> - Note the root path name: file. A same-origin policy here could treat all files with this starting origin as from the same place.</p>
 <p>We can use this to our advantage: create an XSS attack on the <code>file://</code> path.</p>
 <p>Since an XSS endpoint was found using the JSON vulnerabilities in the URL, and there exists a report function, this is all a pretty classic XSS attack from here.</p>

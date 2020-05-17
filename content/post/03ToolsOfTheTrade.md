@@ -10,7 +10,7 @@ tags: ["misc", "web"]
 
 I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.
 
-{{< image src="images/Hackerman.jpg" alt="Login" position="center" style="border-radius: 8px;" >}}
+{{< image src="/images/Hackerman.jpg" alt="Login" position="center" style="border-radius: 8px;" >}}
 
 <!--more-->
 

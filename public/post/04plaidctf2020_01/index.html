@@ -147,8 +147,11 @@
                 <p>This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&rsquo;m glad they did!</p>
 <p>This was a journey in understanding internet protocols that deepened my knowledge of them to completely new levels, so I&rsquo;m really grateful I got the chance to try this problem out - even though I tried it after the CTF ended :P</p>
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
-<p>This problem really holds up to its name. The website is simple - you have the option to login or register as a new user.
-<img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CWP01.png" alt="PlaidCWP1"></p>
+<p>This problem really holds up to its name. The website is simple - you have the option to login or register as a new user.</p>
+
+    <img src="https://jamvie.net/images/CWP01.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>Uniquely, we are given the source code for the problem. The source code shows us that the program has 6 services:</p>
 <pre><code>\services
     \api 
@@ -161,7 +164,10 @@
 </code></pre><p>Checking out the code, I see that <code>flag.txt</code> is actually mentioned. It&rsquo;s in the services dockerfile, which is only used by <code>api</code>, <code>email</code> and <code>server</code> services. So, the vulnerability probably is within one of these services.</p>
 <p>I checked out <code>api</code> first - and I see that the only protocols that it allows are HTTP, HTTPS, and FTP. Aside from the FTP protocol, the other 2 are pretty standard protocols to see in APIs.</p>
 <p>Looking at <code>email</code> next, which uses <a href="https://nodemailer.com/about/">nodemailer</a>. I&rsquo;m not too familiar with it, so I check out its documentation:</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CWP02.png" alt="PlaidCWP1"></p>
+
+    <img src="https://jamvie.net/images/CWP02.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>This seems like a good loophole to exploit - we just need to specify the filepath and nodemailer will send an email with an attachment of whatever file we specified by the filepath, so we can exploit nodemailer&rsquo;s same origin policy. Since the rabbitmq server is the email server&rsquo;s queue, we will send a rogue email request into rabbitmq&rsquo;s queue to serve up to the email server, which will tell it to email us the flag!</p>
 <p>Now the hard part - how <em>do we</em> ask the server? How do we send a request to the server to send us the email with the flag as an attachment?</p>
 <p>I spent a long time trying to figure out how to send a rogue request to the rabbitmq server that will send us the email we want. I spent hours just browsing through the source code, not really paying attention&hellip;</p>

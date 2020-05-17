@@ -14,48 +14,48 @@
     
     <item>
       <title>De1ctf 2020: Hard_Pentest_1 and Animal Crossing</title>
-      <link>https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/</link>
+      <link>https://jamvie.net/post/05de1ctf2020_01/</link>
       <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/</guid>
+      <guid>https://jamvie.net/post/05de1ctf2020_01/</guid>
       <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Plaidctf 2020: Contrived Web Problem</title>
-      <link>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</link>
+      <link>https://jamvie.net/post/04plaidctf2020_01/</link>
       <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</guid>
+      <guid>https://jamvie.net/post/04plaidctf2020_01/</guid>
       <description>&lt;p&gt;This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&amp;rsquo;m glad they did!&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Commonly Used Software</title>
-      <link>https://jamvie.net/posts/2020/04/commonly-used-software/</link>
+      <link>https://jamvie.net/post/03toolsofthetrade/</link>
       <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/2020/04/commonly-used-software/</guid>
+      <guid>https://jamvie.net/post/03toolsofthetrade/</guid>
       <description>&lt;p&gt;I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.&lt;/p&gt;
 
-    &lt;img src=&#34;images/Hackerman.jpg&#34;  alt=&#34;Login&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;  /&gt;</description>
+    &lt;img src=&#34;https://jamvie.net/images/Hackerman.jpg&#34;  alt=&#34;Login&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;  /&gt;</description>
     </item>
     
     <item>
       <title>CONfidence 2020: CatWeb</title>
-      <link>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</link>
+      <link>https://jamvie.net/post/02confidence2020_01/</link>
       <pubDate>Thu, 23 Apr 2020 00:46:19 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</guid>
+      <guid>https://jamvie.net/post/02confidence2020_01/</guid>
       <description>&lt;p&gt;I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>utctf 2020: Epic Admin Pwn</title>
-      <link>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</link>
+      <link>https://jamvie.net/post/01utctf01/</link>
       <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</guid>
+      <guid>https://jamvie.net/post/01utctf01/</guid>
       <description>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</description>
     </item>
     

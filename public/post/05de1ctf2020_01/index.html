@@ -277,11 +277,17 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
 <hr>
 <h2 id="animal-crossing">Animal Crossing</h2>
 <p>Despite the few solves this problem has, I was drawn to it because of its name. Who doesn&rsquo;t love Animal Crossing?</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/DE1CTF01.png" alt="de1ctf01"></p>
+
+    <img src="https://jamvie.net/images/DE1CTF01.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>The website allows you to make a passport. There are fields for your name, island name, nickname, and favourite fruit, I think.</p>
 <p>When we make a passport we are redirected to a URL where the contents of what we typed are reflected in it (a sign of XSS attacks). And, at the bottom, is a report function (A BIG sign of XSS attacks).</p>
 <p>When we go ahead and report it&hellip;</p>
-<p><img src="https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/DE1CTF02.png" alt="de1ctf02"></p>
+
+    <img src="https://jamvie.net/images/DE1CTF02.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>I thought my client broke for a second. I wasn&rsquo;t expecting just plain code to be printed on the front-end.</p>
 <p>It stumped me at first - the ability to report is blocked by this md5 code checking function. I needed to input some string whose md5 encoding&rsquo;s first 6 characters matched the randomized string. I didn&rsquo;t actually get what this was supposed to be doing, I was confused as to wether or not this was still a broken webpage or not, and I asked my team for help. Luckily, my teammate Filip, who&rsquo;s really good at pwn-based challenges, told me it was a &ldquo;proof of work&rdquo; - I just needed to brute-force my way in by finding a string with the md5 hash characters matching the random one. He gave me a script I could work with to start cracking it.</p>
 <p>The good thing (in this context, bad for others) about md5 is that it&rsquo;s a one-way hashing but there is no salting to the code value, it&rsquo;s just the hash. Therefore, a string put through md5 would always return the same md5 encoding. So I just needed to randomly generate a string, md5 it, then check the digest against the random one.</p>
