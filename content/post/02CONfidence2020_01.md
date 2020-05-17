@@ -1,16 +1,14 @@
 ---
-title: "CONfidence 2020: CatWeb"
-date: 2020-04-23T00:46:19-06:00
-draft: false
-author: "JamVie"
-tags: ["writeups", "web"]
+title : "CONfidence 2020: CatWeb"
+date : 2020-04-23T00:46:19-06:00
+draft : false
+author : "JamVie"
+cover : "img/CONfidenceCover.png"
+tags : ["writeups", "web"]
 ---
 
 I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise. 
 <!--more-->
-
-
-{{< image src="https://images.pexels.com/photos/3073690/pexels-photo-3073690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Login" position="center" style="border-radius: 8px;" >}}
 
 Let's Begin!
 ----

@@ -4,7 +4,7 @@ description: "My favourite tools to use for web-based exploits"
 author: "Jamvie"
 date: 2020-04-26T01:30:30-06:00
 draft: false
-image: Hackerman.jpg
+cover: "img/Hackerman.jpg"
 tags: ["misc", "web"]
 ---
 
