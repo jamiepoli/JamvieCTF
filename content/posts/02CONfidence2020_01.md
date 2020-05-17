@@ -10,14 +10,13 @@ I participated in CONfidence CTF 2020 teasers in March of this year. I was focus
 <!--more-->
 
 
-![LoginPage](https://images.pexels.com/photos/3073690/pexels-photo-3073690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)
+{{< image src="https://images.pexels.com/photos/3073690/pexels-photo-3073690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Login" position="center" style="border-radius: 8px;" >}}
 
 Let's Begin!
 ----
 The link to the webpage is: ```http://catweb.zajebistyc.tf/```
 
-
-![CatWebHome](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWeb_HomePage.png)
+{{< image src="images/CatWeb_HomePage.png" alt="Login" position="center" style="border-radius: 8px;" >}}
 
 We have a basic webpage with photos of cute cats filtered by their color. The drop down menu will give us black, red, grey and white cats. At the bottom is a report button, which will take whatever input we get, send it to some server, and respond to us that our report has been...well. Reported. 
 
@@ -35,7 +34,7 @@ Editing the request to change the kind from a colour to just absolute garbage...
 curl "http://catweb.zajebistyc.tf/?kind=djfa"
 ```
 
-![NotFound](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/NotFound.png)
+{{< image src="images/NotFound.png" alt="Login" position="center" style="border-radius: 8px;" >}}
 
 Aha! Our text got echoed back to us in the response. There isn't any input validation in the JSON request! This must be a way in. 
 
@@ -49,7 +48,9 @@ http://catweb.zajebistyc.tf/?","status":"ok","content":["\"<img src=deadbeef one
 
 If there was a JSON vulnerability here, then going to this website would load up an alert with the title of the webpage ("my cats"). What would happen is it would attempt to load an image from the source called "deadbeef", and when it can't find the source, it would load as an error. If the image loaded as an error, pop up an alert with the name of the webpage. 
 
-![XSS](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/XSSJsonInCatWeb.png)
+
+{{< image src="images/XSSJsonInCatWeb.png" alt="Login" position="center" style="border-radius: 8px;" >}}
+
 
 :) Great! There is definitely JSON injection in play here. Let's see what we can do with it! 
 
@@ -59,11 +60,12 @@ Using curl to delve deeper into the webpage, I tried to make it list directories
 curl "http://catweb.zajebistyc.tf/cats?kind=.."
 ```
 
-![Templates](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebTemplates.png)
+{{< image src="images/CatWebTemplates.png" alt="Login" position="center" style="border-radius: 8px;" >}}
 
 I traversed through the directories, but in the templates subfolder...
 
-![Flag](https://raw.githubusercontent.com/jamiepoli/JamvieCTF/master/content/images/CatWebFlagLocn.png)
+
+{{< image src="images/CatWebFlagLocn.png" alt="Login" position="center" style="border-radius: 8px;" >}}
 
 
 Aha! The ```flag.txt``` file is in there. Now we just need to somehow read it from the browser. The fact that I was able to find the local files like this means something: the path of templates looks alot like ```file:///app/templates/flag.txt``` - Note the root path name: file. A same-origin policy here could treat all files with this starting origin as from the same place. 
