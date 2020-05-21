@@ -92,7 +92,7 @@
     <div class="logo">
         
             <span class="logo__mark">></span>
-            <span class="logo__text">$ cd /hello/world</span>
+            <span class="logo__text">$ echo hello</span>
             <span class="logo__cursor" style=
                   "
                    
@@ -213,7 +213,7 @@
 </code></pre></div><p>Image: the profile picture we would upload when we register as a new user. For HTTP and HTTPS protocols it&rsquo;s a simple GET method, not much to do there. But for FTP?
 It asks for the username, password and filename, <em>unchecked</em>, then asynchronously asks the server for the image that matches the filename that we specified.
 FTP is a text-based protocol, and since username and password fields are passed to it unchecked, we could definitely inject some protocol commands, custom data (something like <code>{to: &quot;email@example.com&quot;, attachments:[{path:&quot;/flag.txt&quot;}]}</code>), and make FTP send requests that were never intended to be sent.</p>
-<p>Here&rsquo;s something I learned in my internet computing class about the FTP protocol: FTP connections have two modes : &ldquo;Active&rdquo; and &ldquo;Passive&rdquo;. I&rsquo;ll give a heavily truncated explanation of the two modes (if you&rsquo;re interested in learning mroe about the FTP protocol, check out the <a href="https://tools.ietf.org/html/rfc959">RFC specifications on it</a>):</p>
+<p>Here&rsquo;s something I learned in my internet computing class about the FTP protocol: FTP connections have two modes : &ldquo;Active&rdquo; and &ldquo;Passive&rdquo;. I&rsquo;ll give a heavily truncated explanation of the two modes (if you&rsquo;re interested in learning more about the FTP protocol, check out the <a href="https://tools.ietf.org/html/rfc959">RFC specifications on it</a>):</p>
 <p>&ndash; In active mode, the client will specify the IP of the destination to the server. The FTP server will then send the files to the specified IP. The client establishes the communication channel, tells the server the address to send data to, and the server will then open a data channel to the address.</p>
 <p>&ndash; In passive mode, the server tells the client where the files will be sent to. In this case, the client will then have to open the data channel as well to get the files. By default, applications running FTP will run on passive mode.</p>
 <p>The difference in active and passive really lies in the <code>RETR</code> command in the FTP specifications: active-mode <code>RETR</code> makes the client stipulate the destination IP, and passive-mode <code>RETR</code> makes the server stipulate it.</p>
@@ -238,7 +238,7 @@ RETR payload.txt
 </ul>
 <pre><code>PCTF{not_that_contrived_i_guess}
 </code></pre><p>NOTE: Doing it this way means the FTP server was establishing a connection with the rabbitmq one. However, multiple times I tried this the TCP connection would close immediately after I send my request! I worked around this by sending in a bunch of garbage in my payload.txt file alongside the actual payload, so that at least the TCP connection would have to spend time sending all of that data(think: an unending stream of AAAAAs), and persist long enough for the reponse to be recieved.</p>
-<p>This was a fun way to learn how FTP servers work and how protocols of the internet operate! I&rsquo;m upset that I didn&rsquo;t have the time to participate when it happened, but nonetheless this was a great challenge :)</p>
+<h2 id="this-was-a-fun-way-to-learn-how-ftp-servers-work-and-how-protocols-of-the-internet-operate-im-upset-that-i-didnt-have-the-time-to-participate-when-it-happened-but-nonetheless-this-was-a-great-challenge-">This was a fun way to learn how FTP servers work and how protocols of the internet operate! I&rsquo;m upset that I didn&rsquo;t have the time to participate when it happened, but nonetheless this was a great challenge :)</h2>
 <p>Jam</p>
             </div>
         </article>
