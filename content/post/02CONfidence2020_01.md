@@ -5,6 +5,7 @@ draft : false
 author : "JamVie"
 cover : "img/CONfidenceCover.png"
 tags : ["writeups", "web"]
+images: ["img/CONfidenceCover.png", "/images/CatWeb_HomePage.png", "/images/NotFound.png", "/images/XSSJsonInCatWeb.png", "/images/CatWebFlagLocn.png"]
 ---
 
 I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise. 

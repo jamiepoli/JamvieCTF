@@ -6,6 +6,7 @@ date: 2020-04-26T01:30:30-06:00
 draft: false
 cover: "img/Hackerman.jpg"
 tags: ["misc", "web"]
+images: ["img/Hackerman.jpg"]
 ---
 
 I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.
