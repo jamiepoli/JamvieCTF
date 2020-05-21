@@ -57,9 +57,6 @@ disableHugoGeneratorInject = false
 
   homeSubtitle = "Software Developer || Cybersecurity Enthusiast || Artist"
 
-  # Prefix of link to the git commit detail page. GitInfo must be enabled.
-  # gitUrl = ""
-
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = false
 

@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Thu, 07 May 2020 15:20:38 -0600</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2020 01:22:16 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSAW2019: Unagi</title>
+      <link>https://jamvie.net/post/06csaw2019/</link>
+      <pubDate>Thu, 21 May 2020 01:22:16 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/06csaw2019/</guid>
+      <description>Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
+This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks.</description>
+    </item>
     
     <item>
       <title>De1ctf 2020: Hard_Pentest_1 and Animal Crossing</title>
@@ -46,15 +56,6 @@
       
       <guid>https://jamvie.net/post/02confidence2020_01/</guid>
       <description>&lt;p&gt;I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>utctf 2020: Epic Admin Pwn</title>
-      <link>https://jamvie.net/post/01utctf01/</link>
-      <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
-      
-      <guid>https://jamvie.net/post/01utctf01/</guid>
-      <description>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</description>
     </item>
     
   </channel>
