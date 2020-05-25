@@ -6,7 +6,7 @@ author : "JamVie"
 cover: "img/Database.jpg"
 tags : [
     "writeups"]
-images: ["/images/UTCTFscreenshot1.png", "/images/UTCTFscreenshot2.png"]
+images: ["/images/UTCTFscreenshot2.png"]
 ---
 
 I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas [ISSS](https://www.isss.io/). My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.
