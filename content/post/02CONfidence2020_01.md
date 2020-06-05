@@ -59,7 +59,7 @@ Using curl to delve deeper into the webpage, I tried to make it list directories
 curl "http://catweb.zajebistyc.tf/cats?kind=.."
 ```
 
-{{< image src="/images/CatWebTemplates.png" alt="Login" position="center" style="border-radius: 8px;" >}}
+{{< image src="/images/CatWebTemplates.jpg" alt="Login" position="center" style="border-radius: 8px;" >}}
 
 I traversed through the directories, but in the templates subfolder...
 

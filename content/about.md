@@ -6,7 +6,7 @@
 
 ## What is a CTF?
 
-Short for “Capture the Flag”, CTFs are competitions that involve solving challenges using methods that would pertain to the general practise of cybersecurity and ethical hacking. Challenges you might see include things like cryptography of all varieties, web-based pwns such as SQL injection, and even the classic stack overflows given a program. While all in the name of good fun, CTFs are a great way to improve upon your ethical security skills and hopefully assist in making you a more security-conscious person.
+Short for “Capture the Flag”, CTFs are competitions that involve solving challenges using methods that would pertain to the general practise of cybersecurity and ethical hacking. Challenges you might see include things like cryptography of all varieties, web-based pwns such as SQL injection, and even the classic stack overflows. While all in the name of good fun, CTFs are a great way to improve upon your ethical security skills and hopefully assist in making you a more security-conscious person.
 
 ----
 
