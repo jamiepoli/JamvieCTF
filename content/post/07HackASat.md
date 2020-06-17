@@ -150,8 +150,8 @@ Now, when we plug in all our values into the sample KML file they provided for u
 			<longitude>-80.94308333333333</longitude>
 			<latitude>36.946888888888886</latitude>
 			<altitude>19158.46875</altitude>
-			<heading>TODO</heading>
-			<tilt>57.889</tilt>
+			<heading>57.889</heading>
+			<tilt>44.886</tilt>
 			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
       </Camera>
       <Link>
