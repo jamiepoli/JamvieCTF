@@ -51,9 +51,9 @@ disableHugoGeneratorInject = false
   dateformNumTime = "2006-01-02 15:04 -0700"
 
   # Metadata mostly used in document's head
-  description = "Jamie's CTF Blog"
+  description = "JamVie: blog of cybersecurity"
   keywords = ""
-  images = ["img/profile.jpeg"]
+  images = ["img/profile.jpg"]
 
   homeSubtitle = "Software Developer || Cybersecurity Enthusiast || Artist"
 
@@ -88,9 +88,9 @@ disableHugoGeneratorInject = false
     # Set to a valid CSS time value to change the animation duration, "0s" to disable.
     # logoCursorAnimate  = "2s"
 
-  #[params.portrait]
-   # path = "/staticimg/profile.jpeg"
-   # alt = "Portrait"
+  [params.portrait]
+    path = "img/profile.jpg"
+    alt = "Portrait"
 
   # Social icons
   [[params.social]]
