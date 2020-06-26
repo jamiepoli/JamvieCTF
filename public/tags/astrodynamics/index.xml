@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>astrodynamics on Jam Polintan</title>
+    <link>https://jamvie.net/tags/astrodynamics/</link>
+    <description>Recent content in astrodynamics on Jam Polintan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Wed, 03 Jun 2020 21:47:00 -0600</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/astrodynamics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2020 HackASat Quals</title>
+      <link>https://jamvie.net/post/07hackasat/</link>
+      <pubDate>Wed, 03 Jun 2020 21:47:00 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/07hackasat/</guid>
+      <description>I participated in HackASat Quals with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &amp;ldquo;I Like to Watch.&amp;rdquo; I also went through it myself and am going to discuss my solution to it.</description>
+    </item>
+    
+  </channel>
+</rss>

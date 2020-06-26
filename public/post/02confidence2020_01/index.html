@@ -48,10 +48,6 @@
 <meta itemprop="dateModified" content="2020-04-23T00:46:19-06:00" />
 <meta itemprop="wordCount" content="611">
 <meta itemprop="image" content="https://jamvie.net/img/CONfidenceCover.png">
-<meta itemprop="image" content="https://jamvie.net/images/CatWeb_HomePage.png">
-<meta itemprop="image" content="https://jamvie.net/images/NotFound.png">
-<meta itemprop="image" content="https://jamvie.net/images/XSSJsonInCatWeb.png">
-<meta itemprop="image" content="https://jamvie.net/images/CatWebFlagLocn.png">
 
 
 
@@ -69,10 +65,6 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://jamvie.net/post/02confidence2020_01/" />
 <meta property="og:image" content="https://jamvie.net/img/CONfidenceCover.png" />
-<meta property="og:image" content="https://jamvie.net/images/CatWeb_HomePage.png" />
-<meta property="og:image" content="https://jamvie.net/images/NotFound.png" />
-<meta property="og:image" content="https://jamvie.net/images/XSSJsonInCatWeb.png" />
-<meta property="og:image" content="https://jamvie.net/images/CatWebFlagLocn.png" />
 <meta property="article:published_time" content="2020-04-23T00:46:19-06:00" />
 <meta property="article:modified_time" content="2020-04-23T00:46:19-06:00" />
 
@@ -164,7 +156,7 @@
 <p>We have a basic webpage with photos of cute cats filtered by their color. The drop down menu will give us black, red, grey and white cats. At the bottom is a report button, which will take whatever input we get, send it to some server, and respond to us that our report has been&hellip;well. Reported.</p>
 <p>Checking out the response content as I was clicking about the page showed me the requests for the &ldquo;kind&rdquo; (colour) of cats I chose based on the drop down menu. The request was just a small JSON string stipulating what kind I asked for, and I guess the server takes that input and returns whatever.</p>
 <pre><code>curl &quot;http://catweb.zajebistyc.tf/cats?kind=grey&quot;
-</code></pre><p>That got me thinking, can I ask for cats of a kind not in the drop down menu? 
+</code></pre><p>That got me thinking, can I ask for cats of a kind not in the drop down menu?
 Editing the request to change the kind from a colour to just absolute garbage&hellip;</p>
 <pre><code>curl &quot;http://catweb.zajebistyc.tf/?kind=djfa&quot;
 </code></pre>
@@ -184,7 +176,7 @@ Editing the request to change the kind from a colour to just absolute garbage&he
 <p>Using curl to delve deeper into the webpage, I tried to make it list directories with the command:</p>
 <pre><code>curl &quot;http://catweb.zajebistyc.tf/cats?kind=..&quot;
 </code></pre>
-    <img src="https://jamvie.net/images/CatWebTemplates.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+    <img src="https://jamvie.net/images/CatWebTemplates.jpg"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
 
 <p>I traversed through the directories, but in the templates subfolder&hellip;</p>

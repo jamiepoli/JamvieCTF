@@ -3,32 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2020-06-25T16:26:44-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/post/</loc>
+    <lastmod>2020-06-25T16:26:44-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/post/08redpwn2020/</loc>
+    <lastmod>2020-06-25T16:26:44-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/post/07hackasat/</loc>
+    <lastmod>2020-06-03T21:47:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/astrodynamics/</loc>
+    <lastmod>2020-06-03T21:47:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/math/</loc>
+    <lastmod>2020-06-03T21:47:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/</loc>
+    <lastmod>2020-06-03T21:47:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/writeups/</loc>
+    <lastmod>2020-06-03T21:47:00-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jamvie.net/post/06csaw2019/</loc>
     <lastmod>2020-05-21T01:22:16-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/</loc>
-    <lastmod>2020-05-21T01:22:16-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/post/</loc>
-    <lastmod>2020-05-21T01:22:16-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/</loc>
-    <lastmod>2020-05-21T01:22:16-06:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jamvie.net/tags/web/</loc>
-    <lastmod>2020-05-21T01:22:16-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/writeups/</loc>
     <lastmod>2020-05-21T01:22:16-06:00</lastmod>
   </url>
   
@@ -58,7 +78,7 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/01utctf01/</loc>
+    <loc>https://jamvie.net/post/01utctf/</loc>
     <lastmod>2020-04-22T00:46:19-06:00</lastmod>
   </url>
   

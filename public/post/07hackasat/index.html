@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="I participated in HackASat Quals with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &amp;ldquo;I Like to Watch.&amp;rdquo; I also went through it myself and am going to discuss my solution to it." />
+<meta name="keywords" content=", math, writeups, astrodynamics" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://jamvie.net/post/07hackasat/" />
+
+
+    <title>
+        
+            2020 HackASat Quals :: Jam Polintan 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="2020 HackASat Quals">
+<meta itemprop="description" content="I participated in HackASat Quals with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &ldquo;I Like to Watch.&rdquo; I also went through it myself and am going to discuss my solution to it.">
+<meta itemprop="datePublished" content="2020-06-03T21:47:00-06:00" />
+<meta itemprop="dateModified" content="2020-06-03T21:47:00-06:00" />
+<meta itemprop="wordCount" content="1064">
+<meta itemprop="image" content="https://jamvie.net/images/GoogleEarthPic.png">
+
+
+
+<meta itemprop="keywords" content="math,writeups,astrodynamics," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/images/GoogleEarthPic.png"/>
+
+<meta name="twitter:title" content="2020 HackASat Quals"/>
+<meta name="twitter:description" content="I participated in HackASat Quals with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &ldquo;I Like to Watch.&rdquo; I also went through it myself and am going to discuss my solution to it."/>
+
+
+
+    <meta property="og:title" content="2020 HackASat Quals" />
+<meta property="og:description" content="I participated in HackASat Quals with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &ldquo;I Like to Watch.&rdquo; I also went through it myself and am going to discuss my solution to it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jamvie.net/post/07hackasat/" />
+<meta property="og:image" content="https://jamvie.net/images/GoogleEarthPic.png" />
+<meta property="article:published_time" content="2020-06-03T21:47:00-06:00" />
+<meta property="article:modified_time" content="2020-06-03T21:47:00-06:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-06-03 21:47:00 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo hello</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/post/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://jamvie.net/post/07hackasat/">2020 HackASat Quals</a></h2>
+
+            
+
+            <div class="post-content">
+                <p>I participated in <a href="https://www.hackasat.com/">HackASat Quals</a> with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &ldquo;I Like to Watch.&rdquo; I also went through it myself and am going to discuss my solution to it.</p>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p>The challenge states that we must realign a satellite (simulated via Google Earth) to its exact position and orientation as it was reported at a specific time.</p>
+
+    <img src="https://jamvie.net/images/HackASatDescription.jpg"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Additionally, the challenge supplies us with a KML file - files tailored for Google Earth to communicate location data, with similarities to XML documents.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;kml</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.opengis.net/kml/2.2&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;Folder&gt;</span>
+    <span style="color:#f92672">&lt;name&gt;</span>HackASatCompetition<span style="color:#f92672">&lt;/name&gt;</span>
+    <span style="color:#f92672">&lt;visibility&gt;</span>0<span style="color:#f92672">&lt;/visibility&gt;</span>
+    <span style="color:#f92672">&lt;open&gt;</span>0<span style="color:#f92672">&lt;/open&gt;</span>
+    <span style="color:#f92672">&lt;description&gt;</span>HackASatComp1<span style="color:#f92672">&lt;/description&gt;</span>
+    <span style="color:#f92672">&lt;NetworkLink&gt;</span>
+      <span style="color:#f92672">&lt;name&gt;</span>View Centered Placemark<span style="color:#f92672">&lt;/name&gt;</span>
+      <span style="color:#f92672">&lt;visibility&gt;</span>0<span style="color:#f92672">&lt;/visibility&gt;</span>
+      <span style="color:#f92672">&lt;open&gt;</span>0<span style="color:#f92672">&lt;/open&gt;</span>
+      <span style="color:#f92672">&lt;description&gt;</span>This is where the satellite was located when we saw it.<span style="color:#f92672">&lt;/description&gt;</span>
+      <span style="color:#f92672">&lt;refreshVisibility&gt;</span>0<span style="color:#f92672">&lt;/refreshVisibility&gt;</span>
+      <span style="color:#f92672">&lt;flyToView&gt;</span>0<span style="color:#f92672">&lt;/flyToView&gt;</span>
+      <span style="color:#f92672">&lt;LookAt</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;ID&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#75715e">&lt;!-- specific to LookAt --&gt;</span>
+			<span style="color:#f92672">&lt;longitude&gt;</span>-FILL ME IN<span style="color:#f92672">&lt;/longitude&gt;</span>
+			<span style="color:#f92672">&lt;latitude&gt;</span>FILL ME IN<span style="color:#f92672">&lt;/latitude&gt;</span>
+			<span style="color:#f92672">&lt;altitude&gt;</span>FILL ME IN<span style="color:#f92672">&lt;/altitude&gt;</span>
+			<span style="color:#f92672">&lt;heading&gt;</span>FILL ME IN<span style="color:#f92672">&lt;/heading&gt;</span>
+			<span style="color:#f92672">&lt;tilt&gt;</span>FILL ME IN<span style="color:#f92672">&lt;/tilt&gt;</span>
+			<span style="color:#f92672">&lt;range&gt;</span>FILL ME IN<span style="color:#f92672">&lt;/range&gt;</span>
+			<span style="color:#f92672">&lt;gx:altitudeMode&gt;</span>relativeToSeaFloor<span style="color:#f92672">&lt;/gx:altitudeMode&gt;</span>
+      <span style="color:#f92672">&lt;/LookAt&gt;</span>
+      <span style="color:#f92672">&lt;Link&gt;</span>
+        <span style="color:#f92672">&lt;href&gt;</span>http://18.191.77.141:31110/cgi-bin/HSCKML.py<span style="color:#f92672">&lt;/href&gt;</span>
+        <span style="color:#f92672">&lt;refreshInterval&gt;</span>1<span style="color:#f92672">&lt;/refreshInterval&gt;</span>
+        <span style="color:#f92672">&lt;viewRefreshMode&gt;</span>onStop<span style="color:#f92672">&lt;/viewRefreshMode&gt;</span>
+        <span style="color:#f92672">&lt;viewRefreshTime&gt;</span>1<span style="color:#f92672">&lt;/viewRefreshTime&gt;</span>
+        <span style="color:#f92672">&lt;viewFormat&gt;</span>BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth];CAMERA=[lookatLon],[lookatLat],[lookatRange],[lookatTilt],[lookatHeading];VIEW=[horizFov],[vertFov],[horizPixels],[vertPixels],[terrainEnabled]<span style="color:#f92672">&lt;/viewFormat&gt;</span>
+      <span style="color:#f92672">&lt;/Link&gt;</span>
+    <span style="color:#f92672">&lt;/NetworkLink&gt;</span>
+  <span style="color:#f92672">&lt;/Folder&gt;</span>
+<span style="color:#f92672">&lt;/kml&gt;</span>
+
+</code></pre></div><p>From the netcat connection, the coordinates of the satellite are given to us in <a href="https://en.wikipedia.org/wiki/Two-line_element_set">TLE format</a>. I saved the TLE data in a text file (TLE.txt) for later use. In order to draw out meaningful values from it, you need to parse it. While you can do so manually, I opted to use a script that utilizes <a href="https://pyorbital.readthedocs.io/en/latest/#">pyOrbital</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pyorbital.orbital <span style="color:#f92672">import</span> Orbital
+<span style="color:#f92672">from</span> pyorbital <span style="color:#f92672">import</span> tlefile
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+
+tle_object_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ISS (ZARYA)&#34;</span>
+sat <span style="color:#f92672">=</span> tlefile<span style="color:#f92672">.</span>read(tle_object_name, <span style="color:#e6db74">&#39;TLE.txt&#39;</span>)
+
+<span style="color:#75715e">##8:53:03 pm on March 26, 2020 according to the netcat information</span>
+time <span style="color:#f92672">=</span> datetime(<span style="color:#ae81ff">2020</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">53</span>, <span style="color:#ae81ff">3</span>)
+
+satLon, satLat, satAlt <span style="color:#f92672">=</span> sat<span style="color:#f92672">.</span>get_lonlatalt(time)
+
+<span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;Satellite Lat{}, Lon{}, Alt{}&#34;</span><span style="color:#f92672">.</span>format(satLat, satLon, satAlt)
+
+<span style="color:#f92672">...</span>
+
+</code></pre></div><pre><code>Satellite Lat{36.946888888888886}, Lon{-80.94308333333333}, Alt{419158.46875}
+</code></pre><p>Parsing the TLE format gives us the satellite&rsquo;s location in latitude and longitude, alongside several other key info. The challenge&rsquo;s description asks us to arrange the satellite&rsquo;s (Google Earth) camera in the exact same position as it was, facing the Washington Monument, with very little room for error. We must essentially recreate the orientation of the satellite at its given position at the given time. Since we&rsquo;re using Google Earth, the given KML file will help us manipulate the orientation of the virtual camera.</p>
+<p>In the KML file, we are given a specific tag known as <code>&lt;LookAt&gt;</code>. Some research into the KML documentation reveals that the <code>&lt;LookAt&gt;</code> tag changes the object that the camera is focused on. It can function similarly to another attribute known as <code>&lt;Camera&gt;</code>, which changes the actual camera position. Both tags can be used to try and position our satellite to perfectly align to the Washington Monument, but the <code>&lt;Camera&gt;</code> tag deals with less sub-attributes rather than <code>&lt;Lookat&gt;</code>. In this solution, I opted to use the <code>&lt;Camera&gt;</code> tag, however, the initial solve my team did the <code>&lt;LookAt&gt;</code> tag.</p>
+<h2 id="the-camera-tag">The Camera Tag</h2>
+<p><code>&lt;Camera&gt;</code> has 7 sub-attributes(excluding altitudeMode), of which we only need to focus on all but the last:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;Camera</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;ID&#34;</span><span style="color:#f92672">&gt;</span>    
+  <span style="color:#f92672">&lt;longitude&gt;</span>0<span style="color:#f92672">&lt;/longitude&gt;</span>          <span style="color:#75715e">&lt;!-- kml:angle180 --&gt;</span>     
+  <span style="color:#f92672">&lt;latitude&gt;</span>0<span style="color:#f92672">&lt;/latitude&gt;</span>            <span style="color:#75715e">&lt;!-- kml:angle90 --&gt;</span>    
+  <span style="color:#f92672">&lt;altitude&gt;</span>0<span style="color:#f92672">&lt;/altitude&gt;</span>            <span style="color:#75715e">&lt;!-- double --&gt;</span>    
+  <span style="color:#f92672">&lt;heading&gt;</span>0<span style="color:#f92672">&lt;/heading&gt;</span>              <span style="color:#75715e">&lt;!-- kml:angle360 --&gt;</span>    
+  <span style="color:#f92672">&lt;tilt&gt;</span>0<span style="color:#f92672">&lt;/tilt&gt;</span>                    <span style="color:#75715e">&lt;!-- kml:anglepos180 --&gt;</span>    
+  <span style="color:#f92672">&lt;roll&gt;</span>0<span style="color:#f92672">&lt;/roll&gt;</span>                    <span style="color:#75715e">&lt;!-- kml:angle180 --&gt;</span>    
+  <span style="color:#f92672">&lt;altitudeMode&gt;</span>clampToGround<span style="color:#f92672">&lt;/altitudeMode&gt;</span>
+       <span style="color:#75715e">&lt;!-- kml:altitudeModeEnum: relativeToGround, clampToGround, or absolute --&gt;</span>  
+       <span style="color:#75715e">&lt;!-- or, gx:altitudeMode can be substituted: clampToSeaFloor, relativeToSeaFloor --&gt;</span>
+<span style="color:#f92672">&lt;/Camera&gt;</span> 
+</code></pre></div><p>The first three (longitude, latitude and altitude) we can parse from the TLE data from above. However, for heading and tilt - we would need to do some math.</p>
+<p>The heading, also known as the azimuth direction, of an earth-orbiting object is the angle from it&rsquo;s absolute ground-level position to the north pole. It is a method to orient oneself to face the object relative to a standardized direction (North/South) on earth. The azimuth is an angle between 0-360 degrees.</p>
+<p>We want to determine the azimuth of our satellite at 10:53pm on March 20, 2020. We can use the methods within pyOrbital to calculate the elevation and heading of our satellite. While, again, this can be done manually, keep in mind that we are computing an object relative to Earth and thus must account for the curvature of our planet - we need to acknowledge our geometry being non-Euclidean. This serves several problems for manual computation or utilizing a machine to calculate equations which do not take this into account.</p>
+<p>In my computations, I wanted to calculate the azimuth of the satellite relative to an observer - as in, a target on the ground looking at the satellite. In this case, the challenge wants us to focus the satellite camera on the Washington Monument, so we will have the landmark be our observer.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#f92672">...</span>
+<span style="color:#75715e">#Part 2 of our script.</span>
+
+<span style="color:#75715e">#Washington Monument lon, lat and alt values.</span>
+WaLon <span style="color:#f92672">=</span> <span style="color:#ae81ff">38.8895</span>
+WaLat <span style="color:#f92672">=</span> <span style="color:#ae81ff">77.0353</span>
+WaAlt <span style="color:#f92672">=</span> <span style="color:#ae81ff">169</span>
+
+azi <span style="color:#f92672">=</span> sat<span style="color:#f92672">.</span>get_observer_look(utc_time<span style="color:#f92672">=</span>time, lon<span style="color:#f92672">=</span>WaLon lat<span style="color:#f92672">=</span>WaLat, alt<span style="color:#f92672">=</span>WaAlt)
+	<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;&#34;</span>)
+	<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Azimuth:	&#34;</span>, azi)
+</code></pre></div><p>The tilt is the rotation of the satellite on the X-axis. Because the satellite would theoretically be looking at an overhead angle towards the monument, I did some manual guessing and checking manipulation to see if I could get the correct value. I&rsquo;m sure theres a better, more efficient way of doing this, but I digress :P.</p>
+<p>Now, when we plug in all our values into the sample KML file they provided for us, we should appear at the same location the satellite was at, with the camera turned towards the Washington Monument in the exact same orientation and positioning as the satellite was at the given time.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;kml</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.opengis.net/kml/2.2&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;Folder&gt;</span>
+    <span style="color:#f92672">&lt;name&gt;</span>HackASatCompetition<span style="color:#f92672">&lt;/name&gt;</span>
+    <span style="color:#f92672">&lt;visibility&gt;</span>0<span style="color:#f92672">&lt;/visibility&gt;</span>
+    <span style="color:#f92672">&lt;open&gt;</span>0<span style="color:#f92672">&lt;/open&gt;</span>
+    <span style="color:#f92672">&lt;description&gt;</span>HackASatComp1<span style="color:#f92672">&lt;/description&gt;</span>
+    <span style="color:#f92672">&lt;NetworkLink&gt;</span>
+      <span style="color:#f92672">&lt;name&gt;</span>View Centered Placemark<span style="color:#f92672">&lt;/name&gt;</span>
+      <span style="color:#f92672">&lt;visibility&gt;</span>0<span style="color:#f92672">&lt;/visibility&gt;</span>
+      <span style="color:#f92672">&lt;open&gt;</span>0<span style="color:#f92672">&lt;/open&gt;</span>
+      <span style="color:#f92672">&lt;description&gt;</span>This is where the satellite was located when we saw it.<span style="color:#f92672">&lt;/description&gt;</span>
+      <span style="color:#f92672">&lt;refreshVisibility&gt;</span>0<span style="color:#f92672">&lt;/refreshVisibility&gt;</span>
+      <span style="color:#f92672">&lt;flyToView&gt;</span>0<span style="color:#f92672">&lt;/flyToView&gt;</span>
+      <span style="color:#f92672">&lt;Camera</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;ID&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#75715e">&lt;!-- We input our values here --&gt;</span>
+			<span style="color:#f92672">&lt;longitude&gt;</span>-80.94308333333333<span style="color:#f92672">&lt;/longitude&gt;</span>
+			<span style="color:#f92672">&lt;latitude&gt;</span>36.946888888888886<span style="color:#f92672">&lt;/latitude&gt;</span>
+			<span style="color:#f92672">&lt;altitude&gt;</span>19158.46875<span style="color:#f92672">&lt;/altitude&gt;</span>
+			<span style="color:#f92672">&lt;heading&gt;</span>57.889<span style="color:#f92672">&lt;/heading&gt;</span>
+			<span style="color:#f92672">&lt;tilt&gt;</span>44.886<span style="color:#f92672">&lt;/tilt&gt;</span>
+			<span style="color:#f92672">&lt;gx:altitudeMode&gt;</span>relativeToSeaFloor<span style="color:#f92672">&lt;/gx:altitudeMode&gt;</span>
+      <span style="color:#f92672">&lt;/Camera&gt;</span>
+      <span style="color:#f92672">&lt;Link&gt;</span>
+        <span style="color:#f92672">&lt;href&gt;</span>http://18.191.77.141:31110/cgi-bin/HSCKML.py<span style="color:#f92672">&lt;/href&gt;</span>
+        <span style="color:#f92672">&lt;refreshInterval&gt;</span>1<span style="color:#f92672">&lt;/refreshInterval&gt;</span>
+        <span style="color:#f92672">&lt;viewRefreshMode&gt;</span>onStop<span style="color:#f92672">&lt;/viewRefreshMode&gt;</span>
+        <span style="color:#f92672">&lt;viewRefreshTime&gt;</span>1<span style="color:#f92672">&lt;/viewRefreshTime&gt;</span>
+        <span style="color:#f92672">&lt;viewFormat&gt;</span>BBOX=[bboxWest],[bboxSouth],[bboxEast],[bboxNorth];CAMERA=[lookatLon],[lookatLat],[lookatRange],[lookatTilt],[lookatHeading];VIEW=[horizFov],[vertFov],[horizPixels],[vertPixels],[terrainEnabled]<span style="color:#f92672">&lt;/viewFormat&gt;</span>
+      <span style="color:#f92672">&lt;/Link&gt;</span>
+    <span style="color:#f92672">&lt;/NetworkLink&gt;</span>
+  <span style="color:#f92672">&lt;/Folder&gt;</span>
+<span style="color:#f92672">&lt;/kml&gt;</span>
+
+</code></pre></div><p>Doing so in Google Earth, the link that we specified in the KML file refers to the server to check our values against theres, and we are rewarded with a (randomized) flag once we have aligned the satellite back to its exact position on March 20 :)</p>
+
+    <img src="https://jamvie.net/images/GoogleEarthPic.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>This was less a &ldquo;hacking&rdquo; challenge and more a mathematics one. I&rsquo;m always down to learn more about the world of math, and hopefully I can expand my blog to talk about the unique things I come across in the world of complex mathematics!</p>
+<p>Jam</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/math">math</a></span><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/astrodynamics">astrodynamics</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>
