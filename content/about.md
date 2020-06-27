@@ -6,6 +6,5 @@
 
 ## What is a CTF?
 
-Short for “Capture the Flag”, CTFs are competitions that involve solving challenges using methods that would pertain to the general practise of cybersecurity and ethical hacking. Typically, CTFs challenge their particpants into solving problems by hacking through them or defending their system. 
+Short for “Capture the Flag”, CTFs are competitions that involve solving challenges using methods that would pertain to the general practise of cybersecurity and ethical hacking. Typically, CTFs challenge their participants into solving problems by hacking through them or defending their system. 
 
-----
