@@ -4,7 +4,7 @@ date : 2020-04-23T00:46:19-06:00
 draft : false
 author : "JamVie"
 cover : "img/CONfidenceCover.png"
-tags : ["writeups", "web"]
+tags : ["writeups", "web", "xss", "directory-traversal"]
 images: ["img/CONfidenceCover.png"]
 ---
 

@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Thu, 25 Jun 2020 16:26:44 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2020 21:19:19 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>RedPwnCTF 2020, part 2</title>
+      <link>https://jamvie.net/post/09redpwn2020_02/</link>
+      <pubDate>Sun, 28 Jun 2020 21:19:19 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/09redpwn2020_02/</guid>
+      <description>Part 2 of my writeup series for RedPwnCTF 2020!
+Tux-Fanpage  points: 464  Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request  if(!path || !</description>
+    </item>
     
     <item>
       <title>RedPwnCTF 2020</title>
@@ -48,15 +59,6 @@ This was among the first of the challenges I did while under my team, Maple Baco
       
       <guid>https://jamvie.net/post/05de1ctf2020_01/</guid>
       <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Plaidctf 2020: Contrived Web Problem</title>
-      <link>https://jamvie.net/post/04plaidctf2020_01/</link>
-      <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
-      
-      <guid>https://jamvie.net/post/04plaidctf2020_01/</guid>
-      <description>&lt;p&gt;This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&amp;rsquo;m glad they did!&lt;/p&gt;</description>
     </item>
     
   </channel>

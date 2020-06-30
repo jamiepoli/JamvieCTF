@@ -3,13 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jamvie.net/tags/csrf/</loc>
+    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/directory-traversal/</loc>
+    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/idor/</loc>
+    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jamvie.net/</loc>
-    <lastmod>2020-06-25T16:26:44-06:00</lastmod>
+    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
   </url>
   
   <url>
     <loc>https://jamvie.net/post/</loc>
-    <lastmod>2020-06-25T16:26:44-06:00</lastmod>
+    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/post/09redpwn2020_02/</loc>
+    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/</loc>
+    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/web/</loc>
+    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/writeups/</loc>
+    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
   </url>
   
   <url>
@@ -18,17 +53,12 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/tags/</loc>
+    <loc>https://jamvie.net/tags/sqli/</loc>
     <lastmod>2020-06-25T16:26:44-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/tags/web/</loc>
-    <lastmod>2020-06-25T16:26:44-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/writeups/</loc>
+    <loc>https://jamvie.net/tags/xss/</loc>
     <lastmod>2020-06-25T16:26:44-06:00</lastmod>
   </url>
   
@@ -53,8 +83,18 @@
   </url>
   
   <url>
+    <loc>https://jamvie.net/tags/xxe/</loc>
+    <lastmod>2020-05-21T01:22:16-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jamvie.net/post/05de1ctf2020_01/</loc>
     <lastmod>2020-05-07T15:20:38-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/ftp/</loc>
+    <lastmod>2020-04-28T00:48:12-06:00</lastmod>
   </url>
   
   <url>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xss on Jam Polintan</title>
+    <link>https://jamvie.net/tags/xss/</link>
+    <description>Recent content in xss on Jam Polintan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Thu, 25 Jun 2020 16:26:44 -0600</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/xss/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>RedPwnCTF 2020</title>
+      <link>https://jamvie.net/post/08redpwn2020/</link>
+      <pubDate>Thu, 25 Jun 2020 16:26:44 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/08redpwn2020/</guid>
+      <description>RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
+Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty.</description>
+    </item>
+    
+    <item>
+      <title>DE1ctf 2020: Hard_Pentest_1 and Animal Crossing</title>
+      <link>https://jamvie.net/post/05de1ctf2020_01/</link>
+      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/05de1ctf2020_01/</guid>
+      <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CONfidence 2020: CatWeb</title>
+      <link>https://jamvie.net/post/02confidence2020_01/</link>
+      <pubDate>Thu, 23 Apr 2020 00:46:19 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/02confidence2020_01/</guid>
+      <description>&lt;p&gt;I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

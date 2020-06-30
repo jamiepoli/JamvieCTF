@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sqli on Jam Polintan</title>
+    <link>https://jamvie.net/tags/sqli/</link>
+    <description>Recent content in sqli on Jam Polintan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Thu, 25 Jun 2020 16:26:44 -0600</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/sqli/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>RedPwnCTF 2020</title>
+      <link>https://jamvie.net/post/08redpwn2020/</link>
+      <pubDate>Thu, 25 Jun 2020 16:26:44 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/08redpwn2020/</guid>
+      <description>RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
+Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty.</description>
+    </item>
+    
+    <item>
+      <title>UTctf 2020: Epic Admin Pwn</title>
+      <link>https://jamvie.net/post/01utctf/</link>
+      <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/01utctf/</guid>
+      <description>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</description>
+    </item>
+    
+  </channel>
+</rss>

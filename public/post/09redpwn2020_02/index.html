@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="Part 2 of my writeup series for RedPwnCTF 2020!
+Tux-Fanpage  points: 464  Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request  if(!path || !" />
+<meta name="keywords" content=", writeups, web, directory-traversal, CSRF, IDOR" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://jamvie.net/post/09redpwn2020_02/" />
+
+
+    <title>
+        
+            RedPwnCTF 2020, part 2 :: Jam Polintan 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="RedPwnCTF 2020, part 2">
+<meta itemprop="description" content="Part 2 of my writeup series for RedPwnCTF 2020!
+Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!path || !">
+<meta itemprop="datePublished" content="2020-06-28T21:19:19-06:00" />
+<meta itemprop="dateModified" content="2020-06-28T21:19:19-06:00" />
+<meta itemprop="wordCount" content="1815">
+<meta itemprop="image" content="https://jamvie.net/images/modern-tux.png">
+
+
+
+<meta itemprop="keywords" content="writeups,web,directory-traversal,CSRF,IDOR," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/images/modern-tux.png"/>
+
+<meta name="twitter:title" content="RedPwnCTF 2020, part 2"/>
+<meta name="twitter:description" content="Part 2 of my writeup series for RedPwnCTF 2020!
+Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!path || !"/>
+
+
+
+    <meta property="og:title" content="RedPwnCTF 2020, part 2" />
+<meta property="og:description" content="Part 2 of my writeup series for RedPwnCTF 2020!
+Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!path || !" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jamvie.net/post/09redpwn2020_02/" />
+<meta property="og:image" content="https://jamvie.net/images/modern-tux.png" />
+<meta property="article:published_time" content="2020-06-28T21:19:19-06:00" />
+<meta property="article:modified_time" content="2020-06-28T21:19:19-06:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-06-28 21:19:19 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo hello</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/post/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://jamvie.net/post/09redpwn2020_02/">RedPwnCTF 2020, part 2</a></h2>
+
+            
+
+            <div class="post-content">
+                <p>Part 2 of my writeup series for RedPwnCTF 2020!</p>
+<h2 id="tux-fanpage">Tux-Fanpage</h2>
+<ul>
+<li>points: 464</li>
+</ul>
+<p>Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>)
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>)
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>()
+
+<span style="color:#75715e">//Don&#39;t forget to redact from published source
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">flag</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;[REDACTED]&#39;</span>
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/page?path=index.html&#39;</span>)
+})
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/page&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">path</span>
+
+    <span style="color:#75715e">//Handle queryless request
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">path</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">strip</span>(<span style="color:#a6e22e">path</span>)){
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/page?path=index.html&#39;</span>)
+        <span style="color:#66d9ef">return</span>
+    }
+
+    <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">strip</span>(<span style="color:#a6e22e">path</span>)
+
+    <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">preventTraversal</span>(<span style="color:#a6e22e">path</span>)
+
+    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">sendFile</span>(<span style="color:#a6e22e">prepare</span>(<span style="color:#a6e22e">path</span>), (<span style="color:#a6e22e">err</span>) =&gt; {
+        <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">headersSent</span>) {
+                <span style="color:#66d9ef">try</span> {
+                    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">strip</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">path</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; not found&#39;</span>)
+                } <span style="color:#66d9ef">catch</span> {
+                    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>()
+                }
+            }
+        }
+    })
+})
+
+<span style="color:#75715e">//Prevent directory traversal attack
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">preventTraversal</span>(<span style="color:#a6e22e">dir</span>){
+    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;../&#39;</span>)){
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;../&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">preventTraversal</span>(<span style="color:#a6e22e">res</span>)
+    }
+
+    <span style="color:#75715e">//In case people want to test locally on windows
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;..\\&#39;</span>)){
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;..\\&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">preventTraversal</span>(<span style="color:#a6e22e">res</span>)
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dir</span>
+}
+
+<span style="color:#75715e">//Get absolute path from relative path
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">prepare</span>(<span style="color:#a6e22e">dir</span>){
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;./public/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">dir</span>)
+}
+
+<span style="color:#75715e">//Strip leading characters
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">strip</span>(<span style="color:#a6e22e">dir</span>){
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">regex</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[a-z0-9]$/im</span>
+
+    <span style="color:#75715e">//Remove first character if not alphanumeric
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">regex</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">dir</span>[<span style="color:#ae81ff">0</span>])){
+        <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>){
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strip</span>(<span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span>))
+        }
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span>
+    }
+
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dir</span>
+}
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#ae81ff">3000</span>, () =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;listening on 0.0.0.0:3000&#39;</span>)
+})
+
+</code></pre></div><p>From this, the functions <code>Strip()</code> and <code>preventTraversal()</code> are important:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">//Prevent directory traversal attack
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">preventTraversal</span>(<span style="color:#a6e22e">dir</span>){
+    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;../&#39;</span>)){
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;../&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">preventTraversal</span>(<span style="color:#a6e22e">res</span>)
+    }
+
+    <span style="color:#75715e">//In case people want to test locally on windows
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;..\\&#39;</span>)){
+        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;..\\&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">preventTraversal</span>(<span style="color:#a6e22e">res</span>)
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dir</span>
+}
+
+<span style="color:#75715e">//Strip leading characters
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">strip</span>(<span style="color:#a6e22e">dir</span>){
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">regex</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">/^[a-z0-9]$/im</span>
+
+    <span style="color:#75715e">//Remove first character if not alphanumeric
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">regex</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">dir</span>[<span style="color:#ae81ff">0</span>])){
+        <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>){
+            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strip</span>(<span style="color:#a6e22e">dir</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span>))
+        }
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span>
+    }
+
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dir</span>
+}
+
+</code></pre></div><p>This gives away the attack for this challenge: a directory traversal attack. We would try to force access into folders/directories typically inaccessible from the webpage&rsquo;s root folder. Specifically, the provided script were given pings us to try and traverse our way onto the server&rsquo;s version of <code>index.js</code>, which likely has the flag that isn&rsquo;t redacted (&ldquo;Dont forget to redact from published source&rdquo;). We want to use a URL like</p>
+<pre><code>https://tux-fanpage.2020.redpwnc.tf/page?path=../
+</code></pre><p>Individually, the above functions can be bypassed:</p>
+<ul>
+<li>for <code>strip()</code>, it simply checks if the first character of the argument is alphanumeric, and removes that char if it isn&rsquo;t. In the get request to <code>/page</code>, it calls <code>strip()</code> first. Therefore, we can bypass that check if our URL
+looks like</li>
+</ul>
+<pre><code>https://tux-fanpage.2020.redpwnc.tf/page?path=j&amp;path=../
+</code></pre><ul>
+<li>for <code>preventTraversal()</code>, the function will recursively check for and remove any instance of <code>../</code> in our input. However, the input in this case, dir, is set as an array. Using the <code>includes()</code> function on an array will return true only if an element of that array exactly matches whatever <code>includes()</code> is comparing it too. So, the function will allow <code>../blah</code> to pass through, as it doesn&rsquo;t exactly match <code>../</code>. We can bypass this check if our url looks like</li>
+</ul>
+<pre><code>https://tux-fanpage.2020.redpwnc.tf/page?path=j&amp;path=../blah
+</code></pre><p>It was mentioned in my <a href="https://jamvie.net/post/05de1ctf2020_01/">DE1CTF writeup</a> of &ldquo;Hard_Pentest_1&rdquo; that javascript shares PHP&rsquo;s ability to combine arrays (of certain types) and strings together. To this end, consider the following example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">myStr</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello&#34;</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">array</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34; &#34;</span>, <span style="color:#e6db74">&#34;World&#34;</span>, <span style="color:#e6db74">&#34;!&#34;</span>];
+
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">myStr</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">array</span>;
+
+<span style="color:#a6e22e">print</span> <span style="color:#a6e22e">res</span>;
+
+<span style="color:#f92672">----------</span>
+
+<span style="color:#e6db74">&#34;hello, , World, !&#34;</span>
+</code></pre></div><p>Javascript will concatenate the elements of the array to the provided string. Observe, then, how the tux-fanpage script does this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">//Get absolute path from relative path
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">prepare</span>(<span style="color:#a6e22e">dir</span>){
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#e6db74">&#39;./public/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">dir</span>)
+}
+</code></pre></div><p>In this case the string is <code>'./public/'</code> and the array is <code>dir</code>. Keeping in mind the ways to bypass the two filter functions above, our directory traversing URL will look like</p>
+<pre><code>https://tux-fanpage.2020.redpwnc.tf/page?path=j&amp;path=../../../index.js
+</code></pre><p>Going to this URL will take us to the published source&rsquo;s javascript file where the flag is found.</p>
+
+    <img src="https://jamvie.net/images/REDPWN2020_TuxFlag.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<h2 id="cookie-recipes-v2">cookie-recipes-v2</h2>
+<ul>
+<li>points: 488</li>
+</ul>
+<p>The exploit here is slightly complicated. To summarize, we will need to do a CSRF attack, but theres alot more to this challenge than what I originally thought.</p>
+<p>The site will ask us to register, and then we will come to the landing page where we can buy 3 recipes. The last one is the flag for this challenge, which costs 1000 credits - currently we only have 100. Additionally, there exists a &ldquo;RECIPE&rdquo; submission bar where you send a URL of a recipe to the admin for them to review.</p>
+<p>Several exploits come to mind:</p>
+<ol>
+<li>The ability to send a URL to admin allows the ability to do xss or CSRF attacks. Hopefully, being admin will have special privileges that allow us to obtain the flag.</li>
+<li>The main thing barring us from obtaining the flag is the lack of credits we have. If we could find a way to add more credits to our account, we could purchase the flag.</li>
+</ol>
+<p>The challenge is accompanied by their source script. While long, several things are of note:</p>
+<p>In the last few lines of the source, we see that the ID of the admin is 0.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Add admin account if it does not exist yet
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">hasUser</span>(<span style="color:#e6db74">&#39;admin&#39;</span>)) {
+    <span style="color:#75715e">// Admin gets id 0
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">register</span>(<span style="color:#e6db74">&#39;admin&#39;</span>, <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">ADMIN_PASS</span>, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">ADMIN_TOKEN</span>);
+    <span style="color:#a6e22e">statements</span>.<span style="color:#a6e22e">setIp</span>.<span style="color:#a6e22e">run</span>(<span style="color:#e6db74">&#39;::1&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>);
+}
+</code></pre></div><p>Additionally, we see a list of SQL statements.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">statements</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">resetUsers</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;DROP TABLE IF EXISTS users;&#39;</span>),
+    <span style="color:#a6e22e">fromUsername</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT * FROM users WHERE username = ?;&#39;</span>),
+    <span style="color:#a6e22e">fromId</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT * FROM users WHERE id = ?;&#39;</span>),
+    <span style="color:#a6e22e">fromToken</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT user_id FROM tokens WHERE token = ?;&#39;</span>),
+    <span style="color:#a6e22e">isAdmin</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT admin FROM users WHERE id = ?;&#39;</span>),
+    <span style="color:#a6e22e">register</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">`INSERT INTO 
+</span><span style="color:#e6db74">        users (id, username, password, balance, received_gift, admin) 
+</span><span style="color:#e6db74">        VALUES (?, ?, ?, ?, ?, ?);`</span>),
+    <span style="color:#a6e22e">addToken</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">`INSERT INTO
+</span><span style="color:#e6db74">        tokens (token, user_id)
+</span><span style="color:#e6db74">        VALUES (?, ?);`</span>),
+    <span style="color:#a6e22e">getToken</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT token FROM tokens WHERE user_id = ?;&#39;</span>),
+    <span style="color:#a6e22e">login</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT id FROM users WHERE username = ? AND password = ?;&#39;</span>),
+    <span style="color:#a6e22e">setBalance</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;UPDATE users SET balance = ? WHERE id = ?&#39;</span>),
+    <span style="color:#a6e22e">purchaseRecipe</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">`INSERT INTO
+</span><span style="color:#e6db74">        purchases (user_id, recipe_id)
+</span><span style="color:#e6db74">        VALUES (?, ?);`</span>),
+    <span style="color:#a6e22e">ownsRecipe</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT * FROM purchases WHERE user_id = ? AND recipe_id = ?;&#39;</span>),
+    <span style="color:#a6e22e">getPurchases</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT * FROM purchases WHERE user_id = ?;&#39;</span>),
+    <span style="color:#a6e22e">receivedGift</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT received_gift FROM users WHERE id = ?;&#39;</span>),
+    <span style="color:#a6e22e">checkPassword</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT * FROM users WHERE id = ? AND password = ?;&#39;</span>),
+    <span style="color:#a6e22e">setReceived</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;UPDATE users SET received_gift = 1 WHERE id = ?;&#39;</span>),
+    <span style="color:#a6e22e">allowedIp</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;SELECT allowed_ip FROM users WHERE username = ?;&#39;</span>),
+    <span style="color:#a6e22e">setIp</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;UPDATE users SET allowed_ip = ? WHERE id = ?;&#39;</span>)
+};
+</code></pre></div><p>From the first snippet of code above, we know that admin&rsquo;s username is <code>admin</code> and their id is 0. If we can somehow call the methods that subsequently call these statements, we could retreive the credentials of the admin. As tokens are generated unique to the user, we won&rsquo;t be able to spoof as admin without their cookie token, and so we need to find a way to get the admin info that doesn&rsquo;t rely on using the cookie-generated token.  To this end, <code>fromId</code> is attractive, as it requires just the id of the user.</p>
+<p>I am utilizing burp&rsquo;s proxy service. I register an account as usual, and notice the api call to <code>/userInfo</code>, which, according to the javascript source, will deliver the info of a specific user based on their ID.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;userInfo&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;success&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
+        };
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;GET&#39;</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">405</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#75715e">// Get target user id from url params
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseParams</span>(<span style="color:#a6e22e">req</span>).<span style="color:#a6e22e">id</span>;
+        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">id</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">400</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#75715e">// Get info from database
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">info</span>;
+        <span style="color:#66d9ef">try</span> {
+            <span style="color:#a6e22e">info</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">getInfo</span>(<span style="color:#a6e22e">id</span>);
+        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">info</span>) {
+            <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">error</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;ID not found&#39;</span>; 
+            <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">404</span>, <span style="color:#a6e22e">result</span>);
+            <span style="color:#66d9ef">return</span>;
+        }
+        <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">success</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+        <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">info</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">info</span>;
+        <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">200</span>, <span style="color:#a6e22e">result</span>);
+    }]
+</code></pre></div><p>Knowing that the admin&rsquo;s ID is 0, modify the api call request to <code>/userInfo</code> to get the info of the admin&rsquo;s account, not our own.</p>
+
+    <img src="https://jamvie.net/images/REDPWN2020_CookieUserInfo.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Our edited request succesfully grabs the info of the admin account.</p>
+
+    <img src="https://jamvie.net/images/REDPWN2020_CookieAdmin.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>However, it is shown that the admin account also doesn&rsquo;t have credits, and they haven&rsquo;t purchased it before so its not in their account. Additionally, you can&rsquo;t login as it also checks the ip of the session - but this can be bypassed by converting our request into JSON, as they parse xml requests and bypass checks if not in xml. Despite that, itt appears as though this is a dead end - so let&rsquo;s consider our other avenue of attack: Adding more credits to our account.</p>
+<p>Another function of importance is the API call to <code>/gift</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">405</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> {
+            <span style="color:#e6db74">&#39;success&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
+        };
+
+        <span style="color:#75715e">// Get token from cookie
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseCookies</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">cookie</span>);
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#39;token&#39;</span>)) {
+            <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">200</span>, <span style="color:#a6e22e">result</span>);
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;token&#39;</span>);
+        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span>(<span style="color:#a6e22e">token</span>) <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
+            <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">error</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>;
+            <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">401</span>, <span style="color:#a6e22e">result</span>);
+            <span style="color:#66d9ef">return</span>;
+        }
+
+
+        <span style="color:#75715e">// Get id from token
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">id</span>;
+        <span style="color:#66d9ef">try</span> {
+            <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">getId</span>(<span style="color:#a6e22e">token</span>);
+        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">id</span>) {
+            <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">error</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>;
+            <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">401</span>, <span style="color:#a6e22e">result</span>);
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#75715e">// Make sure request is from admin
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">try</span> {
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">isAdmin</span>(<span style="color:#a6e22e">id</span>)) {
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">403</span>);
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+                <span style="color:#66d9ef">return</span>;
+            }
+        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#75715e">// Get target user id from url
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">user_id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseParams</span>(<span style="color:#a6e22e">req</span>).<span style="color:#a6e22e">id</span>;
+        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">user_id</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">400</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#75715e">// Make sure user exists
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">try</span> {
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">getInfo</span>(<span style="color:#a6e22e">user_id</span>)) {
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">400</span>);
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+                <span style="color:#66d9ef">return</span>;
+            }
+        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#75715e">// Make sure user has not already received a gift
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">try</span> {
+            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">receivedGift</span>(<span style="color:#a6e22e">user_id</span>)) {
+                <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">200</span>, <span style="color:#a6e22e">result</span>); 
+                <span style="color:#66d9ef">return</span>;
+            }
+        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#75715e">// Check admin password to prevent CSRF
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">body</span>;
+        <span style="color:#66d9ef">try</span> {
+            <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseRequest</span>(<span style="color:#a6e22e">req</span>);
+        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">400</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">password</span>;
+        
+        <span style="color:#66d9ef">try</span> {
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">checkPassword</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">password</span>)) {
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">401</span>);
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+                <span style="color:#66d9ef">return</span>;
+            }
+        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#75715e">// Give user 10 credits
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">try</span> {
+            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">changeBalance</span>(<span style="color:#a6e22e">user_id</span>, <span style="color:#ae81ff">150</span>)) {
+                <span style="color:#75715e">// How did we get here
+</span><span style="color:#75715e"></span>                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+                <span style="color:#66d9ef">return</span>;
+            }
+        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+            <span style="color:#66d9ef">return</span>;
+        }
+
+        <span style="color:#75715e">// User can only receive one gift
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">try</span> {
+            <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">setReceived</span>(<span style="color:#a6e22e">user_id</span>);
+        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
+            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
+        }
+
+        <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">success</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+        <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">200</span>, <span style="color:#a6e22e">result</span>);
+    }]
+</code></pre></div><p>The admin has the ability to gift a user some credits. This function is designed to only occur once, but we can fool the server into doing this several times with a race condition, as there is some time between the request being made and served, and when our &ldquo;recievedGift&rdquo; check changes. We simply need to host a script on our server that sends multiple requests at once on the behalf of the admin to gift our account as many credits as possible. Going back to the URL submission, we send the admin the url of our server hosting that script, and when they visit, we should be recieving a bunch of credits from then on, and purchase the flag ourselves.</p>
+
+    <img src="https://jamvie.net/images/REDPWN2020_Balance.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p><code>flag{n0_m0r3_gu3551ng}</code></p>
+<h2 id="summary">Summary</h2>
+<p>These were interesting problems that allowed me to explore some more unique web exploits! I still hope to discuss more redpwn problems, but nonetheless I wanted to share my writeups for the challenges that were incredibly enjoyable to do!</p>
+<p>Jam</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span><span class="tag"><a href="https://jamvie.net/tags/directory-traversal">directory-traversal</a></span><span class="tag"><a href="https://jamvie.net/tags/csrf">CSRF</a></span><span class="tag"><a href="https://jamvie.net/tags/idor">IDOR</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>
