@@ -49,7 +49,7 @@ Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, obser
 const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!path || !">
 <meta itemprop="datePublished" content="2020-06-28T21:19:19-06:00" />
 <meta itemprop="dateModified" content="2020-06-28T21:19:19-06:00" />
-<meta itemprop="wordCount" content="1817">
+<meta itemprop="wordCount" content="1880">
 <meta itemprop="image" content="https://jamvie.net/images/modern-tux.png">
 
 
@@ -532,7 +532,9 @@ looks like</li>
         <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">success</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
         <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">200</span>, <span style="color:#a6e22e">result</span>);
     }]
-</code></pre></div><p>The admin has the ability to gift a user some credits. This function is designed to only occur once, but we can fool the server into doing this several times with a race condition, as there is some time between the request being made and served, and when our &ldquo;recievedGift&rdquo; check changes. We simply need to host a script on our server (that sends multiple requests at once) on the behalf of the admin to gift our account as many credits as we need. Going back to the URL submission, we send the admin the url of our server hosting that script, and when they visit, we should be recieving a bunch of credits from then on, and purchase the flag ourselves.</p>
+</code></pre></div><p>The admin has the ability to gift a user some credits. This function is designed to only occur once, but we can fool the server into doing this several times with a race condition, as there is some time between the request being made and served, and when our &ldquo;recievedGift&rdquo; check changes.
+The important filter to bypass is the fact that the function grabs the id from the user&rsquo;s token in order to verify that the request has actually been made by the admin. Since we don&rsquo;t have the admin token, we must forcethe admin to make the request without knowing - a CSRF attack.
+We simply need to host a script on our server (that sends multiple requests at once) on the behalf of the admin to gift our account as many credits as we need. Going back to the URL submission, we send the admin the url of our server hosting that script, and when they visit - we can make the requests as needed with the admin&rsquo;s token. We should then recieve plenty of credits, and therefore purchase the flag for ourselves.</p>
 
     <img src="https://jamvie.net/images/REDPWN2020_Balance.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
