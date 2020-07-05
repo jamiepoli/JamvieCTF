@@ -1,6 +1,6 @@
 ## Hello!
 
- I’m Jamvie, a member of the [Maple Bacon](https://ubcctf.github.io/) CTF team and university student based in Canada. As it stands, I currently focus on web-based exploits and networking related challenges. Outside of cyber security competitions I utilize my skills in computer science, mathematics, and art to craft beautiful and informative projects that bring tech to a wider audience.
+ I’m Jamvie, a member of the [Maple Bacon](https://ubcctf.github.io/) CTF team and university student based in Canada. I currently focus on web-based exploits and networking related challenges. Outside of cyber security competitions I utilize my skills in computer science, mathematics, and art to craft beautiful and informative projects that bring tech to a wider audience.
 
 ----
 

@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 28 Jun 2020 21:19:19 -0600</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jul 2020 01:56:16 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>RedPwnCTF 2020 Part 3</title>
+      <link>https://jamvie.net/post/10redpwn2020_03/</link>
+      <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/10redpwn2020_03/</guid>
+      <description>Part 3 of my writeup series for RedPwnCTF 2020! This is the writeup for the web challenge known as &amp;ldquo;Viper&amp;rdquo;.
+Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
+When we create our viper, its name is its viperId, which is a UUID.
+The source code is available for us in this challenge as well. The server&amp;rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create.</description>
+    </item>
     
     <item>
       <title>RedPwnCTF 2020, part 2</title>
@@ -50,15 +62,6 @@ Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty
       <guid>https://jamvie.net/post/06csaw2019/</guid>
       <description>Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
 This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks.</description>
-    </item>
-    
-    <item>
-      <title>DE1ctf 2020: Hard_Pentest_1 and Animal Crossing</title>
-      <link>https://jamvie.net/post/05de1ctf2020_01/</link>
-      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
-      
-      <guid>https://jamvie.net/post/05de1ctf2020_01/</guid>
-      <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
     </item>
     
   </channel>

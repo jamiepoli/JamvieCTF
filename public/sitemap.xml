@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2020-07-02T01:56:16-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/post/</loc>
+    <lastmod>2020-07-02T01:56:16-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/post/10redpwn2020_03/</loc>
+    <lastmod>2020-07-02T01:56:16-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jamvie.net/tags/csrf/</loc>
     <lastmod>2020-06-28T21:19:19-06:00</lastmod>
   </url>
@@ -14,16 +29,6 @@
   
   <url>
     <loc>https://jamvie.net/tags/idor/</loc>
-    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/</loc>
-    <lastmod>2020-06-28T21:19:19-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/post/</loc>
     <lastmod>2020-06-28T21:19:19-06:00</lastmod>
   </url>
   
