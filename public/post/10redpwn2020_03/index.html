@@ -17,7 +17,7 @@ The source code is available for us in this challenge as well. The server&amp;rs
 
     <title>
         
-            RedPwnCTF 2020 Part 3 :: Jam Polintan 
+            RedPwnCTF 2020, Part 3 :: Jam Polintan 
         
     </title>
 
@@ -44,14 +44,14 @@ The source code is available for us in this challenge as well. The server&amp;rs
 
 
 
-<meta itemprop="name" content="RedPwnCTF 2020 Part 3">
+<meta itemprop="name" content="RedPwnCTF 2020, Part 3">
 <meta itemprop="description" content="Part 3 of my writeup series for RedPwnCTF 2020! This is the writeup for the web challenge known as &ldquo;Viper&rdquo;.
 Let&rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
 The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create.">
 <meta itemprop="datePublished" content="2020-07-02T01:56:16-06:00" />
 <meta itemprop="dateModified" content="2020-07-02T01:56:16-06:00" />
-<meta itemprop="wordCount" content="1033">
+<meta itemprop="wordCount" content="1042">
 <meta itemprop="image" content="https://jamvie.net/images/REDPWN2020_ViperHome.png">
 
 
@@ -60,7 +60,7 @@ The source code is available for us in this challenge as well. The server&rsquo;
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/images/REDPWN2020_ViperHome.png"/>
 
-<meta name="twitter:title" content="RedPwnCTF 2020 Part 3"/>
+<meta name="twitter:title" content="RedPwnCTF 2020, Part 3"/>
 <meta name="twitter:description" content="Part 3 of my writeup series for RedPwnCTF 2020! This is the writeup for the web challenge known as &ldquo;Viper&rdquo;.
 Let&rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
@@ -68,7 +68,7 @@ The source code is available for us in this challenge as well. The server&rsquo;
 
 
 
-    <meta property="og:title" content="RedPwnCTF 2020 Part 3" />
+    <meta property="og:title" content="RedPwnCTF 2020, Part 3" />
 <meta property="og:description" content="Part 3 of my writeup series for RedPwnCTF 2020! This is the writeup for the web challenge known as &ldquo;Viper&rdquo;.
 Let&rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
@@ -150,7 +150,7 @@ The source code is available for us in this challenge as well. The server&rsquo;
         </div>
 
         <article>
-            <h2 class="post-title"><a href="https://jamvie.net/post/10redpwn2020_03/">RedPwnCTF 2020 Part 3</a></h2>
+            <h2 class="post-title"><a href="https://jamvie.net/post/10redpwn2020_03/">RedPwnCTF 2020, Part 3</a></h2>
 
             
 
@@ -313,7 +313,8 @@ ADMIN_VIPER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#3
 
 <span style="color:#75715e"># Create viper page</span>
 viper <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(address<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/create&#39;</span>, allow_redirects<span style="color:#f92672">=</span>False)
-viper_id <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#34;([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})&#34;</span>, viper<span style="color:#f92672">.</span>text)[<span style="color:#ae81ff">0</span>]
+<span style="color:#75715e">#Get the viper&#39;s name/viper&#39;s id, which is UUID format</span>
+viper_id <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#34;([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})&#34;</span>, viper<span style="color:#f92672">.</span>text)[<span style="color:#ae81ff">0</span>]
 session_id <span style="color:#f92672">=</span> viper<span style="color:#f92672">.</span>cookies[<span style="color:#e6db74">&#34;connect.sid&#34;</span>]
 cookies <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;connect.sid&#34;</span> : session_id}
 
