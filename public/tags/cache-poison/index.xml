@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>CSRF on Jam Polintan</title>
-    <link>https://jamvie.net/tags/csrf/</link>
-    <description>Recent content in CSRF on Jam Polintan</description>
+    <title>cache-poison on Jam Polintan</title>
+    <link>https://jamvie.net/tags/cache-poison/</link>
+    <description>Recent content in cache-poison on Jam Polintan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
     <lastBuildDate>Thu, 02 Jul 2020 01:56:16 -0600</lastBuildDate>
     
-	<atom:link href="https://jamvie.net/tags/csrf/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jamvie.net/tags/cache-poison/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,17 +22,6 @@
 Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
 The source code is available for us in this challenge as well. The server&amp;rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create.</description>
-    </item>
-    
-    <item>
-      <title>RedPwnCTF 2020, part 2</title>
-      <link>https://jamvie.net/post/09redpwn2020_02/</link>
-      <pubDate>Sun, 28 Jun 2020 21:19:19 -0600</pubDate>
-      
-      <guid>https://jamvie.net/post/09redpwn2020_02/</guid>
-      <description>Part 2 of my writeup series for RedPwnCTF 2020!
-Tux-Fanpage  points: 464  Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request  if(!path || !</description>
     </item>
     
   </channel>
