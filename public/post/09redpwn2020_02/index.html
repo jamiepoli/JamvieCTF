@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Jamie Polintan ">
 <meta name="description" content="Part 2 of my writeup series for RedPwnCTF 2020!
-Tux-Fanpage  points: 464  Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request  if(!path || !" />
+Let&amp;rsquo;s Begin! Tux-Fanpage  points: 464  Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request  if(!" />
 <meta name="keywords" content=", writeups, web, directory-traversal, CSRF, IDOR" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -45,11 +45,11 @@ const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39
 
 <meta itemprop="name" content="RedPwnCTF 2020, part 2">
 <meta itemprop="description" content="Part 2 of my writeup series for RedPwnCTF 2020!
-Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!path || !">
+Let&rsquo;s Begin! Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!">
 <meta itemprop="datePublished" content="2020-06-28T21:19:19-06:00" />
 <meta itemprop="dateModified" content="2020-06-28T21:19:19-06:00" />
-<meta itemprop="wordCount" content="1880">
+<meta itemprop="wordCount" content="1889">
 <meta itemprop="image" content="https://jamvie.net/images/modern-tux.png">
 
 
@@ -60,15 +60,15 @@ const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) 
 
 <meta name="twitter:title" content="RedPwnCTF 2020, part 2"/>
 <meta name="twitter:description" content="Part 2 of my writeup series for RedPwnCTF 2020!
-Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!path || !"/>
+Let&rsquo;s Begin! Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!"/>
 
 
 
     <meta property="og:title" content="RedPwnCTF 2020, part 2" />
 <meta property="og:description" content="Part 2 of my writeup series for RedPwnCTF 2020!
-Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!path || !" />
+Let&rsquo;s Begin! Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://jamvie.net/post/09redpwn2020_02/" />
 <meta property="og:image" content="https://jamvie.net/images/modern-tux.png" />
@@ -152,7 +152,8 @@ const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) 
 
             <div class="post-content">
                 <p>Part 2 of my writeup series for RedPwnCTF 2020!</p>
-<h2 id="tux-fanpage">Tux-Fanpage</h2>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<h3 id="tux-fanpage">Tux-Fanpage</h3>
 <ul>
 <li>points: 464</li>
 </ul>
@@ -301,7 +302,7 @@ looks like</li>
     <img src="https://jamvie.net/images/REDPWN2020_TuxFlag.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
 
-<h2 id="cookie-recipes-v2">cookie-recipes-v2</h2>
+<h3 id="cookie-recipes-v2">cookie-recipes-v2</h3>
 <ul>
 <li>points: 488</li>
 </ul>
@@ -309,7 +310,7 @@ looks like</li>
 <p>The site will ask us to register, and then we will come to the landing page where we can buy 3 recipes. The last one is the flag for this challenge, which costs 1000 credits - currently we only have 100. Additionally, there exists a &ldquo;RECIPE&rdquo; submission bar where you send a URL of a recipe to the admin for them to review.</p>
 <p>Several exploits come to mind:</p>
 <ol>
-<li>The ability to send a URL to admin allows the ability to do xss or CSRF attacks. Hopefully, being admin will have special privileges that allow us to obtain the flag.</li>
+<li>The ability to send a URL to admin allows the possibility to perform XSS or CSRF attacks. Hopefully, being admin will have special privileges that allow us to obtain the flag.</li>
 <li>The main thing barring us from obtaining the flag is the lack of credits we have. If we could find a way to add more credits to our account, we could purchase the flag.</li>
 </ol>
 <p>The challenge is accompanied by their source script. While long, several things are of note:</p>
@@ -348,7 +349,7 @@ looks like</li>
     <span style="color:#a6e22e">setIp</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#e6db74">&#39;UPDATE users SET allowed_ip = ? WHERE id = ?;&#39;</span>)
 };
 </code></pre></div><p>From the first snippet of code above, we know that admin&rsquo;s username is <code>admin</code> and their id is 0. If we can somehow call the methods that subsequently call these statements, we could retrieve the credentials of the admin. As tokens are generated unique to the user, we won&rsquo;t be able to spoof as admin without their cookie token, and so we need to find a way to get the admin info that doesn&rsquo;t rely on using the cookie-generated token.  To this end, <code>fromId</code> is attractive, as it requires just the id of the user.</p>
-<p>I am utilizing burp&rsquo;s proxy service. I register an account as usual, and notice the api call to <code>/userInfo</code>, which, according to the javascript source, will deliver the info of a specific user based on their ID.</p>
+<p>I am utilizing burp&rsquo;s proxy service. I register an account as usual, and notice the api call to <code>/userInfo</code>, which, according to the javascript source, will deliver the info of a specific user based on their ID - likely preparing the <code>fromId</code> SQL statement.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;userInfo&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> {
             <span style="color:#e6db74">&#39;success&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
@@ -395,7 +396,7 @@ looks like</li>
     <img src="https://jamvie.net/images/REDPWN2020_CookieAdmin.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
 
-<p>However, it is shown that the admin account also doesn&rsquo;t have enough credits, and they haven&rsquo;t purchased it before so its not in their account. Additionally, you can&rsquo;t login as it also checks the ip of the session - but this can be bypassed by converting our request into JSON, as they parse xml requests and bypass checks if not in xml. Despite that, it appears as though this is a dead end - so let&rsquo;s consider our other avenue of attack: Adding more credits to our account.</p>
+<p>However, it is shown that the admin account also doesn&rsquo;t have enough credits, and they haven&rsquo;t purchased it before so its not in their account. Additionally, you can&rsquo;t login as it also checks the ip of the session - but this can be bypassed by converting our request into JSON, as they parse xml requests and bypass checks if not in xml. Despite that, it appears as though this is a dead end - so let&rsquo;s consider our other avenue of attack: adding more credits to our account.</p>
 <p>Another function of importance is the API call to <code>/gift</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
