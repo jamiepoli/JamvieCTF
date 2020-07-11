@@ -8,7 +8,7 @@
 <meta name="description" content="Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &amp;ldquo;Viper&amp;rdquo;.
 Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
-The source code is available for us in this challenge as well. The server&amp;rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create." />
+The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create." />
 <meta name="keywords" content=", writeups, web, cache-poison, CSRF" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#252627" />
@@ -48,10 +48,10 @@ The source code is available for us in this challenge as well. The server&amp;rs
 <meta itemprop="description" content="Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &ldquo;Viper&rdquo;.
 Let&rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
-The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create.">
+The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create.">
 <meta itemprop="datePublished" content="2020-07-02T01:56:16-06:00" />
 <meta itemprop="dateModified" content="2020-07-02T01:56:16-06:00" />
-<meta itemprop="wordCount" content="1050">
+<meta itemprop="wordCount" content="1140">
 <meta itemprop="image" content="https://jamvie.net/images/REDPWN2020_ViperHome.png">
 
 
@@ -64,7 +64,7 @@ The source code is available for us in this challenge as well. The server&rsquo;
 <meta name="twitter:description" content="Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &ldquo;Viper&rdquo;.
 Let&rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
-The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create."/>
+The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create."/>
 
 
 
@@ -72,7 +72,7 @@ The source code is available for us in this challenge as well. The server&rsquo;
 <meta property="og:description" content="Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &ldquo;Viper&rdquo;.
 Let&rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
-The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create." />
+The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://jamvie.net/post/10redpwn2020_03/" />
 <meta property="og:image" content="https://jamvie.net/images/REDPWN2020_ViperHome.png" />
@@ -163,7 +163,7 @@ The source code is available for us in this challenge as well. The server&rsquo;
 
 
 <p>When we create our viper, its name is its viperId, which is a UUID.</p>
-<p>The source code is available for us in this challenge as well. The server&rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was <code>GET /admin/create</code>.</p>
+<p>The source code is available for us in this challenge as well. The main file, <code>server.js</code>, defines multiple endpoints - but the one that caught my eye immediately was <code>GET /admin/create</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/admin/create&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
     <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">sess</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>;
     <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">viperId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">viperId</span>;
@@ -217,8 +217,7 @@ The source code is available for us in this challenge as well. The server&rsquo;
         <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
     }
  });
-</code></pre></div><p>The endpoint takes a valid viperID and the admin&rsquo;s CSRF token and changes the viper&rsquo;s name to the contents of <code>flag.txt</code>. So, attempting to call or manipulate this endpoint seems like the way to solve this challenge.</p>
-<p>There also exists a report function, which hints at the possibility of an XSS or CSRF attack on the admin, which so far has occured in 3 of the 6 challenges I previously solved in RedPwnCTF 2020. Judging by the code above, we will most likely try to implement a CSRF attack.</p>
+</code></pre></div><p>To summarize, <code>admin/create</code> validates the given viperID as a UUID, checks the CSRF token and session ID of the request as the admin&rsquo;s, and once verified changes the name of the viper associated to the request&rsquo;s viperID to the contents of <code>flag.txt</code>. Additionally, the existence of a report function stipulates the use of an XSS/CSRF attack - likely CSRF, as the presence of using the admin&rsquo;s CSRF token to validate the user will imply that we somehow will have to steal their token in some way or another and implement such an attack utilizing the token we steal.</p>
 <p>The admin&rsquo;s CSRF token is generated by a function known as <code>getRandomInt()</code>, which is called by the <code>/admin</code> endpoint:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getRandomInt</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">min</span>, <span style="color:#a6e22e">max</span>) =&gt; {
     <span style="color:#a6e22e">min</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">ceil</span>(<span style="color:#a6e22e">min</span>);
@@ -281,13 +280,13 @@ The <code>client.set()</code> function sets the cache&rsquo;s key. It&rsquo;s bu
 <p>At this point, it&rsquo;s pretty obvious that our attack will have to do some cache-poisoning. I have only ever done one other challenge that involved cache poisoning so I certainly don&rsquo;t have much experience-based knowledge on it - so I had to some research into how cache-poisoning attacks work.</p>
 <p>Altogether, the attack plan is this:</p>
 <ol>
-<li>Grab the CSRF token.</li>
+<li>Grab the CSRF token through <code>/analytics</code>.</li>
 <li>Create our viper page, but inject our own headers into it so that it will lead to the <code>admin/create</code> endpoint that will give us the flag.</li>
 <li>Cache our viper page with the injected headers, and then send the URL of our page to the admin.</li>
 <li>When the admin visits our page, the cached request that we injected with our headers will fire, and will change the name of the viper to that of the flag.</li>
 </ol>
 <h3 id="step-1-grab-the-csrf-token">Step 1: Grab the CSRF token.</h3>
-<p>As mentioned before, we can use the <code>/analytics</code> endpoint to grab the CSRF token utilizing <code>'__csrftoken__admin_account'</code> as our <code>ip_address</code> value.</p>
+<p>As mentioned before, we can use the <code>/analytics</code> endpoint to grab the CSRF token utilizing <code>'__csrftoken__admin_account'</code> as our <code>ip_address</code> value - using it as the key, we should recieve the token as return value.</p>
 <pre><code>curl http://2020.redpwnc.tf:31291/analytics?ip_address=__csrftoken__admin_account
 </code></pre>
     <img src="https://jamvie.net/images/REDPWN2020_ViperCSRF.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
@@ -297,9 +296,9 @@ The <code>client.set()</code> function sets the cache&rsquo;s key. It&rsquo;s bu
 <h3 id="step-2-create-a-user-and-our-own-viper-page-and-then-inject-custom-headers-into-it">Step 2: Create a user and our own viper page, and then inject custom headers into it.</h3>
 <p>After we create the page, we need to take note of the sessionid, cookies, and viperID for the URL that we send to the admin. When we inject the header, the request URL should be a GET request to <code>admin/create</code>.</p>
 <h3 id="step-3-cache-the-viper-page-we-created">Step 3: Cache the viper page we created.</h3>
-<p>Simply make a request for our page so it will be put into the redis cache. Note that the server will only accept requests encoded in base64.</p>
+<p>Simply make a GET request for our page so it will be put into the redis cache. Note that the server will only accept requests encoded in base64, so we must make sure our payload is properly encoded before doing so.</p>
 <h3 id="step-4-send-our-viper-url-to-the-admin">Step 4: Send our viper URL to the admin!</h3>
-<p>Sending the page URL to the admin will hopefully activate the cache to retrieve the instance of our page with the injected payload into it. When we next refresh the page, the viper&rsquo;s name should be the flag!</p>
+<p>Sending the page URL to the admin will hopefully activate the cache to retrieve the instance of our page with the injected payload into it. When they visit, the payload header will fire a request to the <code>/admin/create</code> endpoint and validate the requester as admin through our use of CSRF token-stealing - thereby allowing the server to rewrite our viper name to that of whatever is in the <code>flag.txt</code> file in their server. Once we access our page once more, the name should change to the flag!</p>
 <p>Here is my script for this challenge:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#75715e">#!/usr/bin/env python3</span>
 <span style="color:#f92672">import</span> requests<span style="color:#f92672">,</span> socket<span style="color:#f92672">,</span> re

@@ -21,7 +21,7 @@
       <description>Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &amp;ldquo;Viper&amp;rdquo;.
 Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
-The source code is available for us in this challenge as well. The server&amp;rsquo;s file defines multiple endpoints, but the one that caught my eye immediately was GET /admin/create.</description>
+The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create.</description>
     </item>
     
     <item>
