@@ -51,7 +51,7 @@ When we create our viper, its name is its viperId, which is a UUID.
 The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create.">
 <meta itemprop="datePublished" content="2020-07-02T01:56:16-06:00" />
 <meta itemprop="dateModified" content="2020-07-02T01:56:16-06:00" />
-<meta itemprop="wordCount" content="1140">
+<meta itemprop="wordCount" content="1159">
 <meta itemprop="image" content="https://jamvie.net/images/REDPWN2020_ViperHome.png">
 
 
@@ -277,8 +277,8 @@ The <code>client.set()</code> function sets the cache&rsquo;s key. It&rsquo;s bu
     });
  });
 </code></pre></div><p>The endpoint logs the amount of times the webpage&rsquo;s visitor&rsquo;s <code>ip_address</code> checked the page into the redis cache. Specifically, it sets the key of the data as our input to the <code>ip_address</code> param. We already know of an existing key and entry in the cache, the key to the admin&rsquo;s CSRF token (<code>'__csrftoken__admin_account'</code>). If we provided this as our input to the <code>ip_address</code> param, we should get the CSRF token (incremented by 1) in return.</p>
-<p>At this point, it&rsquo;s pretty obvious that our attack will have to do some cache-poisoning. I have only ever done one other challenge that involved cache poisoning so I certainly don&rsquo;t have much experience-based knowledge on it - so I had to some research into how cache-poisoning attacks work.</p>
-<p>Altogether, the attack plan is this:</p>
+<p>At this point, it&rsquo;s pretty obvious that our attack will have to do some cache-poisoning. I have only ever done one other challenge that involved cache poisoning so I certainly don&rsquo;t have much experience-based knowledge on it - so I had to do some research into how cache-poisoning attacks work.</p>
+<p>Altogether, the attack plan is as follows:</p>
 <ol>
 <li>Grab the CSRF token through <code>/analytics</code>.</li>
 <li>Create our viper page, but inject our own headers into it so that it will lead to the <code>admin/create</code> endpoint that will give us the flag.</li>
@@ -286,13 +286,13 @@ The <code>client.set()</code> function sets the cache&rsquo;s key. It&rsquo;s bu
 <li>When the admin visits our page, the cached request that we injected with our headers will fire, and will change the name of the viper to that of the flag.</li>
 </ol>
 <h3 id="step-1-grab-the-csrf-token">Step 1: Grab the CSRF token.</h3>
-<p>As mentioned before, we can use the <code>/analytics</code> endpoint to grab the CSRF token utilizing <code>'__csrftoken__admin_account'</code> as our <code>ip_address</code> value - using it as the key, we should recieve the token as return value.</p>
+<p>As mentioned before, we can use the <code>/analytics</code> endpoint to grab the CSRF token utilizing <code>'__csrftoken__admin_account'</code> as our <code>ip_address</code> value - using it as the key, we should recieve the token as return value. A simple GET request to the endpoint with the <code>ip_address</code> value set to <code>__csrftoken__admin_account</code> will allows us to retrieve the token.</p>
 <pre><code>curl http://2020.redpwnc.tf:31291/analytics?ip_address=__csrftoken__admin_account
 </code></pre>
     <img src="https://jamvie.net/images/REDPWN2020_ViperCSRF.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
 
-<p>We will use these commands in a script later to grab the CSRF token.</p>
+<p>We will use these commands in a script later on.</p>
 <h3 id="step-2-create-a-user-and-our-own-viper-page-and-then-inject-custom-headers-into-it">Step 2: Create a user and our own viper page, and then inject custom headers into it.</h3>
 <p>After we create the page, we need to take note of the sessionid, cookies, and viperID for the URL that we send to the admin. When we inject the header, the request URL should be a GET request to <code>admin/create</code>.</p>
 <h3 id="step-3-cache-the-viper-page-we-created">Step 3: Cache the viper page we created.</h3>
