@@ -52,7 +52,7 @@ From my blog, it is clear to see that my expertise lies in web-based exploits an
 Cryptography, in its most generalized form, is the act of encrypting and decrypting data in order to intentionally obfuscate the information to protect the contents of said info.  Encryption takes plain-text, then uses a cipher to transform it into cipher-text (more on the method of how it does that later), which can then be decrypted using that same cipher and retransforming the cipher-text back into plain. This is an INCREDIBLY simplified description of cryptography. Crypto is EXTREMELY important to the functions of computer security and digital privacy as we know it. Specifically, crypto serves several purposes: 
 - encryption, as mentioned before.
 - authentication, which validates information from a trusted source.
--  integrity, which will ensure that the stream of data will not be altered on its transmission to the destination.
+- integrity, which will ensure that the stream of data will not be altered on its transmission to the destination.
 
 ### Keys and “Asymmetric” encryption
 Dual-Key Cryptography is also called Asymmetric Cryptography. Specifically, it allows for secure communication in a channel between two people. Asymmetric cryptography relies on the use of two keys - parameters that which specify the transformation of plain to cipher, and vice-versa for decoding. It works as so:
@@ -64,7 +64,7 @@ Dual-Key Cryptography is also called Asymmetric Cryptography. Specifically, it a
 
 The idea here is that the two keys aid in the crypto process but serve different functions. The public key encodes, while the private key decodes. The private key is assumed to be known by only one person, so the act of decoding is only capable of being performed by that single individual. However, anyone who knows the public key are free to encode data with it as they wish - keeping in mind that once its in cipher form, it cannot be reverted back to plain without the private key. 
 
-The “safety” of asymmetric cryptography relies on just how long it would take to try and brute-force your way into decoding a cipher without the necessary decoding key. There are several measures in place that prevent a malicious hacker from using a few dedicated CPUs to guess the hashes of a given ciphertext. As an example, if you wanted to somehow guess the private key yourself, the existence of information entropy - the average “level” of uncertainty associated to any random variable, in this case the value of the key - will deter you. If you intend to guess the key value (which is often randomized), you will need to overcome the hurdle of the extremely high value of uncertainty in correctly guessing it, so the odds are not in your favor. The bigger size your key, the more information entropy you will have to deal with. Additionally, open-source encryption algorithms are widespread and widely discussed, allowing for the their innovation and improvements as new iterations develop. This means potentially more complex keys, or different encoding algorithms.
+The “safety” of asymmetric cryptography relies on just how long it would take to try and brute-force your way into decoding a cipher without the necessary decoding key. There are several measures in place that prevent a malicious hacker from using a few dedicated CPUs to guess the hashes of a given ciphertext. As an example, if you wanted to somehow guess the private key yourself, the existence of [information entropy](https://en.wikipedia.org/wiki/Entropy_(information_theory)) - the average “level” of uncertainty associated to any random variable, in this case the value of the key - will deter you. If you intend to guess the key value (which is often randomized), you will need to overcome the hurdle of the extremely high value of uncertainty in correctly guessing it, so the odds are not in your favor. The bigger size your key, the more information entropy you will have to deal with. Additionally, open-source encryption algorithms are widespread and widely discussed, allowing for the their innovation and improvements as new iterations develop. This means potentially more complex keys, or different encoding algorithms.
 
 Cryptography relies on the simple mathematical principle of one-way functions: it is exceedingly difficult to undo the transformation of a plaintext document to ciphertext without the correct key - and so far, there does not exist any sort of reversing algorithm capable of doing so in an efficient manner, and in a manner that applies to numerous different cryptographic algorithms as well. Reversing the crypto function is "hard" to do...
 
@@ -83,3 +83,12 @@ P=NP means the end of cryptography as we know it. One-way functions will no long
 To this end, many operate on the assumption that P != NP, and there exists dedicated research into proving so. For if we end up finding that P = NP, our privacy and online security would crumble right in front of us. 
 
 Jam
+
+## Further Reading
+1. "[Explained: P vs. NP](http://news.mit.edu/2009/explainer-pnp)" Hardesty, Larry. “Explained: P vs. NP.” MIT News, 29 Oct. 2009, news.mit.edu/2009/explainer-pnp.
+2. "[An Overview of Cryptography](https://www.garykessler.net/library/crypto.html)" Kessler, Gary C. “Overview of Cryptography.” An Overview of Cryptography, 1 June 2020, www.garykessler.net/library/crypto.html.
+
+## References
+1. Rouse, Margaret. “Asymmetric Cryptography (Public Key Cryptography).” SearchSecurity, 20 Mar. 2020, searchsecurity.techtarget.com/definition/asymmetric-cryptography.
+2. Cook, Stephen. “The Complexity of Theorem-Proving Procedures.” ACM Digital Library, STOC ’71: Proceedings of the third annual ACM symposium on Theory of computing, May 1971, dl.acm.org/doi/10.1145/800157.805047.
+3. My informative TAs and professors of my algorithm analysis courses.

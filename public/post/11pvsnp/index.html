@@ -47,7 +47,7 @@ I am not an expert in either cryptography nor algorithm analysis. However, ever 
 I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &ldquo;P=NP&rdquo; mean for cryptography? I had heard that such a statement, &ldquo;P=NP&rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.">
 <meta itemprop="datePublished" content="2020-07-14T00:22:00-06:00" />
 <meta itemprop="dateModified" content="2020-07-14T00:22:00-06:00" />
-<meta itemprop="wordCount" content="1915">
+<meta itemprop="wordCount" content="2000">
 <meta itemprop="image" content="https://jamvie.net/images/algorithms.png">
 
 
@@ -191,7 +191,7 @@ Something that is incredibly interesting and fascinating about NP-complete probl
 <li>Bob receives Alice’s ciphertext, and uses his private key to transform it into plaintext. Since his private key is used specifically for the decoding of information that was encrypted by his public key, he is able to do this without much effort.</li>
 </ol>
 <p>The idea here is that the two keys aid in the crypto process but serve different functions. The public key encodes, while the private key decodes. The private key is assumed to be known by only one person, so the act of decoding is only capable of being performed by that single individual. However, anyone who knows the public key are free to encode data with it as they wish - keeping in mind that once its in cipher form, it cannot be reverted back to plain without the private key.</p>
-<p>The “safety” of asymmetric cryptography relies on just how long it would take to try and brute-force your way into decoding a cipher without the necessary decoding key. There are several measures in place that prevent a malicious hacker from using a few dedicated CPUs to guess the hashes of a given ciphertext. As an example, if you wanted to somehow guess the private key yourself, the existence of information entropy - the average “level” of uncertainty associated to any random variable, in this case the value of the key - will deter you. If you intend to guess the key value (which is often randomized), you will need to overcome the hurdle of the extremely high value of uncertainty in correctly guessing it, so the odds are not in your favor. The bigger size your key, the more information entropy you will have to deal with. Additionally, open-source encryption algorithms are widespread and widely discussed, allowing for the their innovation and improvements as new iterations develop. This means potentially more complex keys, or different encoding algorithms.</p>
+<p>The “safety” of asymmetric cryptography relies on just how long it would take to try and brute-force your way into decoding a cipher without the necessary decoding key. There are several measures in place that prevent a malicious hacker from using a few dedicated CPUs to guess the hashes of a given ciphertext. As an example, if you wanted to somehow guess the private key yourself, the existence of <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">information entropy</a> - the average “level” of uncertainty associated to any random variable, in this case the value of the key - will deter you. If you intend to guess the key value (which is often randomized), you will need to overcome the hurdle of the extremely high value of uncertainty in correctly guessing it, so the odds are not in your favor. The bigger size your key, the more information entropy you will have to deal with. Additionally, open-source encryption algorithms are widespread and widely discussed, allowing for the their innovation and improvements as new iterations develop. This means potentially more complex keys, or different encoding algorithms.</p>
 <p>Cryptography relies on the simple mathematical principle of one-way functions: it is exceedingly difficult to undo the transformation of a plaintext document to ciphertext without the correct key - and so far, there does not exist any sort of reversing algorithm capable of doing so in an efficient manner, and in a manner that applies to numerous different cryptographic algorithms as well. Reversing the crypto function is &ldquo;hard&rdquo; to do&hellip;</p>
 <hr>
 <h2 id="what-if-p--np">What if P = NP?</h2>
@@ -201,6 +201,17 @@ Something that is incredibly interesting and fascinating about NP-complete probl
 <p>P=NP means the end of cryptography as we know it. One-way functions will no longer exist! Strong cryptographic algorithms are only formidable as withstanding the tests of time in the face of hackers brute forcing their ways through them. If P=NP, time will no longer be on our side, and password/data security will be something trivial for a malicious hacker to bypass.</p>
 <p>To this end, many operate on the assumption that P != NP, and there exists dedicated research into proving so. For if we end up finding that P = NP, our privacy and online security would crumble right in front of us.</p>
 <p>Jam</p>
+<h2 id="further-reading">Further Reading</h2>
+<ol>
+<li>&ldquo;<a href="http://news.mit.edu/2009/explainer-pnp">Explained: P vs. NP</a>&rdquo; Hardesty, Larry. “Explained: P vs. NP.” MIT News, 29 Oct. 2009, news.mit.edu/2009/explainer-pnp.</li>
+<li>&ldquo;<a href="https://www.garykessler.net/library/crypto.html">An Overview of Cryptography</a>&rdquo; Kessler, Gary C. “Overview of Cryptography.” An Overview of Cryptography, 1 June 2020, <a href="http://www.garykessler.net/library/crypto.html">www.garykessler.net/library/crypto.html</a>.</li>
+</ol>
+<h2 id="references">References</h2>
+<ol>
+<li>Rouse, Margaret. “Asymmetric Cryptography (Public Key Cryptography).” SearchSecurity, 20 Mar. 2020, searchsecurity.techtarget.com/definition/asymmetric-cryptography.</li>
+<li>Cook, Stephen. “The Complexity of Theorem-Proving Procedures.” ACM Digital Library, STOC ’71: Proceedings of the third annual ACM symposium on Theory of computing, May 1971, dl.acm.org/doi/10.1145/800157.805047.</li>
+<li>My informative TAs and professors of my algorithm analysis courses.</li>
+</ol>
 
             </div>
         </article>
