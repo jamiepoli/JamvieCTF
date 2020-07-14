@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 26 Apr 2020 01:30:30 -0600</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2020 00:22:00 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/misc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cryptography and P vs. NP: A Basic Outline</title>
+      <link>https://jamvie.net/post/11pvsnp/</link>
+      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/11pvsnp/</guid>
+      <description>Comic from XKCD.
+I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
+    </item>
     
     <item>
       <title>Commonly Used Software</title>

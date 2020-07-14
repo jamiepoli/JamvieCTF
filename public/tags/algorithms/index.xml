@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithms on Jam Polintan</title>
+    <link>https://jamvie.net/tags/algorithms/</link>
+    <description>Recent content in algorithms on Jam Polintan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Tue, 14 Jul 2020 00:22:00 -0600</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cryptography and P vs. NP: A Basic Outline</title>
+      <link>https://jamvie.net/post/11pvsnp/</link>
+      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/11pvsnp/</guid>
+      <description>Comic from XKCD.
+I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
+    </item>
+    
+  </channel>
+</rss>

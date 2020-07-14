@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Thu, 02 Jul 2020 01:56:16 -0600</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2020 00:22:00 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>algorithms</title>
+      <link>https://jamvie.net/tags/algorithms/</link>
+      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/algorithms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crypto</title>
+      <link>https://jamvie.net/tags/crypto/</link>
+      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/crypto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>misc</title>
+      <link>https://jamvie.net/tags/misc/</link>
+      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/misc/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>cache-poison</title>
@@ -27,33 +54,6 @@
       <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/csrf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>web</title>
-      <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writeups</title>
-      <link>https://jamvie.net/tags/writeups/</link>
-      <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/writeups/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>directory-traversal</title>
-      <link>https://jamvie.net/tags/directory-traversal/</link>
-      <pubDate>Sun, 28 Jun 2020 21:19:19 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/directory-traversal/</guid>
       <description></description>
     </item>
     

@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Thu, 02 Jul 2020 01:56:16 -0600</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2020 00:22:00 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cryptography and P vs. NP: A Basic Outline</title>
+      <link>https://jamvie.net/post/11pvsnp/</link>
+      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/11pvsnp/</guid>
+      <description>Comic from XKCD.
+I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
+    </item>
     
     <item>
       <title>RedPwnCTF 2020, Part 3</title>
@@ -52,16 +62,6 @@ Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty
       
       <guid>https://jamvie.net/post/07hackasat/</guid>
       <description>I participated in HackASat Quals with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &amp;ldquo;I Like to Watch.&amp;rdquo; I also went through it myself and am going to discuss my solution to it.</description>
-    </item>
-    
-    <item>
-      <title>CSAW 2019: Unagi</title>
-      <link>https://jamvie.net/post/06csaw2019/</link>
-      <pubDate>Thu, 21 May 2020 01:22:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/post/06csaw2019/</guid>
-      <description>Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
-This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks.</description>
     </item>
     
   </channel>
