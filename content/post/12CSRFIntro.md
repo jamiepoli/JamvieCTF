@@ -1,5 +1,5 @@
 ---
-title: "12CSRFIntro"
+title: "Cross-Site Request Forgery: Introduction"
 date: 2020-07-27T19:07:51-06:00
 draft: false
 comments: false
