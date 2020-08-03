@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Thu, 02 Jul 2020 01:56:16 -0600</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2020 19:07:51 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/web/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>12CSRFIntro</title>
+      <link>https://jamvie.net/post/12csrfintro/</link>
+      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/12csrfintro/</guid>
+      <description>Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&amp;rsquo;re the reason you shouldn&amp;rsquo;t click suspicious links, even if the URL sort of sounds legitimate.
+This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.</description>
+    </item>
     
     <item>
       <title>RedPwnCTF 2020, Part 3</title>
@@ -53,15 +63,6 @@ Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty
       <guid>https://jamvie.net/post/06csaw2019/</guid>
       <description>Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
 This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks.</description>
-    </item>
-    
-    <item>
-      <title>DE1ctf 2020: Hard_Pentest_1 and Animal Crossing</title>
-      <link>https://jamvie.net/post/05de1ctf2020_01/</link>
-      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
-      
-      <guid>https://jamvie.net/post/05de1ctf2020_01/</guid>
-      <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
     </item>
     
   </channel>

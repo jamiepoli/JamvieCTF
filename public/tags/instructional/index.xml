@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>instructional on Jam Polintan</title>
+    <link>https://jamvie.net/tags/instructional/</link>
+    <description>Recent content in instructional on Jam Polintan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Mon, 27 Jul 2020 19:07:51 -0600</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/instructional/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>12CSRFIntro</title>
+      <link>https://jamvie.net/post/12csrfintro/</link>
+      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/12csrfintro/</guid>
+      <description>Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&amp;rsquo;re the reason you shouldn&amp;rsquo;t click suspicious links, even if the URL sort of sounds legitimate.
+This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.</description>
+    </item>
+    
+  </channel>
+</rss>

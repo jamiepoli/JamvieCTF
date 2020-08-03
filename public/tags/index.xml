@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Tue, 14 Jul 2020 00:22:00 -0600</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2020 19:07:51 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSRF</title>
+      <link>https://jamvie.net/tags/csrf/</link>
+      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/csrf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>instructional</title>
+      <link>https://jamvie.net/tags/instructional/</link>
+      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/instructional/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://jamvie.net/tags/web/</link>
+      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/web/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>algorithms</title>
@@ -27,33 +54,6 @@
       <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/crypto/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>misc</title>
-      <link>https://jamvie.net/tags/misc/</link>
-      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/misc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cache-poison</title>
-      <link>https://jamvie.net/tags/cache-poison/</link>
-      <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/cache-poison/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSRF</title>
-      <link>https://jamvie.net/tags/csrf/</link>
-      <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/csrf/</guid>
       <description></description>
     </item>
     

@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Tue, 14 Jul 2020 00:22:00 -0600</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jul 2020 19:07:51 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>12CSRFIntro</title>
+      <link>https://jamvie.net/post/12csrfintro/</link>
+      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
+      
+      <guid>https://jamvie.net/post/12csrfintro/</guid>
+      <description>Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&amp;rsquo;re the reason you shouldn&amp;rsquo;t click suspicious links, even if the URL sort of sounds legitimate.
+This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.</description>
+    </item>
     
     <item>
       <title>Cryptography and P vs. NP: A Basic Outline</title>
@@ -53,15 +63,6 @@ const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39
       <guid>https://jamvie.net/post/08redpwn2020/</guid>
       <description>RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
 Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty.</description>
-    </item>
-    
-    <item>
-      <title>2020 HackASat Quals</title>
-      <link>https://jamvie.net/post/07hackasat/</link>
-      <pubDate>Wed, 03 Jun 2020 21:47:00 -0600</pubDate>
-      
-      <guid>https://jamvie.net/post/07hackasat/</guid>
-      <description>I participated in HackASat Quals with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &amp;ldquo;I Like to Watch.&amp;rdquo; I also went through it myself and am going to discuss my solution to it.</description>
     </item>
     
   </channel>
