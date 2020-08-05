@@ -102,10 +102,6 @@ disableHugoGeneratorInject = false
     url  = "https://www.linkedin.com/in/jamiepoli"
 
   [[params.social]]
-    name = "twitter"
-    url  =  "https://twitter.com/tech_jamvie"
-
-  [[params.social]]
     name = "hackerone"
     url  =  "https://hackerone.com/jamvie"
 
