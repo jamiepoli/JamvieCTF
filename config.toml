@@ -79,7 +79,7 @@ disableHugoGeneratorInject = false
     theme = "#252627"
 
   [params.logo]
-    logoText     = "$ echo hello"
+    logoText     = "$ echo 'hello'"
     logoHomeLink = "/"
     # Set true to remove the logo cursor entirely.
     # logoCursorDisabled = false
@@ -89,7 +89,7 @@ disableHugoGeneratorInject = false
     # logoCursorAnimate  = "2s"
 
   [params.portrait]
-    path = "img/JAMVIELOGO.gif"
+    path = "img/JAMVIELOGO2.gif"
     alt = "Portrait"
 
   # Social icons
