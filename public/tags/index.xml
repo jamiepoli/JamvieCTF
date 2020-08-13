@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Mon, 27 Jul 2020 19:07:51 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 09 Aug 2020 18:48:52 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>pwn</title>
+      <link>https://jamvie.net/tags/pwn/</link>
+      <pubDate>Sun, 09 Aug 2020 18:48:52 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/pwn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeup</title>
+      <link>https://jamvie.net/tags/writeup/</link>
+      <pubDate>Sun, 09 Aug 2020 18:48:52 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/writeup/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>CSRF</title>
@@ -36,24 +54,6 @@
       <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>algorithms</title>
-      <link>https://jamvie.net/tags/algorithms/</link>
-      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/algorithms/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>crypto</title>
-      <link>https://jamvie.net/tags/crypto/</link>
-      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/crypto/</guid>
       <description></description>
     </item>
     
