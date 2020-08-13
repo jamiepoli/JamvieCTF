@@ -14,10 +14,10 @@
     
     <item>
       <title>Cross-Site Request Forgery: Introduction</title>
-      <link>https://jamvie.net/post/12csrfintro/</link>
+      <link>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</link>
       <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
       
-      <guid>https://jamvie.net/post/12csrfintro/</guid>
+      <guid>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</guid>
       <description>Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&amp;rsquo;re the reason you shouldn&amp;rsquo;t click suspicious links, even if the URL sort of sounds legitimate.
 This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.</description>
     </item>

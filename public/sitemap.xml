@@ -3,7 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jamvie.net/post/12csrfintro/</loc>
+    <loc>https://jamvie.net/posts/2020/08/hacktivitycon-ctf-bullseye/</loc>
+    <lastmod>2020-08-09T18:48:52-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2020-08-09T18:48:52-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/posts/</loc>
+    <lastmod>2020-08-09T18:48:52-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</loc>
     <lastmod>2020-07-27T19:07:51-06:00</lastmod>
   </url>
   
@@ -14,16 +29,6 @@
   
   <url>
     <loc>https://jamvie.net/tags/instructional/</loc>
-    <lastmod>2020-07-27T19:07:51-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/</loc>
-    <lastmod>2020-07-27T19:07:51-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/post/</loc>
     <lastmod>2020-07-27T19:07:51-06:00</lastmod>
   </url>
   
@@ -48,7 +53,7 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/11pvsnp/</loc>
+    <loc>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</loc>
     <lastmod>2020-07-14T00:22:00-06:00</lastmod>
   </url>
   
@@ -63,7 +68,7 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/10redpwn2020_03/</loc>
+    <loc>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</loc>
     <lastmod>2020-07-02T01:56:16-06:00</lastmod>
   </url>
   
@@ -83,12 +88,12 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/09redpwn2020_02/</loc>
+    <loc>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</loc>
     <lastmod>2020-06-28T21:19:19-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/08redpwn2020/</loc>
+    <loc>https://jamvie.net/posts/2020/06/redpwnctf-2020/</loc>
     <lastmod>2020-06-25T16:26:44-06:00</lastmod>
   </url>
   
@@ -103,7 +108,7 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/07hackasat/</loc>
+    <loc>https://jamvie.net/posts/2020/06/2020-hackasat-quals/</loc>
     <lastmod>2020-06-03T21:47:00-06:00</lastmod>
   </url>
   
@@ -118,7 +123,7 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/06csaw2019/</loc>
+    <loc>https://jamvie.net/posts/2020/05/csaw-2019-unagi/</loc>
     <lastmod>2020-05-21T01:22:16-06:00</lastmod>
   </url>
   
@@ -128,7 +133,7 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/05de1ctf2020_01/</loc>
+    <loc>https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/</loc>
     <lastmod>2020-05-07T15:20:38-06:00</lastmod>
   </url>
   
@@ -138,27 +143,27 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/04plaidctf2020_01/</loc>
+    <loc>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</loc>
     <lastmod>2020-04-28T00:48:12-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/03toolsofthetrade/</loc>
+    <loc>https://jamvie.net/posts/2020/04/commonly-used-software/</loc>
     <lastmod>2020-04-26T01:30:30-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/02confidence2020_01/</loc>
+    <loc>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</loc>
     <lastmod>2020-04-23T00:46:19-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/01utctf/</loc>
+    <loc>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</loc>
     <lastmod>2020-04-22T00:46:19-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/post/00initialpost/</loc>
+    <loc>https://jamvie.net/posts/2020/04/jamvies-first-post/</loc>
     <lastmod>2020-04-20T21:27:12-06:00</lastmod>
   </url>
   

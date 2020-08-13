@@ -14,20 +14,20 @@
     
     <item>
       <title>Cross-Site Request Forgery: Introduction</title>
-      <link>https://jamvie.net/post/12csrfintro/</link>
+      <link>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</link>
       <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
       
-      <guid>https://jamvie.net/post/12csrfintro/</guid>
+      <guid>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</guid>
       <description>Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&amp;rsquo;re the reason you shouldn&amp;rsquo;t click suspicious links, even if the URL sort of sounds legitimate.
 This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.</description>
     </item>
     
     <item>
       <title>RedPwnCTF 2020, Part 3</title>
-      <link>https://jamvie.net/post/10redpwn2020_03/</link>
+      <link>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</link>
       <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
       
-      <guid>https://jamvie.net/post/10redpwn2020_03/</guid>
+      <guid>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</guid>
       <description>Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &amp;ldquo;Viper&amp;rdquo;.
 Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
@@ -36,10 +36,10 @@ The source code is available for us in this challenge as well. The main file, se
     
     <item>
       <title>RedPwnCTF 2020, part 2</title>
-      <link>https://jamvie.net/post/09redpwn2020_02/</link>
+      <link>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</link>
       <pubDate>Sun, 28 Jun 2020 21:19:19 -0600</pubDate>
       
-      <guid>https://jamvie.net/post/09redpwn2020_02/</guid>
+      <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</guid>
       <description>Part 2 of my writeup series for RedPwnCTF 2020!
 Let&amp;rsquo;s Begin! Tux-Fanpage  points: 464  Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
 const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request  if(!</description>

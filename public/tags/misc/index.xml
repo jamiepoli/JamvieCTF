@@ -14,29 +14,29 @@
     
     <item>
       <title>Cryptography and P vs. NP: A Basic Outline</title>
-      <link>https://jamvie.net/post/11pvsnp/</link>
+      <link>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</link>
       <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
       
-      <guid>https://jamvie.net/post/11pvsnp/</guid>
+      <guid>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</guid>
       <description>Comic from XKCD.
 I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
     </item>
     
     <item>
       <title>Commonly Used Software</title>
-      <link>https://jamvie.net/post/03toolsofthetrade/</link>
+      <link>https://jamvie.net/posts/2020/04/commonly-used-software/</link>
       <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
       
-      <guid>https://jamvie.net/post/03toolsofthetrade/</guid>
+      <guid>https://jamvie.net/posts/2020/04/commonly-used-software/</guid>
       <description>&lt;p&gt;I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Jamvie&#39;s first post</title>
-      <link>https://jamvie.net/post/00initialpost/</link>
+      <link>https://jamvie.net/posts/2020/04/jamvies-first-post/</link>
       <pubDate>Mon, 20 Apr 2020 21:27:12 -0600</pubDate>
       
-      <guid>https://jamvie.net/post/00initialpost/</guid>
+      <guid>https://jamvie.net/posts/2020/04/jamvies-first-post/</guid>
       <description>Hi, and welcome to my CTF blog. I&amp;rsquo;m just a software dev with a hobby for CTFs, and I thought a blog would be a good way to stash all my long-archived writeups for CTF challenges I participated in. I&amp;rsquo;m by no means an expert on the topic, but if someone stumbles upon here and gains a newfound interest in cybersecurity, that would be pretty cool.
 Over the next few weeks I will upload my old writeups for some CTFs that occurred this year and last, so stay tuned!</description>
     </item>

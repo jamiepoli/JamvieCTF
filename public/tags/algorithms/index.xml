@@ -14,10 +14,10 @@
     
     <item>
       <title>Cryptography and P vs. NP: A Basic Outline</title>
-      <link>https://jamvie.net/post/11pvsnp/</link>
+      <link>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</link>
       <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
       
-      <guid>https://jamvie.net/post/11pvsnp/</guid>
+      <guid>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</guid>
       <description>Comic from XKCD.
 I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
     </item>
