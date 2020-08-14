@@ -54,7 +54,7 @@ ch.sendline(libc_base + 0x554e0)
 ch.sendline("/bin/")
 ```
 
-5. Once we opened the shell, get the flag on their server!
+4. Once we opened the shell, get the flag on their server!
 
 ``flag{one_write_two_write_good_write_bad_write}``
 
