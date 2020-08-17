@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SSRF on Jam Polintan</title>
+    <link>https://jamvie.net/tags/ssrf/</link>
+    <description>Recent content in SSRF on Jam Polintan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Tue, 28 Apr 2020 00:48:12 -0600</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/ssrf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Plaidctf 2020: Contrived Web Problem</title>
+      <link>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</link>
+      <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</guid>
+      <description>&lt;p&gt;This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&amp;rsquo;m glad they did!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

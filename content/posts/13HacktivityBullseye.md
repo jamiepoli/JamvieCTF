@@ -7,7 +7,9 @@ images: ["images/ghidrabullseye.png"]
 tags: ["pwn", "writeups"]
 ---
 
-It's clear to see from the content of my blog that my expertise lies in web-based exploits. However, I have mentioned before wanting to branch out and diversify my skillset in hacking; and while I definitely have more knowledge in web exploits, I also know a thing or two about pwning. Hacktivity Con CTF was a competition that ran this month, introducing several different challenges that I sunk my teeth into. I will showcase one of them here, called "Bullseye".
+It's clear to see from the content of my blog that my expertise lies in web-based exploits. 
+<!--more-->
+However, I have mentioned before wanting to branch out and diversify my skillset in hacking; and while I definitely have more knowledge in web exploits, I also know a thing or two about pwning. Hacktivity Con CTF was a competition that ran this month, introducing several different challenges that I sunk my teeth into. I will showcase one of them here, called "Bullseye".
 
 ## Let's Begin!
 
