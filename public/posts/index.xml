@@ -15,13 +15,19 @@
             <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
             
             <guid>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</guid>
-            <description>This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
-Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
-When you make a note, you have an option to share it with a &amp;ldquo;TjMike&amp;rdquo; Entity.</description>
-            <content type="html"><![CDATA[<p>This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)</p>
+            <description>This is the first challenge I worked on. I will soon upload a post on the second one. I completed this challenge with the help of my team mentor!
+(As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
+Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function.</description>
+            <content type="html"><![CDATA[<p>This is the first challenge I worked on. I will soon upload a post on the second one. I completed this challenge with the help of my team mentor!</p>
+<p>(As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)</p>
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
-<p>The challenge lets us load into the DOM whatever we want through this pastebin-esque function.</p>
-<p>When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo; Entity. Sign of XSS/CSRF attacks?</p>
+<p>The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
+When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo; Entity. Sign of XSS/CSRF attacks?</p>
+<p>
+    <img src="/images/google2020pastdompur.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>My input, &ldquo;uwu&rdquo;, is shoved into a javascript string variable called &lsquo;note&rsquo;. Further down we see a</em> <code>const clean</code> <em>variable that calls DOMpurify to sanitize our input.</em></p>
 <p>Looking into the HTML, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever want. Let&rsquo;s focus on the comment.</p>
 
     <img src="/images/google2020source.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
