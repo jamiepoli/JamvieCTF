@@ -22,7 +22,11 @@ When you make a note, you have an option to share it with a &amp;ldquo;TjMike&am
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <p>The challenge lets us load into the DOM whatever we want through this pastebin-esque function.</p>
 <p>When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo; Entity. Sign of XSS/CSRF attacks?</p>
-<p>Looking into the source, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever want. Let&rsquo;s focus on the comment.</p>
+<p>Looking into the HTML, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever want. Let&rsquo;s focus on the comment.</p>
+
+    <img src="/images/google2020source.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>Going to the <code>/source</code> endpoint takes us, well, directly to the webpage&rsquo;s app file.</p>
 <p>Of note are the app&rsquo;s use of using the Express BodyParser to operate on &lsquo;extended&rsquo; mode (using the <code>qs</code> library instead of the <code>querystring</code> library).</p>
 

@@ -18,7 +18,9 @@ The challenge lets us load into the DOM whatever we want through this pastebin-e
 
 When you make a note, you have an option to share it with a "TjMike" Entity. Sign of XSS/CSRF attacks?
 
-Looking into the source, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever want. Let's focus on the comment.
+Looking into the HTML, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever want. Let's focus on the comment.
+
+{{< image src="/images/google2020source.png" alt="Login" position="center" style="border-radius: 8px;" >}}
 
 Going to the ``/source`` endpoint takes us, well, directly to the webpage's app file. 
 
