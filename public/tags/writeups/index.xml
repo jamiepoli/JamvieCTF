@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 09 Aug 2020 18:48:52 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2020 17:35:14 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/writeups/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GoogleCTF 2020: Pasteurize</title>
+      <link>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</link>
+      <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</guid>
+      <description>This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
+Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
+When you make a note, you have an option to share it with a &amp;ldquo;TjMike&amp;rdquo; Entity.</description>
+    </item>
     
     <item>
       <title>HacktivityCon CTF: Bullseye</title>
@@ -52,15 +63,6 @@ const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39
       <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020/</guid>
       <description>RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
 Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty.</description>
-    </item>
-    
-    <item>
-      <title>2020 HackASat Quals</title>
-      <link>https://jamvie.net/posts/2020/06/2020-hackasat-quals/</link>
-      <pubDate>Wed, 03 Jun 2020 21:47:00 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/06/2020-hackasat-quals/</guid>
-      <description>I participated in HackASat Quals with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &amp;ldquo;I Like to Watch.&amp;rdquo; I also went through it myself and am going to discuss my solution to it.</description>
     </item>
     
   </channel>

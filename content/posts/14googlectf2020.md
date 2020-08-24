@@ -5,9 +5,11 @@ draft: false
 comments: false
 images:
 tags:
-    - writeup
+    - writeups
     - web
     - xss
+
+category: writeup
 ---
 
 This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
