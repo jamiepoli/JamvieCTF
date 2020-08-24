@@ -3,27 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</loc>
+    <lastmod>2020-08-23T17:35:14-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2020-08-23T17:35:14-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/posts/</loc>
+    <lastmod>2020-08-23T17:35:14-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/</loc>
+    <lastmod>2020-08-23T17:35:14-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/web/</loc>
+    <lastmod>2020-08-23T17:35:14-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/writeup/</loc>
+    <lastmod>2020-08-23T17:35:14-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/xss/</loc>
+    <lastmod>2020-08-23T17:35:14-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jamvie.net/posts/2020/08/hacktivitycon-ctf-bullseye/</loc>
     <lastmod>2020-08-09T18:48:52-06:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jamvie.net/</loc>
-    <lastmod>2020-08-09T18:48:52-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/posts/</loc>
-    <lastmod>2020-08-09T18:48:52-06:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jamvie.net/tags/pwn/</loc>
-    <lastmod>2020-08-09T18:48:52-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/</loc>
     <lastmod>2020-08-09T18:48:52-06:00</lastmod>
   </url>
   
@@ -44,11 +64,6 @@
   
   <url>
     <loc>https://jamvie.net/tags/instructional/</loc>
-    <lastmod>2020-07-27T19:07:51-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/web/</loc>
     <lastmod>2020-07-27T19:07:51-06:00</lastmod>
   </url>
   
@@ -104,11 +119,6 @@
   
   <url>
     <loc>https://jamvie.net/tags/sqli/</loc>
-    <lastmod>2020-06-25T16:26:44-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/xss/</loc>
     <lastmod>2020-06-25T16:26:44-06:00</lastmod>
   </url>
   

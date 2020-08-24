@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Mon, 27 Jul 2020 19:07:51 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2020 17:35:14 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/web/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GoogleCTF 2020: Pasteurize</title>
+      <link>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</link>
+      <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</guid>
+      <description>This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
+Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
+When you make a note, you have an option to share it with a &amp;ldquo;TjMike&amp;rdquo; Entity.</description>
+    </item>
     
     <item>
       <title>Cross-Site Request Forgery: Introduction</title>
@@ -53,16 +64,6 @@ const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39
       <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020/</guid>
       <description>RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
 Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty.</description>
-    </item>
-    
-    <item>
-      <title>CSAW 2019: Unagi</title>
-      <link>https://jamvie.net/posts/2020/05/csaw-2019-unagi/</link>
-      <pubDate>Thu, 21 May 2020 01:22:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/05/csaw-2019-unagi/</guid>
-      <description>Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
-This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks.</description>
     </item>
     
   </channel>

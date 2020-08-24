@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 09 Aug 2020 18:48:52 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2020 17:35:14 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>web</title>
+      <link>https://jamvie.net/tags/web/</link>
+      <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeup</title>
+      <link>https://jamvie.net/tags/writeup/</link>
+      <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/writeup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xss</title>
+      <link>https://jamvie.net/tags/xss/</link>
+      <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/xss/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>pwn</title>
@@ -27,33 +54,6 @@
       <pubDate>Sun, 09 Aug 2020 18:48:52 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/writeups/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSRF</title>
-      <link>https://jamvie.net/tags/csrf/</link>
-      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/csrf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>instructional</title>
-      <link>https://jamvie.net/tags/instructional/</link>
-      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/instructional/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>web</title>
-      <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/web/</guid>
       <description></description>
     </item>
     

