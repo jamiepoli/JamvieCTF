@@ -21,7 +21,7 @@ We're allowed a single 'write' privilege to change some aspect of the program. I
 
 What's interesting is that the main() function returns by exit() - hence why we only get one write. However, if we use our one write to change exit() to instead jump back to main in the last line, we can bypass the "one write only" rule, sort of making our main() function recursive. 
 
-Doing this, we actually get a [libc](https://www.gnu.org/software/libc/) leak, through the function ``alarm``. This is important - with this libc leak, we can solve our "where is libc in the GOT" question, and calculate the ``system`` function's address in memory through it.
+Doing this, we actually get a [libc](https://www.gnu.org/software/libc/) leak, through the function ``alarm``. I find out afterwards that ASLR is disabled in this executable! This is important - with this libc leak, we can solve our "where is libc in the GOT" question, and calculate the ``system`` function's address in memory through it.
 So we now have an oppurtunity to call ``system``, but what line should we replace in ``main`` to open our shell in?
 
 Lines 16 and 20 feature a libc function called ``strtoull``. The nature of ``strtoull``, according to the standard lib documentation, is to take its single argument (provided its a string) and convert it to a long unsigned int. Since it expects my input, we can take advantage of that fact and replace it with our ``system`` calls while feeding in ``"/bin/sh"`` as our input.
