@@ -153,7 +153,7 @@ So this is where I got stuck. Unfortunately, I didn't have enough time to figure
 
 ## Reflections + Lessons Learned
 
-I'm glad that I tried this challenge out, and I'm equally glad that I saw how close I actually was to the solution. Although it's bittersweet to figure out the solution shortly after the CTF ended, I'm still quite happy with myself for catching on to the exploit relatively quickly and formulating a solution that was 2/3rds of the way there. A few months ago, I would have been totally stumped on this problem. 
+I'm glad that I tried this challenge out, and I'm equally glad that I saw how close I actually was to the solution. Although it's bittersweet to figure out the solution shortly after the CTF ended, I'm still quite happy with myself for catching on to the exploit relatively quickly and formulating a solution that was 4/5ths of the way there. A few months ago, I would have been totally stumped on this problem. 
 
 GoogleCTF 2020 was challenging, and I will continue to participate in harder and harder CTFs as I go. The road to self-improvement of my skills as an ethical hacker is nowhere close to conclusion, which is an exciting and slightly intimidating prospect. This was the first offering of GoogleCTF I participated in, since having started to seriously and consistently participate in CTFs in January of this year. This challenge was good practise, and I learned valuable lessons about the structure of javascript objects in HTML! I'm going to continue developing my skills, and hopefully continue to solve harder and harder challenges.
 
