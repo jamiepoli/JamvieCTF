@@ -14,6 +14,8 @@ tags:
 The 2nd challenge I worked on, titled "All the little things". Frustratingly, I didn't solve this challenge. I was about **85%** of the way there! 
 <!--more-->This is less of a writeup and instead a discussion on what I did in the problem and a reflection on the 2020 offering of GoogleCTF. 
 
+## Let's Begin!
+
 Right off the bat, clicking on ``/login`` we have a very interesting login page that only takes your username and a profile image sourced as an http link. I spent some time wondering if an xss payload delivery was in order that way but it turned out to be a dead end. 
 
 Logging in as any user lets us access a new endpoint called ``/settings``. Aside from the available options to change your name, profile picture and theme (light or dark), lets inspect the HTML: 
