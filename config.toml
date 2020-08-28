@@ -10,7 +10,7 @@ paginate  = 10
 rssLimit  = 5  # Maximum number of items in the RSS feed.
 copyright = "CC Attribution-NonCommercial 4.0 International License" # This message is only used by the RSS template.
 
-googleAnalytics = "https://www.googletagmanager.com/gtag/js?id=UA-176711986-1"
+googleAnalytics = "UA-176711986-1"
 
 archetypeDir = "archetypes"
 contentDir   = "content"
