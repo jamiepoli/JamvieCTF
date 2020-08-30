@@ -1873,7 +1873,7 @@ And it worked!</p>
 <span style="color:#66d9ef">admin</span><span style="color:#e6db74">&#39; AND pass LIKE (&#39;</span>J<span style="color:#f92672">%</span><span style="color:#e6db74">&#39;)
 </span><span style="color:#e6db74">
 </span></code></pre></div><p>This will return true if the admin&rsquo;s password starts with a J.</p>
-<p>While I use the SQL &lsquo;LIKE&rsquo; keyword here, another keyword called &ldquo;substr&rdquo; or &ldquo;substring&rdquo; exists that I prefer. [From SQL Server Tutorial:] (<a href="https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/">https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/</a>)</p>
+<p>While I use the SQL &lsquo;LIKE&rsquo; keyword here, another keyword called &ldquo;substr&rdquo; or &ldquo;substring&rdquo; exists that I prefer. <a href="https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/">From SQL Server Tutorial:</a></p>
 <blockquote>
 <p>The SUBSTRING() extracts a substring with a specified length starting from a location in an input string.</p>
 </blockquote>

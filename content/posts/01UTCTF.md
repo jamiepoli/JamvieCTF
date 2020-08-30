@@ -36,7 +36,7 @@ admin' AND pass LIKE ('J%')
 
 This will return true if the admin's password starts with a J.
 
-While I use the SQL 'LIKE' keyword here, another keyword called "substr" or "substring" exists that I prefer. [From SQL Server Tutorial:] (https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/)
+While I use the SQL 'LIKE' keyword here, another keyword called "substr" or "substring" exists that I prefer. [From SQL Server Tutorial:](https://www.sqlservertutorial.net/sql-server-string-functions/sql-server-substring-function/)
 
 >The SUBSTRING() extracts a substring with a specified length starting from a location in an input string.
 
