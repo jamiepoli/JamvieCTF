@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 23 Aug 2020 17:35:14 -0600</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2020 20:57:15 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>misc</title>
+      <link>https://jamvie.net/tags/misc/</link>
+      <pubDate>Sat, 19 Sep 2020 20:57:15 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/misc/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>web</title>
@@ -45,15 +54,6 @@
       <pubDate>Sun, 09 Aug 2020 18:48:52 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/pwn/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSRF</title>
-      <link>https://jamvie.net/tags/csrf/</link>
-      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/csrf/</guid>
       <description></description>
     </item>
     

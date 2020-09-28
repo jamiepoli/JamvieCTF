@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 23 Aug 2020 17:35:14 -0600</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2020 20:57:15 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>VolgaCTF Finals 2020</title>
+      <link>https://jamvie.net/posts/2020/09/volgactf-finals-2020/</link>
+      <pubDate>Sat, 19 Sep 2020 20:57:15 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/09/volgactf-finals-2020/</guid>
+      <description>&lt;p&gt;A reflection on VolgaCTF Finals, which I participated in with my team. We were the only North American team participating in the event, and for a good portion of the CTF, we held 1st place! Unfortunately, that didn&amp;rsquo;t last for the end of the competition.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>GoogleCTF 2020: Pasteurize</title>
@@ -50,18 +59,6 @@ This is a discussion on the importance of protecting against such attacks, and t
       <guid>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</guid>
       <description>Comic from XKCD.
 I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
-    </item>
-    
-    <item>
-      <title>RedPwnCTF 2020, Part 3</title>
-      <link>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</link>
-      <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</guid>
-      <description>Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &amp;ldquo;Viper&amp;rdquo;.
-Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
-When we create our viper, its name is its viperId, which is a UUID.
-The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create.</description>
     </item>
     
   </channel>
