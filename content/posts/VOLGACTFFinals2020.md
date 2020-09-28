@@ -11,7 +11,7 @@ images:
 A reflection on VolgaCTF Finals, which I participated in with my team. We were the only North American team participating in the event, and for a good portion of the CTF, we held 1st place! Unfortunately, that didn't last for the end of the competition. 
 <!--more-->
 
-This year of the finals round gave us an online offering of the attack-defense CTF competition, marking my first experience with attack-defense style CTFs. Overall the challenges and showmanship were alright throughout the competition, but a big barrier between my team and the others partcipating was the timezone. VolgaCTF was occuring in the midday in Russia, which was midnight in my timezone. 
+This year of the finals round gave us an online offering of the attack-defense CTF competition, marking my first experience with attack-defense style CTFs. Overall the challenges and showmanship were alright throughout the competition, but a big barrier between my team and the others participating was the timezone. VolgaCTF was occuring in the midday in Russia, which was midnight in my timezone. 
 
 My team and I had to pull an all-nighter to partcipate in the finals round, and the lack of sleep was definitely to our disadvantage. 
 
