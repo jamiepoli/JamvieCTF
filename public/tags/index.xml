@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 04 Oct 2020 13:12:06 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>crypto</title>
+      <link>https://jamvie.net/tags/crypto/</link>
+      <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/crypto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://jamvie.net/tags/web/</link>
+      <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeups</title>
+      <link>https://jamvie.net/tags/writeups/</link>
+      <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/writeups/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>android</title>
@@ -22,38 +49,11 @@
     </item>
     
     <item>
-      <title>crypto</title>
-      <link>https://jamvie.net/tags/crypto/</link>
-      <pubDate>Sun, 04 Oct 2020 13:12:06 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/crypto/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>OSINT</title>
       <link>https://jamvie.net/tags/osint/</link>
       <pubDate>Sun, 04 Oct 2020 13:12:06 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/osint/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>reversing</title>
-      <link>https://jamvie.net/tags/reversing/</link>
-      <pubDate>Sun, 04 Oct 2020 13:12:06 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/reversing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>misc</title>
-      <link>https://jamvie.net/tags/misc/</link>
-      <pubDate>Sat, 19 Sep 2020 20:57:15 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/misc/</guid>
       <description></description>
     </item>
     

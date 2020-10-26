@@ -6,8 +6,73 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-        <lastBuildDate>Sun, 04 Oct 2020 13:12:06 -0600</lastBuildDate>
+        <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Hack.lu 2020: Confessions</title>
+            <link>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</link>
+            <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
+            
+            <guid>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</guid>
+            <description>This is a writeup for &amp;ldquo;Confessions&amp;rdquo;, the first web challenge I solved. I was luckily able to finish this challenge in a couple hours, so I could focus my attention to the other super interesting web problems. Confessions was a nice dive into some simple GraphQL manipulation and baby crypto.
+Let&amp;rsquo;s Begin! The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it.</description>
+            <content type="html"><![CDATA[<p>This is a writeup for &ldquo;Confessions&rdquo;, the first web challenge I solved. I was luckily able to finish this challenge in a couple hours, so I could focus my attention to the other super interesting web problems. Confessions was a nice dive into some simple GraphQL manipulation and baby crypto.</p>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p>The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it. Under the hood we see the nature of how these messages are stored:</p>
+<p>TODO: IMAGE</p>
+<p>The application uses graphQL as an intermediary to the database. Specifically, the client &ldquo;talks&rdquo; to graphql via the <code>\graphql</code> endpoint. If we take a look at what happens when we create a message, we see what happens when this endpoint is called upon:</p>
+
+    <img src="/images/confessionsresearch.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The construction of this &ldquo;mutation&rdquo; object is common in graphQL implementations. However, to actually &ldquo;talk&rdquo; to the endpoint, you don&rsquo;t always need to generate a mutation object.</p>
+<p>What else can we ask of the endpoint? (I&rsquo;m using the graphQL IDE here to avoid having to worry about formatting in an API request) If we perform some regular <a href="https://graphql.org/learn/introspection/">introspection</a> into their graphQL infrastructure, we see something interesting:</p>
+
+    <img src="/images/confessionsschema.png"  alt="schema"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The description on the query&rsquo;s field <code>accessLog</code> is the big hint here. Let&rsquo;s expand upon <code>accessLog</code> further:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#960050;background-color:#1e0010">accessLog{</span>
+    <span style="color:#960050;background-color:#1e0010">name</span>
+    <span style="color:#960050;background-color:#1e0010">timestamp</span>
+    <span style="color:#960050;background-color:#1e0010">args</span>
+  }
+<span style="color:#960050;background-color:#1e0010">}</span>
+</code></pre></div>
+    <img src="/images/confessionsaccess.png"  alt="accessLog"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>We recieve a list of hashes, also in sha-256. Running the first 4 hashes through an online sha-256 database reveal to me that they decrypt to &ldquo;f&rdquo;, &ldquo;fl&rdquo;, &ldquo;fla&rdquo;, then finally &ldquo;flag&rdquo;. The full flag of this challenge is obviously the very last hash in this <code>accessLog</code>, so now we must bruteforce the incoming letters (which isn&rsquo;t too crazy. If we operate under the assumption that the flag has letters that are all lowercase, numbers 0-9, and maybe the <code>-</code> or <code>_</code> chars, we are dealing with 38 bits of entropy per letter, which is incredibly manageable. Additionally, we are aware by convention that all flags start with <code>flag{</code> and the last char is <code>}</code>, so we can already figure out what the 5th hash decrypts to). Special thanks to teammate Filip for explaining to me how to do it :-)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> sha256
+<span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+
+
+alphanumerics <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abcdefghijklmnopqrstuvwxyz1234567890{}_-&#34;</span>
+hashes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;&#34;&#34;all the hashes found in accessLog. There were a lot.&#34;&#34;&#34;</span>]
+
+flag <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>
+
+
+<span style="color:#66d9ef">for</span> hash <span style="color:#f92672">in</span> hashes:
+	<span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> alphanumerics:
+		m <span style="color:#f92672">=</span> sha256()
+		m<span style="color:#f92672">.</span>update(flag <span style="color:#f92672">+</span> c<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;utf-8&#34;</span>))
+		testhash <span style="color:#f92672">=</span> enhex(m<span style="color:#f92672">.</span>digest())
+		<span style="color:#66d9ef">if</span> (testhash <span style="color:#f92672">==</span> hash):
+			flag <span style="color:#f92672">+=</span> c<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;utf-8&#34;</span>)
+			<span style="color:#66d9ef">print</span> (flag)
+			<span style="color:#66d9ef">continue</span>
+</code></pre></div>
+    <img src="/images/confessionsflag.png"  alt="flag"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>And that&rsquo;s that! A quick and straightforward challenge. It was a good warmup into the other excellent web problems I saw :)</p>
+<h4 id="vie">Vie</h4>
+]]></content>
+        </item>
         
         <item>
             <title>Trend Micro CTF: Raimund Genes Quals 2020</title>
@@ -176,7 +241,7 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
 <p>With all 5 keys decrypted, all that was left was to combine them all and decrypt the flag.</p>
 <p><code>TMCTF{pzDbkfWGcE}</code></p>
 <p>Special thanks to my teammates, rctcwyvern and Robert for helping me out :) I&rsquo;m thankful I spent my earlier CS years playing around in Android Studio. I unknowingly gained some valuable skills needed to reverse engineer the APK. Goes to show how every little thing counts! :P</p>
-<h3 id="vie">Vie</h3>
+<h4 id="vie">Vie</h4>
 ]]></content>
         </item>
         

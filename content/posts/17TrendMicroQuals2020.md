@@ -214,4 +214,4 @@ With all 5 keys decrypted, all that was left was to combine them all and decrypt
 
 Special thanks to my teammates, rctcwyvern and Robert for helping me out :) I'm thankful I spent my earlier CS years playing around in Android Studio. I unknowingly gained some valuable skills needed to reverse engineer the APK. Goes to show how every little thing counts! :P
 
-### Vie
+#### Vie

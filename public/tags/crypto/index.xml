@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 04 Oct 2020 13:12:06 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/crypto/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hack.lu 2020: Confessions</title>
+      <link>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</link>
+      <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</guid>
+      <description>This is a writeup for &amp;ldquo;Confessions&amp;rdquo;, the first web challenge I solved. I was luckily able to finish this challenge in a couple hours, so I could focus my attention to the other super interesting web problems. Confessions was a nice dive into some simple GraphQL manipulation and baby crypto.
+Let&amp;rsquo;s Begin! The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it.</description>
+    </item>
     
     <item>
       <title>Trend Micro CTF: Raimund Genes Quals 2020</title>
