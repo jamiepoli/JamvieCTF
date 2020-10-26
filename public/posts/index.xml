@@ -20,8 +20,34 @@ Let&amp;rsquo;s Begin! The confessions webpage was a message-generation applicat
             <content type="html"><![CDATA[<p>This is a writeup for &ldquo;Confessions&rdquo;, the first web challenge I solved. I was luckily able to finish this challenge in a couple hours, so I could focus my attention to the other super interesting web problems. Confessions was a nice dive into some simple GraphQL manipulation and baby crypto.</p>
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <p>The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it. Under the hood we see the nature of how these messages are stored:</p>
-<p>TODO: IMAGE</p>
-<p>The application uses graphQL as an intermediary to the database. Specifically, the client &ldquo;talks&rdquo; to graphql via the <code>\graphql</code> endpoint. If we take a look at what happens when we create a message, we see what happens when this endpoint is called upon:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// talk to the GraphQL endpoint
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gql</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">query</span>, <span style="color:#a6e22e">variables</span><span style="color:#f92672">=</span>{}) =&gt; {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/graphql&#39;</span>, {
+        <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
+        <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+            <span style="color:#e6db74">&#39;content-type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>,
+        },
+        <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
+            <span style="color:#a6e22e">operationName</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+            <span style="color:#a6e22e">query</span>,
+            <span style="color:#a6e22e">variables</span>,
+        }),
+    });
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">json</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">length</span>) {
+        <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span>;
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">data</span>;
+    }
+};
+
+<span style="color:#75715e">// some queries/mutations
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfession</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">hash</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;query Q($hash: String) { confession(hash: $hash) { title, hash } }&#39;</span>, { <span style="color:#a6e22e">hash</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confession</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfessionWithMessage</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">id</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation Q($id: String) { confessionWithMessage(id: $id) { title, hash, message } }&#39;</span>, { <span style="color:#a6e22e">id</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confessionWithMessage</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addConfession</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { id } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">previewHash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { hash } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
+
+</code></pre></div><p>The application uses graphQL as an intermediary to the database. Specifically, the client &ldquo;talks&rdquo; to graphql via the <code>\graphql</code> endpoint. If we take a look at what happens when we create a message, we see what happens when this endpoint is called upon:</p>
 
     <img src="/images/confessionsresearch.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
 
