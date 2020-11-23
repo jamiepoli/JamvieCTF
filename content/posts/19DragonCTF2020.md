@@ -127,7 +127,7 @@ On here?
 
 {{< image src="/images/harmonychannel.png" alt="research" position="center" style="border-radius: 8px;" >}}
 
-First thing that came to mind was that the chat logs all have the same ``displayName: message`` format... So the thought was to split the POST request by ``:`` and have these different "users" deliver specific "messages" to construct the POST request there. You had the ability to invite multiple users to one channel, so this was probably the way to go. 
+First thing that came to mind was that the chat logs all have the same ``displayName: message`` format... So the thought was to split the POST request by the first occurence of ``:`` on each new line and have these different "users" deliver specific "messages" to construct the POST request there. You had the ability to invite multiple users to one channel, so this was probably the way to go. 
 
 I know that this can be automated - but I did the process manually. 
 So, we should have 5 "users": ``POST /csp-report?``, ``Host``, ``Content-Length``, ``Content-Type`` and ``{"csp-report"``. They will then each message the chat in order as so... 
@@ -157,8 +157,15 @@ port 172,0,0,1,13,52    <-- Sets FTP on active mode so this is required
 retr <id of channel>    <-- Retrieves chat log, sends it in the data channel
 ```
 
-
 {{< image src="/images/ftpcommunication.png" alt="research" position="center" style="border-radius: 8px;" >}}
+
+- The ``user`` command is expecting a uid of any user in the current session. We technically made 5, so any of their uids work.
+
+- The ``pass`` command can be blank, as the implementation of the application said any password will be accepted. 
+
+- The ``port`` command is what makes the FTP server operate in active mode. The command's arguments are the 4 bytes of the IP, then the 2 remaining values are the port number following this convention: p1, p2 where ``(p1 * 256) + p2`` = full port number. We want to connect to Harmony Chat's localhost at the HTTP server, which is at port 3380. 
+
+- The ``retr`` command takes the name of a file (in this case, the name of the chatlog) and retrieves it, then sends it over the data connection it just established. If we got things right, then the FTP server would have sent our POST request to the HTTP server.
 
 Once the FTP server has confirmed that it RETRieved the channel's chatlog and sent it to the local HTTP server, we check back on our ngrok instance and see that a reverse-shell opened up. All that's left now is to ``ls`` our way to the flag :)
 
