@@ -7,7 +7,8 @@ images:
 tags:
   - SSRF
   - FTP
-  - Insecure Deserialization
+  - insecure-deserialization
+  - writeups
 ---
 
 A writeup for the first web problem, "Harmony Chat", in DragonCTF 2020. A very fun and interesting challenge! 
