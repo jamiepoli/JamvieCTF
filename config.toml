@@ -1,5 +1,5 @@
 baseURL = "https://jamvie.net"
-title   = "Jam Polintan"
+title   = "Jam // Vie"
 languageCode = "en-us"
 theme = "hello-friend-ng"
 
@@ -57,7 +57,7 @@ disableHugoGeneratorInject = false
   keywords = ""
   images = ["img/profile.jpg"]
 
-  homeSubtitle = "Software Developer || Cybersecurity Enthusiast || Artist"
+  homeSubtitle = "Software Developer & Cybersecurity Enthusiast"
 
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = false
