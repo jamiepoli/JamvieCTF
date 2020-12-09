@@ -55,7 +55,7 @@ disableHugoGeneratorInject = false
   # Metadata mostly used in document's head
   description = "JamVie: blog of cybersecurity. Home icon made on Canva"
   keywords = ""
-  images = ["img/ICON.png"]
+  images = ["static/img/ICON.png"]
 
   homeSubtitle = "Software Developer & Cybersecurity Enthusiast"
 
