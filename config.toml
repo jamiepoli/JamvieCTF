@@ -23,7 +23,7 @@ buildFuture  = false
 buildExpired = false
 canonifyURLs = true
 
-enableRobotsTXT = true
+enableRobotsTXT = false
 enableGitInfo   = false
 enableEmoji     = true
 enableMissingTranslationPlaceholders = false
@@ -53,9 +53,9 @@ disableHugoGeneratorInject = false
   dateformNumTime = "2006-01-02 15:04 -0700"
 
   # Metadata mostly used in document's head
-  description = "JamVie: blog of cybersecurity. Home icon made on Canva"
+  description = "JamVie: blog of cybersecurity."
   keywords = ""
-  images = ["img/front.png"]
+  images = ["static/img/front.png"]
 
   homeSubtitle = "Software Developer & Cybersecurity Enthusiast"
 
