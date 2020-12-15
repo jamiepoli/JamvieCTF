@@ -33,3 +33,6 @@ Temporary Items
 # End of https://www.gitignore.io/api/macos
 
 .vscode
+
+# vim temp. files
+*.swp
