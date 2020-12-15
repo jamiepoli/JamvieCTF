@@ -85,12 +85,12 @@ disableHugoGeneratorInject = false
     # Set true to remove the logo cursor entirely.
     # logoCursorDisabled = false
     # Set to a valid CSS color to change the cursor in the logo.
-    # logoCursorColor    = "#67a2c9"
+    logoCursorColor    = "#487860"
     # Set to a valid CSS time value to change the animation duration, "0s" to disable.
     # logoCursorAnimate  = "2s"
 
   [params.portrait]
-    path = "img/JAMVIELOGO2.gif"
+    path = "img/VIE.gif"
     alt = "Portrait"
 
   # Social icons
