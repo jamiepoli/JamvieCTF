@@ -2,7 +2,7 @@
 
  I’m Vie (real name Jam), a member of the [Maple Bacon](https://ubcctf.github.io/) CTF team and university student based in Canada. I currently focus on web-based exploits, networking hacks, and aerospace security. Outside of cyber security competitions I utilize my skills in computer science, mathematics, and art to craft informative projects that bring tech to a wider audience, or connect technology to other disciplines with which I feel passionate about. 
  
- Some of my other interests include astronomy and aerospace, algorithm analysis and design, and statistical analysis applied to environmental and biological phenomena. I have a desire to understand what mystery obscures us from, and hope to use my skills to create an accessible space for others to learn and understand the beautiful complexities of the world around us, and to keep us safe in an ever growing digitially-omnipresent civilization. 
+ Some of my other interests include astronomy and aerospace, algorithm analysis and design, and statistical analysis applied to environmental phenomena. I have a desire to understand what mystery obscures us from, and hope to use my skills to create an accessible space for others to learn and understand the beautiful complexities of the world around us, and to keep us safe in an ever growing digitially-omnipresent civilization. 
 
 ## Acknowledgements
 
