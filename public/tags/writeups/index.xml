@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2020 14:33:48 -0700</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/writeups/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DragonCTF 2020: Harmony Chat</title>
+      <link>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</link>
+      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</guid>
+      <description>A writeup for the first web problem, &amp;ldquo;Harmony Chat&amp;rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
+TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit  Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
+    </item>
     
     <item>
       <title>Hack.lu 2020: Confessions</title>
@@ -52,17 +62,6 @@ Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want 
 Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
 When we create our viper, its name is its viperId, which is a UUID.
 The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create.</description>
-    </item>
-    
-    <item>
-      <title>RedPwnCTF 2020, part 2</title>
-      <link>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</link>
-      <pubDate>Sun, 28 Jun 2020 21:19:19 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</guid>
-      <description>Part 2 of my writeup series for RedPwnCTF 2020!
-Let&amp;rsquo;s Begin! Tux-Fanpage  points: 464  Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request  if(!</description>
     </item>
     
   </channel>

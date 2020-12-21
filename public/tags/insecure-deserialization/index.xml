@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>insecure-deserialization on Jam // Vie</title>
+    <link>https://jamvie.net/tags/insecure-deserialization/</link>
+    <description>Recent content in insecure-deserialization on Jam // Vie</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Sun, 22 Nov 2020 14:33:48 -0700</lastBuildDate>
+    
+	<atom:link href="https://jamvie.net/tags/insecure-deserialization/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DragonCTF 2020: Harmony Chat</title>
+      <link>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</link>
+      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</guid>
+      <description>A writeup for the first web problem, &amp;ldquo;Harmony Chat&amp;rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
+TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit  Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
+    </item>
+    
+  </channel>
+</rss>

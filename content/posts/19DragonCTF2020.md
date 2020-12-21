@@ -1,7 +1,7 @@
 ---
 title: "DragonCTF 2020: Harmony Chat"
 date: 2020-11-22T14:33:48-07:00
-draft: true
+draft: false
 toc: false
 images: ["mages/harmonychannel.png"]
 tags:

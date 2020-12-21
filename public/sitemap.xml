@@ -3,6 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</loc>
+    <lastmod>2020-11-22T14:33:48-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/ftp/</loc>
+    <lastmod>2020-11-22T14:33:48-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/insecure-deserialization/</loc>
+    <lastmod>2020-11-22T14:33:48-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2020-11-22T14:33:48-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/posts/</loc>
+    <lastmod>2020-11-22T14:33:48-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/ssrf/</loc>
+    <lastmod>2020-11-22T14:33:48-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/</loc>
+    <lastmod>2020-11-22T14:33:48-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jamvie.net/tags/writeups/</loc>
+    <lastmod>2020-11-22T14:33:48-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://jamvie.net/tags/crypto/</loc>
     <lastmod>2020-10-25T22:34:34-06:00</lastmod>
   </url>
@@ -13,27 +53,7 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/</loc>
-    <lastmod>2020-10-25T22:34:34-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/posts/</loc>
-    <lastmod>2020-10-25T22:34:34-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/</loc>
-    <lastmod>2020-10-25T22:34:34-06:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jamvie.net/tags/web/</loc>
-    <lastmod>2020-10-25T22:34:34-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/writeups/</loc>
     <lastmod>2020-10-25T22:34:34-06:00</lastmod>
   </url>
   
@@ -158,17 +178,7 @@
   </url>
   
   <url>
-    <loc>https://jamvie.net/tags/ftp/</loc>
-    <lastmod>2020-04-28T00:48:12-06:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</loc>
-    <lastmod>2020-04-28T00:48:12-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/ssrf/</loc>
     <lastmod>2020-04-28T00:48:12-06:00</lastmod>
   </url>
   

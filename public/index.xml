@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2020 14:33:48 -0700</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DragonCTF 2020: Harmony Chat</title>
+      <link>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</link>
+      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</guid>
+      <description>A writeup for the first web problem, &amp;ldquo;Harmony Chat&amp;rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
+TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit  Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
+    </item>
     
     <item>
       <title>Hack.lu 2020: Confessions</title>
@@ -49,16 +59,6 @@ Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want 
       
       <guid>https://jamvie.net/posts/2020/08/hacktivitycon-ctf-bullseye/</guid>
       <description>&lt;p&gt;It&amp;rsquo;s clear to see from the content of my blog that my expertise lies in web-based exploits.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Cross-Site Request Forgery: Introduction</title>
-      <link>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</link>
-      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</guid>
-      <description>Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&amp;rsquo;re the reason you shouldn&amp;rsquo;t click suspicious links, even if the URL sort of sounds legitimate.
-This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.</description>
     </item>
     
   </channel>

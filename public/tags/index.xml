@@ -7,10 +7,46 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2020 14:33:48 -0700</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>FTP</title>
+      <link>https://jamvie.net/tags/ftp/</link>
+      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/ftp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>insecure-deserialization</title>
+      <link>https://jamvie.net/tags/insecure-deserialization/</link>
+      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/insecure-deserialization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSRF</title>
+      <link>https://jamvie.net/tags/ssrf/</link>
+      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/ssrf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeups</title>
+      <link>https://jamvie.net/tags/writeups/</link>
+      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/writeups/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>crypto</title>
@@ -18,42 +54,6 @@
       <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/crypto/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>web</title>
-      <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writeups</title>
-      <link>https://jamvie.net/tags/writeups/</link>
-      <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/writeups/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>misc</title>
-      <link>https://jamvie.net/tags/misc/</link>
-      <pubDate>Sat, 19 Sep 2020 20:57:15 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/misc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>xss</title>
-      <link>https://jamvie.net/tags/xss/</link>
-      <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/xss/</guid>
       <description></description>
     </item>
     
