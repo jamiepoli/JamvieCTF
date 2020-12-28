@@ -128,7 +128,7 @@ EvilExample <span style="color:#f92672">=</span> Secret()
 pickle<span style="color:#f92672">.</span>dump(EvilExample, open(<span style="color:#e6db74">&#34;secret.p&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>))
 </code></pre></div><p>Let&rsquo;s say that there&rsquo;s a file called <code>secret.txt</code> in the directory of the application that looks like so:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">this is a secret~
-</code></pre></div><p>When we submit the generated file from this script (<code>secret.p</code>) and request for it, we can see in our webhook that the contents of <code>secret.txt</code> have succesfully been outpuuted to us in the body of a POST request:</p>
+</code></pre></div><p>When we submit the generated file from this script (<code>secret.p</code>) and request for it, we can see in our webhook that the contents of <code>secret.txt</code> have succesfully been outputed to us in the body of a POST request:</p>
 
     <img src="/images/InsecureDeserializationIntro_secret.png"  alt="secret"  class="center"  style="border-radius: 8px;"  />
 

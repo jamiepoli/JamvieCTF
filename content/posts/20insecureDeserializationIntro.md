@@ -145,7 +145,7 @@ Let's say that there's a file called `secret.txt` in the directory of the applic
 this is a secret~
 ```
 
-When we submit the generated file from this script (`secret.p`) and request for it, we can see in our webhook that the contents of `secret.txt` have succesfully been outpuuted to us in the body of a POST request: 
+When we submit the generated file from this script (`secret.p`) and request for it, we can see in our webhook that the contents of `secret.txt` have succesfully been outputed to us in the body of a POST request: 
 
 {{< image src="/images/InsecureDeserializationIntro_secret.png" alt="secret" position="center" style="border-radius: 8px;" >}}
 
