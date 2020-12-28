@@ -153,7 +153,7 @@ The possibilities are endless. Of course, this is just a toy application I'm run
 
 So what's the takeaway here? If you can help it, never deserialize user-provided input. Of course, there do exist situations where you absolutely cannot avoid it, and I would recommend properly sanitized input or some signature that can act as a canary should anything in the user input change. 
 
-Insecure deserialization is a pretty dangerous vulnerability, and also a pretty easy one to exploit if you know where to look for it. As mentioned earlier, it's seeing prolific exposure in the CTF world, and justifiably so - there are many [real world vulnerabilities](https://www.linkedin.com/pulse/equifax-data-breach-apache-struts-vulnerability-kenneth-g-/) today that are based on serialization functionality but don't have the security to match up for it. If you're using serialziaition libraries or modules, make sure to be careful! 
+Insecure deserialization is a pretty dangerous vulnerability, and also a pretty easy one to exploit if you know where to look for it. As mentioned earlier, it's seeing prolific exposure in the CTF world, and justifiably so - there are many [real world vulnerabilities](https://www.linkedin.com/pulse/equifax-data-breach-apache-struts-vulnerability-kenneth-g-/) today that are based on serialization functionality but don't have the security to match up for it. If you're using serialization libraries or modules, make sure to be careful! 
 
 ## Vie
 
