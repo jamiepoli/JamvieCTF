@@ -30,13 +30,13 @@ The serialization process is a key component to ensure that all the parts of a s
 
 ### Backup Directives
 
-When serializing objects, one thing to note is that some properties or connections will not completely transfer over during the process. In that case, there should be some sort of backup plan or emergency what-to-do in those situations. This blueprint will vary from language to language, but often you'll see it as some directive that tells the deserializer what to do when it encounters a foreign property. As an example, Python's [pickle](https://docs.python.org/3/library/pickle.html) module - the native serializaing library in Python - uses a magic function called `__reduce__()` to stipulate what should be done in case not everything was perfectly translated from their bytestream form. 
+When serializing objects, one thing to note is that some properties or connections will not completely transfer over during the process. In that case, there should be some sort of backup plan or emergency what-to-do in those situations. This blueprint will vary from language to language, but often you'll see it as some directive that tells the deserializer what to do when it encounters a foreign property. As an example, Python's [pickle](https://docs.python.org/3/library/pickle.html) module - the native serializing library in Python - uses a magic function called `__reduce__()` to stipulate what should be done in case not everything was perfectly translated from their bytestream form. 
 
 `__reduce__()` in particular tells the pickle module how to handle things directly within the definition of the class. Specifying this interface will allow us to manually reconstruct potentially complicated properties, such as database connections or open file handles. Of course, there exist unintended ways of using the ``__reduce__()`` directive. 
 
 ## Insecure Deserialization
 
-Serialization is not inherently bad, and it is a very important tool in many infrastructures today. What makes it vulnerable is, like with many different practises, improper handling of its inputs. Insecure deserialization typically arises when applications feed user input into their deserializers, which wasn't properly cleaned/sanitized. 
+Serialization is not inherently bad, and it's a very important tool in many infrastructures today. What makes it vulnerable is, like with many different practises, improper handling of its inputs. Insecure deserialization typically arises when applications feed user input into their deserializers, which wasn't properly cleaned/sanitized. 
 
 Refer back to Python's pickle module once more. It uses the `__reduce__()` directive for edge cases where properties are not properly reconstructed from their stream form. However, if the input that you're giving your pickler is from some external user, you lay yourself bare for RCE. 
 
@@ -65,24 +65,19 @@ _(Some parts omitted)_
 ```py
 import pickle
 import os
-from flask import Flask
-from flask import request, redirect, url_for
+from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
-
-
 
 app = Flask(__name__)
 UPLOAD_FOLDER = '/directory/to/webserver'
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-temp = ""
-
 @app.route('/', methods=['GET', 'POST'])
 def notes_post():
     if request.method == 'GET':
         return '''
-        <!doctype html>
+        <!doctype HTML>
         <title>Upload new File</title>
         <h1>Upload new File</h1>
         <form method=post enctype=multipart/form-data>
@@ -97,10 +92,6 @@ def notes_post():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        os.listdir(UPLOAD_FOLDER)
-        print("?")
-        
-
         return "thaaanks!"
 
 ...
@@ -109,16 +100,14 @@ def notes_post():
 def note():
     my_data = pickle.load(filename, "rb")
 
-    return "this is a note :)"
+    return "your file was succesfully deserialized~"
 ```
 
-I made this toy application to explain this process. The expected application flow is that our program is going to take a file defined by the user and store it in the webserver. For ease of use and convenience, the application "assumes" that the files provided by the user are able to be unpickled. You can request for an object back, and when you do so, it gets de-serialized. 
+I made this toy application to explain this process. The expected application flow is that our program is going to take a file defined by the user and store it in the webserver. For ease of use and convenience, the application _assumes_ that the files provided by the user are able to be deserialized. You can request for an object back, and when you do so, it gets deserialized. 
 
 {{< image src="/images/InsecureDeserializationIntro_fileUpload.png" alt="secret" position="center" style="border-radius: 8px;" >}}
 
-So, the expected input is any sort of valid object file provided by the user. When requested for the file, it will get deserialized.
-
-So what happens when we provide it a file generated from this script?
+So, the expected input is any sort of user-provided file. What happens when we provide it a file generated from this script?
 
 ```py
 class Hello(object):
@@ -156,7 +145,7 @@ Let's say that there's a file called `secret.txt` in the directory of the applic
 this is a secret~
 ```
 
-When we submit the generated file from this script (`secret.p`) and request for it, we can see in our webhook that the contents of `secret.txt` have succesfully been sent to us in the body of a POST request: 
+When we submit the generated file from this script (`secret.p`) and request for it, we can see in our webhook that the contents of `secret.txt` have succesfully been outpuuted to us in the body of a POST request: 
 
 {{< image src="/images/InsecureDeserializationIntro_secret.png" alt="secret" position="center" style="border-radius: 8px;" >}}
 
