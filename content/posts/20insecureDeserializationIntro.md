@@ -30,7 +30,7 @@ The serialization process is a key component to ensure that all the parts of a s
 
 ### Backup Directives
 
-When serializing objects, one thing to note is that some properties or connections will not completely transfer over during the process. In that case, there should be some sort of backup plan or emergency what-to-do in those situations. This blueprint will vary from language to language, but often you'll see it as some directive that tells the deserializer what to do when it encounters a foreign property. As an example, Python's pickle module uses a magic function called `__reduce__()` to stipulate what should be done in case not everything was perfectly translated from their bytestream form. 
+When serializing objects, one thing to note is that some properties or connections will not completely transfer over during the process. In that case, there should be some sort of backup plan or emergency what-to-do in those situations. This blueprint will vary from language to language, but often you'll see it as some directive that tells the deserializer what to do when it encounters a foreign property. As an example, Python's [pickle](https://docs.python.org/3/library/pickle.html) module - the native serializaing library in Python - uses a magic function called `__reduce__()` to stipulate what should be done in case not everything was perfectly translated from their bytestream form. 
 
 `__reduce__()` in particular tells the pickle module how to handle things directly within the definition of the class. Specifying this interface will allow us to manually reconstruct potentially complicated properties, such as database connections or open file handles. Of course, there exist unintended ways of using the ``__reduce__()`` directive. 
 
@@ -40,7 +40,7 @@ Serialization is not inherently bad, and it is a very important tool in many inf
 
 Refer back to Python's pickle module once more. It uses the `__reduce__()` directive for edge cases where properties are not properly reconstructed from their stream form. However, if the input that you're giving your pickler is from some external user, you lay yourself bare for RCE. 
 
-`__reduce__()` can be used to stipulate potentially dangerous commands, such as opening a reverse shell to a server you control. This is,  unfortunately, necessary functionality for the pickle module to have in order to operate smoothly. Consider the following example:
+`__reduce__()` can be used to stipulate potentially dangerous commands, such as opening a reverse shell to a server you control. This is, unfortunately, necessary functionality for the pickle module to have in order to operate smoothly. Consider the following example:
 
 ```py
 import pickle
@@ -164,7 +164,7 @@ The possibilities are endless. Of course, this is just a toy application I'm run
 
 So what's the takeaway here? If you can help it, never deserialize user-provided input. Of course, there do exist situations where you absolutely cannot avoid it, and I would recommend properly sanitized input or some signature that can act as a canary should anything in the user input change. 
 
-Insecure deserialization is a pretty dangerous vulnerability, and also a pretty easy one to exploit if you know where to look for it. As mentioned earlier, it's seeing prolific exposure in the CTF world, and justifiably so - there are many real world vulnerabilities today that are based on serialization functionality but don't have the security to match up for it. If you're using serialziaition libraries or modules, make sure to be careful! 
+Insecure deserialization is a pretty dangerous vulnerability, and also a pretty easy one to exploit if you know where to look for it. As mentioned earlier, it's seeing prolific exposure in the CTF world, and justifiably so - there are many [real world vulnerabilities](https://www.linkedin.com/pulse/equifax-data-breach-apache-struts-vulnerability-kenneth-g-/) today that are based on serialization functionality but don't have the security to match up for it. If you're using serialziaition libraries or modules, make sure to be careful! 
 
 ## Vie
 
