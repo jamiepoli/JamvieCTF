@@ -6,11 +6,30 @@
     <description>Recent content in web on Jam // Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate>
+    <lastBuildDate>Tue, 22 Dec 2020 14:38:40 -0700</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/web/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Insecure Deserialization: Introduction</title>
+      <link>https://jamvie.net/posts/2020/12/insecure-deserialization-introduction/</link>
+      <pubDate>Tue, 22 Dec 2020 14:38:40 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/12/insecure-deserialization-introduction/</guid>
+      <description>Insecure deserialization is a prolific vulnerability that provides a pretty straightforward gateway into unintended RCE - if you&amp;rsquo;re not careful. As of late, I&amp;rsquo;ve seen more and more CTFs employ this bug, and more real-word bug bounties deal with this kind of exploit. I figure I could provide a quick introduction into them, and hopefully ensure a few people secure their applications from this.
+Context What Even is Serialization? My CPSC210 class I learned the fundamentals of object-oriented programming and the concept of complex abstractions above simple data structures: From simple arrays to instances of objects or classes, with fields and properties holding specific type values.</description>
+    </item>
+    
+    <item>
+      <title>DragonCTF 2020: Harmony Chat</title>
+      <link>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</link>
+      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</guid>
+      <description>A writeup for the first web problem, &amp;ldquo;Harmony Chat&amp;rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
+TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit  Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
+    </item>
     
     <item>
       <title>Hack.lu 2020: Confessions</title>
@@ -64,6 +83,71 @@ The source code is available for us in this challenge as well. The main file, se
       <description>Part 2 of my writeup series for RedPwnCTF 2020!
 Let&amp;rsquo;s Begin! Tux-Fanpage  points: 464  Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
 const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request  if(!</description>
+    </item>
+    
+    <item>
+      <title>RedPwnCTF 2020</title>
+      <link>https://jamvie.net/posts/2020/06/redpwnctf-2020/</link>
+      <pubDate>Thu, 25 Jun 2020 16:26:44 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020/</guid>
+      <description>RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
+Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty.</description>
+    </item>
+    
+    <item>
+      <title>CSAW 2019: Unagi</title>
+      <link>https://jamvie.net/posts/2020/05/csaw-2019-unagi/</link>
+      <pubDate>Thu, 21 May 2020 01:22:16 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/05/csaw-2019-unagi/</guid>
+      <description>Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
+This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks.</description>
+    </item>
+    
+    <item>
+      <title>DE1ctf 2020: Hard_Pentest_1 and Animal Crossing</title>
+      <link>https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/</link>
+      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/</guid>
+      <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Plaidctf 2020: Contrived Web Problem</title>
+      <link>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</link>
+      <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</guid>
+      <description>&lt;p&gt;This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&amp;rsquo;m glad they did!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Commonly Used Software</title>
+      <link>https://jamvie.net/posts/2020/04/commonly-used-software/</link>
+      <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/04/commonly-used-software/</guid>
+      <description>&lt;p&gt;I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CONfidence 2020: CatWeb</title>
+      <link>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</link>
+      <pubDate>Thu, 23 Apr 2020 00:46:19 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</guid>
+      <description>&lt;p&gt;I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UTctf 2020: Epic Admin Pwn</title>
+      <link>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</link>
+      <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</guid>
+      <description>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</description>
     </item>
     
   </channel>
