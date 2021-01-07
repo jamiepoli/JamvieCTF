@@ -3,7 +3,9 @@ title : "UTctf 2020: Epic Admin Pwn"
 date : 2020-04-22T00:46:19-06:00
 draft : false
 author : "JamVie"
-tags : ["writeups", "web", "sqli"]
+tags : ["web", "sqli"]
+categories:
+  - writeups
 images: ["images/UTCTFscreenshot2.png"]
 ---
 

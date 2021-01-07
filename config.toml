@@ -7,8 +7,8 @@ PygmentsCodeFences = true
 PygmentsStyle = "monokai"
 
 paginate  = 10
-rssLimit  = 5  # Maximum number of items in the RSS feed.
-copyright = "CC Attribution-NonCommercial 4.0 International License" # This message is only used by the RSS template.
+rssLimit  = 0  # Maximum number of items in the RSS feed.
+#copyright = "CC Attribution-NonCommercial 4.0 International License" # This message is only used by the RSS template.
 
 googleAnalytics = "UA-176711986-1"
 
@@ -118,4 +118,4 @@ disableHugoGeneratorInject = false
   [[menu.main]]
     identifier = "categories"
     name       = "Categories"
-    url        = "tags/"
+    url        = "categories/"

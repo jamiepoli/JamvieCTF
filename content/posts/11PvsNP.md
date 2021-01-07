@@ -4,6 +4,8 @@ date: 2020-07-14T00:22:00-06:00
 draft: false
 comments: false
 tags: ["crypto", "algorithms", "misc"]
+categories:
+  - miscellaneous
 images: ["images/algorithms.png"]
 cover: "images/algorithms.png"
 ---

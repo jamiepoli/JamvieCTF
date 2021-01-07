@@ -5,9 +5,11 @@ draft: false
 comments: false
 images:
 tags:
-    - writeups
     - web
     - xss
+
+categories:
+  - writeups
 ---
 
 This is the first challenge I worked on. I will soon upload a post on the second one. I completed this challenge with the help of my team mentor!

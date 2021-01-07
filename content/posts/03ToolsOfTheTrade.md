@@ -6,6 +6,8 @@ date: 2020-04-26T01:30:30-06:00
 draft: false
 cover: "img/Hackerman.jpg"
 tags: ["misc", "web"]
+categories:
+  - miscellaneous
 images: ["img/Hackerman.jpg"]
 ---
 

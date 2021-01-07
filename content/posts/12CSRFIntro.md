@@ -5,6 +5,8 @@ draft: false
 comments: false
 tags: ["CSRF", "web", "instructional"]
 images:
+categories:
+  - instructional
 ---
 
 Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they're the reason you shouldn't click suspicious links, even if the URL sort of sounds legitimate. 

@@ -3,7 +3,9 @@ title: "2020 HackASat Quals"
 date: 2020-06-03T21:47:00-06:00
 draft: false
 comments: false
-tags: ["math", "writeups", "astrodynamics"]
+tags: ["math", "astrodynamics"]
+categories:
+  - writeups
 images: ["images/GoogleEarthPic.png"]
 ---
 

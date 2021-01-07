@@ -8,6 +8,9 @@ tags:
   - SSRF
   - FTP
   - insecure-deserialization
+  - web
+
+categories:
   - writeups
 ---
 

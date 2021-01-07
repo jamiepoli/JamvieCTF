@@ -4,7 +4,9 @@ date: 2020-08-09T18:48:52-06:00
 draft: false
 comments: false
 images: ["images/ghidrabullseye.png"]
-tags: ["pwn", "writeups"]
+tags: ["pwn"]
+categories:
+  - writeups
 ---
 
 It's clear to see from the content of my blog that my expertise lies in web-based exploits. 

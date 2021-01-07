@@ -9,6 +9,9 @@ tags:
     - xss
     - web
     - object-poisoning
+
+categories:
+  - miscellaneous
 ---
 
 The 2nd challenge I worked on, titled "All the little things". Frustratingly, I didn't solve this challenge. I was about **85%** of the way there! 

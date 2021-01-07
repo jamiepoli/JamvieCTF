@@ -5,7 +5,10 @@ draft: false
 comments: false
 tags: 
 - misc
+categories:
+  - miscellaneous
 images:
+
 ---
 
 A reflection on VolgaCTF Finals, which I participated in with my team. We were the only North American team participating in the event, and for a good portion of the CTF, we held 1st place! Unfortunately, that didn't last for the end of the competition. 
