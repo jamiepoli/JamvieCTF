@@ -165,6 +165,22 @@ if (!doNotTrack) {
             <h1 class="post-title">
                 <a href="https://jamvie.net/posts/2020/12/insecure-deserialization-introduction/">Insecure Deserialization: Introduction</a>
             </h1>
+                <hr />
+                <aside id="toc">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#context">Context</a>
+      <ul>
+        <li><a href="#what-even-is-serialization">What Even is Serialization?</a></li>
+        <li><a href="#backup-directives">Backup Directives</a></li>
+      </ul>
+    </li>
+    <li><a href="#insecure-deserialization">Insecure Deserialization</a></li>
+  </ul>
+</nav>
+                </aside>
+                <hr />
 
             
 
@@ -288,7 +304,7 @@ pickle<span style="color:#f92672">.</span>dump(EvilExample, open(<span style="co
 <p>The possibilities are endless. Of course, this is just a toy application I&rsquo;m running locally to showcase this, but regardless the dangers are still plain to see. RCE is remarkably easy to achieve and scarily straightforward to do if your deserializer is not properly secured. In fact, that&rsquo;s part of the exploit used in hacking <a href="https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/">DragonCTF&rsquo;s Harmony Chat</a>, although their serializer was a Javascript variant, not a Python one.</p>
 <p>So what&rsquo;s the takeaway here? If you can help it, never deserialize user-provided input. Of course, there do exist situations where you absolutely cannot avoid it, and I would recommend properly sanitized input or some signature that can act as a canary should anything in the user input change.</p>
 <p>Insecure deserialization is a pretty dangerous vulnerability, and also a pretty easy one to exploit if you know where to look for it. As mentioned earlier, it&rsquo;s seeing prolific exposure in the CTF world, and justifiably so - there are many <a href="https://www.linkedin.com/pulse/equifax-data-breach-apache-struts-vulnerability-kenneth-g-/">real world vulnerabilities</a> today that are based on serialization functionality but don&rsquo;t have the security to match up for it. If you&rsquo;re using serialization libraries or modules, make sure to be careful!</p>
-<h2 id="vie">Vie</h2>
+<p><strong>Vie</strong></p>
 
             </div>
         </article>

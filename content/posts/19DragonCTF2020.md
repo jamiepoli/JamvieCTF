@@ -12,6 +12,8 @@ tags:
 
 categories:
   - writeups
+
+toc: true
 ---
 
 A writeup for the first web problem, "Harmony Chat", in DragonCTF 2020. A very fun and interesting challenge! 
@@ -175,4 +177,4 @@ Once the FTP server has confirmed that it RETRieved the channel's chatlog and se
 
 {{< image src="/images/harmonyshell.png" alt="research" position="center" style="border-radius: 8px;" >}}
 
-#### Vie
+**Vie**

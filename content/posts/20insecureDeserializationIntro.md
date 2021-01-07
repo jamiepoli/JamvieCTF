@@ -3,6 +3,7 @@ title: "Insecure Deserialization: Introduction"
 date: 2020-12-22T14:38:40-07:00
 draft: false
 comments: false
+toc: true
 images: ["/images/InsecureDeserializationIntro.jpg"]
 tags:
   - insecure-deserialization
@@ -158,5 +159,5 @@ So what's the takeaway here? If you can help it, never deserialize user-provided
 
 Insecure deserialization is a pretty dangerous vulnerability, and also a pretty easy one to exploit if you know where to look for it. As mentioned earlier, it's seeing prolific exposure in the CTF world, and justifiably so - there are many [real world vulnerabilities](https://www.linkedin.com/pulse/equifax-data-breach-apache-struts-vulnerability-kenneth-g-/) today that are based on serialization functionality but don't have the security to match up for it. If you're using serialization libraries or modules, make sure to be careful! 
 
-## Vie
+**Vie**
 

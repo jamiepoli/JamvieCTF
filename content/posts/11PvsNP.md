@@ -8,6 +8,7 @@ categories:
   - miscellaneous
 images: ["images/algorithms.png"]
 cover: "images/algorithms.png"
+toc: true
 ---
 
 *Comic from [XKCD](https://xkcd.com/1667/).*
