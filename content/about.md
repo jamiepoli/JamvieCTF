@@ -8,4 +8,4 @@
 
 Interactive home icon made on Canva. 
 
-Website theme by [Djordje Atlialp](https://github.com/rhazdon.)
+Website theme by [Djordje Atlialp](https://github.com/rhazdon)
