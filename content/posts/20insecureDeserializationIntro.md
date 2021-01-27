@@ -2,15 +2,13 @@
 title: "Insecure Deserialization: Introduction"
 date: 2020-12-22T14:38:40-07:00
 draft: false
-comments: false
 toc: true
+categories:
+  - instructional
 images: ["/images/InsecureDeserializationIntro.jpg"]
 tags:
   - insecure-deserialization
   - web
-
-categories:
-  - instructional
 ---
 
 Insecure deserialization is a prolific vulnerability that provides a pretty straightforward gateway into unintended RCE - if you're not careful. As of late, I've seen more and more CTFs employ this bug, and more real-word bug bounties deal with this kind of exploit. I figure I could provide a quick introduction into them, and hopefully ensure a few people secure their applications from this. 
