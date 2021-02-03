@@ -1,67 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>writeups on Jam // Vie</title>
+    <title>writeups on Jam ⇆ Vie</title>
     <link>https://jamvie.net/tags/writeups/</link>
-    <description>Recent content in writeups on Jam // Vie</description>
+    <description>Recent content in writeups on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 22 Nov 2020 14:33:48 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 31 Jan 2021 23:05:20 -0700</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/writeups/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>DragonCTF 2020: Harmony Chat</title>
-      <link>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</link>
-      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
+      <title>justCTF[*] 2020 - A Collection of Web Problems</title>
+      <link>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</link>
+      <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
       
-      <guid>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</guid>
-      <description>A writeup for the first web problem, &amp;ldquo;Harmony Chat&amp;rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
-TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit  Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
-    </item>
-    
-    <item>
-      <title>Hack.lu 2020: Confessions</title>
-      <link>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</link>
-      <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</guid>
-      <description>This is a writeup for &amp;ldquo;Confessions&amp;rdquo;, the first web challenge I solved. I was luckily able to finish this challenge in a couple hours, so I could focus my attention to the other super interesting web problems. Confessions was a nice dive into some simple GraphQL manipulation and baby crypto.
-Let&amp;rsquo;s Begin! The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it.</description>
-    </item>
-    
-    <item>
-      <title>GoogleCTF 2020: Pasteurize</title>
-      <link>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</link>
-      <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</guid>
-      <description>This is the first challenge I worked on. I will soon upload a post on the second one. I completed this challenge with the help of my team mentor!
-Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function. When you make a note, you have an option to share it with a &amp;ldquo;TjMike&amp;rdquo; Entity. Sign of XSS/CSRF attacks?
- My input, &amp;ldquo;uwu&amp;rdquo;, is shoved into a javascript string variable called &amp;lsquo;note&amp;rsquo;.</description>
-    </item>
-    
-    <item>
-      <title>HacktivityCon CTF: Bullseye</title>
-      <link>https://jamvie.net/posts/2020/08/hacktivitycon-ctf-bullseye/</link>
-      <pubDate>Sun, 09 Aug 2020 18:48:52 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/08/hacktivitycon-ctf-bullseye/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s clear to see from the content of my blog that my expertise lies in web-based exploits.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>RedPwnCTF 2020, Part 3</title>
-      <link>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</link>
-      <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</guid>
-      <description>Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &amp;ldquo;Viper&amp;rdquo;.
-Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
-When we create our viper, its name is its viperId, which is a UUID.
-The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create.</description>
+      <guid>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</guid>
+      <description>This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by justCatTheFish. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.
+Forgotten Name I found this on a total fluke. I wasn&amp;rsquo;t paying attention to the challenge much but the description was compelling:
+I&amp;rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&amp;rsquo;s network, and so instead thought about the nature of their subdomains.</description>
     </item>
     
   </channel>

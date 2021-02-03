@@ -1,5 +1,5 @@
 baseURL = "https://jamvie.net"
-title   = "Jam // Vie"
+title   = "Jam ⇆ Vie"
 languageCode = "en-us"
 theme = "hello-friend-ng"
 
@@ -44,7 +44,7 @@ disableHugoGeneratorInject = false
 [taxonomies]
   tag      = "tags"
   category = "categories"
-  series   = "series"
+  #series   = "series"
 
 [params]
   dateform        = "Jan 2, 2006"

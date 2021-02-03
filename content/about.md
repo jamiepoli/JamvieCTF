@@ -1,4 +1,4 @@
-## Hello!
+## ▶ Hello!
 
 I'm Vie, real name Jam, and I'm a computer science/mathematics student from the University of British Columbia. I'm also a mentor/executive member of the UBC CTF team, [Maple Bacon](https://ubcctf.github.io/), where I help with managerial duties and provide educational resources to those new to the CTF scene - particularly in web application and network security. 
 
@@ -6,14 +6,14 @@ Some of my other interests include, but are not limited to: statistics, art hist
 
 I have a desire to understand what mystery obscures us from, and a hope to use my skills to create an accessible space for others to learn and understand the beautiful complexities of the world around us, and to keep us safe in a growing digitally-omnipresent era. 
 
-## Skillset
+## ▶ Skillset
 
 As mentioned previously, I excel in web application and network security exploits - most of my writeups and blog posts are about this topic. Nonetheless, in the world of security I consider myself a learning student in cryptography and reverse engineering, skills I hope to develop in the future. 
 
 From a technical perspective, my skillset is varied and encompasses several topics - from linear programming to algorithm analysis. With an eye for detail, I excel at improving program architecture, with a thorough knowledge on how to implement unique security solutions given my ethical hacking background. I like to see the beauty in math, and I can bring to the table techniques and tools forged through my mathematics courses to optimize the efficiency of any codebase or project I'm placed on.
 
 
-## FAQ
+## ▶ FAQ
 
 #### How did you start getting into CTFs?
 
@@ -31,7 +31,7 @@ Check out [Maple Bacon's site](https://ubcctf.github.io/) for more information o
 
 I misspelled my name once and it stuck. :P
 
-## Acknowledgements
+## ▶ Acknowledgements
 
 Interactive home icon made on Canva. 
 

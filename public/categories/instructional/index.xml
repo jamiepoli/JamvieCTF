@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>instructional on Jam // Vie</title>
+    <title>instructional on Jam ⇆ Vie</title>
     <link>https://jamvie.net/categories/instructional/</link>
-    <description>Recent content in instructional on Jam // Vie</description>
+    <description>Recent content in instructional on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Dec 2020 14:38:40 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 26 Jan 2021 12:04:52 -0700</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/categories/instructional/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Common Web Exploits: A Guide for Recon</title>
+      <link>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</link>
+      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</guid>
+      <description>This is mainly used as a helpful recon guide to determine what vulnerabilities are available to you as an ethical hacker or CTFer. I&amp;rsquo;ve spent quite a bit of time researching these vulnerabilities and spotting their telltale signs, and I hope to share them here. These are common or more unique vulnerabilities that I have seen, executed, and researched while doing CTFs.
+Disclaimer: This article is not exhaustive, and is not intended to replace any research you would perform on your own.</description>
+    </item>
     
     <item>
       <title>Insecure Deserialization: Introduction</title>

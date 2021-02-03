@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>writeups on Jam // Vie</title>
+    <title>writeups on Jam ⇆ Vie</title>
     <link>https://jamvie.net/categories/writeups/</link>
-    <description>Recent content in writeups on Jam // Vie</description>
+    <description>Recent content in writeups on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Nov 2020 14:33:48 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 31 Jan 2021 23:05:20 -0700</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/categories/writeups/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>justCTF[*] 2020 - A Collection of Web Problems</title>
+      <link>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</link>
+      <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</guid>
+      <description>This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by justCatTheFish. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.
+Forgotten Name I found this on a total fluke. I wasn&amp;rsquo;t paying attention to the challenge much but the description was compelling:
+I&amp;rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&amp;rsquo;s network, and so instead thought about the nature of their subdomains.</description>
+    </item>
     
     <item>
       <title>DragonCTF 2020: Harmony Chat</title>

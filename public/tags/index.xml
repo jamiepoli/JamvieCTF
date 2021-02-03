@@ -1,31 +1,112 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Jam // Vie</title>
+    <title>Tags on Jam ⇆ Vie</title>
     <link>https://jamvie.net/tags/</link>
-    <description>Recent content in Tags on Jam // Vie</description>
+    <description>Recent content in Tags on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Dec 2020 14:38:40 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 31 Jan 2021 23:05:20 -0700</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>web</title>
+      <link>https://jamvie.net/tags/web/</link>
+      <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeups</title>
+      <link>https://jamvie.net/tags/writeups/</link>
+      <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/writeups/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xss</title>
+      <link>https://jamvie.net/tags/xss/</link>
+      <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/xss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CSRF</title>
+      <link>https://jamvie.net/tags/csrf/</link>
+      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/csrf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>directory-traversal</title>
+      <link>https://jamvie.net/tags/directory-traversal/</link>
+      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/directory-traversal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>insecure-deserialization</title>
       <link>https://jamvie.net/tags/insecure-deserialization/</link>
-      <pubDate>Tue, 22 Dec 2020 14:38:40 -0700</pubDate>
+      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/insecure-deserialization/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>web</title>
-      <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Tue, 22 Dec 2020 14:38:40 -0700</pubDate>
+      <title>instructional</title>
+      <link>https://jamvie.net/tags/instructional/</link>
+      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
       
-      <guid>https://jamvie.net/tags/web/</guid>
+      <guid>https://jamvie.net/tags/instructional/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>misc</title>
+      <link>https://jamvie.net/tags/misc/</link>
+      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/misc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqli</title>
+      <link>https://jamvie.net/tags/sqli/</link>
+      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/sqli/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSRF</title>
+      <link>https://jamvie.net/tags/ssrf/</link>
+      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/ssrf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xxe</title>
+      <link>https://jamvie.net/tags/xxe/</link>
+      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/xxe/</guid>
       <description></description>
     </item>
     
@@ -35,15 +116,6 @@
       <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/ftp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SSRF</title>
-      <link>https://jamvie.net/tags/ssrf/</link>
-      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/ssrf/</guid>
       <description></description>
     </item>
     
@@ -84,47 +156,11 @@
     </item>
     
     <item>
-      <title>misc</title>
-      <link>https://jamvie.net/tags/misc/</link>
-      <pubDate>Sat, 19 Sep 2020 20:57:15 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/misc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>xss</title>
-      <link>https://jamvie.net/tags/xss/</link>
-      <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/xss/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>pwn</title>
       <link>https://jamvie.net/tags/pwn/</link>
       <pubDate>Sun, 09 Aug 2020 18:48:52 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/pwn/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSRF</title>
-      <link>https://jamvie.net/tags/csrf/</link>
-      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/csrf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>instructional</title>
-      <link>https://jamvie.net/tags/instructional/</link>
-      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/instructional/</guid>
       <description></description>
     </item>
     
@@ -147,29 +183,11 @@
     </item>
     
     <item>
-      <title>directory-traversal</title>
-      <link>https://jamvie.net/tags/directory-traversal/</link>
-      <pubDate>Sun, 28 Jun 2020 21:19:19 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/directory-traversal/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>IDOR</title>
       <link>https://jamvie.net/tags/idor/</link>
       <pubDate>Sun, 28 Jun 2020 21:19:19 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/idor/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sqli</title>
-      <link>https://jamvie.net/tags/sqli/</link>
-      <pubDate>Thu, 25 Jun 2020 16:26:44 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/sqli/</guid>
       <description></description>
     </item>
     
@@ -188,15 +206,6 @@
       <pubDate>Wed, 03 Jun 2020 21:47:00 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/math/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>xxe</title>
-      <link>https://jamvie.net/tags/xxe/</link>
-      <pubDate>Thu, 21 May 2020 01:22:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/xxe/</guid>
       <description></description>
     </item>
     

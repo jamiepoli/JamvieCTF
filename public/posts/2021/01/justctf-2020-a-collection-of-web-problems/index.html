@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by justCatTheFish. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.
+Forgotten Name I found this on a total fluke. I wasn&amp;rsquo;t paying attention to the challenge much but the description was compelling:
+I&amp;rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&amp;rsquo;s network, and so instead thought about the nature of their subdomains." />
+<meta name="keywords" content=", web, writeups, xss" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/" />
+
+
+    <title>
+        
+            justCTF[*] 2020 - A Collection of Web Problems :: Jam ⇆ Vie 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#0c0c0d">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0c0c0d">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="justCTF[*] 2020 - A Collection of Web Problems">
+<meta itemprop="description" content="This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by justCatTheFish. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.
+Forgotten Name I found this on a total fluke. I wasn&rsquo;t paying attention to the challenge much but the description was compelling:
+I&rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&rsquo;s network, and so instead thought about the nature of their subdomains.">
+<meta itemprop="datePublished" content="2021-01-31T23:05:20-07:00" />
+<meta itemprop="dateModified" content="2021-01-31T23:05:20-07:00" />
+<meta itemprop="wordCount" content="1329">
+<meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
+
+
+
+<meta itemprop="keywords" content="web,writeups,xss," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/JAMIE.png"/>
+
+<meta name="twitter:title" content="justCTF[*] 2020 - A Collection of Web Problems"/>
+<meta name="twitter:description" content="This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by justCatTheFish. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.
+Forgotten Name I found this on a total fluke. I wasn&rsquo;t paying attention to the challenge much but the description was compelling:
+I&rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&rsquo;s network, and so instead thought about the nature of their subdomains."/>
+
+
+
+
+
+    <meta property="article:section" content="writeups" />
+
+
+
+    <meta property="article:published_time" content="2021-01-31 23:05:20 -0700 MST" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#487860;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>7 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/">justCTF[*] 2020 - A Collection of Web Problems</a>
+            </h1>
+                <hr />
+                <aside id="toc">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#forgotten-name">Forgotten Name</a></li>
+    <li><a href="#computeration">Computeration</a></li>
+    <li><a href="#baby-csp">Baby-CSP</a>
+      <ul>
+        <li><a href="#the-nonce-value-and-php-response-buffers">The nonce value and PHP response buffers</a></li>
+        <li><a href="#xss-payload--23">XSS payload &lt;= 23</a></li>
+        <li><a href="#putting-it-all-together">Putting it all together</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </aside>
+                <hr />
+
+            
+
+            <div class="post-content">
+                <p>This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by <a href="https://github.com/justcatthefish">justCatTheFish</a>. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.</p>
+<h2 id="forgotten-name">Forgotten Name</h2>
+<p>I found this on a total fluke. I wasn&rsquo;t paying attention to the challenge much but the description was compelling:</p>
+
+    <img src="https://jamvie.net/images/justCTF2020_forgottennamedesc.png"  alt="description"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I&rsquo;m hesitant to attempt to <code>nmap</code> all known domains of justCatTheFish&rsquo;s network, and so instead thought about the nature of their subdomains. Every other challenge that required accessing a server was suffixed with the subdomain <code>*.jctf.pro</code>. I decided to search through certificate transparency logs with that subdomain to see what would come up, and a certain URL caught my eye: <code>6a7573744354467b633372545f6c34616b735f6f3070737d.web.jctf.pro/</code>. It had the correct beginning characters and it ended in <code>jctf.pro</code>, and visiting it we see a small message: &ldquo;OH! You found it! Thank you &lt;3&rdquo;.</p>
+<p>So, the secret domain has been found. Hex decoding the mash of numbers in the URL gave the flag: <code>justCTF{c3rT_l4aks_o0ps}</code>.</p>
+<h2 id="computeration">Computeration</h2>
+<p>This challenge was labelled as hard but it had an unintended solution. The challenge featured a note repository and the ability to report URLs to admins - basic XSS stuff. However, the notes were stored in our browser&rsquo;s localStorage, which is unique per domain and session, and likely doesn&rsquo;t involve cookies due to this. Looking at this, my first thought came to XS-leaks (a web vulnerability I&rsquo;m currently studying and researching), which would essentially side-channel attack a user in their browser to leak information based on functionality and logic of the program.</p>
+<p>During recon, I spun up a quick server and gave the URL to the bot to check out. When they made the request, I inspected the headers:</p>
+
+    <img src="https://jamvie.net/images/justCTF2020_referer.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I don&rsquo;t typically see the <code>referer</code> header in many requests, because there are <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns">inherent security concerns</a> with using it. Out of curiosity I tried to access the referer site myself, and unintentionally got the flag that way.</p>
+
+    <img src="https://jamvie.net/images/justCTF2020_computerationflag.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The key is in the response headers I recieved after visiting the domain. Their <code>referrer-policy</code> header was set to <code>no-referer</code>, which is a mispelling of <code>no-referrer</code>. Confusingly, the <code>referer</code> request header is misspelled - which is a different story. When the admin bot begins to fire a request to a URL we specify, its domain&rsquo;s <code>referrer-policy</code> will be set to <code>unsafe-url</code> since <code>no-referer</code> technically doesn&rsquo;t match any of its options. Therefore, the <code>referer</code> request header is added to the bot&rsquo;s GET request to our URL.</p>
+<p>Although unintended, still a good discussion on the security of referrer headers. Looking at the flag also validated my suspicions of this challenge&rsquo;s intended solution requiring XS-leaks.</p>
+<h2 id="baby-csp">Baby-CSP</h2>
+<p>I was primarily focused on this challenge. We see some interesting PHP code right away upon visiting it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">require_once</span>(<span style="color:#e6db74">&#34;secrets.php&#34;</span>);
+$nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_bytes</span>(<span style="color:#ae81ff">8</span>);
+
+<span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;flag&#39;</span>])){
+ <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isAdmin</span>()){
+    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;X-Content-Type-Options: nosniff&#39;</span>);
+    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;X-Frame-Options: DENY&#39;</span>);
+    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Content-type: text/html; charset=UTF-8&#39;</span>);
+    <span style="color:#66d9ef">echo</span> $flag;
+    <span style="color:#66d9ef">die</span>();
+ }
+ <span style="color:#66d9ef">else</span>{
+     <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;You are not an admin!&#34;</span>;
+     <span style="color:#66d9ef">die</span>();
+ }
+}
+
+<span style="color:#66d9ef">for</span>($i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; $i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; $i<span style="color:#f92672">++</span>){
+    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;alg&#39;</span>])){
+        $_nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">hash</span>($_GET[<span style="color:#e6db74">&#39;alg&#39;</span>], $nonce);
+        <span style="color:#66d9ef">if</span>($_nonce){
+            $nonce <span style="color:#f92672">=</span> $_nonce;
+            <span style="color:#66d9ef">continue</span>;
+        }
+    }
+    $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">md5</span>($nonce);
+}
+
+<span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;user&#39;</span>]) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">strlen</span>($_GET[<span style="color:#e6db74">&#39;user&#39;</span>]) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">23</span>) {
+    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;; script-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;&#34;</span>);
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&lt;&lt;&lt;</span><span style="color:#e6db74">EOT</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        &lt;script nonce=&#39;$nonce&#39;&gt;
+</span><span style="color:#e6db74">            setInterval(
+</span><span style="color:#e6db74">                ()=&gt;user.style.color=Math.random()&lt;0.3?&#39;red&#39;:&#39;black&#39;
+</span><span style="color:#e6db74">            ,100);
+</span><span style="color:#e6db74">        &lt;/script&gt;
+</span><span style="color:#e6db74">        &lt;center&gt;&lt;h1&gt; Hello &lt;span id=&#39;user&#39;&gt;{$_GET[&#39;user&#39;]}&lt;/span&gt;!!&lt;/h1&gt;
+</span><span style="color:#e6db74">        &lt;p&gt;Click &lt;a href=&#34;?flag&#34;&gt;here&lt;/a&gt; to get a flag!&lt;/p&gt;
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">EOT</span>;
+}<span style="color:#66d9ef">else</span>{
+    <span style="color:#a6e22e">show_source</span>(<span style="color:#66d9ef">__FILE__</span>);
+}
+
+<span style="color:#75715e">// Found a bug? We want to hear from you! /bugbounty.php
+</span><span style="color:#75715e">// Check /Dockerfile
+</span></code></pre></div><p>There&rsquo;s a reflected-XSS attack which can be done through the <code>user</code> query parameter. However, the Content-Security-Policy is pretty strict and my XSS payload has to be less than <em>23 chars</em>. The CSP uses a nonce value (randomized 8 bytes), which we can see in the for loop above, is hashed 10 times. There&rsquo;s no feasible way to reverse a hash 10 times. So, there are 2 obstacles to overcome: how to create an XSS payload that&rsquo;s at most 23 characters long, and also how to bypass the hashing of this nonce value.</p>
+<h3 id="the-nonce-value-and-php-response-buffers">The nonce value and PHP response buffers</h3>
+<p>The nonce value is hashed 10 times with a hashing algorithm of our choosing (md5 if we don&rsquo;t choose), using the <code>alg</code> query parameter. However, something interesting that teammate Filip pointed out while I was working on this challenge was the fact that this server was being run on a development config, which you can find out by checking the <code>/Dockerfile</code> endpoint. This fact became relevant to me when, in doing recon for the challenge, I tried to make a GET request with the <code>alg</code> query parameter and accidentally misspelled <code>sha256</code> (it was 3am). What happened was this:</p>
+
+    <img src="https://jamvie.net/images/justCTF2020_babycsphash.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>We get 10 warnings (A warning per iteration in the for loop) that fill the webpage, complaining about our mistake. The reason why we see these is because the PHP server is in a development environment - so the warnings are given to us in the responses.</p>
+<p>PHP was initially developed as a procedural language. The script provided to us is executed in order - it first does actions according to the presence of a <code>flag</code> in a recieved request, then it iterates through the for loop, hashing the <code>nonce</code> value accordingly. Then, it performs actions based on the presence of the <code>user</code> parameter. It is here in the if statement for the <code>user</code> query where the Content-Security-Policy is set:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">header(&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-$nonce&#39;; script-src &#39;nonce-$nonce&#39;&#34;);
+</code></pre></div><p>So headers are being modified when the <code>user</code> query is specified, but if you also specify an <code>alg</code> query and give it an invalid value, the server&rsquo;s response will first have 10 warnings before the headers of that response are ready.</p>
+<p>These warnings also reflect our input back to us, so we can modify the size of each warning by our <code>alg</code> input. Why is this relevant?</p>
+<p>PHP has a mechanism called output buffering - if you have a script that began outputting data before the headers were set, that data is put into a buffer which will be sent once the entire response is ready. The PHP response buffer is 4096 bytes (4KB), and once it&rsquo;s filled, it&rsquo;s immediately flushed and the data within it is sent over.</p>
+<p>So, if we could specify a value in the <code>alg</code> query that&rsquo;s sufficiently long enough to fill the response buffer, <strong>we will initiate a response sent from the server, regardless of whether or not the headers are ready</strong>. Thus, the CSP <code>header()</code> call will be ignored as a response was already sent. With this, we don&rsquo;t need to worry about whatever the <code>$nonce</code> value is hashed to, cause we can bypass the CSP entirely.</p>
+<h3 id="xss-payload--23">XSS payload &lt;= 23</h3>
+<p>I initially tried to format an xss payload on my own, trying to shorten my URL domain or use different tags, but with some <a href="https://tinyxss.terjanq.me/">googling</a> I found <code>&lt;svg/onload=&gt;</code> to be effective.</p>
+<p>Specifically, the example provided was <code>&lt;svg/onload=eval(name)&gt;</code>, so ideally I could modify the <code>name</code> variable to do what I want. Something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">alert</span>(<span style="color:#ae81ff">1</span>);
+
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">svg</span><span style="color:#f92672">/</span><span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span>eval(<span style="color:#a6e22e">name</span>)<span style="color:#f92672">&gt;</span>
+</code></pre></div><h3 id="putting-it-all-together">Putting it all together</h3>
+<p>We can test out if whether or not overloading the response buffer will bypass the CSP with this query:</p>
+<pre><code class="language-url" data-lang="url">https://baby-csp.web.jctf.pro/?alg=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&amp;user=&lt;svg/onload=alert(1)&gt;
+</code></pre><p>And this will prompt an alert. We can see the HTML of the webpage and find that our <code>&lt;svg&gt;</code> payload is correctly interpreted as such:</p>
+
+    <img src="https://jamvie.net/images/justCTF2020_svg.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>So, all that&rsquo;s left is to craft a working payload. Due to the <code>/bugbounty.php</code> endpoint, we have a way to make the admin visit a URL we specify, so the rest of the problem is correctly formatting our XSS payload. I ended up hosting a page on my server to redirect the bot to the flag endpoint once they visited, and leak the contents of that response to a webhook. Unfortunately, I wasn&rsquo;t able to grab the flag in time before I could submit it - at that point, the CTF had ended :( I suppose next time I&rsquo;ll be more efficient given that I learned alot about PHP.</p>
+<hr>
+<p>And that&rsquo;s a portion of the challenges I took a look at during justCTF. Hopefully next time I can solve challenges more efficiently :P</p>
+<p><strong>Vie</strong></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/xss">xss</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1329 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-01-31 23:05 -0700</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/">
+                                <span class="button__text">Common Web Exploits: A Guide for Recon</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            
+            
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+    </body>
+</html>

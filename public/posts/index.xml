@@ -1,12 +1,161 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on Jam // Vie</title>
+        <title>Posts on Jam ⇆ Vie</title>
         <link>https://jamvie.net/posts/</link>
-        <description>Recent content in Posts on Jam // Vie</description>
+        <description>Recent content in Posts on Jam ⇆ Vie</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Tue, 22 Dec 2020 14:38:40 -0700</lastBuildDate>
+        <lastBuildDate>Sun, 31 Jan 2021 23:05:20 -0700</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>justCTF[*] 2020 - A Collection of Web Problems</title>
+            <link>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</link>
+            <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
+            
+            <guid>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</guid>
+            <description>This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by justCatTheFish. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.
+Forgotten Name I found this on a total fluke. I wasn&amp;rsquo;t paying attention to the challenge much but the description was compelling:
+I&amp;rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&amp;rsquo;s network, and so instead thought about the nature of their subdomains.</description>
+            <content type="html"><![CDATA[<p>This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by <a href="https://github.com/justcatthefish">justCatTheFish</a>. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.</p>
+<h2 id="forgotten-name">Forgotten Name</h2>
+<p>I found this on a total fluke. I wasn&rsquo;t paying attention to the challenge much but the description was compelling:</p>
+
+    <img src="/images/justCTF2020_forgottennamedesc.png"  alt="description"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I&rsquo;m hesitant to attempt to <code>nmap</code> all known domains of justCatTheFish&rsquo;s network, and so instead thought about the nature of their subdomains. Every other challenge that required accessing a server was suffixed with the subdomain <code>*.jctf.pro</code>. I decided to search through certificate transparency logs with that subdomain to see what would come up, and a certain URL caught my eye: <code>6a7573744354467b633372545f6c34616b735f6f3070737d.web.jctf.pro/</code>. It had the correct beginning characters and it ended in <code>jctf.pro</code>, and visiting it we see a small message: &ldquo;OH! You found it! Thank you &lt;3&rdquo;.</p>
+<p>So, the secret domain has been found. Hex decoding the mash of numbers in the URL gave the flag: <code>justCTF{c3rT_l4aks_o0ps}</code>.</p>
+<h2 id="computeration">Computeration</h2>
+<p>This challenge was labelled as hard but it had an unintended solution. The challenge featured a note repository and the ability to report URLs to admins - basic XSS stuff. However, the notes were stored in our browser&rsquo;s localStorage, which is unique per domain and session, and likely doesn&rsquo;t involve cookies due to this. Looking at this, my first thought came to XS-leaks (a web vulnerability I&rsquo;m currently studying and researching), which would essentially side-channel attack a user in their browser to leak information based on functionality and logic of the program.</p>
+<p>During recon, I spun up a quick server and gave the URL to the bot to check out. When they made the request, I inspected the headers:</p>
+
+    <img src="/images/justCTF2020_referer.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I don&rsquo;t typically see the <code>referer</code> header in many requests, because there are <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Referer_header:_privacy_and_security_concerns">inherent security concerns</a> with using it. Out of curiosity I tried to access the referer site myself, and unintentionally got the flag that way.</p>
+
+    <img src="/images/justCTF2020_computerationflag.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The key is in the response headers I recieved after visiting the domain. Their <code>referrer-policy</code> header was set to <code>no-referer</code>, which is a mispelling of <code>no-referrer</code>. Confusingly, the <code>referer</code> request header is misspelled - which is a different story. When the admin bot begins to fire a request to a URL we specify, its domain&rsquo;s <code>referrer-policy</code> will be set to <code>unsafe-url</code> since <code>no-referer</code> technically doesn&rsquo;t match any of its options. Therefore, the <code>referer</code> request header is added to the bot&rsquo;s GET request to our URL.</p>
+<p>Although unintended, still a good discussion on the security of referrer headers. Looking at the flag also validated my suspicions of this challenge&rsquo;s intended solution requiring XS-leaks.</p>
+<h2 id="baby-csp">Baby-CSP</h2>
+<p>I was primarily focused on this challenge. We see some interesting PHP code right away upon visiting it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">require_once</span>(<span style="color:#e6db74">&#34;secrets.php&#34;</span>);
+$nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_bytes</span>(<span style="color:#ae81ff">8</span>);
+
+<span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;flag&#39;</span>])){
+ <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isAdmin</span>()){
+    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;X-Content-Type-Options: nosniff&#39;</span>);
+    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;X-Frame-Options: DENY&#39;</span>);
+    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Content-type: text/html; charset=UTF-8&#39;</span>);
+    <span style="color:#66d9ef">echo</span> $flag;
+    <span style="color:#66d9ef">die</span>();
+ }
+ <span style="color:#66d9ef">else</span>{
+     <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;You are not an admin!&#34;</span>;
+     <span style="color:#66d9ef">die</span>();
+ }
+}
+
+<span style="color:#66d9ef">for</span>($i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; $i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; $i<span style="color:#f92672">++</span>){
+    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;alg&#39;</span>])){
+        $_nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">hash</span>($_GET[<span style="color:#e6db74">&#39;alg&#39;</span>], $nonce);
+        <span style="color:#66d9ef">if</span>($_nonce){
+            $nonce <span style="color:#f92672">=</span> $_nonce;
+            <span style="color:#66d9ef">continue</span>;
+        }
+    }
+    $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">md5</span>($nonce);
+}
+
+<span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;user&#39;</span>]) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">strlen</span>($_GET[<span style="color:#e6db74">&#39;user&#39;</span>]) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">23</span>) {
+    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;; script-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;&#34;</span>);
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&lt;&lt;&lt;</span><span style="color:#e6db74">EOT</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">        &lt;script nonce=&#39;$nonce&#39;&gt;
+</span><span style="color:#e6db74">            setInterval(
+</span><span style="color:#e6db74">                ()=&gt;user.style.color=Math.random()&lt;0.3?&#39;red&#39;:&#39;black&#39;
+</span><span style="color:#e6db74">            ,100);
+</span><span style="color:#e6db74">        &lt;/script&gt;
+</span><span style="color:#e6db74">        &lt;center&gt;&lt;h1&gt; Hello &lt;span id=&#39;user&#39;&gt;{$_GET[&#39;user&#39;]}&lt;/span&gt;!!&lt;/h1&gt;
+</span><span style="color:#e6db74">        &lt;p&gt;Click &lt;a href=&#34;?flag&#34;&gt;here&lt;/a&gt; to get a flag!&lt;/p&gt;
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">EOT</span>;
+}<span style="color:#66d9ef">else</span>{
+    <span style="color:#a6e22e">show_source</span>(<span style="color:#66d9ef">__FILE__</span>);
+}
+
+<span style="color:#75715e">// Found a bug? We want to hear from you! /bugbounty.php
+</span><span style="color:#75715e">// Check /Dockerfile
+</span></code></pre></div><p>There&rsquo;s a reflected-XSS attack which can be done through the <code>user</code> query parameter. However, the Content-Security-Policy is pretty strict and my XSS payload has to be less than <em>23 chars</em>. The CSP uses a nonce value (randomized 8 bytes), which we can see in the for loop above, is hashed 10 times. There&rsquo;s no feasible way to reverse a hash 10 times. So, there are 2 obstacles to overcome: how to create an XSS payload that&rsquo;s at most 23 characters long, and also how to bypass the hashing of this nonce value.</p>
+<h3 id="the-nonce-value-and-php-response-buffers">The nonce value and PHP response buffers</h3>
+<p>The nonce value is hashed 10 times with a hashing algorithm of our choosing (md5 if we don&rsquo;t choose), using the <code>alg</code> query parameter. However, something interesting that teammate Filip pointed out while I was working on this challenge was the fact that this server was being run on a development config, which you can find out by checking the <code>/Dockerfile</code> endpoint. This fact became relevant to me when, in doing recon for the challenge, I tried to make a GET request with the <code>alg</code> query parameter and accidentally misspelled <code>sha256</code> (it was 3am). What happened was this:</p>
+
+    <img src="/images/justCTF2020_babycsphash.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>We get 10 warnings (A warning per iteration in the for loop) that fill the webpage, complaining about our mistake. The reason why we see these is because the PHP server is in a development environment - so the warnings are given to us in the responses.</p>
+<p>PHP was initially developed as a procedural language. The script provided to us is executed in order - it first does actions according to the presence of a <code>flag</code> in a recieved request, then it iterates through the for loop, hashing the <code>nonce</code> value accordingly. Then, it performs actions based on the presence of the <code>user</code> parameter. It is here in the if statement for the <code>user</code> query where the Content-Security-Policy is set:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">header(&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-$nonce&#39;; script-src &#39;nonce-$nonce&#39;&#34;);
+</code></pre></div><p>So headers are being modified when the <code>user</code> query is specified, but if you also specify an <code>alg</code> query and give it an invalid value, the server&rsquo;s response will first have 10 warnings before the headers of that response are ready.</p>
+<p>These warnings also reflect our input back to us, so we can modify the size of each warning by our <code>alg</code> input. Why is this relevant?</p>
+<p>PHP has a mechanism called output buffering - if you have a script that began outputting data before the headers were set, that data is put into a buffer which will be sent once the entire response is ready. The PHP response buffer is 4096 bytes (4KB), and once it&rsquo;s filled, it&rsquo;s immediately flushed and the data within it is sent over.</p>
+<p>So, if we could specify a value in the <code>alg</code> query that&rsquo;s sufficiently long enough to fill the response buffer, <strong>we will initiate a response sent from the server, regardless of whether or not the headers are ready</strong>. Thus, the CSP <code>header()</code> call will be ignored as a response was already sent. With this, we don&rsquo;t need to worry about whatever the <code>$nonce</code> value is hashed to, cause we can bypass the CSP entirely.</p>
+<h3 id="xss-payload--23">XSS payload &lt;= 23</h3>
+<p>I initially tried to format an xss payload on my own, trying to shorten my URL domain or use different tags, but with some <a href="https://tinyxss.terjanq.me/">googling</a> I found <code>&lt;svg/onload=&gt;</code> to be effective.</p>
+<p>Specifically, the example provided was <code>&lt;svg/onload=eval(name)&gt;</code>, so ideally I could modify the <code>name</code> variable to do what I want. Something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">alert</span>(<span style="color:#ae81ff">1</span>);
+
+<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">svg</span><span style="color:#f92672">/</span><span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span>eval(<span style="color:#a6e22e">name</span>)<span style="color:#f92672">&gt;</span>
+</code></pre></div><h3 id="putting-it-all-together">Putting it all together</h3>
+<p>We can test out if whether or not overloading the response buffer will bypass the CSP with this query:</p>
+<pre><code class="language-url" data-lang="url">https://baby-csp.web.jctf.pro/?alg=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&amp;user=&lt;svg/onload=alert(1)&gt;
+</code></pre><p>And this will prompt an alert. We can see the HTML of the webpage and find that our <code>&lt;svg&gt;</code> payload is correctly interpreted as such:</p>
+
+    <img src="/images/justCTF2020_svg.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>So, all that&rsquo;s left is to craft a working payload. Due to the <code>/bugbounty.php</code> endpoint, we have a way to make the admin visit a URL we specify, so the rest of the problem is correctly formatting our XSS payload. I ended up hosting a page on my server to redirect the bot to the flag endpoint once they visited, and leak the contents of that response to a webhook. Unfortunately, I wasn&rsquo;t able to grab the flag in time before I could submit it - at that point, the CTF had ended :( I suppose next time I&rsquo;ll be more efficient given that I learned alot about PHP.</p>
+<hr>
+<p>And that&rsquo;s a portion of the challenges I took a look at during justCTF. Hopefully next time I can solve challenges more efficiently :P</p>
+<p><strong>Vie</strong></p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Common Web Exploits: A Guide for Recon</title>
+            <link>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</link>
+            <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
+            
+            <guid>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</guid>
+            <description>This is mainly used as a helpful recon guide to determine what vulnerabilities are available to you as an ethical hacker or CTFer. I&amp;rsquo;ve spent quite a bit of time researching these vulnerabilities and spotting their telltale signs, and I hope to share them here. These are common or more unique vulnerabilities that I have seen, executed, and researched while doing CTFs.
+Disclaimer: This article is not exhaustive, and is not intended to replace any research you would perform on your own.</description>
+            <content type="html"><![CDATA[<p>This is mainly used as a helpful recon guide to determine what vulnerabilities are available to you as an ethical hacker or CTFer. I&rsquo;ve spent quite a bit of time researching these vulnerabilities and spotting their telltale signs, and I hope to share them here. These are common or more unique vulnerabilities that I have seen, executed, and researched while doing CTFs.</p>
+<p><em>Disclaimer</em>: This article is not exhaustive, and is not intended to replace any research you would perform on your own. I merely present this as a guide to help others understand how exploits work, based on my own experience in CTFs and my research.</p>
+<h2 id="cross-site-request-forgery-csrfcross-site-scripting-xss">Cross-Site Request Forgery (CSRF)/Cross-Site Scripting (XSS)</h2>
+<p>I group CSRF attacks and XSS attacks together because their attack delivery involves much of the same steps. CSRF attacks involve secretly invoking state-modifying requests, piggybacking on a victim&rsquo;s sessional cookies (without them knowing), while XSS attacks involve rogue Javascript injection into a webpage to perform a variety of things. However, both involve the presence of some &ldquo;victim&rdquo;, who would need to visit a webpage that we control.
+If you suspect one of these exploits is available to you, look for specific areas where <strong>user-input is accepted</strong>, and for webpages that <strong>can be seen by other users</strong>. If your application satisfies both of those conditions, you can format your recon accordingly to look for these xss/csrf bugs.</p>
+<h2 id="sql-injection">SQL Injection</h2>
+<p>SQL databases are used for many different purposes - and most commonly in CTFs, they&rsquo;re seen to authenticate users when logging in, or when searching through items displayed on a webpage (i.e you have a blog with a search function to look for a specific post).</p>
+<p>If you see a login function, you can try to see if SQL injection can be at play by injecting rogue quotes <code>'</code> in user input, or other SQL statements that could malform the underlying query in the backend (i.e <code>'; --</code> which comments out the rest of the query). Be warned that by default, SQL exception errors are <em>incredibly</em> verbose, and CTF competitions may surpress these error messages to prevent a dead giveaway. You&rsquo;ll typically want to log in as a privileged user, like <code>admin</code>.</p>
+<p>If you see a search function through a collection, such as a collection of blog posts, the search may be using an SQL query to filter and display the database table accordingly. In CTFs, there may be a specific tuple in that query that is of importance, and which wouldn&rsquo;t be seen by normal search terms. Injecting the appropriate queries in the search bar is just the same as when testing for SQLi in login functions - test if rogue quotes can be inserted, or portions of SQL characters that can malform the query underneath.</p>
+<h2 id="local-file-inclusiondirectory-traversal">Local File Inclusion/Directory Traversal</h2>
+<p>Most commonly seen in applications developed in PHP, file inclusion vulnerabilities are a bit tricky to see unless you have an idea of what the source code looks like.</p>
+<p>Anywhere that you can find a <code>$file = $_GET[‘file’];</code> in PHP can be a giveaway for LFI attacks (though be careful - while most LFI attacks I&rsquo;ve seen abuse PHP&rsquo;s <code>GET</code> module, not all LFI attacks will use it). In more straightforward challenges, the problem may specify a file or hidden webpage somewhere on the server that can&rsquo;t be accessed by a regular REST api, and so you may need to perform a directory traversal attack to move through the webserver&rsquo;s directory in search of it.</p>
+<h2 id="ssrf">SSRF</h2>
+<p>Also a trickier exploit to spot, SSRFs sort of look like CSRFs but instead of a user being tricked into making a request, a server is tricked. In simplistic challenges, I see this often as a website that checks URLs, so you input a URL and the site fires a GET request to it. SSRFs may require knowledge of the backend architecture to fully execute.
+Try and look for servers in an autonomous system that supports server intra-communication, and implements basic integrity checking (LAN checking, use of tokens, etc). See if there are any servers that are front-facing and can be communicated to.</p>
+<h2 id="xml-external-entity-xxe">XML External Entity (XXE)</h2>
+<p>XML parsers can be notoriously insecure, and a very prominent bug related to XML is external entity exploits - where you can specify the disclosure of sensitive files or the inclusion of malware in an XML file.</p>
+<p>Look for where XML files are accepted into the application. If at any point, you can provide a <code>.xml</code> file to the server, there may be a chance for xxe.</p>
+<h2 id="http-request-smuggling">HTTP Request Smuggling</h2>
+<p>While rare in CTFs, this is a unique bug that I wouldn&rsquo;t mind seeing more exposure of in hacking competitions. Request smuggling requires communication between 2 servers that will process the same request differently (request parsers are notoriously not standardized). In your requests, look for feedback or other hints that a proxy server is in use, which typically reads through your request before sending it to the proper server. Furthermore, check to see if the multiple servers handle requests differently based on the <code>Transfer-Encoding</code> header and the <code>Content-Length</code> header in their responses.</p>
+<h2 id="insecure-deserialization">Insecure Deserialization</h2>
+<p>Spotting deserialization bugs relies on the language used in implementing the application, as each language has a unique module or library for serialization purposes. If you have access to source code, look for known popular serial modules such as python&rsquo;s <code>pickle</code> module, javascript <code>javascript-serializer</code>, etc etc. If not modules, look for class specifications, such as Java&rsquo;s <code>serilizable.io</code> class, or functions like PHP&rsquo;s <code>serialize()</code>.</p>
+<p>Deserialization bugs also take advantage of user input, so examine where in applications user input may be converted to some byte format for easy transportation. Looking out for specific formats, like JSON when dealing with Javascript applications, are important to note to see if they get passed through a deserializer.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Insecure Deserialization: Introduction</title>
