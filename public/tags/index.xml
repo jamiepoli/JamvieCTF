@@ -6,15 +6,42 @@
     <description>Recent content in Tags on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Jan 2021 23:05:20 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 07 Feb 2021 19:06:12 -0700</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>CSRF</title>
+      <link>https://jamvie.net/tags/csrf/</link>
+      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/csrf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>prototype-pollution</title>
+      <link>https://jamvie.net/tags/prototype-pollution/</link>
+      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/prototype-pollution/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqli</title>
+      <link>https://jamvie.net/tags/sqli/</link>
+      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/sqli/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>web</title>
       <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
+      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/web/</guid>
       <description></description>
@@ -23,7 +50,7 @@
     <item>
       <title>writeups</title>
       <link>https://jamvie.net/tags/writeups/</link>
-      <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
+      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/writeups/</guid>
       <description></description>
@@ -32,18 +59,9 @@
     <item>
       <title>xss</title>
       <link>https://jamvie.net/tags/xss/</link>
-      <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
+      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/xss/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSRF</title>
-      <link>https://jamvie.net/tags/csrf/</link>
-      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/csrf/</guid>
       <description></description>
     </item>
     
@@ -80,15 +98,6 @@
       <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/misc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sqli</title>
-      <link>https://jamvie.net/tags/sqli/</link>
-      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/sqli/</guid>
       <description></description>
     </item>
     
