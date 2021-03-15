@@ -6,10 +6,22 @@
     <description>Recent content in writeups on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Feb 2021 19:06:12 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 14 Mar 2021 17:17:38 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/writeups/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>UTCTF 2021</title>
+      <link>https://jamvie.net/posts/2021/03/utctf-2021/</link>
+      <pubDate>Sun, 14 Mar 2021 17:17:38 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/03/utctf-2021/</guid>
+      <description>Lightning Round The first few web challenges were pretty trivial so I&amp;rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
+Source it! Inspect source. You&amp;rsquo;ll find it.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&amp;rsquo;s jsshell.</description>
+    </item>
     
     <item>
       <title>DiceCTF 2021</title>

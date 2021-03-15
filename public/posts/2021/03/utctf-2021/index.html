@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="Lightning Round The first few web challenges were pretty trivial so I&amp;rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
+Source it! Inspect source. You&amp;rsquo;ll find it.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&amp;rsquo;s jsshell." />
+<meta name="keywords" content=", writeups, command-injection, web" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2021/03/utctf-2021/" />
+
+
+    <title>
+        
+            UTCTF 2021 :: Jam ⇆ Vie 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#0c0c0d">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0c0c0d">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="UTCTF 2021">
+<meta itemprop="description" content="Lightning Round The first few web challenges were pretty trivial so I&rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
+Source it! Inspect source. You&rsquo;ll find it.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&rsquo;s jsshell.">
+<meta itemprop="datePublished" content="2021-03-14T17:17:38-06:00" />
+<meta itemprop="dateModified" content="2021-03-14T17:17:38-06:00" />
+<meta itemprop="wordCount" content="560">
+<meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
+
+
+
+<meta itemprop="keywords" content="writeups,command-injection,web," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/JAMIE.png"/>
+
+<meta name="twitter:title" content="UTCTF 2021"/>
+<meta name="twitter:description" content="Lightning Round The first few web challenges were pretty trivial so I&rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
+Source it! Inspect source. You&rsquo;ll find it.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&rsquo;s jsshell."/>
+
+
+
+
+
+    <meta property="article:section" content="writeups" />
+
+
+
+    <meta property="article:published_time" content="2021-03-14 17:17:38 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#487860;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>3 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://jamvie.net/posts/2021/03/utctf-2021/">UTCTF 2021</a>
+            </h1>
+                <hr />
+                <aside id="toc">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#lightning-round">Lightning Round</a>
+      <ul>
+        <li><a href="#source-it">Source it!</a></li>
+        <li><a href="#oinker">Oinker</a></li>
+        <li><a href="#fastfox-easy-way">Fastfox (easy way)</a></li>
+      </ul>
+    </li>
+    <li><a href="#tar-inspector">Tar Inspector</a></li>
+  </ul>
+</nav>
+                </aside>
+                <hr />
+
+            
+
+            <div class="post-content">
+                <h2 id="lightning-round">Lightning Round</h2>
+<p>The first few web challenges were pretty trivial so I&rsquo;ll do super quick, 2-sentence descriptions on how to solve them.</p>
+<h3 id="source-it">Source it!</h3>
+<p>Inspect source. You&rsquo;ll find it.</p>
+<h3 id="oinker">Oinker</h3>
+<p>Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting <code>alert(1)l</code> leads to oink endpoint 64). Go to <a href="http://web2.utctf.live:5320/oink/2">\oink\2</a> to get the flag.</p>
+<h3 id="fastfox-easy-way">Fastfox (easy way)</h3>
+<p>Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&rsquo;s jsshell. Some recon shows us that <code>os.system()</code> is in the scope, so <code>os.system('cat flag.txt')</code> gives you the flag.</p>
+<hr>
+<h2 id="tar-inspector">Tar Inspector</h2>
+<p>This will mainly be a writeup for the challenge &ldquo;Tar Inspector&rdquo;.</p>
+<p>The name is self-explanatory: you get a webpage that lets you provide a tar file to it and it&rsquo;ll extract it to display the contents in a tree structure. A hint was provided that displayed the sanitization function that the filename of your provided file would go through - essentially removing all possible shell metachars, and barring against possible traversal attacks.</p>
+<p>&hellip;Except, you could put spaces in your filename. Input some file with the filename <code>te st.tar</code> will give it an error, and it&rsquo;s likely because the space forces the backend to interpret <code>te</code> and <code>st</code> as seperate commands, which will return an error. This tells us something very important - our filename is put into some sort of command line interface - likely a call to GNU <code>tar</code> to actually extract our file. So, if we can use whitespaces in our filename, can we add some arbitrary <code>tar</code> commands?</p>
+<p>The answer is yes: inspect the <a href="https://man7.org/linux/man-pages/man1/tar.1.html">tar</a> man page for a bit and you&rsquo;ll come across a particularly useful option called <code>--to-command=COMMAND</code>. Its usage is something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tar xvf &lt;yourfile.tar&gt; --to-command<span style="color:#f92672">=</span>bash
+</code></pre></div><p>And the contents of <code>yourfile.tar</code> could then hold bash commands. The idea is that <code>--to-command=COMMAND</code> will extract the contents of your tar file and pipe it into the standard input of the command you stipulated.</p>
+<p>Trying this out with <code>ls</code> for example:</p>
+
+    <img src="https://jamvie.net/images/utctf2021_ls.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>You can see that other files are being added by other people attempting this challenge. So, we have the ability to inject commands into the server, and with that, we can easily get the flag.</p>
+<p>Make a simple .txt file to <code>cat</code> the flag: <code>cat /flag.txt</code>. Tar it (uncompressed! I wasted a bunch of time thinking my exploits weren&rsquo;t working when really it was cause my tar files were compressed) and then submit that to the inspector. All archives exist in the same directory, which is a fact we&rsquo;ll need for later.</p>
+<p>We want to submit another tar file where the filename is a GNU tar command. Since we can access our earlier file, we can reference it (note that the challenge appends a weird randomized suffix to every tar archive you give it, so make sure you include that) and give it the option <code>--to-command=bash</code>. Due to the whole suffix appending issue, use the GNU tar <code>-F</code> option to absorbe it. All in all, your second file should have the filename:</p>
+<pre><code>yourFirstFile__XXXXX.tar --to-command=bash -F .tar
+</code></pre><p>Then submit your second tar file (and the contents of the 2nd tar file don&rsquo;t matter at all. Just needs the right filename).</p>
+
+    <img src="https://jamvie.net/images/utctf2021_flag.png"  alt="commandinjectionwao"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>ayo!</p>
+<p><strong>Vie</strong></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/command-injection">command-injection</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>560 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-03-14 17:17 -0600</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://jamvie.net/posts/2021/02/dicectf-2021/">
+                                <span class="button__text">DiceCTF 2021</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            
+            
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+
+    </body>
+</html>

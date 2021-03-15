@@ -5,8 +5,53 @@
         <description>Recent content in Posts on Jam ⇆ Vie</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 07 Feb 2021 19:06:12 -0700</lastBuildDate>
+        <lastBuildDate>Sun, 14 Mar 2021 17:17:38 -0600</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>UTCTF 2021</title>
+            <link>https://jamvie.net/posts/2021/03/utctf-2021/</link>
+            <pubDate>Sun, 14 Mar 2021 17:17:38 -0600</pubDate>
+            
+            <guid>https://jamvie.net/posts/2021/03/utctf-2021/</guid>
+            <description>Lightning Round The first few web challenges were pretty trivial so I&amp;rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
+Source it! Inspect source. You&amp;rsquo;ll find it.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&amp;rsquo;s jsshell.</description>
+            <content type="html"><![CDATA[<h2 id="lightning-round">Lightning Round</h2>
+<p>The first few web challenges were pretty trivial so I&rsquo;ll do super quick, 2-sentence descriptions on how to solve them.</p>
+<h3 id="source-it">Source it!</h3>
+<p>Inspect source. You&rsquo;ll find it.</p>
+<h3 id="oinker">Oinker</h3>
+<p>Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting <code>alert(1)l</code> leads to oink endpoint 64). Go to <a href="http://web2.utctf.live:5320/oink/2">\oink\2</a> to get the flag.</p>
+<h3 id="fastfox-easy-way">Fastfox (easy way)</h3>
+<p>Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&rsquo;s jsshell. Some recon shows us that <code>os.system()</code> is in the scope, so <code>os.system('cat flag.txt')</code> gives you the flag.</p>
+<hr>
+<h2 id="tar-inspector">Tar Inspector</h2>
+<p>This will mainly be a writeup for the challenge &ldquo;Tar Inspector&rdquo;.</p>
+<p>The name is self-explanatory: you get a webpage that lets you provide a tar file to it and it&rsquo;ll extract it to display the contents in a tree structure. A hint was provided that displayed the sanitization function that the filename of your provided file would go through - essentially removing all possible shell metachars, and barring against possible traversal attacks.</p>
+<p>&hellip;Except, you could put spaces in your filename. Input some file with the filename <code>te st.tar</code> will give it an error, and it&rsquo;s likely because the space forces the backend to interpret <code>te</code> and <code>st</code> as seperate commands, which will return an error. This tells us something very important - our filename is put into some sort of command line interface - likely a call to GNU <code>tar</code> to actually extract our file. So, if we can use whitespaces in our filename, can we add some arbitrary <code>tar</code> commands?</p>
+<p>The answer is yes: inspect the <a href="https://man7.org/linux/man-pages/man1/tar.1.html">tar</a> man page for a bit and you&rsquo;ll come across a particularly useful option called <code>--to-command=COMMAND</code>. Its usage is something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tar xvf &lt;yourfile.tar&gt; --to-command<span style="color:#f92672">=</span>bash
+</code></pre></div><p>And the contents of <code>yourfile.tar</code> could then hold bash commands. The idea is that <code>--to-command=COMMAND</code> will extract the contents of your tar file and pipe it into the standard input of the command you stipulated.</p>
+<p>Trying this out with <code>ls</code> for example:</p>
+
+    <img src="/images/utctf2021_ls.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>You can see that other files are being added by other people attempting this challenge. So, we have the ability to inject commands into the server, and with that, we can easily get the flag.</p>
+<p>Make a simple .txt file to <code>cat</code> the flag: <code>cat /flag.txt</code>. Tar it (uncompressed! I wasted a bunch of time thinking my exploits weren&rsquo;t working when really it was cause my tar files were compressed) and then submit that to the inspector. All archives exist in the same directory, which is a fact we&rsquo;ll need for later.</p>
+<p>We want to submit another tar file where the filename is a GNU tar command. Since we can access our earlier file, we can reference it (note that the challenge appends a weird randomized suffix to every tar archive you give it, so make sure you include that) and give it the option <code>--to-command=bash</code>. Due to the whole suffix appending issue, use the GNU tar <code>-F</code> option to absorbe it. All in all, your second file should have the filename:</p>
+<pre><code>yourFirstFile__XXXXX.tar --to-command=bash -F .tar
+</code></pre><p>Then submit your second tar file (and the contents of the 2nd tar file don&rsquo;t matter at all. Just needs the right filename).</p>
+
+    <img src="/images/utctf2021_flag.png"  alt="commandinjectionwao"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>ayo!</p>
+<p><strong>Vie</strong></p>
+]]></content>
+        </item>
         
         <item>
             <title>DiceCTF 2021</title>

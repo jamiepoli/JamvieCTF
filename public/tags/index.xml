@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Feb 2021 19:06:12 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 14 Mar 2021 17:17:38 -0600</lastBuildDate>
     
 	<atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>command-injection</title>
+      <link>https://jamvie.net/tags/command-injection/</link>
+      <pubDate>Sun, 14 Mar 2021 17:17:38 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/command-injection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://jamvie.net/tags/web/</link>
+      <pubDate>Sun, 14 Mar 2021 17:17:38 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeups</title>
+      <link>https://jamvie.net/tags/writeups/</link>
+      <pubDate>Sun, 14 Mar 2021 17:17:38 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/writeups/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>CSRF</title>
@@ -35,24 +62,6 @@
       <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/sqli/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>web</title>
-      <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writeups</title>
-      <link>https://jamvie.net/tags/writeups/</link>
-      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/writeups/</guid>
       <description></description>
     </item>
     
