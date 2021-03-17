@@ -51,7 +51,7 @@ Oinker Make an oink with the exact same content and realize that each oink has a
 Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&rsquo;s jsshell.">
 <meta itemprop="datePublished" content="2021-03-14T17:17:38-06:00" />
 <meta itemprop="dateModified" content="2021-03-14T17:17:38-06:00" />
-<meta itemprop="wordCount" content="560">
+<meta itemprop="wordCount" content="607">
 <meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
 
 
@@ -193,8 +193,23 @@ if (!doNotTrack) {
 <hr>
 <h2 id="tar-inspector">Tar Inspector</h2>
 <p>This will mainly be a writeup for the challenge &ldquo;Tar Inspector&rdquo;.</p>
+
+    <img src="https://jamvie.net/images/utctf2021-tarmainpage.png"  alt="Tar Inspector"  class="center"  style="border-radius: 8px;"  />
+
+
 <p>The name is self-explanatory: you get a webpage that lets you provide a tar file to it and it&rsquo;ll extract it to display the contents in a tree structure. A hint was provided that displayed the sanitization function that the filename of your provided file would go through - essentially removing all possible shell metachars, and barring against possible traversal attacks.</p>
-<p>&hellip;Except, you could put spaces in your filename. Input some file with the filename <code>te st.tar</code> will give it an error, and it&rsquo;s likely because the space forces the backend to interpret <code>te</code> and <code>st</code> as seperate commands, which will return an error. This tells us something very important - our filename is put into some sort of command line interface - likely a call to GNU <code>tar</code> to actually extract our file. So, if we can use whitespaces in our filename, can we add some arbitrary <code>tar</code> commands?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#75715e"># creates a secured version of the filename</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">secure_filename</span>(filename):
+    <span style="color:#75715e"># strip extension and any sneaky path traversal stuff</span>
+    filename <span style="color:#f92672">=</span> filename[:<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>]
+    filename <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>basename(filename)
+    <span style="color:#75715e"># escape shell metacharacters</span>
+    filename <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;(!|\$|#|&amp;|</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">|</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">|\(|\)|\||&lt;|&gt;|`|</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">\|;)&#34;</span>, <span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">\1&#34;</span>, filename)
+    filename <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, filename)
+    <span style="color:#75715e"># add extension</span>
+    filename <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;__&#39;</span><span style="color:#f92672">+</span>hex(randrange(<span style="color:#ae81ff">10000000</span>))[<span style="color:#ae81ff">2</span>:]<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.tar&#39;</span>
+    <span style="color:#66d9ef">return</span> filename
+</code></pre></div><p>&hellip;Except, you could put spaces in your filename. Input some file with the filename <code>te st.tar</code> will give it an error, and it&rsquo;s likely because the space forces the backend to interpret <code>te</code> and <code>st</code> as seperate commands, which will return an error. This tells us something very important - our filename is put into some sort of command line interface - likely a call to GNU <code>tar</code> to actually extract our file. So, if we can use whitespaces in our filename, can we add some arbitrary <code>tar</code> commands?</p>
 <p>The answer is yes: inspect the <a href="https://man7.org/linux/man-pages/man1/tar.1.html">tar</a> man page for a bit and you&rsquo;ll come across a particularly useful option called <code>--to-command=COMMAND</code>. Its usage is something like:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tar xvf &lt;yourfile.tar&gt; --to-command<span style="color:#f92672">=</span>bash
 </code></pre></div><p>And the contents of <code>yourfile.tar</code> could then hold bash commands. The idea is that <code>--to-command=COMMAND</code> will extract the contents of your tar file and pipe it into the standard input of the command you stipulated.</p>
@@ -204,9 +219,9 @@ if (!doNotTrack) {
 
 
 <p>You can see that other files are being added by other people attempting this challenge. So, we have the ability to inject commands into the server, and with that, we can easily get the flag.</p>
-<p>Make a simple .txt file to <code>cat</code> the flag: <code>cat /flag.txt</code>. Tar it (uncompressed! I wasted a bunch of time thinking my exploits weren&rsquo;t working when really it was cause my tar files were compressed) and then submit that to the inspector. All archives exist in the same directory, which is a fact we&rsquo;ll need for later.</p>
-<p>We want to submit another tar file where the filename is a GNU tar command. Since we can access our earlier file, we can reference it (note that the challenge appends a weird randomized suffix to every tar archive you give it, so make sure you include that) and give it the option <code>--to-command=bash</code>. Due to the whole suffix appending issue, use the GNU tar <code>-F</code> option to absorbe it. All in all, your second file should have the filename:</p>
-<pre><code>yourFirstFile__XXXXX.tar --to-command=bash -F .tar
+<p>Make a simple .txt file to <code>cat</code> the flag: <code>cat /flag.txt</code>. Tar it (<strong>uncompressed!</strong> I wasted a bunch of time thinking my exploits weren&rsquo;t working when really it was cause my tar files were compressed) and then submit that to the inspector. All archives exist in the same directory, which is a fact we&rsquo;ll need for later.</p>
+<p>We want to submit another tar file where the filename is a GNU tar command. Since we can access our earlier file, we can reference it (note that the challenge appends a weird randomized suffix to every tar archive you give it, so make sure you include that) and give it the option <code>--to-command=bash</code>. Due to the whole suffix appending issue, use the GNU tar <code>-F</code> option to absorb it. All in all, your second file should have the filename:</p>
+<pre><code>yourFirstFileThatHasShellCommandsInIt__XXXXX.tar --to-command=bash -F .tar
 </code></pre><p>Then submit your second tar file (and the contents of the 2nd tar file don&rsquo;t matter at all. Just needs the right filename).</p>
 
     <img src="https://jamvie.net/images/utctf2021_flag.png"  alt="commandinjectionwao"  class="center"  style="border-radius: 8px;"  />
@@ -225,7 +240,7 @@ if (!doNotTrack) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/command-injection">command-injection</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>560 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>607 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-03-14 17:17 -0600</p>
         </div>
