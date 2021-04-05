@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &amp;ldquo;animal&amp;rdquo;-ified versions of the famous lorem ipsum placeholder text.
+Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?
+This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens." />
+<meta name="keywords" content=", writeups, directory-traversal, web, werkzeug" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/" />
+
+
+    <title>
+        
+            Bo1lersCTF 2021: Lorem_Ipsum :: Jam ⇆ Vie 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#0c0c0d">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0c0c0d">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="Bo1lersCTF 2021: Lorem_Ipsum">
+<meta itemprop="description" content="Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &ldquo;animal&rdquo;-ified versions of the famous lorem ipsum placeholder text.
+Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?
+This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens."><meta itemprop="datePublished" content="2021-04-04T03:12:16-06:00" />
+<meta itemprop="dateModified" content="2021-04-04T03:12:16-06:00" />
+<meta itemprop="wordCount" content="685"><meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
+<meta itemprop="keywords" content="writeups,directory-traversal,web,werkzeug," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/JAMIE.png"/>
+
+<meta name="twitter:title" content="Bo1lersCTF 2021: Lorem_Ipsum"/>
+<meta name="twitter:description" content="Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &ldquo;animal&rdquo;-ified versions of the famous lorem ipsum placeholder text.
+Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?
+This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens."/>
+
+
+
+
+
+    <meta property="article:section" content="writeups" />
+
+
+
+    <meta property="article:published_time" content="2021-04-04 03:12:16 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#487860;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/">Bo1lersCTF 2021: Lorem_Ipsum</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <p>Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &ldquo;animal&rdquo;-ified versions of the famous lorem ipsum placeholder text.</p>
+
+    <img src="https://jamvie.net/images/bo1lers2021_cheese.png"  alt="what"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Choose among the available animals, and notice a GET query parameter that looks something like <code>?animal=dogs</code>. What if you gave it text garbage instead of an expected animal?</p>
+
+    <img src="https://jamvie.net/images/bo1lers2021_werkzeug.png"  alt="werkzeug"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a <a href="https://werkzeug.palletsprojects.com/en/1.0.x/debug/">python console</a> with every traceback that is reported to you when something wrong happens. Easy challenge, except -</p>
+
+    <img src="https://jamvie.net/images/bo1lers2021_consolelocked.png"  alt="pin=protected"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The console is pin-protected.</p>
+<p>The text made me wonder - it seems as though this pin, if such security measures are enabled, has a specific generation algorithm I could reverse. Good thing <a href="https://github.com/pallets/werkzeug/blob/master/src/werkzeug/debug/__init__.py">Werkzeug is open-source</a>.</p>
+<p>Truncated to the most relevant parts, and following off of this <a href="https://book.hacktricks.xyz/pentesting/pentesting-web/werkzeug">hacktrick</a>, I realize that the pin generation algorithm isn&rsquo;t randomized - it&rsquo;s based on a few environment variables:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">    <span style="color:#75715e"># This information only exists to make the cookie unique on the</span>
+    <span style="color:#75715e"># computer, not as a security feature.</span>
+    probably_public_bits <span style="color:#f92672">=</span> [
+        username,
+        modname,
+        getattr(app, <span style="color:#e6db74">&#34;__name__&#34;</span>, type(app)<span style="color:#f92672">.</span>__name__),
+        getattr(mod, <span style="color:#e6db74">&#34;__file__&#34;</span>, None),
+    ]
+
+    <span style="color:#75715e"># This information is here to make it harder for an attacker to</span>
+    <span style="color:#75715e"># guess the cookie name.  They are unlikely to be contained anywhere</span>
+    <span style="color:#75715e"># within the unauthenticated debug page.</span>
+    private_bits <span style="color:#f92672">=</span> [str(uuid<span style="color:#f92672">.</span>getnode()), get_machine_id()]
+</code></pre></div><p>Some of these bits are easy to find - modname is the name of the module in use, which is <code>flask.app</code>. <code>getattr(app, &quot;__name__&quot;, type(app).__name__)</code> is just the name of the class in use, which is just <code>Flask</code>. <code>getattr(mod, &quot;__file__&quot;, None)</code> wants an absolute path to an <code>app.py</code> file, which we can get from looking at the traceback given to us from before: <code>usr/local/lib/python3.6/dist-packages/flask/app.py</code>.</p>
+<p>And on that note, the <code>username</code> value can also be lifted from the traceback by noticing that there is a &ldquo;loremipsum&rdquo; directory branch in <code>/home</code> (Thanks, <a href="https://ubcctf.github.io/authors/Filip/">Filip</a> and <a href="https://ubcctf.github.io/authors/Jason/">Jason</a> :P).</p>
+<p>So all the public bits are found - what about the private bits? The hacktrick goes into more detail, but the TL;DR is as so: <code>str(uuid.getnode())</code> wants the MAC address of the machine. <code>get_machine_id()</code> is defined in the source as a function that wants either the <code>machine-id</code> (on linux install) or the <code>boot-id</code> (on, well, boot&hellip;duh) of the machine hosting the server.</p>
+<p>How do we find such things? They obviously aren&rsquo;t available to us in public. Maybe if we can do a directory traversal, we can input traversal commands and look through relevant linux files ourselves in order to get this information.</p>
+<p>Let&rsquo;s return once more to the <code>?animal=</code> query. Again, give it something it doesn&rsquo;t expect and inspect the traceback/pin-protected console, and see an interesting piece of the traceback:</p>
+
+    <img src="https://jamvie.net/images/bo1lers2021_traversalbug.png"  alt="traversal"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The <code>f</code> variable seen here is the value of the <code>?animal=</code> query, <em>passed into an open() function to open a file in the server</em>. This means that our input to the query is treated as a filename. We can do directory traversal through the <code>?animal=</code> query!</p>
+<p>Back to the private bits - we can simply traverse to the relevant linux files to grab the information we want.</p>
+<p>MAC address:</p>
+<pre><code>?animal=%2F..%2F..%2Fsys/class/net/eth0/address
+</code></pre>
+    <img src="https://jamvie.net/images/bo1lers2021_MACaddr.png"  alt="MAC"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>boot-id:</p>
+<pre><code>?animal=%2F..%2F..%2Fproc/sys/kernel/random/boot_id
+</code></pre><p>cgroup (append it to the end of boot-id):</p>
+<pre><code>?animal=%2F..%2F..%2Fproc/self/cgroup
+</code></pre>
+    <img src="https://jamvie.net/images/bo1lers2021_bootid.png"  alt="MAC"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>NOTE: you&rsquo;ll need to convert the MAC address from hex to decimal.</p>
+<p>NOTE1: trying to get <code>machine-id</code> didn&rsquo;t work for me, that&rsquo;s why I got <code>boot-id</code> instead.</p>
+<p>NOTE2: <code>boot-id</code> isn&rsquo;t stable - a new one is generated each time the server restarts. The challenge went down a couple times and the admins had to restart the server throughout, meaning with each time it went back up, I needed the new <code>boot-id</code>.</p>
+<p>Altogether, we can modify the source code into a script to generate the pins based on these values we provide it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">
+probably_public_bits <span style="color:#f92672">=</span> [ 
+  <span style="color:#e6db74">&#39;loremipsum&#39;</span> ,
+  <span style="color:#e6db74">&#39;flask.app&#39;</span> , <span style="color:#75715e"># modname - probably &#39;flask.app&#39; ?</span>
+  <span style="color:#e6db74">&#39;Flask&#39;</span>,<span style="color:#75715e">#getattr (app, &#39;__name__&#39;, getattr (app .__ class__, &#39;__name__&#39;)), is this just &#39;Flask&#39;?</span>
+  <span style="color:#e6db74">&#39;/usr/local/lib/python3.6/dist-packages/flask/app.py&#39;</span> <span style="color:#75715e">##getattr (mod, &#39;__file__&#39;, None) </span>
+  ] 
+
+private_bits <span style="color:#f92672">=</span> [ 
+  <span style="color:#e6db74">&#39;2485378547714&#39;</span> , <span style="color:#75715e">#MAC Address, decimal</span>
+  <span style="color:#e6db74">&#39;b875f129-5ae6-4ab1-90c0-ae07a6134578e8c9f0084a3b2b724e4f2a526d60bf0a62505f38649743b8522a8c005b8334ae&#39;</span> 
+  <span style="color:#75715e">## ^^ boot-id + one of the cgroups. </span>
+  ] 
+</code></pre></div><p>Give the script these hard-coded values and get the pin, provide it to the debugger and now you have a python console ready to go!</p>
+
+    <img src="https://jamvie.net/images/bo1lers2021_flag.png"  alt="flag"  class="center"  style="border-radius: 8px;"  />
+
+
+<p><code>b0ctf{Fl4sK_d3buG_is_InseCure}</code></p>
+<p><strong>Vie</strong></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/directory-traversal">directory-traversal</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span><span class="tag"><a href="https://jamvie.net/tags/werkzeug">werkzeug</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>685 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-04-04 03:12 -0600</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://jamvie.net/posts/2021/03/utctf-2021/">
+                                <span class="button__text">UTCTF 2021</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            
+            
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+    </body>
+</html>

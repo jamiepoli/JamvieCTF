@@ -43,14 +43,9 @@
 
 
 <meta itemprop="name" content="Plaidctf 2020: Contrived Web Problem">
-<meta itemprop="description" content="This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&rsquo;m glad they did!">
-<meta itemprop="datePublished" content="2020-04-28T00:48:12-06:00" />
+<meta itemprop="description" content="This was a CTF I unfortunately didn&rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&rsquo;m glad they did!"><meta itemprop="datePublished" content="2020-04-28T00:48:12-06:00" />
 <meta itemprop="dateModified" content="2020-04-28T00:48:12-06:00" />
-<meta itemprop="wordCount" content="1171">
-<meta itemprop="image" content="https://jamvie.net/images/CWP01.png">
-
-
-
+<meta itemprop="wordCount" content="1171"><meta itemprop="image" content="https://jamvie.net/images/CWP01.png">
 <meta itemprop="keywords" content="web,FTP,SSRF," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/images/CWP01.png"/>
@@ -133,7 +128,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </header>
 
 
@@ -185,7 +179,7 @@ if (!doNotTrack) {
 <p>Now the hard part - how <em>do we</em> ask the server? How do we send a request to the server to send us the email with the flag as an attachment?</p>
 <p>I spent a long time trying to figure out how to send a rogue request to the rabbitmq server that will send us the email we want. I spent hours just browsing through the source code, not really paying attention&hellip;</p>
 <p>Until I came across this piece of code in the <code>api/index.ts</code> file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/image&#34;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/image&#34;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">let</span> { <span style="color:#a6e22e">url</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
         <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;string&#34;</span>) {
             <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad body&#34;</span>);
@@ -195,8 +189,8 @@ if (!doNotTrack) {
 
         <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">image</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Buffer</span>;
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;http:&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;https:&#34;</span>) {
-            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imageReq</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">toString</span>(), { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span> });
-            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> (<span style="color:#a6e22e">imageReq</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">any</span>).<span style="color:#a6e22e">buffer</span>();
+            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imageReq</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">toString</span>(), { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span> });
+            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> (<span style="color:#a6e22e">imageReq</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">any</span>).<span style="color:#a6e22e">buffer</span>();
         } 
         
          <span style="color:#75715e">//THIS PART HERE!
@@ -204,13 +198,13 @@ if (!doNotTrack) {
             <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">username</span>);
             <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">password</span>);
             <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">pathname</span>);
-            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ftpClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">connectFtp</span>({
+            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ftpClient</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">connectFtp</span>({
                 <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">hostname</span>,
                 <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> parseInt(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span>) <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
                 <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
                 <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
             });
-            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">ftpClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">filename</span>);
+            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">ftpClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">filename</span>);
         } <span style="color:#66d9ef">else</span> {
             <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad image url&#34;</span>);
         }
@@ -328,7 +322,7 @@ RETR payload.txt
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -342,7 +336,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
 
 

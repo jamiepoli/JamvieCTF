@@ -1,285 +1,179 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
+    <loc>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</loc>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
     <loc>https://jamvie.net/categories/</loc>
-    <lastmod>2021-03-14T17:17:38-06:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/directory-traversal/</loc>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/posts/</loc>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/</loc>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/web/</loc>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/werkzeug/</loc>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/writeups/</loc>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/categories/writeups/</loc>
+    <lastmod>2021-04-04T03:12:16-06:00</lastmod>
+  </url><url>
     <loc>https://jamvie.net/tags/command-injection/</loc>
     <lastmod>2021-03-14T17:17:38-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/</loc>
-    <lastmod>2021-03-14T17:17:38-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/posts/</loc>
-    <lastmod>2021-03-14T17:17:38-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/</loc>
-    <lastmod>2021-03-14T17:17:38-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2021/03/utctf-2021/</loc>
     <lastmod>2021-03-14T17:17:38-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/web/</loc>
-    <lastmod>2021-03-14T17:17:38-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/writeups/</loc>
-    <lastmod>2021-03-14T17:17:38-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/categories/writeups/</loc>
-    <lastmod>2021-03-14T17:17:38-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/csrf/</loc>
     <lastmod>2021-02-07T19:06:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2021/02/dicectf-2021/</loc>
     <lastmod>2021-02-07T19:06:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/prototype-pollution/</loc>
     <lastmod>2021-02-07T19:06:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/sqli/</loc>
     <lastmod>2021-02-07T19:06:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/xss/</loc>
     <lastmod>2021-02-07T19:06:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</loc>
     <lastmod>2021-01-31T23:05:20-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</loc>
     <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jamvie.net/tags/directory-traversal/</loc>
-    <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/insecure-deserialization/</loc>
     <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/instructional/</loc>
     <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/categories/instructional/</loc>
     <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/misc/</loc>
     <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/ssrf/</loc>
     <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/xxe/</loc>
     <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/12/insecure-deserialization-introduction/</loc>
     <lastmod>2020-12-22T14:38:40-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</loc>
     <lastmod>2020-11-22T14:33:48-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/ftp/</loc>
     <lastmod>2020-11-22T14:33:48-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/crypto/</loc>
     <lastmod>2020-10-25T22:34:34-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</loc>
     <lastmod>2020-10-25T22:34:34-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/android/</loc>
     <lastmod>2020-10-04T13:12:06-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/osint/</loc>
     <lastmod>2020-10-04T13:12:06-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/reversing/</loc>
     <lastmod>2020-10-04T13:12:06-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/10/trend-micro-ctf-raimund-genes-quals-2020/</loc>
     <lastmod>2020-10-04T13:12:06-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/categories/miscellaneous/</loc>
     <lastmod>2020-09-19T20:57:15-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/09/volgactf-finals-2020/</loc>
     <lastmod>2020-09-19T20:57:15-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</loc>
     <lastmod>2020-08-23T17:35:14-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/08/hacktivitycon-ctf-bullseye/</loc>
     <lastmod>2020-08-09T18:48:52-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/pwn/</loc>
     <lastmod>2020-08-09T18:48:52-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</loc>
     <lastmod>2020-07-27T19:07:51-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/algorithms/</loc>
     <lastmod>2020-07-14T00:22:00-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</loc>
     <lastmod>2020-07-14T00:22:00-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/cache-poison/</loc>
     <lastmod>2020-07-02T01:56:16-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</loc>
     <lastmod>2020-07-02T01:56:16-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/idor/</loc>
     <lastmod>2020-06-28T21:19:19-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</loc>
     <lastmod>2020-06-28T21:19:19-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/06/redpwnctf-2020/</loc>
     <lastmod>2020-06-25T16:26:44-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/06/2020-hackasat-quals/</loc>
     <lastmod>2020-06-03T21:47:00-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/astrodynamics/</loc>
     <lastmod>2020-06-03T21:47:00-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/tags/math/</loc>
     <lastmod>2020-06-03T21:47:00-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/05/csaw-2019-unagi/</loc>
     <lastmod>2020-05-21T01:22:16-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/</loc>
     <lastmod>2020-05-07T15:20:38-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</loc>
     <lastmod>2020-04-28T00:48:12-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/04/commonly-used-software/</loc>
     <lastmod>2020-04-26T01:30:30-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</loc>
     <lastmod>2020-04-23T00:46:19-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</loc>
     <lastmod>2020-04-22T00:46:19-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/04/jamvies-first-post/</loc>
     <lastmod>2020-04-20T21:27:12-06:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jamvie.net/about/</loc>
     <priority>0</priority>
   </url>
-  
 </urlset>

@@ -46,14 +46,9 @@ const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39
 <meta itemprop="name" content="RedPwnCTF 2020, part 2">
 <meta itemprop="description" content="Part 2 of my writeup series for RedPwnCTF 2020!
 Let&rsquo;s Begin! Tux-Fanpage  points: 464  Ignoring the 1990&rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!">
-<meta itemprop="datePublished" content="2020-06-28T21:19:19-06:00" />
+const express = require(&#39;express&#39;) const path = require(&#39;path&#39;) const app = express() //Don&#39;t forget to redact from published source const flag = &#39;[REDACTED]&#39; app.get(&#39;/&#39;, (req, res) =&gt; { res.redirect(&#39;/page?path=index.html&#39;) }) app.get(&#39;/page&#39;, (req, res) =&gt; { let path = req.query.path //Handle queryless request  if(!"><meta itemprop="datePublished" content="2020-06-28T21:19:19-06:00" />
 <meta itemprop="dateModified" content="2020-06-28T21:19:19-06:00" />
-<meta itemprop="wordCount" content="1889">
-<meta itemprop="image" content="https://jamvie.net/images/modern-tux.png">
-
-
-
+<meta itemprop="wordCount" content="1889"><meta itemprop="image" content="https://jamvie.net/images/modern-tux.png">
 <meta itemprop="keywords" content="web,directory-traversal,CSRF,IDOR," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/images/modern-tux.png"/>
@@ -138,7 +133,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </header>
 
 
@@ -361,7 +355,7 @@ looks like</li>
 };
 </code></pre></div><p>From the first snippet of code above, we know that admin&rsquo;s username is <code>admin</code> and their id is 0. If we can somehow call the methods that subsequently call these statements, we could retrieve the credentials of the admin. As tokens are generated unique to the user, we won&rsquo;t be able to spoof as admin without their cookie token, and so we need to find a way to get the admin info that doesn&rsquo;t rely on using the cookie-generated token.  To this end, <code>fromId</code> is attractive, as it requires just the id of the user.</p>
 <p>I am utilizing burp&rsquo;s proxy service. I register an account as usual, and notice the api call to <code>/userInfo</code>, which, according to the javascript source, will deliver the info of a specific user based on their ID - likely preparing the <code>fromId</code> SQL statement.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;userInfo&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;userInfo&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> {
             <span style="color:#e6db74">&#39;success&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
         };
@@ -409,7 +403,7 @@ looks like</li>
 
 <p>However, it is shown that the admin account also doesn&rsquo;t have enough credits, and they haven&rsquo;t purchased it before so its not in their account. Additionally, you can&rsquo;t login as it also checks the ip of the session - but this can be bypassed by converting our request into JSON, as they parse xml requests and bypass checks if not in xml. Despite that, it appears as though this is a dead end - so let&rsquo;s consider our other avenue of attack: adding more credits to our account.</p>
 <p>Another function of importance is the API call to <code>/gift</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">405</span>);
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
@@ -498,7 +492,7 @@ looks like</li>
         <span style="color:#75715e">// Check admin password to prevent CSRF
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">body</span>;
         <span style="color:#66d9ef">try</span> {
-            <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseRequest</span>(<span style="color:#a6e22e">req</span>);
+            <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseRequest</span>(<span style="color:#a6e22e">req</span>);
         } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">400</span>);
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
@@ -631,7 +625,7 @@ We simply need to host a script on our server (that sends multiple requests at o
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -645,7 +639,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
 
 

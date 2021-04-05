@@ -44,14 +44,9 @@ const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;
 
 <meta itemprop="name" content="DiceCTF 2021">
 <meta itemprop="description" content="Babier CSP The challenge takes after justCTF&rsquo;s similarly named challenge. We&rsquo;re given an index.js file:
-const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`}&lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?">
-<meta itemprop="datePublished" content="2021-02-07T19:06:12-07:00" />
+const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`}&lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?"><meta itemprop="datePublished" content="2021-02-07T19:06:12-07:00" />
 <meta itemprop="dateModified" content="2021-02-07T19:06:12-07:00" />
-<meta itemprop="wordCount" content="2260">
-<meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
-
-
-
+<meta itemprop="wordCount" content="2260"><meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
 <meta itemprop="keywords" content="writeups,xss,sqli,web,prototype-pollution,csrf," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/img/JAMIE.png"/>
@@ -135,7 +130,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </header>
 
 
@@ -276,16 +270,16 @@ This means that if we try to inject single quotes ourselves to try a classic sql
 <h2 id="web-utils">Web Utils</h2>
 <p>The application appears to be a pastebin and also a URL shortener. We&rsquo;re provided the source as well, and what&rsquo;s interesting is to note how the application parses our input, which is treated as JSON.</p>
 <p>If we create a paste, there&rsquo;s a front-end script which runs a request to <code>/api/createPaste</code>, which stores our paste into a database.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#a6e22e">async</span> () =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#66d9ef">async</span> () =&gt; {
 
-  <span style="color:#a6e22e">await</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>) =&gt; {
+  <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>) =&gt; {
     window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;load&#39;</span>, <span style="color:#a6e22e">resolve</span>);
   });
 
-  document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-form&#39;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;submit&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">e</span>) =&gt; {
+  document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-form&#39;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;submit&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">e</span>) =&gt; {
     <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">text</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-input&#39;</span>).<span style="color:#a6e22e">value</span>;
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> (<span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/createPaste&#39;</span>, {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> (<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/createPaste&#39;</span>, {
       <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
       <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
         <span style="color:#e6db74">&#39;Content-Type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>
@@ -336,7 +330,7 @@ This means that if we try to inject single quotes ourselves to try a classic sql
 <h3 id="build-a-panel">Build a Panel</h3>
 <p>The first challenge is roughly the same code but the admin bot doesn&rsquo;t have the same regex check. So, the solution for both challenges may involve much of the same steps.</p>
 <p>We can examine source and find this interesting function (also present in &ldquo;build a better panel&rdquo;):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/admin/debug/add_widget&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/admin/debug/add_widget&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>;
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">queryParams</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
 
@@ -508,7 +502,7 @@ This means that if we try to inject single quotes ourselves to try a classic sql
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -522,7 +516,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
 
 

@@ -44,14 +44,9 @@ TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp
 
 <meta itemprop="name" content="DragonCTF 2020: Harmony Chat">
 <meta itemprop="description" content="A writeup for the first web problem, &ldquo;Harmony Chat&rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
-TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&rsquo;s HTTP server Cat flag for profit  Let&rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.">
-<meta itemprop="datePublished" content="2020-11-22T14:33:48-07:00" />
+TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&rsquo;s HTTP server Cat flag for profit  Let&rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels."><meta itemprop="datePublished" content="2020-11-22T14:33:48-07:00" />
 <meta itemprop="dateModified" content="2020-11-22T14:33:48-07:00" />
-<meta itemprop="wordCount" content="1354">
-<meta itemprop="image" content="https://jamvie.net/mages/harmonychannel.png">
-
-
-
+<meta itemprop="wordCount" content="1354"><meta itemprop="image" content="https://jamvie.net/mages/harmonychannel.png">
 <meta itemprop="keywords" content="SSRF,FTP,insecure-deserialization,web," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/mages/harmonychannel.png"/>
@@ -135,7 +130,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </header>
 
 
@@ -387,7 +381,7 @@ retr &lt;id of channel&gt;    &lt;-- Retrieves chat log, sends it in the data ch
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -401,7 +395,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
 
 

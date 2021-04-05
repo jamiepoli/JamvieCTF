@@ -5,8 +5,100 @@
         <description>Recent content in Posts on Jam ⇆ Vie</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 14 Mar 2021 17:17:38 -0600</lastBuildDate>
+        <lastBuildDate>Sun, 04 Apr 2021 03:12:16 -0600</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Bo1lersCTF 2021: Lorem_Ipsum</title>
+            <link>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</link>
+            <pubDate>Sun, 04 Apr 2021 03:12:16 -0600</pubDate>
+            
+            <guid>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</guid>
+            <description>Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &amp;ldquo;animal&amp;rdquo;-ified versions of the famous lorem ipsum placeholder text.
+Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?
+This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens.</description>
+            <content type="html"><![CDATA[<p>Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &ldquo;animal&rdquo;-ified versions of the famous lorem ipsum placeholder text.</p>
+
+    <img src="/images/bo1lers2021_cheese.png"  alt="what"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Choose among the available animals, and notice a GET query parameter that looks something like <code>?animal=dogs</code>. What if you gave it text garbage instead of an expected animal?</p>
+
+    <img src="/images/bo1lers2021_werkzeug.png"  alt="werkzeug"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a <a href="https://werkzeug.palletsprojects.com/en/1.0.x/debug/">python console</a> with every traceback that is reported to you when something wrong happens. Easy challenge, except -</p>
+
+    <img src="/images/bo1lers2021_consolelocked.png"  alt="pin=protected"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The console is pin-protected.</p>
+<p>The text made me wonder - it seems as though this pin, if such security measures are enabled, has a specific generation algorithm I could reverse. Good thing <a href="https://github.com/pallets/werkzeug/blob/master/src/werkzeug/debug/__init__.py">Werkzeug is open-source</a>.</p>
+<p>Truncated to the most relevant parts, and following off of this <a href="https://book.hacktricks.xyz/pentesting/pentesting-web/werkzeug">hacktrick</a>, I realize that the pin generation algorithm isn&rsquo;t randomized - it&rsquo;s based on a few environment variables:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">    <span style="color:#75715e"># This information only exists to make the cookie unique on the</span>
+    <span style="color:#75715e"># computer, not as a security feature.</span>
+    probably_public_bits <span style="color:#f92672">=</span> [
+        username,
+        modname,
+        getattr(app, <span style="color:#e6db74">&#34;__name__&#34;</span>, type(app)<span style="color:#f92672">.</span>__name__),
+        getattr(mod, <span style="color:#e6db74">&#34;__file__&#34;</span>, None),
+    ]
+
+    <span style="color:#75715e"># This information is here to make it harder for an attacker to</span>
+    <span style="color:#75715e"># guess the cookie name.  They are unlikely to be contained anywhere</span>
+    <span style="color:#75715e"># within the unauthenticated debug page.</span>
+    private_bits <span style="color:#f92672">=</span> [str(uuid<span style="color:#f92672">.</span>getnode()), get_machine_id()]
+</code></pre></div><p>Some of these bits are easy to find - modname is the name of the module in use, which is <code>flask.app</code>. <code>getattr(app, &quot;__name__&quot;, type(app).__name__)</code> is just the name of the class in use, which is just <code>Flask</code>. <code>getattr(mod, &quot;__file__&quot;, None)</code> wants an absolute path to an <code>app.py</code> file, which we can get from looking at the traceback given to us from before: <code>usr/local/lib/python3.6/dist-packages/flask/app.py</code>.</p>
+<p>And on that note, the <code>username</code> value can also be lifted from the traceback by noticing that there is a &ldquo;loremipsum&rdquo; directory branch in <code>/home</code> (Thanks, <a href="https://ubcctf.github.io/authors/Filip/">Filip</a> and <a href="https://ubcctf.github.io/authors/Jason/">Jason</a> :P).</p>
+<p>So all the public bits are found - what about the private bits? The hacktrick goes into more detail, but the TL;DR is as so: <code>str(uuid.getnode())</code> wants the MAC address of the machine. <code>get_machine_id()</code> is defined in the source as a function that wants either the <code>machine-id</code> (on linux install) or the <code>boot-id</code> (on, well, boot&hellip;duh) of the machine hosting the server.</p>
+<p>How do we find such things? They obviously aren&rsquo;t available to us in public. Maybe if we can do a directory traversal, we can input traversal commands and look through relevant linux files ourselves in order to get this information.</p>
+<p>Let&rsquo;s return once more to the <code>?animal=</code> query. Again, give it something it doesn&rsquo;t expect and inspect the traceback/pin-protected console, and see an interesting piece of the traceback:</p>
+
+    <img src="/images/bo1lers2021_traversalbug.png"  alt="traversal"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The <code>f</code> variable seen here is the value of the <code>?animal=</code> query, <em>passed into an open() function to open a file in the server</em>. This means that our input to the query is treated as a filename. We can do directory traversal through the <code>?animal=</code> query!</p>
+<p>Back to the private bits - we can simply traverse to the relevant linux files to grab the information we want.</p>
+<p>MAC address:</p>
+<pre><code>?animal=%2F..%2F..%2Fsys/class/net/eth0/address
+</code></pre>
+    <img src="/images/bo1lers2021_MACaddr.png"  alt="MAC"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>boot-id:</p>
+<pre><code>?animal=%2F..%2F..%2Fproc/sys/kernel/random/boot_id
+</code></pre><p>cgroup (append it to the end of boot-id):</p>
+<pre><code>?animal=%2F..%2F..%2Fproc/self/cgroup
+</code></pre>
+    <img src="/images/bo1lers2021_bootid.png"  alt="MAC"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>NOTE: you&rsquo;ll need to convert the MAC address from hex to decimal.</p>
+<p>NOTE1: trying to get <code>machine-id</code> didn&rsquo;t work for me, that&rsquo;s why I got <code>boot-id</code> instead.</p>
+<p>NOTE2: <code>boot-id</code> isn&rsquo;t stable - a new one is generated each time the server restarts. The challenge went down a couple times and the admins had to restart the server throughout, meaning with each time it went back up, I needed the new <code>boot-id</code>.</p>
+<p>Altogether, we can modify the source code into a script to generate the pins based on these values we provide it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">
+probably_public_bits <span style="color:#f92672">=</span> [ 
+  <span style="color:#e6db74">&#39;loremipsum&#39;</span> ,
+  <span style="color:#e6db74">&#39;flask.app&#39;</span> , <span style="color:#75715e"># modname - probably &#39;flask.app&#39; ?</span>
+  <span style="color:#e6db74">&#39;Flask&#39;</span>,<span style="color:#75715e">#getattr (app, &#39;__name__&#39;, getattr (app .__ class__, &#39;__name__&#39;)), is this just &#39;Flask&#39;?</span>
+  <span style="color:#e6db74">&#39;/usr/local/lib/python3.6/dist-packages/flask/app.py&#39;</span> <span style="color:#75715e">##getattr (mod, &#39;__file__&#39;, None) </span>
+  ] 
+
+private_bits <span style="color:#f92672">=</span> [ 
+  <span style="color:#e6db74">&#39;2485378547714&#39;</span> , <span style="color:#75715e">#MAC Address, decimal</span>
+  <span style="color:#e6db74">&#39;b875f129-5ae6-4ab1-90c0-ae07a6134578e8c9f0084a3b2b724e4f2a526d60bf0a62505f38649743b8522a8c005b8334ae&#39;</span> 
+  <span style="color:#75715e">## ^^ boot-id + one of the cgroups. </span>
+  ] 
+</code></pre></div><p>Give the script these hard-coded values and get the pin, provide it to the debugger and now you have a python console ready to go!</p>
+
+    <img src="/images/bo1lers2021_flag.png"  alt="flag"  class="center"  style="border-radius: 8px;"  />
+
+
+<p><code>b0ctf{Fl4sK_d3buG_is_InseCure}</code></p>
+<p><strong>Vie</strong></p>
+]]></content>
+        </item>
         
         <item>
             <title>UTCTF 2021</title>
@@ -174,16 +266,16 @@ This means that if we try to inject single quotes ourselves to try a classic sql
 <h2 id="web-utils">Web Utils</h2>
 <p>The application appears to be a pastebin and also a URL shortener. We&rsquo;re provided the source as well, and what&rsquo;s interesting is to note how the application parses our input, which is treated as JSON.</p>
 <p>If we create a paste, there&rsquo;s a front-end script which runs a request to <code>/api/createPaste</code>, which stores our paste into a database.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#a6e22e">async</span> () =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#66d9ef">async</span> () =&gt; {
 
-  <span style="color:#a6e22e">await</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>) =&gt; {
+  <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>) =&gt; {
     window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;load&#39;</span>, <span style="color:#a6e22e">resolve</span>);
   });
 
-  document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-form&#39;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;submit&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">e</span>) =&gt; {
+  document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-form&#39;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;submit&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">e</span>) =&gt; {
     <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">text</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-input&#39;</span>).<span style="color:#a6e22e">value</span>;
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> (<span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/createPaste&#39;</span>, {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> (<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/createPaste&#39;</span>, {
       <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
       <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
         <span style="color:#e6db74">&#39;Content-Type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>
@@ -234,7 +326,7 @@ This means that if we try to inject single quotes ourselves to try a classic sql
 <h3 id="build-a-panel">Build a Panel</h3>
 <p>The first challenge is roughly the same code but the admin bot doesn&rsquo;t have the same regex check. So, the solution for both challenges may involve much of the same steps.</p>
 <p>We can examine source and find this interesting function (also present in &ldquo;build a better panel&rdquo;):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/admin/debug/add_widget&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/admin/debug/add_widget&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>;
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">queryParams</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
 
@@ -367,7 +459,7 @@ I&amp;rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&am
 <p>Although unintended, still a good discussion on the security of referrer headers. Looking at the flag also validated my suspicions of this challenge&rsquo;s intended solution requiring XS-leaks.</p>
 <h2 id="baby-csp">Baby-CSP</h2>
 <p>I was primarily focused on this challenge. We see some interesting PHP code right away upon visiting it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#66d9ef">require_once</span>(<span style="color:#e6db74">&#34;secrets.php&#34;</span>);
 $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_bytes</span>(<span style="color:#ae81ff">8</span>);
 
@@ -422,7 +514,7 @@ $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_b
 
 <p>We get 10 warnings (A warning per iteration in the for loop) that fill the webpage, complaining about our mistake. The reason why we see these is because the PHP server is in a development environment - so the warnings are given to us in the responses.</p>
 <p>PHP was initially developed as a procedural language. The script provided to us is executed in order - it first does actions according to the presence of a <code>flag</code> in a recieved request, then it iterates through the for loop, hashing the <code>nonce</code> value accordingly. Then, it performs actions based on the presence of the <code>user</code> parameter. It is here in the if statement for the <code>user</code> query where the Content-Security-Policy is set:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">header(&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-$nonce&#39;; script-src &#39;nonce-$nonce&#39;&#34;);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;; script-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;&#34;</span>);
 </code></pre></div><p>So headers are being modified when the <code>user</code> query is specified, but if you also specify an <code>alg</code> query and give it an invalid value, the server&rsquo;s response will first have 10 warnings before the headers of that response are ready.</p>
 <p>These warnings also reflect our input back to us, so we can modify the size of each warning by our <code>alg</code> input. Why is this relevant?</p>
 <p>PHP has a mechanism called output buffering - if you have a script that began outputting data before the headers were set, that data is put into a buffer which will be sent once the entire response is ready. The PHP response buffer is 4096 bytes (4KB), and once it&rsquo;s filled, it&rsquo;s immediately flushed and the data within it is sent over.</p>
@@ -777,8 +869,8 @@ Let&amp;rsquo;s Begin! The confessions webpage was a message-generation applicat
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <p>The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it. Under the hood we see the nature of how these messages are stored:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// talk to the GraphQL endpoint
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gql</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">query</span>, <span style="color:#a6e22e">variables</span><span style="color:#f92672">=</span>{}) =&gt; {
-    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/graphql&#39;</span>, {
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gql</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">query</span>, <span style="color:#a6e22e">variables</span><span style="color:#f92672">=</span>{}) =&gt; {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/graphql&#39;</span>, {
         <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
         <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
             <span style="color:#e6db74">&#39;content-type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>,
@@ -789,7 +881,7 @@ Let&amp;rsquo;s Begin! The confessions webpage was a message-generation applicat
             <span style="color:#a6e22e">variables</span>,
         }),
     });
-    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">json</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">json</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
     <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">length</span>) {
         <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span>;
     } <span style="color:#66d9ef">else</span> {
@@ -798,10 +890,10 @@ Let&amp;rsquo;s Begin! The confessions webpage was a message-generation applicat
 };
 
 <span style="color:#75715e">// some queries/mutations
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfession</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">hash</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;query Q($hash: String) { confession(hash: $hash) { title, hash } }&#39;</span>, { <span style="color:#a6e22e">hash</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confession</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfessionWithMessage</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> <span style="color:#a6e22e">id</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation Q($id: String) { confessionWithMessage(id: $id) { title, hash, message } }&#39;</span>, { <span style="color:#a6e22e">id</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confessionWithMessage</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addConfession</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { id } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">previewHash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { hash } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfession</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">hash</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;query Q($hash: String) { confession(hash: $hash) { title, hash } }&#39;</span>, { <span style="color:#a6e22e">hash</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confession</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfessionWithMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">id</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation Q($id: String) { confessionWithMessage(id: $id) { title, hash, message } }&#39;</span>, { <span style="color:#a6e22e">id</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confessionWithMessage</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addConfession</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { id } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">previewHash</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { hash } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
 
 </code></pre></div><p>The application uses graphQL as an intermediary to the database. Specifically, the client &ldquo;talks&rdquo; to graphql via the <code>\graphql</code> endpoint. If we take a look at what happens when we create a message:</p>
 
@@ -1183,7 +1275,7 @@ This is a discussion on the importance of protecting against such attacks, and t
 <p>CSRF attacks are exploits that trick users into unknowingly performing actions that they didn&rsquo;t intend/consent to perform. They work through using your credentials without you actually knowing - through the use of automatic additions of your session ID to browser cookies in HTTP requests. How, specifically, do the CSRF exploits work?</p>
 <p>Consider my writeup for the challenge &ldquo;<a href="/posts/2020/06/redpwnctf-2020-part-2/#cookie-recipes-v2">cookie-recipes-v2</a>&rdquo; from Redpwnctf 2020. The challenge called for us to execute multiple CSRF attacks - but the reason why we wanted to do a CSRF attack and not an XSS attack (the two are quite similar) lies in the architecture of the underlying server.</p>
 <p>The premise of the challenge was that you could &ldquo;purchase&rdquo; the flag in the program if you had enough virtual credits to do so - the price for buying the flag was around 1000 credits, but when you make an account, you start with only 200 (or 100?). At first glance, there are no ways to gain more credits, and so you were out of luck. However, in the infrastructure of the application, there exists a certain API endpoint called <code>/gift</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">405</span>);
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
@@ -1264,7 +1356,7 @@ This is a discussion on the importance of protecting against such attacks, and t
 <p>CSRF tokens violate two main paradigms that would typically ensure the success of a CSRF attack: making some aspect of the request parameters in doing a state-changing action unpredictable, and additionally needing more than just the cookie session ID to validate a user.</p>
 <p>The tokens are values that which are unpredictable - consider them to be variables like passwords, and thus are only as effective as the number of bits of entropy is high.</p>
 <p>CSRF tokens work through being generated from the server, and transmitted back to the client. The client must then include this secret value into their next HTML request back to the server - if that value is malformed or missing, the server rejects the request regardless if that user&rsquo;s session ID from the cookie was validated in it. The generation of the token can be once per user, or once per new request. Typically, adding this extra level of verification to all state-changing requests are a good way to mitigate any possible CSRF exploits in your application. However, the use of these tokens must also be treated with caution, for they can be trivial to bypass if not implemented correctly.</p>
-<p>As an example, consider my other writeup for the challenge &ldquo;<a href="/posts/2020/07/redpwnctf-2020-part-3/">Viper</a>&quot;, also from REDPWNCTF 2020. The premise of that challenge focused mainly on another vulnerability known as cache-poisoning, but at its core, the use of poisoning was a vehicle to deliver a CSRF attack. We wanted to utilize an API endpoint that was only relevant if visited by an admin. The endpoint in question would change the contents of a webpage if it was called. This challenge also employed CSRF tokens that would shut down any basic attempts at unauthorized request making, which were generated by an RNG function. Consider the provided code found in Viper&rsquo;s infrastructure:</p>
+<p>As an example, consider my other writeup for the challenge &ldquo;<a href="/posts/2020/07/redpwnctf-2020-part-3/">Viper</a>&rdquo;, also from REDPWNCTF 2020. The premise of that challenge focused mainly on another vulnerability known as cache-poisoning, but at its core, the use of poisoning was a vehicle to deliver a CSRF attack. We wanted to utilize an API endpoint that was only relevant if visited by an admin. The endpoint in question would change the contents of a webpage if it was called. This challenge also employed CSRF tokens that would shut down any basic attempts at unauthorized request making, which were generated by an RNG function. Consider the provided code found in Viper&rsquo;s infrastructure:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/analytics&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ip_address</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">ip_address</span>;
 
@@ -1291,7 +1383,7 @@ This is a discussion on the importance of protecting against such attacks, and t
     });
  });
 </code></pre></div><p>The token in this challenge is a randomly generated number, that is between 10000-1000000000 bits long. There is no efficient way to brute-force its value. That being said, the mishandling of such tokens is one of the vulnerabilities we are meant to exploit in this challenge.
-Tokens should not be passed around in multiple areas of the infrastructure where it could possibly be leaked. Ideally, you would want your token values to be dynamically generated unique to your user/request, and then discarded afterwards. However, the Viper challenge employed a cache which kept the admin&rsquo;s CSRF token, which was dynamically changing based on the number of times the admin visited the page, inside it with a trivially easy-to-figure-out cache key(&quot;__csrftoken__admin_account&rdquo;). If you wanted to grab the CSRF token, you just needed to make a request with the correct cache key formatted in your request params to recieve the CSRF token.
+Tokens should not be passed around in multiple areas of the infrastructure where it could possibly be leaked. Ideally, you would want your token values to be dynamically generated unique to your user/request, and then discarded afterwards. However, the Viper challenge employed a cache which kept the admin&rsquo;s CSRF token, which was dynamically changing based on the number of times the admin visited the page, inside it with a trivially easy-to-figure-out cache key(&quot;__csrftoken__admin_account&quot;). If you wanted to grab the CSRF token, you just needed to make a request with the correct cache key formatted in your request params to recieve the CSRF token.
 With this, you could construct a CSRF attack as normal, including the token to bypass that additional check.</p>
 <pre><code>curl http://2020.redpwnc.tf:31291/analytics?ip_address=__csrftoken__admin_account
 </code></pre>
@@ -1795,7 +1887,7 @@ looks like</li>
 };
 </code></pre></div><p>From the first snippet of code above, we know that admin&rsquo;s username is <code>admin</code> and their id is 0. If we can somehow call the methods that subsequently call these statements, we could retrieve the credentials of the admin. As tokens are generated unique to the user, we won&rsquo;t be able to spoof as admin without their cookie token, and so we need to find a way to get the admin info that doesn&rsquo;t rely on using the cookie-generated token.  To this end, <code>fromId</code> is attractive, as it requires just the id of the user.</p>
 <p>I am utilizing burp&rsquo;s proxy service. I register an account as usual, and notice the api call to <code>/userInfo</code>, which, according to the javascript source, will deliver the info of a specific user based on their ID - likely preparing the <code>fromId</code> SQL statement.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;userInfo&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;userInfo&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> {
             <span style="color:#e6db74">&#39;success&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
         };
@@ -1843,7 +1935,7 @@ looks like</li>
 
 <p>However, it is shown that the admin account also doesn&rsquo;t have enough credits, and they haven&rsquo;t purchased it before so its not in their account. Additionally, you can&rsquo;t login as it also checks the ip of the session - but this can be bypassed by converting our request into JSON, as they parse xml requests and bypass checks if not in xml. Despite that, it appears as though this is a dead end - so let&rsquo;s consider our other avenue of attack: adding more credits to our account.</p>
 <p>Another function of importance is the API call to <code>/gift</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">405</span>);
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
@@ -1932,7 +2024,7 @@ looks like</li>
         <span style="color:#75715e">// Check admin password to prevent CSRF
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">body</span>;
         <span style="color:#66d9ef">try</span> {
-            <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseRequest</span>(<span style="color:#a6e22e">req</span>);
+            <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseRequest</span>(<span style="color:#a6e22e">req</span>);
         } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">400</span>);
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
@@ -2159,7 +2251,7 @@ function clean(input) {
 <p>Register and see some pretty anti-panda facts. At the bottom is a secret fact that will bar anyone who isn&rsquo;t a member. The challenge&rsquo;s provided script reveals the check:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">...
 
-<span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">generateToken</span>(<span style="color:#a6e22e">username</span>) {
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">generateToken</span>(<span style="color:#a6e22e">username</span>) {
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">algorithm</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;aes-192-cbc&#39;</span>; 
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">KEY</span>, <span style="color:#e6db74">&#39;hex&#39;</span>); 
     <span style="color:#75715e">// Predictable IV doesn&#39;t matter here
@@ -2175,14 +2267,14 @@ function clean(input) {
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">encrypted</span>;
 }
 
-<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/api/flag&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/api/flag&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
     <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
         <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>});
         <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
         <span style="color:#66d9ef">return</span>;
     }
 
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">decodeToken</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span>);
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">decodeToken</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span>);
     <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">result</span>) {
         <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>});
         <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
@@ -2526,7 +2618,7 @@ Unfortunately, because of that these problems required more time for me to solve
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <h2 id="hard_pentest_1">Hard_Pentest_1</h2>
 <p>The no-css basic HTML page exposes its php scripts right off the bat.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#75715e">//Clear the uploads directory every hour
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">highlight_file</span>(<span style="color:#66d9ef">__FILE__</span>);
 $sandbox <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;uploads/&#34;</span><span style="color:#f92672">.</span> <span style="color:#a6e22e">md5</span>(<span style="color:#e6db74">&#34;De1CTF2020&#34;</span><span style="color:#f92672">.</span>$_SERVER[<span style="color:#e6db74">&#39;REMOTE_ADDR&#39;</span>]);
@@ -2562,51 +2654,51 @@ $sandbox <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;u
     }
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
 }
-<span style="color:#75715e">?&gt;</span>
-
-&lt;<span style="color:#f92672">html</span>&gt;
-&lt;<span style="color:#f92672">head</span>&gt;
-&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;
-&lt;<span style="color:#f92672">title</span>&gt;upload&lt;/<span style="color:#f92672">title</span>&gt;
-&lt;/<span style="color:#f92672">head</span>&gt;
-&lt;<span style="color:#f92672">body</span>&gt;
-
-&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;index.php&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span> <span style="color:#a6e22e">enctype</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;multipart/form-data&#34;</span>&gt;
-    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;file&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;file&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;file&#34;</span>&gt;&lt;<span style="color:#f92672">br</span>&gt;
-    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span>&gt;
-&lt;/<span style="color:#f92672">form</span>&gt;
-
-&lt;/<span style="color:#f92672">body</span>&gt;
-&lt;/<span style="color:#f92672">html</span>&gt;
-</code></pre></div><p>The <code>Check()</code> method is important here.</p>
+<span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">&lt;html&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;head&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;meta charset=&#34;utf-8&#34;&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;title&gt;upload&lt;/title&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;/head&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;body&gt;
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">&lt;form action=&#34;index.php&#34; method=&#34;post&#34; enctype=&#34;multipart/form-data&#34;&gt;
+</span><span style="color:#960050;background-color:#1e0010">    &lt;input type=&#34;file&#34; name=&#34;file&#34; id=&#34;file&#34;&gt;&lt;br&gt;
+</span><span style="color:#960050;background-color:#1e0010">    &lt;input type=&#34;submit&#34; name=&#34;submit&#34; value=&#34;submit&#34;&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;/form&gt;
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">&lt;/body&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;/html&gt;
+</span></code></pre></div><p>The <code>Check()</code> method is important here.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">
-function Check(){
-    $BlackExts = array(&#34;php&#34;);
-    $ext = explode(&#34;.&#34;, $_FILES[&#34;file&#34;][&#34;name&#34;]);
-    $exts = trim(end($ext));
-    $file_content = file_get_contents($_FILES[&#34;file&#34;][&#34;tmp_name&#34;]);
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Check</span>(){
+    $BlackExts <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(<span style="color:#e6db74">&#34;php&#34;</span>);
+    $ext <span style="color:#f92672">=</span> <span style="color:#a6e22e">explode</span>(<span style="color:#e6db74">&#34;.&#34;</span>, $_FILES[<span style="color:#e6db74">&#34;file&#34;</span>][<span style="color:#e6db74">&#34;name&#34;</span>]);
+    $exts <span style="color:#f92672">=</span> <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">end</span>($ext));
+    $file_content <span style="color:#f92672">=</span> <span style="color:#a6e22e">file_get_contents</span>($_FILES[<span style="color:#e6db74">&#34;file&#34;</span>][<span style="color:#e6db74">&#34;tmp_name&#34;</span>]);
 
-    if(!preg_match(&#39;/[a-z0-9;~^`<span style="color:#960050;background-color:#1e0010">&amp;</span>|]/is&#39;,$file_content)  <span style="color:#960050;background-color:#1e0010">&amp;&amp;</span> 
-        !in_array($exts, $BlackExts) <span style="color:#960050;background-color:#1e0010">&amp;&amp;</span> 
-        !preg_match(&#39;/\.\./&#39;,$_FILES[&#34;file&#34;][&#34;name&#34;])) {
-          return true;
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">preg_match</span>(<span style="color:#e6db74">&#39;/[a-z0-9;~^`&amp;|]/is&#39;</span>,$file_content)  <span style="color:#f92672">&amp;&amp;</span> 
+        <span style="color:#f92672">!</span><span style="color:#a6e22e">in_array</span>($exts, $BlackExts) <span style="color:#f92672">&amp;&amp;</span> 
+        <span style="color:#f92672">!</span><span style="color:#a6e22e">preg_match</span>(<span style="color:#e6db74">&#39;/\.\./&#39;</span>,$_FILES[<span style="color:#e6db74">&#34;file&#34;</span>][<span style="color:#e6db74">&#34;name&#34;</span>])) {
+          <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
     }
-    return false;
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
 
 
 </code></pre></div><p>We can only upload php files, so maybe I can try to open a webshell here. The name, &ldquo;Hard_Pentest&rdquo; also gives me a hint that I should try to open a webshell. But the if statement blocks all alphanumerics and certain special characters from being processed. So, at first glance, anything we feed into this function won&rsquo;t be processed. But php is a <del>strange and weird</del> fascinating language with plenty of loopholes and different quirks about it, one of them, being the concept of &ldquo;<a href="https://www.php.net/manual/en/language.operators.increment.php">string/character arithmetic</a>&rdquo; (not the real term but I have no other informed way to describe it):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$a = &#39;Z&#39;
-echo $a++; //Basically, Z + 1. This will print &#39;AA&#39;
-
-output: &#39;AA&#39;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Z&#39;</span>
+<span style="color:#66d9ef">echo</span> $a<span style="color:#f92672">++</span>; <span style="color:#75715e">//Basically, Z + 1. This will print &#39;AA&#39;
+</span><span style="color:#75715e"></span>
+<span style="color:#a6e22e">output</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;AA&#39;</span>
 </code></pre></div><p>This is valid PHP. This definitely isn&rsquo;t something you&rsquo;d see in other conventional languages. What does it mean to increment &lsquo;Z&rsquo; by 1? Logically it makes no sense, but in PHP it does!</p>
 <p>Another thing PHP has that we can utilize here is shorthand statements. Plenty of other languages have this feature as well in some way or another. For example, the ternary operator <code>?</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$result = $condition ? &#39;Jam&#39; : &#39;Vie&#39;;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$result <span style="color:#f92672">=</span> $condition <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;Jam&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Vie&#39;</span>;
 </code></pre></div><p>is shorthand for</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">if ($condition){
-    $result = &#39;Jam&#39;;
-}else{
-    $result = &#39;Vie&#39;;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#66d9ef">if</span> ($condition){
+    $result <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Jam&#39;</span>;
+}<span style="color:#66d9ef">else</span>{
+    $result <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Vie&#39;</span>;
 }
 </code></pre></div><p>And finally, the last quirk about php: arrays and strings.</p>
 <p>In other languages, arrays and strings are treated as distinct, two different data types. Some languages may treat strings as an array of chars, but by convention, just any random and arbitrary array can&rsquo;t and shouldn&rsquo;t be joined with a string without proper typesetting and checking. Okay, sounds fair and good and all. But what does php do instead?</p>
@@ -2622,23 +2714,23 @@ A
 </code></pre><p>What does this mean for us?</p>
 <p>Because of the <code>Check()</code> function, we can&rsquo;t use alphanumerics or certain special characters. But for the list of valid special characters, <code>[]</code> square brackets are allowed, so we can declare arrays as normal. And we can still declare variables as usual, and the <code>+</code> operators are still valid so we can utilize string arithmetic.</p>
 <p>So, all in all, if we wanted to spell the word <code>GET</code> with all the restrictions above, it would look like</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=</span>[] <span style="color:#75715e">?&gt;</span>            //Declare array
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=@</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$_</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e">?&gt;</span>         //array is converted to a string, &#34;Array&#34;
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_<span style="color:#f92672">=</span>$_[<span style="color:#e6db74">&#39;!&#39;</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#39;@&#39;</span>] <span style="color:#75715e">?&gt;</span>  //Access first element in array. The &#39;!&#39;==&#39;@&#39; check returns 0
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $___<span style="color:#f92672">=</span>$_ <span style="color:#75715e">?&gt;</span>          //&#39;A&#39;
-
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $__ <span style="color:#f92672">=</span> $_ <span style="color:#75715e">?&gt;</span>
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> <span style="color:#f92672">@</span>$____ <span style="color:#f92672">=</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#75715e">?&gt;</span>   
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_______ <span style="color:#f92672">=</span> $__ <span style="color:#75715e">?&gt;</span>   //&#39;G&#39;     
-
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $__ <span style="color:#f92672">=</span> $_ <span style="color:#75715e">?&gt;</span>
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> <span style="color:#f92672">@</span>$____ <span style="color:#f92672">=</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#75715e">?&gt;</span>    //&#39;E&#39;
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_______ <span style="color:#f92672">.=</span> $__ <span style="color:#75715e">?&gt;</span>                           //&#39;GE&#39;
-
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $__ <span style="color:#f92672">=</span> $_ <span style="color:#75715e">?&gt;</span>
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> <span style="color:#f92672">@</span>$____ <span style="color:#f92672">=</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#f92672">+</span> $__<span style="color:#f92672">++</span> <span style="color:#75715e">?&gt;</span>   //&#39;T&#39;
-<span style="color:#75715e">&lt;?</span><span style="color:#f92672">=</span> $_______ <span style="color:#f92672">.=</span> $__  <span style="color:#75715e">?&gt;</span> //&#39;GET&#39;
-</code></pre></div><p>Armed with this knowledge, we can write out entire lines of code of php that are just a series of various shorthand operators and symbols, and string arithmetic.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?=</span> $_<span style="color:#f92672">=</span>[] <span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">            //Declare array
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= $_=@&#34;$_&#34; ?&gt;         //array is converted to a string, &#34;Array&#34;
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= $_=$_[&#39;!&#39;==&#39;@&#39;] ?&gt;  //Access first element in array. The &#39;!&#39;==&#39;@&#39; check returns 0
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= $___=$_ ?&gt;          //&#39;A&#39;
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= $__ = $_ ?&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= @$____ = $__++ + $__++ + $__++ + $__++ + $__++ + $__++ ?&gt;   
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= $_______ = $__ ?&gt;   //&#39;G&#39;     
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= $__ = $_ ?&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= @$____ = $__++ + $__++ + $__++ + $__++ ?&gt;    //&#39;E&#39;
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= $_______ .= $__ ?&gt;                           //&#39;GE&#39;
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= $__ = $_ ?&gt;
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= @$____ = $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ + $__++ ?&gt;   //&#39;T&#39;
+</span><span style="color:#960050;background-color:#1e0010">&lt;?= $_______ .= $__  ?&gt; //&#39;GET&#39;
+</span></code></pre></div><p>Armed with this knowledge, we can write out entire lines of code of php that are just a series of various shorthand operators and symbols, and string arithmetic.</p>
 <p>The first hurdle is the existence of the php opening tag. All php code requires the <code>&lt;?php</code> opening tag before anything, kinda like the start of any HTML document needing <code>&lt;HTML&gt;</code> to be declared first at the top.</p>
 <p>Checking out php open tags, we come across the existence of shorthand tags for them, in the <a href="https://www.php.net/manual/en/language.basic-syntax.phptags.php">PHP documentation</a>:</p>
 <blockquote>
@@ -2672,7 +2764,7 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
 </code></pre><p>And we retrieve the cookie, which has the flag:</p>
 <p><code>FLAG=De1CTF{I_l1k4_</code></p>
 <p>But this is just one half of the flag. Where&rsquo;s the other half?</p>
-<p>Eventually, De1CTF released a hint: &ldquo;what is the admin doing?&quot;. After the CTF, I ruminated on the implications of this hint.</p>
+<p>Eventually, De1CTF released a hint: &ldquo;what is the admin doing?&rdquo;. After the CTF, I ruminated on the implications of this hint.</p>
 <p>Looking at the document shows hundreds of png images, of what looks like other people&rsquo;s passports. I guess, the other half of the flag is among them. But the hint got me thinking - obviously, the admin would have to be leafing through the screenshots but its not like the flag will just magically turn up in one of the images cause they forgot to hide their flag text file out of view. So unless I can control the screenshot, I doubt I&rsquo;ll be able to find the flag.</p>
 <p>The library &lsquo;<a href="https://html2canvas.hertzen.com/">html2canvas</a>&rsquo; comes to mind - taking screenshots with javascript. If I pass a payload to the admin that takes a screenshot of their interface, will the flag be there?</p>
 <p>The idea here is to upload some code using html2canvas. If we give it a .png extension the server won&rsquo;t complain, after which you can fetch your image back, whatever you called it, and evaluate it so it takes the screenshot and you can download it. Your code should import the html2canvas library, take a screenshot, then upload that screenshot to the server for you to fetch and download.</p>
@@ -2724,7 +2816,7 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
 <p>Now the hard part - how <em>do we</em> ask the server? How do we send a request to the server to send us the email with the flag as an attachment?</p>
 <p>I spent a long time trying to figure out how to send a rogue request to the rabbitmq server that will send us the email we want. I spent hours just browsing through the source code, not really paying attention&hellip;</p>
 <p>Until I came across this piece of code in the <code>api/index.ts</code> file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/image&#34;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/image&#34;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">let</span> { <span style="color:#a6e22e">url</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
         <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;string&#34;</span>) {
             <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad body&#34;</span>);
@@ -2734,8 +2826,8 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
 
         <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">image</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Buffer</span>;
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;http:&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;https:&#34;</span>) {
-            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imageReq</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">toString</span>(), { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span> });
-            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> (<span style="color:#a6e22e">imageReq</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">any</span>).<span style="color:#a6e22e">buffer</span>();
+            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imageReq</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">toString</span>(), { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span> });
+            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> (<span style="color:#a6e22e">imageReq</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">any</span>).<span style="color:#a6e22e">buffer</span>();
         } 
         
          <span style="color:#75715e">//THIS PART HERE!
@@ -2743,13 +2835,13 @@ But that&rsquo;s just part 1 of the problem: we&rsquo;ve sucessfully opened a sh
             <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">username</span>);
             <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">password</span>);
             <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">pathname</span>);
-            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ftpClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">connectFtp</span>({
+            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ftpClient</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">connectFtp</span>({
                 <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">hostname</span>,
                 <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> parseInt(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span>) <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
                 <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
                 <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
             });
-            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">ftpClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">filename</span>);
+            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">ftpClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">filename</span>);
         } <span style="color:#66d9ef">else</span> {
             <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad image url&#34;</span>);
         }

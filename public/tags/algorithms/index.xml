@@ -6,11 +6,7 @@
     <description>Recent content in algorithms on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Jul 2020 00:22:00 -0600</lastBuildDate>
-    
-	<atom:link href="https://jamvie.net/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 14 Jul 2020 00:22:00 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cryptography and P vs. NP: A Basic Outline</title>
       <link>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</link>

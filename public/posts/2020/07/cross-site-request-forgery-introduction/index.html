@@ -44,14 +44,9 @@ This is a discussion on the importance of protecting against such attacks, and t
 
 <meta itemprop="name" content="Cross-Site Request Forgery: Introduction">
 <meta itemprop="description" content="Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&rsquo;re the reason you shouldn&rsquo;t click suspicious links, even if the URL sort of sounds legitimate.
-This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.">
-<meta itemprop="datePublished" content="2020-07-27T19:07:51-06:00" />
+This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well."><meta itemprop="datePublished" content="2020-07-27T19:07:51-06:00" />
 <meta itemprop="dateModified" content="2020-07-27T19:07:51-06:00" />
-<meta itemprop="wordCount" content="1644">
-<meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
-
-
-
+<meta itemprop="wordCount" content="1644"><meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
 <meta itemprop="keywords" content="CSRF,web,instructional," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/img/JAMIE.png"/>
@@ -135,7 +130,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </header>
 
 
@@ -165,7 +159,7 @@ if (!doNotTrack) {
 <p>CSRF attacks are exploits that trick users into unknowingly performing actions that they didn&rsquo;t intend/consent to perform. They work through using your credentials without you actually knowing - through the use of automatic additions of your session ID to browser cookies in HTTP requests. How, specifically, do the CSRF exploits work?</p>
 <p>Consider my writeup for the challenge &ldquo;<a href="https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/#cookie-recipes-v2">cookie-recipes-v2</a>&rdquo; from Redpwnctf 2020. The challenge called for us to execute multiple CSRF attacks - but the reason why we wanted to do a CSRF attack and not an XSS attack (the two are quite similar) lies in the architecture of the underlying server.</p>
 <p>The premise of the challenge was that you could &ldquo;purchase&rdquo; the flag in the program if you had enough virtual credits to do so - the price for buying the flag was around 1000 credits, but when you make an account, you start with only 200 (or 100?). At first glance, there are no ways to gain more credits, and so you were out of luck. However, in the infrastructure of the application, there exists a certain API endpoint called <code>/gift</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
         <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">405</span>);
             <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
@@ -246,7 +240,7 @@ if (!doNotTrack) {
 <p>CSRF tokens violate two main paradigms that would typically ensure the success of a CSRF attack: making some aspect of the request parameters in doing a state-changing action unpredictable, and additionally needing more than just the cookie session ID to validate a user.</p>
 <p>The tokens are values that which are unpredictable - consider them to be variables like passwords, and thus are only as effective as the number of bits of entropy is high.</p>
 <p>CSRF tokens work through being generated from the server, and transmitted back to the client. The client must then include this secret value into their next HTML request back to the server - if that value is malformed or missing, the server rejects the request regardless if that user&rsquo;s session ID from the cookie was validated in it. The generation of the token can be once per user, or once per new request. Typically, adding this extra level of verification to all state-changing requests are a good way to mitigate any possible CSRF exploits in your application. However, the use of these tokens must also be treated with caution, for they can be trivial to bypass if not implemented correctly.</p>
-<p>As an example, consider my other writeup for the challenge &ldquo;<a href="https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/">Viper</a>&quot;, also from REDPWNCTF 2020. The premise of that challenge focused mainly on another vulnerability known as cache-poisoning, but at its core, the use of poisoning was a vehicle to deliver a CSRF attack. We wanted to utilize an API endpoint that was only relevant if visited by an admin. The endpoint in question would change the contents of a webpage if it was called. This challenge also employed CSRF tokens that would shut down any basic attempts at unauthorized request making, which were generated by an RNG function. Consider the provided code found in Viper&rsquo;s infrastructure:</p>
+<p>As an example, consider my other writeup for the challenge &ldquo;<a href="https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/">Viper</a>&rdquo;, also from REDPWNCTF 2020. The premise of that challenge focused mainly on another vulnerability known as cache-poisoning, but at its core, the use of poisoning was a vehicle to deliver a CSRF attack. We wanted to utilize an API endpoint that was only relevant if visited by an admin. The endpoint in question would change the contents of a webpage if it was called. This challenge also employed CSRF tokens that would shut down any basic attempts at unauthorized request making, which were generated by an RNG function. Consider the provided code found in Viper&rsquo;s infrastructure:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/analytics&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ip_address</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">ip_address</span>;
 
@@ -273,7 +267,7 @@ if (!doNotTrack) {
     });
  });
 </code></pre></div><p>The token in this challenge is a randomly generated number, that is between 10000-1000000000 bits long. There is no efficient way to brute-force its value. That being said, the mishandling of such tokens is one of the vulnerabilities we are meant to exploit in this challenge.
-Tokens should not be passed around in multiple areas of the infrastructure where it could possibly be leaked. Ideally, you would want your token values to be dynamically generated unique to your user/request, and then discarded afterwards. However, the Viper challenge employed a cache which kept the admin&rsquo;s CSRF token, which was dynamically changing based on the number of times the admin visited the page, inside it with a trivially easy-to-figure-out cache key(&quot;__csrftoken__admin_account&rdquo;). If you wanted to grab the CSRF token, you just needed to make a request with the correct cache key formatted in your request params to recieve the CSRF token.
+Tokens should not be passed around in multiple areas of the infrastructure where it could possibly be leaked. Ideally, you would want your token values to be dynamically generated unique to your user/request, and then discarded afterwards. However, the Viper challenge employed a cache which kept the admin&rsquo;s CSRF token, which was dynamically changing based on the number of times the admin visited the page, inside it with a trivially easy-to-figure-out cache key(&quot;__csrftoken__admin_account&quot;). If you wanted to grab the CSRF token, you just needed to make a request with the correct cache key formatted in your request params to recieve the CSRF token.
 With this, you could construct a CSRF attack as normal, including the token to bypass that additional check.</p>
 <pre><code>curl http://2020.redpwnc.tf:31291/analytics?ip_address=__csrftoken__admin_account
 </code></pre>
@@ -358,7 +352,7 @@ With this, you could construct a CSRF attack as normal, including the token to b
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -372,7 +366,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
 
 

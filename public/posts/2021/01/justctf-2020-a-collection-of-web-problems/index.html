@@ -46,14 +46,9 @@ I&amp;rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&am
 <meta itemprop="name" content="justCTF[*] 2020 - A Collection of Web Problems">
 <meta itemprop="description" content="This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by justCatTheFish. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.
 Forgotten Name I found this on a total fluke. I wasn&rsquo;t paying attention to the challenge much but the description was compelling:
-I&rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&rsquo;s network, and so instead thought about the nature of their subdomains.">
-<meta itemprop="datePublished" content="2021-01-31T23:05:20-07:00" />
+I&rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&rsquo;s network, and so instead thought about the nature of their subdomains."><meta itemprop="datePublished" content="2021-01-31T23:05:20-07:00" />
 <meta itemprop="dateModified" content="2021-01-31T23:05:20-07:00" />
-<meta itemprop="wordCount" content="1329">
-<meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
-
-
-
+<meta itemprop="wordCount" content="1329"><meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
 <meta itemprop="keywords" content="web,writeups,xss," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/img/JAMIE.png"/>
@@ -138,7 +133,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </header>
 
 
@@ -205,7 +199,7 @@ if (!doNotTrack) {
 <p>Although unintended, still a good discussion on the security of referrer headers. Looking at the flag also validated my suspicions of this challenge&rsquo;s intended solution requiring XS-leaks.</p>
 <h2 id="baby-csp">Baby-CSP</h2>
 <p>I was primarily focused on this challenge. We see some interesting PHP code right away upon visiting it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#66d9ef">require_once</span>(<span style="color:#e6db74">&#34;secrets.php&#34;</span>);
 $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_bytes</span>(<span style="color:#ae81ff">8</span>);
 
@@ -260,7 +254,7 @@ $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_b
 
 <p>We get 10 warnings (A warning per iteration in the for loop) that fill the webpage, complaining about our mistake. The reason why we see these is because the PHP server is in a development environment - so the warnings are given to us in the responses.</p>
 <p>PHP was initially developed as a procedural language. The script provided to us is executed in order - it first does actions according to the presence of a <code>flag</code> in a recieved request, then it iterates through the for loop, hashing the <code>nonce</code> value accordingly. Then, it performs actions based on the presence of the <code>user</code> parameter. It is here in the if statement for the <code>user</code> query where the Content-Security-Policy is set:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">header(&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-$nonce&#39;; script-src &#39;nonce-$nonce&#39;&#34;);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;; script-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;&#34;</span>);
 </code></pre></div><p>So headers are being modified when the <code>user</code> query is specified, but if you also specify an <code>alg</code> query and give it an invalid value, the server&rsquo;s response will first have 10 warnings before the headers of that response are ready.</p>
 <p>These warnings also reflect our input back to us, so we can modify the size of each warning by our <code>alg</code> input. Why is this relevant?</p>
 <p>PHP has a mechanism called output buffering - if you have a script that began outputting data before the headers were set, that data is put into a buffer which will be sent once the entire response is ready. The PHP response buffer is 4096 bytes (4KB), and once it&rsquo;s filled, it&rsquo;s immediately flushed and the data within it is sent over.</p>
@@ -359,7 +353,7 @@ $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_b
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -373,7 +367,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
 
 

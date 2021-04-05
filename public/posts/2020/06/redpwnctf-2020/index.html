@@ -44,14 +44,9 @@ Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty
 
 <meta itemprop="name" content="RedPwnCTF 2020">
 <meta itemprop="description" content="RedPwnCTF 2020 is a beginner to intermediate CTF that&rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
-Let&rsquo;s Begin! The problems are in no way ordered in terms of difficulty.">
-<meta itemprop="datePublished" content="2020-06-25T16:26:44-06:00" />
+Let&rsquo;s Begin! The problems are in no way ordered in terms of difficulty."><meta itemprop="datePublished" content="2020-06-25T16:26:44-06:00" />
 <meta itemprop="dateModified" content="2020-06-25T16:26:44-06:00" />
-<meta itemprop="wordCount" content="1139">
-<meta itemprop="image" content="https://jamvie.net/images/REDPWN2020_LoginPage.png">
-
-
-
+<meta itemprop="wordCount" content="1139"><meta itemprop="image" content="https://jamvie.net/images/REDPWN2020_LoginPage.png">
 <meta itemprop="keywords" content="web,xss,sqli," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/images/REDPWN2020_LoginPage.png"/>
@@ -135,7 +130,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 </header>
 
 
@@ -318,7 +312,7 @@ function clean(input) {
 <p>Register and see some pretty anti-panda facts. At the bottom is a secret fact that will bar anyone who isn&rsquo;t a member. The challenge&rsquo;s provided script reveals the check:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">...
 
-<span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">generateToken</span>(<span style="color:#a6e22e">username</span>) {
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">generateToken</span>(<span style="color:#a6e22e">username</span>) {
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">algorithm</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;aes-192-cbc&#39;</span>; 
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">KEY</span>, <span style="color:#e6db74">&#39;hex&#39;</span>); 
     <span style="color:#75715e">// Predictable IV doesn&#39;t matter here
@@ -334,14 +328,14 @@ function clean(input) {
     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">encrypted</span>;
 }
 
-<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/api/flag&#39;</span>, <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/api/flag&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
     <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
         <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>});
         <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
         <span style="color:#66d9ef">return</span>;
     }
 
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">decodeToken</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span>);
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">decodeToken</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">token</span>);
     <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">result</span>) {
         <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>});
         <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
@@ -488,7 +482,7 @@ If we make our username overwrite the first assignment to the member field, we c
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;
@@ -502,7 +496,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 
 
 
