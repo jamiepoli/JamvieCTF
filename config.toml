@@ -105,11 +105,7 @@ disableHugoGeneratorInject = false
   [[params.social]]
     name = "hackerone"
     url  =  "https://hackerone.com/jamvie"
-
-  [[params.social]]
-    name = "twitter"
-    url  =  "https://twitter.com/vie_please"
-
+    
 [menu]
   [[menu.main]]
     identifier = "about"
