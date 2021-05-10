@@ -24,7 +24,7 @@ Anyone who is anybody in the hacker space knows about DEF CON. It is _the_ top C
 
 I still have a long way to go, but I am glad that my team and I worked hard to land among the top 25 of DEF CON Qualifiers 2021 edition. This is big for us, given how we are still a recently new team (We only started in Feb of 2019), and we were the only Canadian team to land that good this year. Hopefully, next year, we can work harder to beat our own score! Maybe until then I'll brush up on my reversing skills so I don't do nothing for the first day :P 
 
-Landing a respectable position among the top 25 teams in DE CON Quals is still a fact I'm absorbing and attempting to process. I know my team, and I know my team members all work hard and push against their limits to learn and grow. I'm extremely proud of each and every one of them, and certainly, I'm happy at myself for even solving a DEF CON challenge in the first place. 
+Landing a respectable position among the top 25 teams in DEF CON Quals is still a fact I'm absorbing and attempting to process. I know my team, and I know my team members all work hard and push against their limits to learn and grow. I'm extremely proud of each and every one of them, and certainly, I'm happy at myself for even solving a DEF CON challenge in the first place. 
 
 I'd like to think that as I progress in the CTF world, every little victory will be celebrated and recognized. At this same time one year ago, I was thinking to myself how much I needed to do to catch up to both my teammates, and to others in the CTF world who seemed to be a on a level beyond me. I still have quite a bit of climbing to do, but allow me a minute to indulge myself and be proud of what I was able to learn in a short period of time. 
 
