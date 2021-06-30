@@ -19,8 +19,9 @@ _[Link](https://ngrok.com/)_
 I love ngrok. It's easily my most utilized tool. It's great for literally anything, since at its core it's just a tunneler to expose a port on your localhost. Spin up a quick HTTP server and open ngrok on that same port, and now you have a public HTTP server. Start up a netcat listener and use ngrok on TCP mode, and now all you need is a reverse shell payload to be executed on some poor victim's server. The possibilities are endless. 
 
 ## 2. Python
+_[Link](https://www.python.org/)_
 
-Can I call Python a tool? It's my scripting language of choice. One year ago, my Python skills were pretty barren (I was a staunch believer in C# supremacy. Microsoft, heyy) - now, most if not all of my coding (from scripts to full-fledged programs) are done in Python. It's remarkably easy to create anything with it. ALL of my ctf scripts are in Python, and most of my academic projects are also written in it. Not only that, but Python comes with an incredible library called pwntools containing just about everything you could ever want in a CTF-centered package. 
+Can I call Python a tool? It's my scripting language of choice. One year ago, my Python skills were pretty barren (I was a staunch believer in C# supremacy. Microsoft, heyy) - now, most if not all of my coding (from scripts to full-fledged programs) are done in Python. It's remarkably easy to create anything with it. ALL of my ctf scripts are in Python, and most of my academic projects are also written in it. Not only that, but Python comes with an incredible library called [pwntools](https://github.com/Gallopsled/pwntools) containing just about everything you could ever want in a CTF-centered package. 
 
 ----
 
