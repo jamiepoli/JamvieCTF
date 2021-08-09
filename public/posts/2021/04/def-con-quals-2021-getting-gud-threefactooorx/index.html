@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once
+DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&amp;rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had 1 web challenge - which was more like reversing, but I&amp;rsquo;ll take what I can get." />
+<meta name="keywords" content=", writeups, reversing, web" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx/" />
+
+
+    <title>
+        
+            DEF CON Quals 2021: Getting Gud &#43; threefactooorx :: Jam ⇆ Vie 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#0c0c0d">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0c0c0d">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="DEF CON Quals 2021: Getting Gud &#43; threefactooorx">
+<meta itemprop="description" content="AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once
+DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had 1 web challenge - which was more like reversing, but I&rsquo;ll take what I can get."><meta itemprop="datePublished" content="2021-04-11T00:07:54-06:00" />
+<meta itemprop="dateModified" content="2021-04-11T00:07:54-06:00" />
+<meta itemprop="wordCount" content="1546"><meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
+<meta itemprop="keywords" content="writeups,reversing,web," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/JAMIE.png"/>
+
+<meta name="twitter:title" content="DEF CON Quals 2021: Getting Gud &#43; threefactooorx"/>
+<meta name="twitter:description" content="AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once
+DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had 1 web challenge - which was more like reversing, but I&rsquo;ll take what I can get."/>
+
+
+
+
+
+    <meta property="article:section" content="writeups" />
+
+    <meta property="article:section" content="" />
+
+
+
+    <meta property="article:published_time" content="2021-04-11 00:07:54 -0600 -0600" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#487860;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>8 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx/">DEF CON Quals 2021: Getting Gud + threefactooorx</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <p><strong>AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once</strong></p>
+<p>DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had <strong>1</strong> web challenge - which was more like reversing, but I&rsquo;ll take what I can get.</p>
+<h2 id="def-con-from-someone-who-thinks-shes-wildly-out-of-her-depth">DEF CON, from someone who thinks she&rsquo;s wildly out of her depth</h2>
+<p>Anyone who is anybody in the hacker space knows about DEF CON. It is <em>the</em> top CTF to really form a reputation out of. If you won DEF CON, you&rsquo;ve found yourself at the top, to say the least. DEF CON has been an established security conference and CTF for years, long before I ever joined the scene. If you ever took a look at my FAQ, you&rsquo;ll know that being a part of DEF CON in any capacity was a lofty goal of mine. I may like CTFs, but to be on the level where I&rsquo;m up against other top teams in the DEF CON leaderboard is truly a mark of recognition I would have to earn.</p>
+<p>I still have a long way to go, but I am glad that my team and I worked hard to land among the top 25 of DEF CON Qualifiers 2021 edition. This is big for us, given how we are still a recently new team (We only started in Feb of 2019), and we were the only Canadian team to land that good this year. Hopefully, next year, we can work harder to beat our own score! Maybe until then I&rsquo;ll brush up on my reversing skills so I don&rsquo;t do nothing for the first day :P</p>
+<p>Landing a respectable position among the top 25 teams in DEF CON Quals is still a fact I&rsquo;m absorbing and attempting to process. I know my team, and I know my team members all work hard and push against their limits to learn and grow. I&rsquo;m extremely proud of each and every one of them, and certainly, I&rsquo;m happy at myself for even solving a DEF CON challenge in the first place.</p>
+<p>I&rsquo;d like to think that as I progress in the CTF world, every little victory will be celebrated and recognized. At this same time one year ago, I was thinking to myself how much I needed to do to catch up to both my teammates, and to others in the CTF world who seemed to be a on a level beyond me. I still have quite a bit of climbing to do, but allow me a minute to indulge myself and be proud of what I was able to learn in a short period of time.</p>
+<h2 id="threefactooorx">Threefactooorx</h2>
+
+    <img src="https://jamvie.net/images/DEFCONQUALS2021-meme.jpeg"  alt="webgang is sad"  class="center"  style="border-radius: 8px;"  />
+
+
+<p><em>pic from <a href="https://twitter.com/oooverflow/status/1388764308838912000?s=20">ooo on twitter</a></em></p>
+<p>The challenge, threefactooorx involved de-obfuscating some horrid js file and then satisfying the checks that it went through, to grab the flag. Specifically, you had to create an html file that checked all the boxes, and give that html file to an admin entity - who likely has the same extension - and they would send back a screenshot of what the html file looked like, loaded on their end.</p>
+<p>Funnily enough, this also seemed like a perfect challenge to practise chrome ndays, but despite thinking about it I didn&rsquo;t end up doing that - <a href="https://twitter.com/r4j0x00/status/1389064716723519489?s=20">but you could totally do it, if you wanted to</a>.</p>
+
+    <img src="https://jamvie.net/images/DEFCONQUALS2021-chromenday.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Source was provided - it was actually a chrome extension you could load into your browser. Like mentioned earlier, the <code>content_script.js</code> was a giant, obfuscated-to-hell JavaScript file that&hellip; did stuff.</p>
+<p>Well, specifically, it performed some checks that, after trying it out with opening html files locally, would run on each load if it was enabled. Again, the file was obfuscated, but the very last line of the script was interesting.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#a6e22e">nodesadded</span> <span style="color:#f92672">==</span> 
+    <span style="color:#ae81ff">0x1</span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x27a</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x3</span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x3f8</span> <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x4cd</span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x3</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#a6e22e">_0x39523f</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0x157</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1ae</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x17e</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1c2</span>)](<span style="color:#a6e22e">nodesdeleted</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1b66</span> <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x14e</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">0x8</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x25d9</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">attrcharsadded</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x2001</span> <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">0x433</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x49</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">0x8e</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;DvvtZ&#39;</span>](<span style="color:#a6e22e">domvalue</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0xed7</span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1</span> <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x18f0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x12a5</span>) <span style="color:#f92672">&amp;&amp;</span> (document[<span style="color:#e6db74">&#39;getElement&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">_0x39523f</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0xf2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x127</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x132</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x153</span>)](<span style="color:#a6e22e">_0x5773c7</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0x141</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1ab</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x16f</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x192</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">_0x5773c7</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0x131</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x15d</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x10d</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0xc2</span>))[<span style="color:#e6db74">&#39;value&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x336e82</span>[<span style="color:#a6e22e">_0x5773c7</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0xe7</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0xda</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x11f</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x111</span>)]);
+</code></pre></div><p>What are these local variables? What do they hold?</p>
+<p>Now we turn to actually de-obfuscating the damn thing. There was a function, <code>OOO_0x1e05</code>, that we could see throughout the entirety of <code>content_script.js</code>. From the looks of it, it seemed as though <code>OOO_0x1e05</code> was a custom de-obfuscator that the challenge was using. Based on this, we could regex match and replace many of the complex bits and pieces into readable strings, to make the js somewhat more easy on the eyes. Robert Xiao did the regex matching, and the previous snippet of code above now looks like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">_0x10b2d5</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x5ebd2a</span>,
+        <span style="color:#a6e22e">_0xd26915</span> <span style="color:#f92672">=</span> {};
+    <span style="color:#a6e22e">_0xd26915</span>[<span style="color:#e6db74">&#39;getflag&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;xOsuT&#39;</span>], <span style="color:#a6e22e">chrome</span>[<span style="color:#e6db74">&#39;runtime&#39;</span>][<span style="color:#e6db74">&#39;sendMessag&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;e&#39;</span>](<span style="color:#a6e22e">_0xd26915</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0x336e82</span>) {
+        <span style="color:#a6e22e">FLAG</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x336e82</span>[<span style="color:#e6db74">&#39;flag&#39;</span>], <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;KShsG&#39;</span>](<span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;bppSB&#39;</span>], <span style="color:#a6e22e">_0x336e82</span>[<span style="color:#e6db74">&#39;flag&#39;</span>]));
+        <span style="color:#a6e22e">nodesadded</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;yRdwv&#39;</span>](<span style="color:#a6e22e">nodesdeleted</span>, <span style="color:#ae81ff">3</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">attrcharsadded</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">23</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_0x10b2d5</span>.<span style="color:#a6e22e">DvvtZ</span>(<span style="color:#a6e22e">domvalue</span>, <span style="color:#ae81ff">2188</span>) <span style="color:#f92672">&amp;&amp;</span> (document[<span style="color:#e6db74">&#39;getElement&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;ById&#39;</span>](<span style="color:#e6db74">&#39;thirdfacto&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;oor&#39;</span>)[<span style="color:#e6db74">&#39;value&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x336e82</span>[<span style="color:#e6db74">&#39;flag&#39;</span>]);
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">_0x369bcb</span> <span style="color:#f92672">=</span> document[<span style="color:#e6db74">&#39;createElem&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;ent&#39;</span>](<span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;SxgOB&#39;</span>]);
+        <span style="color:#a6e22e">_0x369bcb</span>[<span style="color:#e6db74">&#39;setAttribu&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;te&#39;</span>](<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#a6e22e">_0x10b2d5</span>.<span style="color:#a6e22e">hxkyy</span>), document[<span style="color:#e6db74">&#39;body&#39;</span>][<span style="color:#e6db74">&#39;appendChil&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;d&#39;</span>](<span style="color:#a6e22e">_0x369bcb</span>);
+    });
+</code></pre></div><p>&hellip;Which is, better, at least. I <em>can</em> actually read it and understand what&rsquo;s going on, and this is what you can glean from this hellcode:</p>
+<ul>
+<li>
+<p>The extension was, as mentioned earlier, performing checks on the HTML file you visit. These checks see if it was doing the following things under an HTML node with id called <code>3fa</code>:</p>
+<ul>
+<li>added 5 nodes</li>
+<li>deleted 3 nodes</li>
+<li>had a total <code>attrcharsadded</code> count of 23</li>
+<li>had a domvalue of 2188</li>
+</ul>
+</li>
+<li>
+<p>If the checks above were satisfied it would look for an element called <code>thirdfactooor</code> and give it the value of the flag.</p>
+</li>
+</ul>
+<p>So, in summary, add 5 nodes, delete 3, have some attribute with 23 characters in it, and have a &ldquo;domvalue&rdquo; of 2188. The addition and subtraction of HTML nodes is easy enough to do in Javascript, but the other 2 require some explanation: <code>attrcharsadded</code> is a local variable whose value is assigned as so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">_0x55a6f1</span>.<span style="color:#a6e22e">qieKm</span>(<span style="color:#a6e22e">_0x55a6f1</span>[<span style="color:#e6db74">&#39;MRogb&#39;</span>], <span style="color:#a6e22e">_0x55a6f1</span>[<span style="color:#e6db74">&#39;MRogb&#39;</span>])) <span style="color:#a6e22e">attrcharsadded</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">_0x8a010b</span>[<span style="color:#e6db74">&#39;attributeName&#39;</span>][<span style="color:#e6db74">&#39;length&#39;</span>];
+</code></pre></div><p>Hard to fully understand what this code does, but the last part is what to focus on: the length of the <code>attributeName</code> is added to the value of <code>attrcharsadded</code>. This means we need some attribute with a name that is exactly 23 characters to satisfy this <code>attrcharsadded</code> check.</p>
+<p>The domvalue is computed in the <code>check_dom</code> function, which has a lot going on:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">check_dom</span>() {
+   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">_0x525a15</span> <span style="color:#f92672">=</span> {};
+   <span style="color:#a6e22e">_0x525a15</span>.<span style="color:#a6e22e">wmicU</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0x1a77be</span>, <span style="color:#a6e22e">_0x3e38f4</span>) {
+       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">_0x1a77be</span>(<span style="color:#a6e22e">_0x3e38f4</span>);
+   }, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;ueJYA&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0x500490</span>, <span style="color:#a6e22e">_0x3c0a68</span>) {
+       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">_0x500490</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">_0x3c0a68</span>;
+   }, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;hJFjw&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0x410572</span>, <span style="color:#a6e22e">_0x33660a</span>) {
+       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">_0x410572</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">_0x33660a</span>;
+   }, <span style="color:#a6e22e">_0x525a15</span>.<span style="color:#a6e22e">KoOZC</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#thirdfactooor&#39;</span>, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;RkNoD&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;INPUT&#39;</span>, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;QwGfh&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;QzIrw&#39;</span>, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;IKmUR&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;cunYq&#39;</span>, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0xee8465</span>, <span style="color:#a6e22e">_0x43b0b6</span>) {
+       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">_0xee8465</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">_0x43b0b6</span>;
+   };
+   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">_0x2c0eff</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x525a15</span>;
+   <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">_0x1e6746</span> <span style="color:#f92672">=</span> document[<span style="color:#e6db74">&#39;getElementById&#39;</span>](<span style="color:#e6db74">&#39;3fa&#39;</span>);
+   <span style="color:#a6e22e">chilen</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x1e6746</span>[<span style="color:#e6db74">&#39;querySelectorAll&#39;</span>](<span style="color:#e6db74">&#39;*&#39;</span>)[<span style="color:#e6db74">&#39;length&#39;</span>], <span style="color:#a6e22e">maxdepth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">total_attributes</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x1e6746</span>[<span style="color:#e6db74">&#39;attributes&#39;</span>][<span style="color:#e6db74">&#39;length&#39;</span>];
+   <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">_0x28c57b</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">_0x1e6746</span>[<span style="color:#e6db74">&#39;querySelectorAll&#39;</span>](<span style="color:#e6db74">&#39;*&#39;</span>)) {
+       <span style="color:#a6e22e">d</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;wmicU&#39;</span>](<span style="color:#a6e22e">getDepth</span>, <span style="color:#a6e22e">_0x28c57b</span>);
+       <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">maxdepth</span>) <span style="color:#a6e22e">maxdepth</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d</span>;
+       <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">_0x28c57b</span>.<span style="color:#a6e22e">attributes</span>) <span style="color:#a6e22e">total_attributes</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">_0x28c57b</span>[<span style="color:#e6db74">&#39;attributes&#39;</span>][<span style="color:#e6db74">&#39;length&#39;</span>];
+   }
+   <span style="color:#a6e22e">specificid</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+   <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;ueJYA&#39;</span>](document[<span style="color:#e6db74">&#39;querySelector&#39;</span>](<span style="color:#e6db74">&#39;[tost=&#34;1&#34;]&#39;</span>), <span style="color:#66d9ef">null</span>) <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">specificid</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>);
+   <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+   <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;hJFjw&#39;</span>](document[<span style="color:#e6db74">&#39;querySelector&#39;</span>](<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;KoOZC&#39;</span>])[<span style="color:#e6db74">&#39;tagName&#39;</span>], <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;RkNoD&#39;</span>])) {
+       <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;QwGfh&#39;</span>] <span style="color:#f92672">!==</span> <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;IKmUR&#39;</span>]) <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1337</span>;
+       <span style="color:#66d9ef">else</span> {
+           <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">_0x2351ff</span>() {
+               <span style="color:#66d9ef">return</span>;
+           }
+       }
+   }
+   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">totalchars</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x1e6746</span>[<span style="color:#e6db74">&#39;innerHTML&#39;</span>][<span style="color:#e6db74">&#39;length&#39;</span>], <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>](<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>](<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>](<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>](<span style="color:#a6e22e">chilen</span>, <span style="color:#a6e22e">maxdepth</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">total_attributes</span>, <span style="color:#a6e22e">totalchars</span>), <span style="color:#a6e22e">specificid</span>), <span style="color:#a6e22e">token</span>);
+}
+</code></pre></div><p>The last return sets the value of <code>domvalue</code>. It essentially sums up everything within <code>3fa</code>: <code>total_attributes</code> + <code>totalchars</code> + <code>specificid</code> + <code>token</code> + <code>chilen</code> + <code>maxdepth</code> + <code>innerHTML.length</code> + and maybe some other things, that I couldn&rsquo;t get from the partially de-obfuscated code. That was fine though - because <code>innerHTML.length</code> is added to this value, and we could freely control that to modify <code>domvalue</code> to the number we want.</p>
+<p>The final HTML file is below. It&rsquo;s not pretty.</p>
+<p>With all this information, we now needed some way to actually verify and check when we hit the necessary values for all the local variables. This is where the chrome debugger comes in.</p>
+<p>Load the extension into your browser and open up an html file that serves as the candidate to satisfy the given checks. Placing breakpoints throughout the content script allowed me to take a look at the local variables and see what values they took:</p>
+
+    <img src="https://jamvie.net/images/DEFCONQUALS2021-allchecksgreen.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>And I simply repeated this process until the vars had required values needed for the extension to be happy.</p>
+<p>Now submit your monster html file to admin, and wait for the picture they send back :)</p>
+
+    <img src="https://jamvie.net/images/DEFCONQUALS2021-flag.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>HTML file below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+
+ &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3fa&#34;</span>&gt;
+ 	&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;thirdfactooor&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width: 900px;&#34;</span>&gt;Poggers&lt;/<span style="color:#f92672">input</span>&gt;
+
+ 	&lt;<span style="color:#f92672">button</span>&gt;button1&lt;/<span style="color:#f92672">button</span>&gt;
+
+ 	&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nested&#34;</span>&gt;	
+	 &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div2&#34;</span>&gt;
+	  &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p1&#34;</span>&gt;You shouldnt see this.&lt;/<span style="color:#f92672">p</span>&gt;
+	&lt;/<span style="color:#f92672">div</span>&gt;
+
+	&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div3&#34;</span>&gt;
+	  &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p1&#34;</span>&gt;You shouldnt see this.&lt;/<span style="color:#f92672">p</span>&gt;
+	&lt;/<span style="color:#f92672">div</span>&gt;
+
+	&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div4&#34;</span>&gt;
+	  &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p1&#34;</span>&gt;You shouldnt see this.&lt;/<span style="color:#f92672">p</span>&gt;
+	&lt;/<span style="color:#f92672">div</span>&gt;
+ 	&lt;/<span style="color:#f92672">div</span>&gt;
+
+
+&lt;/<span style="color:#f92672">div</span>&gt;
+
+
+
+&lt;<span style="color:#f92672">script</span>&gt;
+<span style="color:#75715e">//this is to get the domval to the necessary amount. It&#39;s not pretty :) 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">one</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;oneiuhfiluhfiulfhsjkdnaljdnakldnawkdhaeluifhefiluhwfujnsdkjnslkajfhbeiwlfhewliufhesukfhnksjdfnkje&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">two</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;two;sijlhkugfhhuijlok;jidlsfgkyuadiuhoijpsoIHRUGLKYEADHIOJDSPOSUDGHKSIFUJADKOSDJIHUFSJFAOKDWJISHUGUFAEIJDWFHUSGUFIAJDWEFHUSGYHUEADIJWEFHUSRFEIJADWOEFHUSRFEAJODWEFHUSGRYIUHEFAJDOWEFHUSAIJo&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">thr</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;thriuhygtftgyuhijutydfgukhilkjthghijhhguhijolhkgyfutyfyguhiljokihytyguhijo;ljtjgkhlj;hcguhhfgjkhljhkuashduahduhdiuhee&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">four</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;foukjhgfghjklkjhghjkjhghjklkjhghjklkjklkjhghjklkjklkjhghjklkjklkjhghjklkjhklkjhklkjhghjklr&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">five</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;pleasegivemethefleguwuasdfsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss&#34;</span>);
+
+<span style="color:#75715e">//add 5 nodes
+</span><span style="color:#75715e"></span>document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">one</span>);
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">two</span>);
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">thr</span>);
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">four</span>);
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">five</span>);
+
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">d_nested</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;nested&#34;</span>);
+<span style="color:#75715e">//remove 3 nodes
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">remove2</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;div2&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">remove3</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;div3&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">remove4</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;div4&#34;</span>);
+<span style="color:#a6e22e">r2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d_nested</span>.<span style="color:#a6e22e">removeChild</span>(<span style="color:#a6e22e">remove2</span>);
+<span style="color:#a6e22e">r3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d_nested</span>.<span style="color:#a6e22e">removeChild</span>(<span style="color:#a6e22e">remove3</span>);
+<span style="color:#a6e22e">r4</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d_nested</span>.<span style="color:#a6e22e">removeChild</span>(<span style="color:#a6e22e">remove4</span>);
+
+
+<span style="color:#75715e">// attributename = 23 chars
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buttatt1</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementsByTagName</span>(<span style="color:#e6db74">&#34;BUTTON&#34;</span>)[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">setAttribute</span>(<span style="color:#e6db74">&#34;namenamenamenamenamenam&#34;</span>, <span style="color:#e6db74">&#34;pleasegivemetheflag&#34;</span>);
+
+
+&lt;/<span style="color:#f92672">script</span>&gt;
+
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/reversing">reversing</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1546 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-04-10 23:07 -0700</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">RaRCTF2021: Some simpler web probz</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://jamvie.net/posts/2021/04/commonly-used-software-2-electric-boogaloo/">
+                                <span class="button__text">Commonly Used Software 2: Electric Boogaloo</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            
+            
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+    </body>
+</html>

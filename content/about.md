@@ -6,6 +6,8 @@ Some of my other interests include, but are not limited to: statistics, art hist
 
 I have a desire to understand what mystery obscures us from, and a hope to use my skills to create an accessible space for others to learn and understand the beautiful complexities of the world around us, and to keep us safe in a growing digitally-omnipresent era. 
 
+{{< image src="/images/Self.png" alt="satisfies all checks" position="center" style="border-radius: 900px; width: 300px;" >}}
+
 ## ▶ Skillset
 
 As mentioned previously, I excel in web application and network security exploits - most of my writeups and blog posts are about this topic. Nonetheless, in the world of security I consider myself a learning student in cryptography and reverse engineering, skills I hope to develop in the future. 
