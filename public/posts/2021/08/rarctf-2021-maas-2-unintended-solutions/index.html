@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &amp;lsquo;notes&amp;rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.
+The provided source has some interesting code:
+notes/app.py
+@app.route(&amp;#39;/useraction&amp;#39;, methods=[&amp;#34;POST&amp;#34;]) def useraction(): mode = request.form.get(&amp;#34;mode&amp;#34;) username = request." />
+<meta name="keywords" content=", writeups, ssti, command-injection, web" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/" />
+
+
+    <title>
+        
+            RaRCTF 2021: MAAS 2 &#43; Unintended Solutions :: Jam ⇆ Vie 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#0c0c0d">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0c0c0d">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="RaRCTF 2021: MAAS 2 &#43; Unintended Solutions">
+<meta itemprop="description" content="MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &lsquo;notes&rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.
+The provided source has some interesting code:
+notes/app.py
+@app.route(&#39;/useraction&#39;, methods=[&#34;POST&#34;]) def useraction(): mode = request.form.get(&#34;mode&#34;) username = request."><meta itemprop="datePublished" content="2021-08-20T13:49:21-07:00" />
+<meta itemprop="dateModified" content="2021-08-20T13:49:21-07:00" />
+<meta itemprop="wordCount" content="731"><meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
+<meta itemprop="keywords" content="writeups,ssti,command-injection,web," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/JAMIE.png"/>
+
+<meta name="twitter:title" content="RaRCTF 2021: MAAS 2 &#43; Unintended Solutions"/>
+<meta name="twitter:description" content="MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &lsquo;notes&rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.
+The provided source has some interesting code:
+notes/app.py
+@app.route(&#39;/useraction&#39;, methods=[&#34;POST&#34;]) def useraction(): mode = request.form.get(&#34;mode&#34;) username = request."/>
+
+
+
+
+
+    <meta property="article:section" content="writeups" />
+
+
+
+    <meta property="article:published_time" content="2021-08-20 13:49:21 -0700 PDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#487860;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/">RaRCTF 2021: MAAS 2 + Unintended Solutions</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <h2 id="maas-2--notes">MAAS 2 // Notes</h2>
+<p>Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &lsquo;notes&rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.</p>
+<p>The provided source has some interesting code:</p>
+<p><em>notes/app.py</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/useraction&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">useraction</span>():
+    mode <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;mode&#34;</span>)
+    username <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;username&#34;</span>)
+    <span style="color:#66d9ef">if</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;register&#34;</span>:
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;http://redis_userdata:5000/adduser&#39;</span>)
+        port <span style="color:#f92672">=</span> int(r<span style="color:#f92672">.</span>text)
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        red<span style="color:#f92672">.</span>set(username, port)
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;adddata&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        requests<span style="color:#f92672">.</span>post(f<span style="color:#e6db74">&#34;http://redis_userdata:5000/putuser/{port}&#34;</span>, json<span style="color:#f92672">=</span>{
+            request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;key&#34;</span>): request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;value&#34;</span>)
+        })
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;getdata&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(f<span style="color:#e6db74">&#34;http://redis_userdata:5000/getuser/{port}&#34;</span>)
+        <span style="color:#66d9ef">return</span> jsonify(r<span style="color:#f92672">.</span>json())
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bioadd&#34;</span>:
+        bio <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;bio&#34;</span>)
+        bio<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;_&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>\
+            replace(<span style="color:#e6db74">&#34;{&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;}&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>\
+            replace(<span style="color:#e6db74">&#34;(&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;)&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>\
+            replace(<span style="color:#e6db74">&#34;|&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+
+        bio <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\[\[([^\[\]]+)\]\]&#39;</span>, <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;{{data[&#34;\g&lt;1&gt;&#34;]}}&#39;</span>, bio)
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        requests<span style="color:#f92672">.</span>post(f<span style="color:#e6db74">&#34;http://redis_userdata:5000/bio/{port}&#34;</span>, json<span style="color:#f92672">=</span>{
+            <span style="color:#e6db74">&#34;bio&#34;</span>: bio
+        })
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bioget&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(f<span style="color:#e6db74">&#34;http://redis_userdata:5000/bio/{port}&#34;</span>)
+        <span style="color:#66d9ef">return</span> r<span style="color:#f92672">.</span>text
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;keytransfer&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        red2 <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_userdata&#34;</span>,
+                           port<span style="color:#f92672">=</span>int(port))
+        red2<span style="color:#f92672">.</span>migrate(request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;host&#34;</span>),
+                     request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;port&#34;</span>),
+                     [request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;key&#34;</span>)],
+                     <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1000</span>,
+                     copy<span style="color:#f92672">=</span>True, replace<span style="color:#f92672">=</span>True)
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/render&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">render_bio</span>():
+    data <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>json<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;data&#39;</span>)
+    <span style="color:#66d9ef">if</span> data <span style="color:#f92672">is</span> None:
+        data <span style="color:#f92672">=</span> {}
+    <span style="color:#66d9ef">return</span> render_template_string(request<span style="color:#f92672">.</span>json<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;bio&#39;</span>), data<span style="color:#f92672">=</span>data)
+</code></pre></div><p>The relevant parts are when mode is equal to <code>bioadd</code>. There&rsquo;s a pretty hefty sanitizer in play that removes all relevant characters required for an SSTI. This is further supplemented by the endpoint to <code>/render</code>, which takes your input and passes it into <code>render_template_string</code>. TL;DR: <strong>S</strong>erver-<strong>S</strong>ide <strong>T</strong>emplate <strong>I</strong>njection involves injecting code into template expressions that are evaluated on the server. Essentially, if you have an app vulnerable to SSTI, then you should be able to inject any expression into {{double curly brackets}} and that expression would be evaluated.</p>
+<p>But, this is a sanitizer function, and it does specifically remove the <code>{}</code> characters, so we would be out of luck for SSTI. Out of sanity, I double checked that {{template expressions}} were disallowed and tried a basic SSTI payload such as {{7*7}}.</p>
+
+    <img src="https://jamvie.net/images/rarctf_maas2ssti.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Oh, wait a second. <em>The sanitization filter isn&rsquo;t actually applied to our input!</em> We get a quick and easy SSTI vulnerability.</p>
+<p>We can modify our payload from the previous MAAS 1 to better suit a template expression:</p>
+<pre><code>{{request.application.__globals__.__builtins__.open('../flag.txt','r').read(-1)}}
+</code></pre><p>Update your bio as this and the flag will be loaded for you!</p>
+
+    <img src="https://jamvie.net/images/rarctf_maas2flag.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>While this is the unintended solution, the intended one did involve throwing an SSTI payload over &ldquo;behind&rdquo; the filtering by manipulating the redis container that would contain the user objects.</p>
+<p>If the filter was actually applied, you would be forced to instead leverage the application&rsquo;s key transfer feature to force a key-transfer connection to a Redis container at port 6379 - which is the defualt port of the Redis server.</p>
+<p>The code for the keytransfer actually calls the Redis command &ldquo;migrate&rdquo;:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;keytransfer&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        red2 <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_userdata&#34;</span>,
+                           port<span style="color:#f92672">=</span>int(port))
+        red2<span style="color:#f92672">.</span>migrate(request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;host&#34;</span>),
+                     request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;port&#34;</span>),
+                     [request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;key&#34;</span>)],
+                     <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1000</span>,
+                     copy<span style="color:#f92672">=</span>True, replace<span style="color:#f92672">=</span>True)
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</code></pre></div><p>And we can provide as a port argument the value 6379 to tell the Redis-cli server that the provided &ldquo;host&rdquo; argument should have their value changed to the &ldquo;key&rdquo; argument. Here, you would then be able to set a user&rsquo;s port as some arbitrary value that you can control, such as &ldquo;../bio&rdquo;. Get 2 users, perform a key transfer to the Redis-server to change one user&rsquo;s port to &ldquo;../bio&rdquo;, and then perform another key transfer to give a &ldquo;key&rdquo; called &ldquo;bio&rdquo; with the value being your SSTI payload, to the original user. The result after all these Redis manipulations should be the execution of your SSTI payload that would have completely avoided the filtering.</p>
+<p>You could, additionally, use your previous payload from MAAS 1 and take advantage of the challenge&rsquo;s improper network isolation issues to make internal calls to the MAAS 2 notes API. This was possible due to the fact that MAAS 1-3 were 3 different, linked docker containers that (unintended by the dev) could be interacted with from between docker containers. This &ldquo;sharing&rdquo; feature allowed you to reuse an attack vector in one challenge to request for resources from another challenge, like their flag. This could be done for any of the MAAS challenges. Interesting stuff!</p>
+<hr>
+<p>RaRCTF was a good CTF, and given how it appears to be team WinRaR&rsquo;s first CTF, I&rsquo;m thoroughly impressed by the quality of the challenges.</p>
+<p><strong>Vie</strong></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/ssti">ssti</a></span><span class="tag"><a href="https://jamvie.net/tags/command-injection">command-injection</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>731 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-08-20 13:49 -0700</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/">
+                                <span class="button__text">RaRCTF2021: Some simpler web probz</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            
+            
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+    </body>
+</html>

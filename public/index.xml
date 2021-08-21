@@ -6,7 +6,19 @@
     <description>Recent content on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Aug 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Aug 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RaRCTF 2021: MAAS 2 &#43; Unintended Solutions</title>
+      <link>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/</link>
+      <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/</guid>
+      <description>MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &amp;lsquo;notes&amp;rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.
+The provided source has some interesting code:
+notes/app.py
+@app.route(&amp;#39;/useraction&amp;#39;, methods=[&amp;#34;POST&amp;#34;]) def useraction(): mode = request.form.get(&amp;#34;mode&amp;#34;) username = request.</description>
+    </item>
+    
     <item>
       <title>RaRCTF2021: Some simpler web probz</title>
       <link>https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/</link>
@@ -294,7 +306,7 @@ Over the next few weeks I will upload my old writeups for some CTFs that occurre
       
       <guid>https://jamvie.net/about/</guid>
       <description>▶ Hello! I&amp;rsquo;m Vie, real name Jam, and I&amp;rsquo;m a computer science/mathematics student from the University of British Columbia. I&amp;rsquo;m also a mentor/executive member of the UBC CTF team, Maple Bacon, where I help with managerial duties and provide educational resources to those new to the CTF scene - particularly in web application and network security.
-Some of my other interests include, but are not limited to: statistics, art history, earth sciences, and physics.</description>
+Some of my other interests include, but are not limited to: art history, earth sciences, and physics.</description>
     </item>
     
   </channel>

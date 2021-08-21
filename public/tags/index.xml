@@ -6,20 +6,29 @@
     <description>Recent content in Tags on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Aug 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Aug 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>command-injection</title>
       <link>https://jamvie.net/tags/command-injection/</link>
-      <pubDate>Mon, 09 Aug 2021 13:49:21 -0700</pubDate>
+      <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/command-injection/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>ssti</title>
+      <link>https://jamvie.net/tags/ssti/</link>
+      <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/ssti/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>web</title>
       <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Mon, 09 Aug 2021 13:49:21 -0700</pubDate>
+      <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/web/</guid>
       <description></description>
@@ -28,7 +37,7 @@
     <item>
       <title>writeups</title>
       <link>https://jamvie.net/tags/writeups/</link>
-      <pubDate>Mon, 09 Aug 2021 13:49:21 -0700</pubDate>
+      <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/writeups/</guid>
       <description></description>
