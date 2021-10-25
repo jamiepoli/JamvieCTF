@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>css-leak on Jam ⇆ Vie</title>
+    <link>https://jamvie.net/tags/css-leak/</link>
+    <description>Recent content in css-leak on Jam ⇆ Vie</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 24 Oct 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/css-leak/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ASIS Quals 2021: Lovely Nonce</title>
+      <link>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</link>
+      <pubDate>Sun, 24 Oct 2021 13:49:21 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</guid>
+      <description>Lovely Nonces is a challenge from ASIS Quals 2021, involving interesting CSP bypasses and stylesheet leaks. My teammate Ming and I solved this challenge together, and a copy of the writeup (with the index.html file used in the exploit) can be found in the UBC CTF blog.
+TL;DR CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.
+Recon The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise.</description>
+    </item>
+    
+  </channel>
+</rss>

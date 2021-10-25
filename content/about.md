@@ -2,9 +2,9 @@
 
 I'm Vie, real name Jam, and I'm a computer science/mathematics student from the University of British Columbia. I'm also a mentor/executive member of the UBC CTF team, [Maple Bacon](https://ubcctf.github.io/), where I help with managerial duties and provide educational resources to those new to the CTF scene - particularly in web application and network security. 
 
-Some of my other interests include, but are not limited to: art history, earth sciences, and physics. Outside of computer security competitions, I utilize my skills in mathematics and computer science combined with my artistic talent to create projects carrying technology to a wider audience. 
+Some of my other interests include, but are not limited to: art history, earth and climate sciences, and physics. I'm currently delving into the prospects of matheamtical modelling and optimization as an application to solve all sorts of problems. 
 
-I have a desire to understand what mystery obscures us from, and a hope to use my skills to create an accessible space for others to learn and understand the beautiful complexities of the world around us, and to keep us safe in a growing digitally-omnipresent era. 
+Outside of computer security competitions, I utilize my skills in mathematics and computer science combined with my artistic talent to create projects carrying technology to a wider audience. 
 
 {{< image src="/images/Self.png" alt="satisfies all checks" position="center" style="border-radius: 900px; width: 300px;" >}}
 
@@ -24,7 +24,11 @@ Check out [Maple Bacon's site](https://ubcctf.github.io/) for more information o
 
 #### What is the origin of 'Vie'? 
 
-I misspelled my name once and it stuck. :P
+I misspelled my name once and it stuck.
+
+#### What do you do outside of CTFs? 
+
+Dematerialize and power off until the next CTF comes. 
 
 ## ▶ Acknowledgements
 
