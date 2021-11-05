@@ -36,7 +36,7 @@ disableHugoGeneratorInject = false
   posts = "/posts/:year/:month/:title/"
 
 [author]
-  name = "Jamie Polintan"
+  name = "Vie"
 
 [blackfriday]
   hrefTargetBlank = true
@@ -53,12 +53,12 @@ disableHugoGeneratorInject = false
   dateformNumTime = "2006-01-02 15:04 -0700"
 
   # Metadata mostly used in document's head
-  description = "JamVie: blog of cybersecurity."
+  description = "Vie: blog of cybersecurity."
   keywords = ""
   images = ["img/V.png"]
 
-  homeSubtitle = "Software Developer & Cybersecurity Enthusiast"
-
+  homeSubtitle = "Cybersecurity Enthusiast"
+  
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = false
 
