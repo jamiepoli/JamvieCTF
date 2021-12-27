@@ -57,7 +57,7 @@ disableHugoGeneratorInject = false
   keywords = ""
   images = ["img/V.png"]
 
-  homeSubtitle = "Cybersecurity Enthusiast"
+  homeSubtitle = "Cybersecurity Researcher"
   
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = false
