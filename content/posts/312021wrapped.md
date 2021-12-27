@@ -47,8 +47,8 @@ The remaining topics that are worthy to note are insecure deserialization exploi
 - [UTCTF 2021's Tar Inspector challenge](/posts/2021/03/utctf-2021/#tar-inspector)
 - Some challenges from CyberApocalypse
 - Some nice proto pollution challenges from RedPwnCTF
-- [DiceCTF's Build A Better Panel challenge](posts/2021/02/dicectf-2021/#build-a-better-panel)
-- [DEF CON Quals' Threefactooorx challenge](posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx)
+- [DiceCTF's Build A Better Panel challenge](/posts/2021/02/dicectf-2021/#build-a-better-panel)
+- [DEF CON Quals' Threefactooorx challenge](/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx)
 
 ## Security, in general
 When 2021 began, the new hotness leaving 2020 was the [Solarwinds Orion](https://www.reuters.com/article/us-usa-cyber-treasury-exclsuive/suspected-russian-hackers-spied-on-u-s-treasury-emails-sources-idUKKBN28N0PG?edition-redirect=uk) hack that targeted enterprisal software used by thousands of other companies. Ransomware hidden in a software update, anyone?
