@@ -4,10 +4,6 @@ I'm Jam/Vie, and I'm a student from the University of British Columbia. I'm also
 
 Some of my other interests include, but are not limited to: art history, earth and climate sciences, and physics. I'm currently delving into the prospects of mathematical modelling and combinatorial optimization as an application to solve all sorts of problems. 
 
-Outside of computer security competitions, I utilize my skills in mathematics and computer science combined with my artistic talent to create projects carrying technology to a wider audience. 
-
-{{< image src="/images/Self.png" alt="satisfies all checks" position="center" style="border-radius: 900px; width: 300px;" >}}
-
 ## ▶ FAQ
 
 #### How did you start getting into CTFs?
