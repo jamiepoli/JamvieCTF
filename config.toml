@@ -1,5 +1,5 @@
 baseURL = "https://jamvie.net"
-title   = "Jam ⇆ Vie"
+title   = "Vie"
 languageCode = "en-us"
 theme = "hello-friend-ng"
 
@@ -53,7 +53,7 @@ disableHugoGeneratorInject = false
   dateformNumTime = "2006-01-02 15:04 -0700"
 
   # Metadata mostly used in document's head
-  description = "Vie: blog of cybersecurity."
+  description = "Vie's Portfolio."
   keywords = ""
   images = ["img/V.png"]
 
