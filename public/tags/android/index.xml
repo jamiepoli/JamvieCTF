@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>android on Jam ⇆ Vie</title>
+    <title>android on Vie</title>
     <link>https://jamvie.net/tags/android/</link>
-    <description>Recent content in android on Jam ⇆ Vie</description>
+    <description>Recent content in android on Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
     <lastBuildDate>Sun, 04 Oct 2020 13:12:06 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/android/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Trend Micro CTF: Raimund Genes Quals 2020</title>

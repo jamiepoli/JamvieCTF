@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>writeups on Jam ⇆ Vie</title>
+    <title>writeups on Vie</title>
     <link>https://jamvie.net/tags/writeups/</link>
-    <description>Recent content in writeups on Jam ⇆ Vie</description>
+    <description>Recent content in writeups on Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Oct 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/writeups/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Tue, 26 Apr 2022 19:59:24 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/writeups/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>b01lers CTF 2022: hacker/place</title>
+      <link>https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/</link>
+      <pubDate>Tue, 26 Apr 2022 19:59:24 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/</guid>
+      <description>Thoughts This year&amp;rsquo;s b01lers CTF was a great one for Maple Bacon, given that we came in first. A fantastic development, especially since last year we landed in 7th, so we&amp;rsquo;ve certainly improved a great deal since then.
+While the balance of problems was skewed, the CTF was overall an enjoyable experience. It was nice to delve into the different problems outside of web (whilst waiting for the one (1) web challenge to release), which reminded me I really need to touch up on my reversing skills, a 2022 new year resolution that I wanted to get into.</description>
+    </item>
+    
     <item>
       <title>ASIS Quals 2021: Lovely Nonce</title>
       <link>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</link>

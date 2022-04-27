@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>werkzeug on Jam ⇆ Vie</title>
+    <title>werkzeug on Vie</title>
     <link>https://jamvie.net/tags/werkzeug/</link>
-    <description>Recent content in werkzeug on Jam ⇆ Vie</description>
+    <description>Recent content in werkzeug on Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
     <lastBuildDate>Sun, 04 Apr 2021 03:12:16 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/werkzeug/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bo1lersCTF 2021: Lorem_Ipsum</title>

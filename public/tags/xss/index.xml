@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>xss on Jam ⇆ Vie</title>
+    <title>xss on Vie</title>
     <link>https://jamvie.net/tags/xss/</link>
-    <description>Recent content in xss on Jam ⇆ Vie</description>
+    <description>Recent content in xss on Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
     <lastBuildDate>Sun, 24 Oct 2021 13:49:21 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/xss/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ASIS Quals 2021: Lovely Nonce</title>

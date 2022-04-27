@@ -92,7 +92,7 @@ Our infrastructure utilized AWS, kubernetes, github actions, CTFd and grafana.
 
 ### No I don't know what k8s is and at this point I'm too scared to ask
 
-Utilizing k8s made continuous container deployment easy. The additional k8s kops tool when combined with our AWS infrastructure simplified alot of stuff for us - making challenge deployment quick and easy and also giving us the opportunity to quickly roll out patches or restart deployment in seconds. Our infra guy thankfully created a highly scalable solution which could be added to if needed. Thankfully, not too many spats happened throughout the competition so we didn't have to worry too much about the whole thing going down. 
+Utilizing k8s made continuous container deployment easy. The additional k8s kops tool when combined with our AWS infrastructure simplified alot of stuff for us - making challenge deployment quick and easy and also giving us the opportunity to quickly roll out patches or restart deployment in seconds. Our infra guy created a highly scalable solution which could be added to if needed. Thankfully, not too many spats happened throughout the competition so we didn't have to worry too much about the whole thing going down. 
 
 ### AWS EC2, very cool 
 

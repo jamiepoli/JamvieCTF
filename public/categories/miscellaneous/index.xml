@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>miscellaneous on Jam ⇆ Vie</title>
+    <title>miscellaneous on Vie</title>
     <link>https://jamvie.net/categories/miscellaneous/</link>
-    <description>Recent content in miscellaneous on Jam ⇆ Vie</description>
+    <description>Recent content in miscellaneous on Vie</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
     <lastBuildDate>Sat, 19 Sep 2020 20:57:15 -0600</lastBuildDate><atom:link href="https://jamvie.net/categories/miscellaneous/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>VolgaCTF Finals 2020</title>

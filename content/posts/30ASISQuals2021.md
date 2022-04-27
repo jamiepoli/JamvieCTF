@@ -10,7 +10,7 @@ categories:
 tags: 
   - writeups
   - xss
-  - css-leak
+  - xs-leak
   - web
 ---
 
