@@ -13,13 +13,13 @@ tags:
   - ssti
   - csrf
   - arduino
-  
+
 toc: true
 ---
 
 ## Just in Time
 
-Maple Bacon played in NahamCon CTF 2022 this past weekend, which came as a surprise - we were fully planning on focusing our efforts onto AngstromCTF which overlapped. AngstromCTF is still underway, but in the awkward passage of time between my last week and weekend, I played in NahamCon CTF for a little bit of practice. 
+Maple Bacon played in NahamCon CTF 2022 this past weekend, which came as a surprise - we were fully planning on focusing our efforts onto AngstromCTF which overlapped, however, NahamCon CTF proved to be an interesting and good-quality so a last-minute decision was made to participate in both. AngstromCTF is still underway, but in the awkward passage of time between my last week and weekend, I played in NahamCon CTF for a little bit of practice. 
 
 ## Flaskmetal Alchemist
 
