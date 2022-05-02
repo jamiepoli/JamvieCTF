@@ -21,7 +21,9 @@ toc: true
 
 Maple Bacon played in NahamCon CTF 2022 this past weekend, which came as a surprise - we were fully planning on focusing our efforts onto AngstromCTF which overlapped, however, NahamCon CTF proved to be interesting and good-quality so a last-minute decision was made to participate in both. AngstromCTF is still underway, but in the awkward passage of time between my last week and weekend, I played in NahamCon CTF for a little bit of practice. 
 
-## Flaskmetal Alchemist
+## Challenges
+
+### Flaskmetal Alchemist (Web)
 
 Snoop around for a little bit and observe that the sqlalchemy libary version the app is using is 0.2, which is incredibly old. Google "sqlalchemy/0.2" specifically and you'll recieve a few [hits](https://security.snyk.io/vuln/SNYK-PYTHON-SQLALCHEMY-173678) on a potential SQLi vulnerability in the group_by/order_by function. Luckily for us, the application indeed utilizes the `order_by` function. 
 
@@ -41,7 +43,7 @@ Repeat this in a script and grab the flag character by character.
 
 `flag{order_By_blind}`
 
-## Two For One 
+### Two For One (Web)
 
 The challenge is a pastebin-esque site but with added otp functionality for basically everything - from viewing and deleting notes, to changing your password.
 
@@ -63,7 +65,7 @@ The next step is to retrieve their password, which you can do by again using the
 
 {{< image src="/images/nahamcon2022_twoforone_flag.png" alt="2fa gone bad" position="center" style="border-radius: 8px;" >}}
 
-## Deafcon 
+### Deafcon (Web)
 
 The challenge asks for your name and email to be rendered onto a fake "deaf con" ticket as a PDF.
 
@@ -73,7 +75,7 @@ Script execution is possible, in a similar fashion to dangling markup. If you ad
 
 Craft an SSTI payload to find any file named `flag`. 
 
-## Dweeno
+### Dweeno (Hardware/RF)
 
 You're given a few things: `output.txt` which is a list of binary values, a `source.ino` file, an image of an arduino hooked up to a breadboard with a chip in the middle, and a sketch of the arduino as well. 
 

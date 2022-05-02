@@ -1,7 +1,7 @@
 ---
 title: "MapleCTF UBC ver. Introspective"
 date: 2022-01-30T22:00:18-08:00
-draft: true
+draft: false
 comments: false
 toc: true
 images:
