@@ -3,7 +3,7 @@ title: "DEFCON 30: Retrospective"
 date: 2022-08-16T13:37:54-07:00
 draft: false
 comments: false
-images: ["images/MMM.png"]
+images: ["images/mmm_together.JPG"]
 categories: 
     - misc
 toc: true
