@@ -13,7 +13,6 @@ tags:
   - ssti
   - csrf
   - arduino
-
 toc: true
 ---
 
