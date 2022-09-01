@@ -72,15 +72,6 @@
     </item>
     
     <item>
-      <title>wrapped</title>
-      <link>https://jamvie.net/tags/wrapped/</link>
-      <pubDate>Mon, 20 Dec 2021 22:37:46 -0800</pubDate>
-      
-      <guid>https://jamvie.net/tags/wrapped/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>xs-leak</title>
       <link>https://jamvie.net/tags/xs-leak/</link>
       <pubDate>Sun, 24 Oct 2021 13:49:21 -0700</pubDate>
@@ -212,24 +203,6 @@
       <pubDate>Sun, 04 Oct 2020 13:12:06 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/osint/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HTML-injection</title>
-      <link>https://jamvie.net/tags/html-injection/</link>
-      <pubDate>Mon, 24 Aug 2020 20:17:24 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/html-injection/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>object-poisoning</title>
-      <link>https://jamvie.net/tags/object-poisoning/</link>
-      <pubDate>Mon, 24 Aug 2020 20:17:24 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/object-poisoning/</guid>
       <description></description>
     </item>
     
