@@ -127,7 +127,7 @@ The end results of DEFCON CTF were announced at the end of the closing ceremony,
 
 The final day after the end of the contest was a free-for-all in terms of stuff to do. Since we had the rest of the day to ourselves, many of us wandered around or went sightseeing in Vegas for a bit after the conclusion of DEFCON. Some of us went ahead and had an MMM pool ppparty, since hey we might as well use the pool while we're here :p
 
-Later that night we saw the other teams at the afterparty, where we mingled and formed plenty new friendships :> special shoutout to team Sauercloud for giving me the matrix gigachad sticker which has a new home on my laptop. One of us also distributed small rubber ducks to the afterparty, and I know this because for a brief 5 minutes the floor was just filled with sounds of rubber ducky squeaks. 
+Later that night we saw the other teams at the afterparty, shoutout to *perfect r✪✪✪t x organizers*, where we mingled and formed plenty new friendships :> special shoutout to team Sauercloud for giving me the matrix gigachad sticker which has a new home on my laptop. One of us also distributed small rubber ducks to the afterparty, and I know this because for a brief 5 minutes the floor was just filled with sounds of rubber ducky squeaks. 
 
 {{< tweet user="vie_please" id="1560009205481803777" position="center">}}
 
