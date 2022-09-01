@@ -15,7 +15,7 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
 
     <title>
         
-            b01lers CTF 2022: hacker/place :: Vie 
+            B01lers CTF 2022: hacker/place :: Vie 
         
     </title>
 
@@ -42,16 +42,16 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
 
 
 
-<meta itemprop="name" content="b01lers CTF 2022: hacker/place">
+<meta itemprop="name" content="B01lers CTF 2022: hacker/place">
 <meta itemprop="description" content="Thoughts This year&rsquo;s b01lers CTF was a great one for Maple Bacon, given that we came in first. A fantastic development, especially since last year we landed in 7th, so we&rsquo;ve certainly improved a great deal since then.
 While the balance of problems was skewed, the CTF was overall an enjoyable experience. It was nice to delve into the different problems outside of web (whilst waiting for the one (1) web challenge to release), which reminded me I really need to touch up on my reversing skills, a 2022 new year resolution that I wanted to get into."><meta itemprop="datePublished" content="2022-04-26T19:59:24-07:00" />
 <meta itemprop="dateModified" content="2022-04-26T19:59:24-07:00" />
-<meta itemprop="wordCount" content="806"><meta itemprop="image" content="https://jamvie.net/img/V.png"/>
+<meta itemprop="wordCount" content="807"><meta itemprop="image" content="https://jamvie.net/img/V.png"/>
 <meta itemprop="keywords" content="writeups,web," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/img/V.png"/>
 
-<meta name="twitter:title" content="b01lers CTF 2022: hacker/place"/>
+<meta name="twitter:title" content="B01lers CTF 2022: hacker/place"/>
 <meta name="twitter:description" content="Thoughts This year&rsquo;s b01lers CTF was a great one for Maple Bacon, given that we came in first. A fantastic development, especially since last year we landed in 7th, so we&rsquo;ve certainly improved a great deal since then.
 While the balance of problems was skewed, the CTF was overall an enjoyable experience. It was nice to delve into the different problems outside of web (whilst waiting for the one (1) web challenge to release), which reminded me I really need to touch up on my reversing skills, a 2022 new year resolution that I wanted to get into."/>
 
@@ -63,7 +63,7 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
 
 
 
-    <meta property="article:published_time" content="2022-04-26 19:59:24 -0700 PDT" />
+    <meta property="article:published_time" content="2022-04-26 19:59:24 -0700 -0700" />
 
 
 
@@ -147,7 +147,7 @@ if (!doNotTrack) {
 
         <article>
             <h1 class="post-title">
-                <a href="https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/">b01lers CTF 2022: hacker/place</a>
+                <a href="https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/">B01lers CTF 2022: hacker/place</a>
             </h1>
                 <hr />
                 <aside id="toc">
@@ -190,18 +190,18 @@ if (!doNotTrack) {
 <p>The challenge is inspired by reddit’s r/place, which gives us a canvas and the ability to place a pixel at a position every 10 seconds. The premise of the challenge has us looking at a bot that is busy occupying the middle of the canvas with a giant b01lers logo.</p>
 <p>The source of the challenge is provided. In the <code>app.js</code> file, we can observe a <code>/flag</code> endpoint which requires the correct admin-valued JWT token in the cookie of the visitor to access, which gives us the flag. The secret which is used to sign the JWT is given as a header to the b01lers bot on the application.</p>
 <p>The bot connects to the canvas server through a websocket, then colours the appropriate x,y coordinates on the canvas with “red” and “darkred” values to create the b01lers logo. If anyone tries to colour those x,y positions with another colour, the bot will swiftly change it back (this is important for later). When the bot receives a message signaling a colour change anywhere on the canvas (including when it adds a colour too), it will take note of the colour and make an axios POST request to that colour with the given x,y coordinates. The bot code will attempt to block any bad colour inputs through a trivial replace function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">color</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">7</span>));
-<span style="color:#66d9ef">try</span> {
-    <span style="color:#a6e22e">color</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">color</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;://&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
-} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
-    <span style="color:#75715e">//
-</span><span style="color:#75715e"></span>}
-<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Logging opposing pixel placed at </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">x</span><span style="color:#e6db74">}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">y</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> with color </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">color</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-<span style="color:#a6e22e">axios</span>(<span style="color:#a6e22e">color</span>, {
-    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;post&#39;</span>,
-    <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> }
-})
-</code></pre></div><p>This can be easily bypassed by simply adding another <code>://</code> into your input, since only the first one in the string gets removed. This allows us to make the bot make a POST request to anywhere we want - which is nice, since any HTTP request will also include the custom header that has the JWT signing secret we need to make our own JWTs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">color</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">7</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">color</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">color</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;://&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Logging opposing pixel placed at </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">x</span><span style="color:#e6db74">}</span><span style="color:#e6db74">, </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">y</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> with color </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">color</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">axios</span>(<span style="color:#a6e22e">color</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;post&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> }
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><p>This can be easily bypassed by simply adding another <code>://</code> into your input, since only the first one in the string gets removed. This allows us to make the bot make a POST request to anywhere we want - which is nice, since any HTTP request will also include the custom header that has the JWT signing secret we need to make our own JWTs.</p>
 <p>Going back to <code>app.js</code>, the canvas is updated using a 2d array of “clients” (read: people on the canvas adding pixels, including the bot). In the <code>set_pixel()</code> function, the 2nd try-catch block performs the logic needed to update the canvas to all clients on it with the newly-coloured pixel. In this try-catch, there is also logic which will validate the provided colour amongst the enumeration of colours available, so even if we did bypass the trivial <code>://</code> replacer, we wouldn’t pass the if statement and our payload would not have been accessed by the bot… in theory. The application also keeps tabs on the client who last changed the updated pixel separately, and updates them with the change first before updating everyone else - and this occurs in the first try-catch block, before the if statement validates the provided colour.</p>
 <p>Therefore, we can choose a pixel that&rsquo;s watched by the bot, change it (using a valid colour), and let the bot change it back. Then, we can change the pixel back, but this time change the colour to a link to our server. The logic will thus send our payload to the bot first without verifying the colour. Of course, afterwards the colour check in the 2nd try-catch will fail us, and our payload will not be broadcast to the rest of the people on the canvas.</p>
 <p>Once we&rsquo;ve managed to make the app send our payload to the bot, we will get a request to our server with the header containing the secret needed to sign our own JWT tokens. Simply make your JWT “admin” token, access <code>/flag</code>, and receive your hard-earned goddamned-web-challenge flag.</p>
@@ -216,9 +216,9 @@ if (!doNotTrack) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>806 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>807 Words</p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-04-26 19:59 -0700</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-04-26 20:59 -0600</p>
         </div>
 
         
@@ -230,11 +230,18 @@ if (!doNotTrack) {
 
                 <div class="pagination__buttons">
                     
+                        <span class="button previous">
+                            <a href="https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">NahamCon CTF 2022</span>
+                            </a>
+                        </span>
+                    
 
                     
                         <span class="button next">
-                            <a href="https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/">
-                                <span class="button__text">ASIS Quals 2021: Lovely Nonce</span>
+                            <a href="https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-introspective/">
+                                <span class="button__text">MapleCTF UBC ver. Introspective</span>
                                 <span class="button__icon">→</span>
                             </a>
                         </span>
@@ -274,7 +281,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.af5a3e743efae0c74305dc03080fb4bd5ae8f1a60160b3599ab59639ad6c182d763fb4238e72a726f48319ad132a4cdc9cd51fac5462e8a25dc0ba096f547038.js" integrity="sha512-r1o&#43;dD764MdDBdwDCA&#43;0vVro8aYBYLNZmrWWOa1sGC12P7QjjnKnJvSDGa0TKkzcnNUfrFRi6KJdwLoJb1RwOA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;

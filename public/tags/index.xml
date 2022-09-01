@@ -7,11 +7,47 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Tue, 26 Apr 2022 19:59:24 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 May 2022 12:40:52 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>arduino</title>
+      <link>https://jamvie.net/tags/arduino/</link>
+      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/arduino/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CSRF</title>
+      <link>https://jamvie.net/tags/csrf/</link>
+      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/csrf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqli</title>
+      <link>https://jamvie.net/tags/sqli/</link>
+      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/sqli/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssti</title>
+      <link>https://jamvie.net/tags/ssti/</link>
+      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/ssti/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>web</title>
       <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Tue, 26 Apr 2022 19:59:24 -0700</pubDate>
+      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/web/</guid>
       <description></description>
@@ -20,9 +56,27 @@
     <item>
       <title>writeups</title>
       <link>https://jamvie.net/tags/writeups/</link>
-      <pubDate>Tue, 26 Apr 2022 19:59:24 -0700</pubDate>
+      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/writeups/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>misc</title>
+      <link>https://jamvie.net/tags/misc/</link>
+      <pubDate>Sun, 30 Jan 2022 22:00:18 -0800</pubDate>
+      
+      <guid>https://jamvie.net/tags/misc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wrapped</title>
+      <link>https://jamvie.net/tags/wrapped/</link>
+      <pubDate>Mon, 20 Dec 2021 22:37:46 -0800</pubDate>
+      
+      <guid>https://jamvie.net/tags/wrapped/</guid>
       <description></description>
     </item>
     
@@ -54,15 +108,6 @@
     </item>
     
     <item>
-      <title>ssti</title>
-      <link>https://jamvie.net/tags/ssti/</link>
-      <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/ssti/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>reversing</title>
       <link>https://jamvie.net/tags/reversing/</link>
       <pubDate>Sun, 11 Apr 2021 00:07:54 -0600</pubDate>
@@ -90,29 +135,11 @@
     </item>
     
     <item>
-      <title>CSRF</title>
-      <link>https://jamvie.net/tags/csrf/</link>
-      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/csrf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>prototype-pollution</title>
       <link>https://jamvie.net/tags/prototype-pollution/</link>
       <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/prototype-pollution/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sqli</title>
-      <link>https://jamvie.net/tags/sqli/</link>
-      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/sqli/</guid>
       <description></description>
     </item>
     
@@ -131,15 +158,6 @@
       <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/instructional/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>misc</title>
-      <link>https://jamvie.net/tags/misc/</link>
-      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/misc/</guid>
       <description></description>
     </item>
     
@@ -194,6 +212,24 @@
       <pubDate>Sun, 04 Oct 2020 13:12:06 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/osint/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTML-injection</title>
+      <link>https://jamvie.net/tags/html-injection/</link>
+      <pubDate>Mon, 24 Aug 2020 20:17:24 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/html-injection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>object-poisoning</title>
+      <link>https://jamvie.net/tags/object-poisoning/</link>
+      <pubDate>Mon, 24 Aug 2020 20:17:24 -0600</pubDate>
+      
+      <guid>https://jamvie.net/tags/object-poisoning/</guid>
       <description></description>
     </item>
     

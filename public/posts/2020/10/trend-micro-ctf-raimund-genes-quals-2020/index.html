@@ -58,7 +58,7 @@
 
 
 
-    <meta property="article:published_time" content="2020-10-04 13:12:06 -0600 -0600" />
+    <meta property="article:published_time" content="2020-10-04 13:12:06 -0600 MDT" />
 
 
 
@@ -178,29 +178,29 @@ if (!doNotTrack) {
 
 
 <p>But the actual key bit itself was still unknown. So I poked around in the <code>AndroidManifest.xml</code> file and saw this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">       <span style="color:#f92672">&lt;activity</span>
-            <span style="color:#a6e22e">android:theme=</span><span style="color:#e6db74">&#34;@ref/0x7f0e0008&#34;</span>
-            <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;@ref/0x7f0d003a&#34;</span>
-            <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;com.trendmicro.keybox.KEY1HintActivity&#34;</span>
-            <span style="color:#a6e22e">android:exported=</span><span style="color:#e6db74">&#34;true&#34;</span>
-            <span style="color:#a6e22e">android:hint=</span><span style="color:#e6db74">&#34;Unlocking the hints requires sending the appropriate intent : adb shell am start-activity -a com.trendmicro.keybox.UNLOCK_HINT -n com.trendmicro.keybox/.KEY1HintActivity -e hintkey1 $PASSWORD&#34;</span>
-            <span style="color:#a6e22e">android:parentActivityName=</span><span style="color:#e6db74">&#34;com.trendmicro.keybox.KeyboxMainActivity&#34;</span><span style="color:#f92672">&gt;</span>
-
-            <span style="color:#f92672">&lt;intent-filter&gt;</span>
-
-                <span style="color:#f92672">&lt;action</span>
-                    <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;com.trendmicro.keybox.UNLOCK_HINT&#34;</span> <span style="color:#f92672">/&gt;</span>
-
-                <span style="color:#f92672">&lt;category</span>
-                    <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.intent.category.LAUNCHER&#34;</span> <span style="color:#f92672">/&gt;</span>
-            <span style="color:#f92672">&lt;/intent-filter&gt;</span>
-
-            <span style="color:#f92672">&lt;meta-data</span>
-                <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.support.PARENT_ACTIVITY&#34;</span>
-                <span style="color:#a6e22e">android:value=</span><span style="color:#e6db74">&#34;com.trendmicro.keybox.KeyboxMainActivity&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;/activity&gt;</span>
-        
-</code></pre></div><p>This was to unlock the hint for key 1. It was an app-specific intent that required a password. The intent itself would actually decrypt the hint, with the password you provided it as the key (am I using &lsquo;key&rsquo; too much here?). Since the actual &ldquo;hint&rdquo; in key 0 didn&rsquo;t really deliver information to me about <em>how</em> to unlock key 0, I figured I would request the hint again. But I didn&rsquo;t know the password value(more on this later). So Arctic and I bounced a few ideas back and forth until I thought to sanity check and use the same password provided to us to unzip the challenge file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>       <span style="color:#f92672">&lt;activity</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:theme=</span><span style="color:#e6db74">&#34;@ref/0x7f0e0008&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;@ref/0x7f0d003a&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;com.trendmicro.keybox.KEY1HintActivity&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:exported=</span><span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:hint=</span><span style="color:#e6db74">&#34;Unlocking the hints requires sending the appropriate intent : adb shell am start-activity -a com.trendmicro.keybox.UNLOCK_HINT -n com.trendmicro.keybox/.KEY1HintActivity -e hintkey1 $PASSWORD&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:parentActivityName=</span><span style="color:#e6db74">&#34;com.trendmicro.keybox.KeyboxMainActivity&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;intent-filter&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;action</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;com.trendmicro.keybox.UNLOCK_HINT&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;category</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.intent.category.LAUNCHER&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/intent-filter&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;meta-data</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.support.PARENT_ACTIVITY&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">android:value=</span><span style="color:#e6db74">&#34;com.trendmicro.keybox.KeyboxMainActivity&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/activity&gt;</span>
+</span></span><span style="display:flex;"><span>        
+</span></span></code></pre></div><p>This was to unlock the hint for key 1. It was an app-specific intent that required a password. The intent itself would actually decrypt the hint, with the password you provided it as the key (am I using &lsquo;key&rsquo; too much here?). Since the actual &ldquo;hint&rdquo; in key 0 didn&rsquo;t really deliver information to me about <em>how</em> to unlock key 0, I figured I would request the hint again. But I didn&rsquo;t know the password value(more on this later). So Arctic and I bounced a few ideas back and forth until I thought to sanity check and use the same password provided to us to unzip the challenge file.</p>
 
     <img src="https://jamvie.net/images/Key0Decrypt.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
@@ -208,7 +208,7 @@ if (!doNotTrack) {
 <p>I&rsquo;m not sure why that worked. I&rsquo;m not totally sure this was intended or not. But regardless, the key for key 0&rsquo;s encryption process was the password that was used to unzip the challenge file. Later on, Arctic mentioned that the real hint for key 0 we maybe never found out, and we ended up just correctly guessing the key to decode key0.</p>
 <h3 id="key-1">Key 1</h3>
 <p>So on a bit of lucky streak, I continued on to key 1, while Arctic decrypted the hints. Because we still didn&rsquo;t know the encryption key for the hints, Arctic used a scoring function to decode as much of the hints in the ciphertexts as possible. The bits and pieces she recovered for key1&rsquo;s hint was:</p>
-<pre><code>To unlock Key 1, you must call Trend Micro.
+<pre tabindex="0"><code>To unlock Key 1, you must call Trend Micro.
 </code></pre><p>It was at this point that I was examining the other classes in the APK that I realized that the encryption key was hidden in the singleton class - <code>TrendMicro</code>.</p>
 <p>Another teammate and mentor Robert quickly spun up a python script called <code>decrypt.py</code> to automate much of the decrypting process, now that we figured out the password.
 But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whole hint.</p>
@@ -223,17 +223,17 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
 
 <h3 id="key-2">Key 2</h3>
 <p>With that being said, key 2 was way easier to decrypt. The hint for it was simple:</p>
-<pre><code>To unlock KEY2, send the secret code.
+<pre tabindex="0"><code>To unlock KEY2, send the secret code.
 </code></pre><p>Which is sufficiently vague, but &ldquo;secret codes&rdquo; are meaningful in Android developement.</p>
 <p>Secret codes are specific sequences of numbers that could perform special actions. For example, the code <code>232338</code> would reveal your android phone&rsquo;s MAC address. Applications can also use them to perform secret tasks or unlock hidden features. If you wanted to test this out on your android device, open up your dialer and input a secret code as so:
 <code>*#*#123456#*#*</code>.</p>
 <p>In the <code>AndroidManifest.xml</code> file, the SECRET_CODE intent is defined:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">            <span style="color:#f92672">&lt;intent-filter&gt;</span>
-                <span style="color:#f92672">&lt;action</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.provider.Telephony.SECRET_CODE&#34;</span><span style="color:#f92672">/&gt;</span>
-                <span style="color:#f92672">&lt;data</span> <span style="color:#a6e22e">android:host=</span><span style="color:#e6db74">&#34;\ 8736364276&#34;</span> <span style="color:#a6e22e">android:scheme=</span><span style="color:#e6db74">&#34;android_secret_code&#34;</span><span style="color:#f92672">/&gt;</span>
-                <span style="color:#f92672">&lt;data</span> <span style="color:#a6e22e">android:host=</span><span style="color:#e6db74">&#34;\ 8736364275&#34;</span> <span style="color:#a6e22e">android:scheme=</span><span style="color:#e6db74">&#34;android_secret_code&#34;</span><span style="color:#f92672">/&gt;</span>
-            <span style="color:#f92672">&lt;/intent-filter&gt;</span>
-</code></pre></div><p>So the secret code in the app is the encryption key for KEY2!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>            <span style="color:#f92672">&lt;intent-filter&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;action</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.provider.Telephony.SECRET_CODE&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;data</span> <span style="color:#a6e22e">android:host=</span><span style="color:#e6db74">&#34;\ 8736364276&#34;</span> <span style="color:#a6e22e">android:scheme=</span><span style="color:#e6db74">&#34;android_secret_code&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;data</span> <span style="color:#a6e22e">android:host=</span><span style="color:#e6db74">&#34;\ 8736364275&#34;</span> <span style="color:#a6e22e">android:scheme=</span><span style="color:#e6db74">&#34;android_secret_code&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/intent-filter&gt;</span>
+</span></span></code></pre></div><p>So the secret code in the app is the encryption key for KEY2!</p>
 <p>You can either use <code>abd</code> to send the <code>android.provider.Telephony.SECRET_CODE</code> intent or just use the dialer in the emulator, as the app has a listener on the call function. Either way, you get KEY2.</p>
 
     <img src="https://jamvie.net/images/Key2Decrypt.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
@@ -241,31 +241,31 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
 
 <h2 id="key-3">Key 3</h2>
 <p>The hint for Key3 was:</p>
-<pre><code>Unlock KEY3 by sending the right text message. 
+<pre tabindex="0"><code>Unlock KEY3 by sending the right text message. 
 </code></pre><p>This requires some explanation on the architecture of text messages in an android phone.</p>
 <p>SMS messages are kept in a relational database - specifically, sqlite. In the APK&rsquo;s observer class, we see some interesting checking going on:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v5</span><span style="color:#f92672">,</span> v2<span style="color:#f92672">},</span> Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;-&gt;</span>getColumnName<span style="color:#f92672">(</span>I<span style="color:#f92672">)</span>Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String<span style="color:#f92672">;</span>
-
-    move<span style="color:#f92672">-</span>result<span style="color:#f92672">-</span>object v5
-
-    invoke<span style="color:#f92672">-</span>virtual <span style="color:#f92672">{</span>v4<span style="color:#f92672">,</span> v5<span style="color:#f92672">},</span> Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String<span style="color:#f92672">;-&gt;</span>equals<span style="color:#f92672">(</span>Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>Object<span style="color:#f92672">;)</span>Z
-
-    move<span style="color:#f92672">-</span>result v4
-
-    <span style="color:#66d9ef">if</span><span style="color:#f92672">-</span>eqz v4<span style="color:#f92672">,</span> <span style="color:#f92672">:</span>cond_a8
-
-    iget<span style="color:#f92672">-</span>object v4<span style="color:#f92672">,</span> p0<span style="color:#f92672">,</span> Lcom<span style="color:#f92672">/</span>trendmicro<span style="color:#f92672">/</span>keybox<span style="color:#f92672">/</span>Observer<span style="color:#f92672">;-&gt;</span>cursor<span style="color:#f92672">:</span>Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;</span>
-
-    iget<span style="color:#f92672">-</span>object v5<span style="color:#f92672">,</span> p0<span style="color:#f92672">,</span> Lcom<span style="color:#f92672">/</span>trendmicro<span style="color:#f92672">/</span>keybox<span style="color:#f92672">/</span>Observer<span style="color:#f92672">;-&gt;</span>cursor<span style="color:#f92672">:</span>Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;</span>
-
-    <span style="color:#66d9ef">const</span><span style="color:#f92672">-</span>string v6<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;type&#34;</span>
-
-    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v5</span><span style="color:#f92672">,</span> v6<span style="color:#f92672">},</span> Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;-&gt;</span>getColumnIndex<span style="color:#f92672">(</span>Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String<span style="color:#f92672">;)</span>I
-
-    move<span style="color:#f92672">-</span>result v5
-
-    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v4</span><span style="color:#f92672">,</span> v5<span style="color:#f92672">},</span> Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;-&gt;</span>getInt<span style="color:#f92672">(</span>I<span style="color:#f92672">)</span>I
-</code></pre></div><p>What&rsquo;s happening here? Well, long story short, when we send an SMS message, the app will access the SMS sqlite database and iterate through the columns of that database, and match the content of the text message to the column name. If there&rsquo;s a match, then the app will unlock the 3rd key for us. This must mean that the string needed to decrypt the third key bit must be one of the column names!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v5</span><span style="color:#f92672">,</span> v2<span style="color:#f92672">},</span> Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;-&gt;</span>getColumnName<span style="color:#f92672">(</span>I<span style="color:#f92672">)</span>Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    move<span style="color:#f92672">-</span>result<span style="color:#f92672">-</span>object v5
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span>virtual <span style="color:#f92672">{</span>v4<span style="color:#f92672">,</span> v5<span style="color:#f92672">},</span> Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String<span style="color:#f92672">;-&gt;</span>equals<span style="color:#f92672">(</span>Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>Object<span style="color:#f92672">;)</span>Z
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    move<span style="color:#f92672">-</span>result v4
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">-</span>eqz v4<span style="color:#f92672">,</span> <span style="color:#f92672">:</span>cond_a8
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    iget<span style="color:#f92672">-</span>object v4<span style="color:#f92672">,</span> p0<span style="color:#f92672">,</span> Lcom<span style="color:#f92672">/</span>trendmicro<span style="color:#f92672">/</span>keybox<span style="color:#f92672">/</span>Observer<span style="color:#f92672">;-&gt;</span>cursor<span style="color:#f92672">:</span>Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    iget<span style="color:#f92672">-</span>object v5<span style="color:#f92672">,</span> p0<span style="color:#f92672">,</span> Lcom<span style="color:#f92672">/</span>trendmicro<span style="color:#f92672">/</span>keybox<span style="color:#f92672">/</span>Observer<span style="color:#f92672">;-&gt;</span>cursor<span style="color:#f92672">:</span>Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span><span style="color:#f92672">-</span>string v6<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;type&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v5</span><span style="color:#f92672">,</span> v6<span style="color:#f92672">},</span> Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;-&gt;</span>getColumnIndex<span style="color:#f92672">(</span>Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String<span style="color:#f92672">;)</span>I
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    move<span style="color:#f92672">-</span>result v5
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v4</span><span style="color:#f92672">,</span> v5<span style="color:#f92672">},</span> Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;-&gt;</span>getInt<span style="color:#f92672">(</span>I<span style="color:#f92672">)</span>I
+</span></span></code></pre></div><p>What&rsquo;s happening here? Well, long story short, when we send an SMS message, the app will access the SMS sqlite database and iterate through the columns of that database, and match the content of the text message to the column name. If there&rsquo;s a match, then the app will unlock the 3rd key for us. This must mean that the string needed to decrypt the third key bit must be one of the column names!</p>
 
     <img src="https://jamvie.net/images/Key3Decrypt.png"  alt="key3"  class="center"  style="border-radius: 8px;"  />
 
@@ -273,32 +273,32 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
 <p>The column name that decrypted KEY3 turned out to be &lsquo;body&rsquo;.</p>
 <h2 id="key-4">Key 4</h2>
 <p>Despite KEY4 having the longest hint, and arguably the most amount of time to do, KEY4 was remarkably simple. The details are in the function of the ciphertext:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// why actually calculate distance when you can just fake it ;)
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(Math.<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">location_latitude</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">singleton_latitude</span>) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span> <span style="color:#f92672">&amp;&amp;</span> Math.<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">location_longitude</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">singleton_longitude</span>) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span> ) {
-            <span style="color:#a6e22e">Log</span>(<span style="color:#e6db74">&#34;Matched Location &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">location</span>);
-            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">SHA1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Hashes</span>.<span style="color:#a6e22e">SHA1</span>;
-            <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">SHA1</span>.<span style="color:#a6e22e">hex</span>(<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">location</span>)
-            <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">hash</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>) {
-                <span style="color:#a6e22e">location_match</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Welcome to &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">location</span>;
-            } <span style="color:#66d9ef">else</span> {
-                <span style="color:#a6e22e">location_match</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Welcome to &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">location</span>;
-                <span style="color:#a6e22e">singleton</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>);
-            }
-            <span style="color:#66d9ef">break</span>;
-        } <span style="color:#66d9ef">else</span> {
-            <span style="color:#a6e22e">location_match</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
-        }
-    }
-
-
-    <span style="color:#a6e22e">titleView</span>.<span style="color:#a6e22e">setText</span>(<span style="color:#e6db74">&#34;Key Four Hints&#34;</span>);
-    <span style="color:#a6e22e">textView</span>.<span style="color:#a6e22e">setText</span>(
-    <span style="color:#e6db74">&#34;Visit &#34;</span> <span style="color:#f92672">+</span> <span style="color:#75715e">/* all three of */</span> <span style="color:#e6db74">&#34;the headquarters to unlock Key 4&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\n\n&#34;</span> <span style="color:#f92672">+</span>
-    <span style="color:#a6e22e">location_match</span>
-    );
-
-    <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">true</span>)<span style="color:#e6db74">`
-</span></code></pre></div><p>The hint specified to visit only the 3 headquarters, which were in the USA, Canada and Japan (Irving, Ontario and Tokyo respectively). While you can simulate your location in the emulator to pretend as if you visited all 3 locations, what it was looking for was the hash of the lat-lon location. It would check if that hash was among the list of accepted ones (which are only the hashes of the 3 HQs), and then append those hashes and use it as the key to decrypt KEY4.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// why actually calculate distance when you can just fake it ;)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(Math.<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">location_latitude</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">singleton_latitude</span>) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span> <span style="color:#f92672">&amp;&amp;</span> Math.<span style="color:#a6e22e">abs</span>(<span style="color:#a6e22e">location_longitude</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">singleton_longitude</span>) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.001</span> ) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Log</span>(<span style="color:#e6db74">&#34;Matched Location &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">location</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">SHA1</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Hashes</span>.<span style="color:#a6e22e">SHA1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">SHA1</span>.<span style="color:#a6e22e">hex</span>(<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">location</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>( <span style="color:#a6e22e">hash</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">location_match</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Welcome to &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">location</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">location_match</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Welcome to &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">location</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">singleton</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">location_match</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">titleView</span>.<span style="color:#a6e22e">setText</span>(<span style="color:#e6db74">&#34;Key Four Hints&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">textView</span>.<span style="color:#a6e22e">setText</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Visit &#34;</span> <span style="color:#f92672">+</span> <span style="color:#75715e">/* all three of */</span> <span style="color:#e6db74">&#34;the headquarters to unlock Key 4&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\n\n&#34;</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">location_match</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>(<span style="color:#66d9ef">true</span>)<span style="color:#e6db74">`
+</span></span></span></code></pre></div><p>The hint specified to visit only the 3 headquarters, which were in the USA, Canada and Japan (Irving, Ontario and Tokyo respectively). While you can simulate your location in the emulator to pretend as if you visited all 3 locations, what it was looking for was the hash of the lat-lon location. It would check if that hash was among the list of accepted ones (which are only the hashes of the 3 HQs), and then append those hashes and use it as the key to decrypt KEY4.</p>
 <p>So, we needed to just append the hashes of the 3 headquarters, and input that as our decryption key to key4.enc.</p>
 
     <img src="https://jamvie.net/images/Key4Decrypt.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
@@ -322,7 +322,7 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1686 Words</p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-10-04 12:12 -0700</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-10-04 13:12 -0600</p>
         </div>
 
         
@@ -385,7 +385,7 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.af5a3e743efae0c74305dc03080fb4bd5ae8f1a60160b3599ab59639ad6c182d763fb4238e72a726f48319ad132a4cdc9cd51fac5462e8a25dc0ba096f547038.js" integrity="sha512-r1o&#43;dD764MdDBdwDCA&#43;0vVro8aYBYLNZmrWWOa1sGC12P7QjjnKnJvSDGa0TKkzcnNUfrFRi6KJdwLoJb1RwOA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;

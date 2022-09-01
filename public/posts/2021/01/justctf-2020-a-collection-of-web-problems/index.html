@@ -48,7 +48,7 @@ I&amp;rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&am
 Forgotten Name I found this on a total fluke. I wasn&rsquo;t paying attention to the challenge much but the description was compelling:
 I&rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&rsquo;s network, and so instead thought about the nature of their subdomains."><meta itemprop="datePublished" content="2021-01-31T23:05:20-07:00" />
 <meta itemprop="dateModified" content="2021-01-31T23:05:20-07:00" />
-<meta itemprop="wordCount" content="1329"><meta itemprop="image" content="https://jamvie.net/img/V.png"/>
+<meta itemprop="wordCount" content="1330"><meta itemprop="image" content="https://jamvie.net/img/V.png"/>
 <meta itemprop="keywords" content="web,writeups,xss," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/img/V.png"/>
@@ -66,7 +66,7 @@ I&rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&rsquo;
 
 
 
-    <meta property="article:published_time" content="2021-01-31 23:05:20 -0700 -0700" />
+    <meta property="article:published_time" content="2021-01-31 23:05:20 -0700 MST" />
 
 
 
@@ -199,53 +199,53 @@ if (!doNotTrack) {
 <p>Although unintended, still a good discussion on the security of referrer headers. Looking at the flag also validated my suspicions of this challenge&rsquo;s intended solution requiring XS-leaks.</p>
 <h2 id="baby-csp">Baby-CSP</h2>
 <p>I was primarily focused on this challenge. We see some interesting PHP code right away upon visiting it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-<span style="color:#66d9ef">require_once</span>(<span style="color:#e6db74">&#34;secrets.php&#34;</span>);
-$nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_bytes</span>(<span style="color:#ae81ff">8</span>);
-
-<span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;flag&#39;</span>])){
- <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isAdmin</span>()){
-    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;X-Content-Type-Options: nosniff&#39;</span>);
-    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;X-Frame-Options: DENY&#39;</span>);
-    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Content-type: text/html; charset=UTF-8&#39;</span>);
-    <span style="color:#66d9ef">echo</span> $flag;
-    <span style="color:#66d9ef">die</span>();
- }
- <span style="color:#66d9ef">else</span>{
-     <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;You are not an admin!&#34;</span>;
-     <span style="color:#66d9ef">die</span>();
- }
-}
-
-<span style="color:#66d9ef">for</span>($i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; $i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; $i<span style="color:#f92672">++</span>){
-    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;alg&#39;</span>])){
-        $_nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">hash</span>($_GET[<span style="color:#e6db74">&#39;alg&#39;</span>], $nonce);
-        <span style="color:#66d9ef">if</span>($_nonce){
-            $nonce <span style="color:#f92672">=</span> $_nonce;
-            <span style="color:#66d9ef">continue</span>;
-        }
-    }
-    $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">md5</span>($nonce);
-}
-
-<span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;user&#39;</span>]) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">strlen</span>($_GET[<span style="color:#e6db74">&#39;user&#39;</span>]) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">23</span>) {
-    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;; script-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;&#34;</span>);
-    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&lt;&lt;&lt;</span><span style="color:#e6db74">EOT</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">        &lt;script nonce=&#39;$nonce&#39;&gt;
-</span><span style="color:#e6db74">            setInterval(
-</span><span style="color:#e6db74">                ()=&gt;user.style.color=Math.random()&lt;0.3?&#39;red&#39;:&#39;black&#39;
-</span><span style="color:#e6db74">            ,100);
-</span><span style="color:#e6db74">        &lt;/script&gt;
-</span><span style="color:#e6db74">        &lt;center&gt;&lt;h1&gt; Hello &lt;span id=&#39;user&#39;&gt;{$_GET[&#39;user&#39;]}&lt;/span&gt;!!&lt;/h1&gt;
-</span><span style="color:#e6db74">        &lt;p&gt;Click &lt;a href=&#34;?flag&#34;&gt;here&lt;/a&gt; to get a flag!&lt;/p&gt;
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">EOT</span>;
-}<span style="color:#66d9ef">else</span>{
-    <span style="color:#a6e22e">show_source</span>(<span style="color:#66d9ef">__FILE__</span>);
-}
-
-<span style="color:#75715e">// Found a bug? We want to hear from you! /bugbounty.php
-</span><span style="color:#75715e">// Check /Dockerfile
-</span></code></pre></div><p>There&rsquo;s a reflected-XSS attack which can be done through the <code>user</code> query parameter. However, the Content-Security-Policy is pretty strict and my XSS payload has to be less than <em>23 chars</em>. The CSP uses a nonce value (randomized 8 bytes), which we can see in the for loop above, is hashed 10 times. There&rsquo;s no feasible way to reverse a hash 10 times. So, there are 2 obstacles to overcome: how to create an XSS payload that&rsquo;s at most 23 characters long, and also how to bypass the hashing of this nonce value.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">require_once</span>(<span style="color:#e6db74">&#34;secrets.php&#34;</span>);
+</span></span><span style="display:flex;"><span>$nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_bytes</span>(<span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;flag&#39;</span>])){
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isAdmin</span>()){
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;X-Content-Type-Options: nosniff&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;X-Frame-Options: DENY&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Content-type: text/html; charset=UTF-8&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">echo</span> $flag;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">die</span>();
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;You are not an admin!&#34;</span>;
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">die</span>();
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>($i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; $i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">10</span>; $i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;alg&#39;</span>])){
+</span></span><span style="display:flex;"><span>        $_nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">hash</span>($_GET[<span style="color:#e6db74">&#39;alg&#39;</span>], $nonce);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>($_nonce){
+</span></span><span style="display:flex;"><span>            $nonce <span style="color:#f92672">=</span> $_nonce;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">md5</span>($nonce);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;user&#39;</span>]) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">strlen</span>($_GET[<span style="color:#e6db74">&#39;user&#39;</span>]) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">23</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;; script-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&lt;&lt;&lt;</span><span style="color:#e6db74">EOT</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;script nonce=&#39;$nonce&#39;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            setInterval(
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                ()=&gt;user.style.color=Math.random()&lt;0.3?&#39;red&#39;:&#39;black&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            ,100);
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;/script&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;center&gt;&lt;h1&gt; Hello &lt;span id=&#39;user&#39;&gt;{$_GET[&#39;user&#39;]}&lt;/span&gt;!!&lt;/h1&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;p&gt;Click &lt;a href=&#34;?flag&#34;&gt;here&lt;/a&gt; to get a flag!&lt;/p&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span><span style="color:#e6db74">EOT</span>;
+</span></span><span style="display:flex;"><span>}<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">show_source</span>(<span style="color:#66d9ef">__FILE__</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Found a bug? We want to hear from you! /bugbounty.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Check /Dockerfile
+</span></span></span></code></pre></div><p>There&rsquo;s a reflected-XSS attack which can be done through the <code>user</code> query parameter. However, the Content-Security-Policy is pretty strict and my XSS payload has to be less than <em>23 chars</em>. The CSP uses a nonce value (randomized 8 bytes), which we can see in the for loop above, is hashed 10 times. There&rsquo;s no feasible way to reverse a hash 10 times. So, there are 2 obstacles to overcome: how to create an XSS payload that&rsquo;s at most 23 characters long, and also how to bypass the hashing of this nonce value.</p>
 <h3 id="the-nonce-value-and-php-response-buffers">The nonce value and PHP response buffers</h3>
 <p>The nonce value is hashed 10 times with a hashing algorithm of our choosing (md5 if we don&rsquo;t choose), using the <code>alg</code> query parameter. However, something interesting that teammate Filip pointed out while I was working on this challenge was the fact that this server was being run on a development config, which you can find out by checking the <code>/Dockerfile</code> endpoint. This fact became relevant to me when, in doing recon for the challenge, I tried to make a GET request with the <code>alg</code> query parameter and accidentally misspelled <code>sha256</code> (it was 3am). What happened was this:</p>
 
@@ -254,20 +254,20 @@ $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_b
 
 <p>We get 10 warnings (A warning per iteration in the for loop) that fill the webpage, complaining about our mistake. The reason why we see these is because the PHP server is in a development environment - so the warnings are given to us in the responses.</p>
 <p>PHP was initially developed as a procedural language. The script provided to us is executed in order - it first does actions according to the presence of a <code>flag</code> in a recieved request, then it iterates through the for loop, hashing the <code>nonce</code> value accordingly. Then, it performs actions based on the presence of the <code>user</code> parameter. It is here in the if statement for the <code>user</code> query where the Content-Security-Policy is set:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;; script-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;&#34;</span>);
-</code></pre></div><p>So headers are being modified when the <code>user</code> query is specified, but if you also specify an <code>alg</code> query and give it an invalid value, the server&rsquo;s response will first have 10 warnings before the headers of that response are ready.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;content-security-policy: default-src &#39;none&#39;; style-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;; script-src &#39;nonce-</span><span style="color:#e6db74">$nonce</span><span style="color:#e6db74">&#39;&#34;</span>);
+</span></span></code></pre></div><p>So headers are being modified when the <code>user</code> query is specified, but if you also specify an <code>alg</code> query and give it an invalid value, the server&rsquo;s response will first have 10 warnings before the headers of that response are ready.</p>
 <p>These warnings also reflect our input back to us, so we can modify the size of each warning by our <code>alg</code> input. Why is this relevant?</p>
 <p>PHP has a mechanism called output buffering - if you have a script that began outputting data before the headers were set, that data is put into a buffer which will be sent once the entire response is ready. The PHP response buffer is 4096 bytes (4KB), and once it&rsquo;s filled, it&rsquo;s immediately flushed and the data within it is sent over.</p>
 <p>So, if we could specify a value in the <code>alg</code> query that&rsquo;s sufficiently long enough to fill the response buffer, <strong>we will initiate a response sent from the server, regardless of whether or not the headers are ready</strong>. Thus, the CSP <code>header()</code> call will be ignored as a response was already sent. With this, we don&rsquo;t need to worry about whatever the <code>$nonce</code> value is hashed to, cause we can bypass the CSP entirely.</p>
 <h3 id="xss-payload--23">XSS payload &lt;= 23</h3>
 <p>I initially tried to format an xss payload on my own, trying to shorten my URL domain or use different tags, but with some <a href="https://tinyxss.terjanq.me/">googling</a> I found <code>&lt;svg/onload=&gt;</code> to be effective.</p>
 <p>Specifically, the example provided was <code>&lt;svg/onload=eval(name)&gt;</code>, so ideally I could modify the <code>name</code> variable to do what I want. Something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">alert</span>(<span style="color:#ae81ff">1</span>);
-
-<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">svg</span><span style="color:#f92672">/</span><span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span>eval(<span style="color:#a6e22e">name</span>)<span style="color:#f92672">&gt;</span>
-</code></pre></div><h3 id="putting-it-all-together">Putting it all together</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">alert</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">svg</span><span style="color:#f92672">/</span><span style="color:#a6e22e">onload</span><span style="color:#f92672">=</span>eval(<span style="color:#a6e22e">name</span>)<span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><h3 id="putting-it-all-together">Putting it all together</h3>
 <p>We can test out if whether or not overloading the response buffer will bypass the CSP with this query:</p>
-<pre><code class="language-url" data-lang="url">https://baby-csp.web.jctf.pro/?alg=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&amp;user=&lt;svg/onload=alert(1)&gt;
+<pre tabindex="0"><code class="language-url" data-lang="url">https://baby-csp.web.jctf.pro/?alg=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&amp;user=&lt;svg/onload=alert(1)&gt;
 </code></pre><p>And this will prompt an alert. We can see the HTML of the webpage and find that our <code>&lt;svg&gt;</code> payload is correctly interpreted as such:</p>
 
     <img src="https://jamvie.net/images/justCTF2020_svg.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
@@ -288,9 +288,9 @@ $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_b
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/xss">xss</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1329 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1330 Words</p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-01-31 22:05 -0800</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-01-31 23:05 -0700</p>
         </div>
 
         
@@ -353,7 +353,7 @@ $nonce <span style="color:#f92672">=</span> <span style="color:#a6e22e">random_b
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.af5a3e743efae0c74305dc03080fb4bd5ae8f1a60160b3599ab59639ad6c182d763fb4238e72a726f48319ad132a4cdc9cd51fac5462e8a25dc0ba096f547038.js" integrity="sha512-r1o&#43;dD764MdDBdwDCA&#43;0vVro8aYBYLNZmrWWOa1sGC12P7QjjnKnJvSDGa0TKkzcnNUfrFRi6KJdwLoJb1RwOA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;

@@ -2,29 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jamvie.net/categories/</loc>
+    <lastmod>2022-08-16T13:37:54-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</loc>
+    <lastmod>2022-08-16T13:37:54-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/categories/misc/</loc>
+    <lastmod>2022-08-16T13:37:54-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/posts/</loc>
+    <lastmod>2022-08-16T13:37:54-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2022-08-16T13:37:54-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/arduino/</loc>
+    <lastmod>2022-05-02T12:40:52-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/csrf/</loc>
+    <lastmod>2022-05-02T12:40:52-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</loc>
+    <lastmod>2022-05-02T12:40:52-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/sqli/</loc>
+    <lastmod>2022-05-02T12:40:52-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/ssti/</loc>
+    <lastmod>2022-05-02T12:40:52-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/</loc>
+    <lastmod>2022-05-02T12:40:52-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/web/</loc>
+    <lastmod>2022-05-02T12:40:52-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/writeups/</loc>
+    <lastmod>2022-05-02T12:40:52-07:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/categories/writeups/</loc>
+    <lastmod>2022-05-02T12:40:52-07:00</lastmod>
+  </url><url>
     <loc>https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/</loc>
     <lastmod>2022-04-26T19:59:24-07:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/categories/</loc>
-    <lastmod>2022-04-26T19:59:24-07:00</lastmod>
+    <loc>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-introspective/</loc>
+    <lastmod>2022-01-30T22:00:18-08:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/posts/</loc>
-    <lastmod>2022-04-26T19:59:24-07:00</lastmod>
+    <loc>https://jamvie.net/tags/misc/</loc>
+    <lastmod>2022-01-30T22:00:18-08:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/tags/</loc>
-    <lastmod>2022-04-26T19:59:24-07:00</lastmod>
+    <loc>https://jamvie.net/categories/miscellaneous/</loc>
+    <lastmod>2022-01-30T22:00:18-08:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/</loc>
-    <lastmod>2022-04-26T19:59:24-07:00</lastmod>
+    <loc>https://jamvie.net/posts/2021/12/2021-wrapped/</loc>
+    <lastmod>2021-12-20T22:37:46-08:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/tags/web/</loc>
-    <lastmod>2022-04-26T19:59:24-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/tags/writeups/</loc>
-    <lastmod>2022-04-26T19:59:24-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/categories/writeups/</loc>
-    <lastmod>2022-04-26T19:59:24-07:00</lastmod>
+    <loc>https://jamvie.net/tags/wrapped/</loc>
+    <lastmod>2021-12-20T22:37:46-08:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</loc>
     <lastmod>2021-10-24T13:49:21-07:00</lastmod>
@@ -38,16 +74,13 @@
     <loc>https://jamvie.net/tags/command-injection/</loc>
     <lastmod>2021-08-20T13:49:21-07:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/</loc>
-    <lastmod>2021-08-20T13:49:21-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/tags/ssti/</loc>
+    <loc>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2--unintended-solutions/</loc>
     <lastmod>2021-08-20T13:49:21-07:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/</loc>
     <lastmod>2021-08-09T13:49:21-07:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx/</loc>
+    <loc>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud--threefactooorx/</loc>
     <lastmod>2021-04-11T00:07:54-06:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/tags/reversing/</loc>
@@ -68,16 +101,10 @@
     <loc>https://jamvie.net/posts/2021/03/utctf-2021/</loc>
     <lastmod>2021-03-14T17:17:38-06:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/tags/csrf/</loc>
-    <lastmod>2021-02-07T19:06:12-07:00</lastmod>
-  </url><url>
     <loc>https://jamvie.net/posts/2021/02/dicectf-2021/</loc>
     <lastmod>2021-02-07T19:06:12-07:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/tags/prototype-pollution/</loc>
-    <lastmod>2021-02-07T19:06:12-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/tags/sqli/</loc>
     <lastmod>2021-02-07T19:06:12-07:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</loc>
@@ -93,9 +120,6 @@
     <lastmod>2021-01-26T12:04:52-07:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/categories/instructional/</loc>
-    <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/tags/misc/</loc>
     <lastmod>2021-01-26T12:04:52-07:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/tags/ssrf/</loc>
@@ -128,11 +152,17 @@
     <loc>https://jamvie.net/posts/2020/10/trend-micro-ctf-raimund-genes-quals-2020/</loc>
     <lastmod>2020-10-04T13:12:06-06:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/categories/miscellaneous/</loc>
-    <lastmod>2020-09-19T20:57:15-06:00</lastmod>
-  </url><url>
     <loc>https://jamvie.net/posts/2020/09/volgactf-finals-2020/</loc>
     <lastmod>2020-09-19T20:57:15-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/</loc>
+    <lastmod>2020-08-24T20:17:24-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/html-injection/</loc>
+    <lastmod>2020-08-24T20:17:24-06:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/object-poisoning/</loc>
+    <lastmod>2020-08-24T20:17:24-06:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</loc>
     <lastmod>2020-08-23T17:35:14-06:00</lastmod>

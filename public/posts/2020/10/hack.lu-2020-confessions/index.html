@@ -63,7 +63,7 @@ Let&rsquo;s Begin! The confessions webpage was a message-generation application 
 
 
 
-    <meta property="article:published_time" content="2020-10-25 22:34:34 -0600 -0600" />
+    <meta property="article:published_time" content="2020-10-25 22:34:34 -0600 MDT" />
 
 
 
@@ -156,34 +156,33 @@ if (!doNotTrack) {
                 <p>This is a writeup for &ldquo;Confessions&rdquo;, the first web challenge I solved. I was luckily able to finish this challenge in a couple hours, so I could focus my attention to the other super interesting web problems. Confessions was a nice dive into some simple GraphQL manipulation and baby crypto.</p>
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <p>The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it. Under the hood we see the nature of how these messages are stored:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// talk to the GraphQL endpoint
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gql</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">query</span>, <span style="color:#a6e22e">variables</span><span style="color:#f92672">=</span>{}) =&gt; {
-    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/graphql&#39;</span>, {
-        <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
-        <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
-            <span style="color:#e6db74">&#39;content-type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>,
-        },
-        <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
-            <span style="color:#a6e22e">operationName</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
-            <span style="color:#a6e22e">query</span>,
-            <span style="color:#a6e22e">variables</span>,
-        }),
-    });
-    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">json</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">length</span>) {
-        <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span>;
-    } <span style="color:#66d9ef">else</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">data</span>;
-    }
-};
-
-<span style="color:#75715e">// some queries/mutations
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfession</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">hash</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;query Q($hash: String) { confession(hash: $hash) { title, hash } }&#39;</span>, { <span style="color:#a6e22e">hash</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confession</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfessionWithMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">id</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation Q($id: String) { confessionWithMessage(id: $id) { title, hash, message } }&#39;</span>, { <span style="color:#a6e22e">id</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confessionWithMessage</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addConfession</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { id } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">previewHash</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { hash } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
-
-</code></pre></div><p>The application uses graphQL as an intermediary to the database. Specifically, the client &ldquo;talks&rdquo; to graphql via the <code>\graphql</code> endpoint. If we take a look at what happens when we create a message:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// talk to the GraphQL endpoint
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gql</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">query</span>, <span style="color:#a6e22e">variables</span><span style="color:#f92672">=</span>{}) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/graphql&#39;</span>, {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;content-type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>,
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">operationName</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">query</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">variables</span>,
+</span></span><span style="display:flex;"><span>        }),
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">json</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">length</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">errors</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">data</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// some queries/mutations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfession</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">hash</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;query Q($hash: String) { confession(hash: $hash) { title, hash } }&#39;</span>, { <span style="color:#a6e22e">hash</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confession</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getConfessionWithMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">id</span> =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation Q($id: String) { confessionWithMessage(id: $id) { title, hash, message } }&#39;</span>, { <span style="color:#a6e22e">id</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">confessionWithMessage</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">addConfession</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { id } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">previewHash</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span>) =&gt; <span style="color:#a6e22e">gql</span>(<span style="color:#e6db74">&#39;mutation M($title: String, $message: String) { addConfession(title: $title, message: $message) { hash } }&#39;</span>, { <span style="color:#a6e22e">title</span>, <span style="color:#a6e22e">message</span> }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">d</span> =&gt; <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">addConfession</span>);
+</span></span></code></pre></div><p>The application uses graphQL as an intermediary to the database. Specifically, the client &ldquo;talks&rdquo; to graphql via the <code>\graphql</code> endpoint. If we take a look at what happens when we create a message:</p>
 
     <img src="https://jamvie.net/images/confessionsresearch.png"  alt="research"  class="center"  style="border-radius: 8px;"  />
 
@@ -195,38 +194,38 @@ if (!doNotTrack) {
 
 
 <p>The description on the query&rsquo;s field <code>accessLog</code> is the big hint here. Let&rsquo;s expand upon <code>accessLog</code> further:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#960050;background-color:#1e0010">accessLog{</span>
-    <span style="color:#960050;background-color:#1e0010">name</span>
-    <span style="color:#960050;background-color:#1e0010">timestamp</span>
-    <span style="color:#960050;background-color:#1e0010">args</span>
-  }
-<span style="color:#960050;background-color:#1e0010">}</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">accessLog{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">name</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">timestamp</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">args</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span></code></pre></div>
     <img src="https://jamvie.net/images/confessionsaccess.png"  alt="accessLog"  class="center"  style="border-radius: 8px;"  />
 
 
 <p>We recieve a list of hashes, also in sha-256. Running the first 4 hashes through an online sha-256 database reveal to me that they decrypt to &ldquo;f&rdquo;, &ldquo;fl&rdquo;, &ldquo;fla&rdquo;, then finally &ldquo;flag&rdquo;. The full flag of this challenge is obviously the very last hash in this <code>accessLog</code>, so now we must bruteforce the incoming letters (which isn&rsquo;t too crazy. If we operate under the assumption that the flag has letters that are all lowercase, numbers 0-9, and maybe the <code>-</code> or <code>_</code> chars, we are dealing with 38 bits of entropy per letter, which is manageable. Additionally, we are aware by convention that all flags start with <code>flag{</code> and the last char is <code>}</code>, so we can already figure out what the 5th hash decrypts to). Special thanks to teammate Filip for explaining to me how to do it :-)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> sha256
-<span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
-
-
-alphanumerics <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abcdefghijklmnopqrstuvwxyz1234567890{}_-&#34;</span>
-hashes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;&#34;&#34;all the hashes found in accessLog. There were a lot.&#34;&#34;&#34;</span>]
-
-flag <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>
-
-
-<span style="color:#66d9ef">for</span> hash <span style="color:#f92672">in</span> hashes:
-	<span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> alphanumerics:
-		m <span style="color:#f92672">=</span> sha256()
-		m<span style="color:#f92672">.</span>update(flag <span style="color:#f92672">+</span> c<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;utf-8&#34;</span>))
-		testhash <span style="color:#f92672">=</span> enhex(m<span style="color:#f92672">.</span>digest())
-		<span style="color:#66d9ef">if</span> (testhash <span style="color:#f92672">==</span> hash):
-			flag <span style="color:#f92672">+=</span> c<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;utf-8&#34;</span>)
-			<span style="color:#66d9ef">print</span> (flag)
-			<span style="color:#66d9ef">continue</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> hashlib <span style="color:#f92672">import</span> sha256
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>alphanumerics <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abcdefghijklmnopqrstuvwxyz1234567890</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">_-&#34;</span>
+</span></span><span style="display:flex;"><span>hashes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;&#34;&#34;all the hashes found in accessLog. There were a lot.&#34;&#34;&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>flag <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> hash <span style="color:#f92672">in</span> hashes:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> alphanumerics:
+</span></span><span style="display:flex;"><span>		m <span style="color:#f92672">=</span> sha256()
+</span></span><span style="display:flex;"><span>		m<span style="color:#f92672">.</span>update(flag <span style="color:#f92672">+</span> c<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;utf-8&#34;</span>))
+</span></span><span style="display:flex;"><span>		testhash <span style="color:#f92672">=</span> enhex(m<span style="color:#f92672">.</span>digest())
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (testhash <span style="color:#f92672">==</span> hash):
+</span></span><span style="display:flex;"><span>			flag <span style="color:#f92672">+=</span> c<span style="color:#f92672">.</span>encode(<span style="color:#e6db74">&#34;utf-8&#34;</span>)
+</span></span><span style="display:flex;"><span>			print (flag)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">continue</span>
+</span></span></code></pre></div>
     <img src="https://jamvie.net/images/confessionsflag.png"  alt="flag"  class="center"  style="border-radius: 8px;"  />
 
 
@@ -245,7 +244,7 @@ flag <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><s
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>582 Words</p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-10-25 21:34 -0700</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-10-25 22:34 -0600</p>
         </div>
 
         
@@ -308,7 +307,7 @@ flag <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><s
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.af5a3e743efae0c74305dc03080fb4bd5ae8f1a60160b3599ab59639ad6c182d763fb4238e72a726f48319ad132a4cdc9cd51fac5462e8a25dc0ba096f547038.js" integrity="sha512-r1o&#43;dD764MdDBdwDCA&#43;0vVro8aYBYLNZmrWWOa1sGC12P7QjjnKnJvSDGa0TKkzcnNUfrFRi6KJdwLoJb1RwOA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;

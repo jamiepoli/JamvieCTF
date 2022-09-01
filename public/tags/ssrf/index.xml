@@ -25,7 +25,7 @@ Disclaimer: This article is not exhaustive, and is not intended to replace any r
       
       <guid>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</guid>
       <description>A writeup for the first web problem, &amp;ldquo;Harmony Chat&amp;rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
-TL;DR  Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit  Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
+TL;DR Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
     </item>
     
     <item>
