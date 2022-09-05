@@ -5,7 +5,7 @@ draft: false
 comments: false
 images: ["images/mmm_together.JPG"]
 categories: 
-    - misc
+    - miscellaneous
 toc: true
 ---
 

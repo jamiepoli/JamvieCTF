@@ -115,3 +115,7 @@ disableHugoGeneratorInject = false
     identifier = "categories"
     name       = "Categories"
     url        = "categories/"
+  [[menu.main]]
+    identifier = "notes"
+    name       = "Notes"
+    url        = "notes/"
