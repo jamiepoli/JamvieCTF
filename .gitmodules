@@ -3,5 +3,5 @@
 	url = https://github.com/rhazdon/hugo-theme-hello-friend-ng.git
 
 [submodule "themes/hugo-theme-hello-friend-ng-vie"]
-	path = themes/hello-friend-ng-vie
+	path = themes/hugo-theme-hello-friend-ng-vie
 	url = https://github.com/jamiepoli/hugo-theme-hello-friend-ng-vie.git
