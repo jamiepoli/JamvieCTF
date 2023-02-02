@@ -13,7 +13,10 @@
                 </span>
             {{ end }}
 
-            <span class="theme-toggle unselectable">{{ partial "theme-icon.html" . }}</span>
+            {{- if .Site.Params.EnableThemeToggle }}
+            <span class="theme-toggle">{{ partial "theme-icon.html" . }}</span>
+            {{- end}}
+
         </span>
     </span>
 

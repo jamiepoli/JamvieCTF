@@ -1,5 +1,5 @@
 ---
-title: "MapleCTF 2022: Vie's challenges"
+title: "MapleCTF 2022    : Vie's challenges"
 date: 2022-09-01T14:50:08-06:00
 draft: false
 comments: false
