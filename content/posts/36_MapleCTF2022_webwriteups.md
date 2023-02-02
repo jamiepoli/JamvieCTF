@@ -26,7 +26,7 @@ I guess no one remembers vine anymore cause I don't think anyone remembered the 
 
 Anyway, crisis and nostalgia aside, Viene Library was predicated on combining _my favourite bug_ prototype pollution and some cute and quirky things about how HTTP Rails servers operate. 
 
-### Step 0: What's in the code?
+### Step A: What's in the code?
 
 The public facing server was a NodeJS one that would call back to a Ruby Rails server asking for txt files served from the filesystem - these txt files were my vine poems, or my "vienes". Both servers were in the same network in the same container. Only the NodeJS one was publicly accessible on port 8080.
 
@@ -139,7 +139,7 @@ If you POST `/submitaviene` you could have your request body be standardized wit
 2. Ruby open() for RCE and get flog
 ```
 
-### Step 1: Proto-pollution and node-fetch
+### Step B: Proto-pollution and node-fetch
 
 [Recent research](https://portswigger.net/research/widespread-prototype-pollution-gadgets) showcases that the object you pass into the fetch API can be proto-polluted with all the methods and fields you could stipulate to a fetch request (including node-fetch). For us, the ideal candidate here is the `headers` field, since the `method` field was explicitly declared in either node-fetch request so we couldn't proto-pollute that.
 
@@ -147,7 +147,7 @@ The header I was thinking of was the `X-HTTP-Method-Override` header set to `PUT
 
 Either way, proto-polluting headers with either will make [Rails interpret the request](https://www.rubydoc.info/gems/rack/Rack/MethodOverride) it recieves as a `PUT` instead of a `POST` regardless if whether or not the method field stated it was a `POST`. 
 
-### Step 2: Ruby open()
+### Step C: Ruby open()
 
 Now that you're in the PUT logic of the viene controller in the Rails server, you get free RCE. 
 
@@ -182,7 +182,7 @@ Here is the TL;DR -
 4. flag
 ```
 
-### Step 0: WTF does this code do
+### Step A: WTF does this code do
 The general idea of the app was as so:
 
 - An image gallery that you could upload your own pictures to
@@ -244,7 +244,7 @@ app.post("/upload", (req, res) => {
 ```
 Now, take note that the filename given to your image appends a `.png` extension to it (`random_filename`) - this does nothing as the extension and file format are never checked as valid. Therefore, you could submit a file of any format and it will not get type-checked as a legit PNG image. 
 
-### Step 1: TLS Poison
+### Step B: TLS Poison
 The first step is the most tedious/hardest to work on. For those unaware, TLS poison is an innovative way to use TLS session ids or tickets to create powerful new SSRF techniques - [here is the blackhat talk that discusses this in detail - thank you Joshua Maddux!](https://www.youtube.com/watch?v=udpamSmD_vU&ab_channel=BlackHat). 
 
 The crux of the TLS poison is that the [exploit server that is freely available out of the box](https://github.com/jmdx/TLS-poison) needed to be tweaked if you were to use it for the challenge. The jmdx TLS server would expect 2 requests to the DNS server, and it would alternate A records on each request, which is fine for most use cases _except_ my challenge. See, the HTTP server makes a _curl_ request to the specified resource:
@@ -281,7 +281,7 @@ The `PORT` command makes the server operate on active mode, establishing a data 
 
 Anyway, bypass curl's caching and give the server a session ticket containing some FTP commands, leading to...
 
-### Step 2: FTP SSRF
+### Step C: FTP SSRF
 Remember the file format quirk?
 
 What we could do with it was upload a file which contained RESP commands that set the user's key to a node-serialize RCE payload, and have the FTP server RETR that file to Redis on active mode. We couldn't talk to the Redis server on our own, so let's use the FTP server to talk to it instead.
@@ -290,7 +290,7 @@ Through TLS poisoning, you could submit a session ticket to the FTP server which
 
 NOTE: The FTP server was intentionally made to be quiet even when recieving commands, as normal protocol involved it writing responses on input and it would try to do that into the SSL socket which caused problems. 
 
-### Step 3: Redis SSRF
+### Step D: Redis SSRF
 Redis also uses a plaintext protocol, RESP, for data manipulation. When the FTP server establishes a data connection to the Redis one, the file it sends over should contain new-line delimited RESP commands which set a user's "images" key to that of a node-serialize payload. 
 
 Your uploaded 'image' file should have the following command inside:
@@ -299,7 +299,7 @@ Your uploaded 'image' file should have the following command inside:
 SET image_<your art token> <node serialize payload>
 ```
 
-### Step 4: Fleg
+### Step E: Fleg
 
 When you revisit the art gallery, the app should deserialize your payload, netting you the flag.
 
