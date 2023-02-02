@@ -1,7 +1,7 @@
 baseURL = "https://jamvie.net"
 title   = "Vie"
 languageCode = "en-us"
-theme = "hello-friend-ng-vie"
+theme = "hugo-theme-hello-friend-ng-vie"
 
 PygmentsCodeFences = true
 PygmentsStyle = "monokai"
