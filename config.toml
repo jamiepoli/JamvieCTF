@@ -1,5 +1,5 @@
 baseURL = "https://jamvie.net"
-title   = "Vie"
+title   = "VIE"
 languageCode = "en-us"
 theme = "hugo-theme-hello-friend-ng-vie"
 
@@ -53,11 +53,11 @@ disableHugoGeneratorInject = false
   dateformNumTime = "2006-01-02 15:04 -0700"
 
   # Metadata mostly used in document's head
-  description = "Vie's Portfolio."
+  description = "Vie"
   keywords = ""
   images = ["img/V.png"]
 
-  homeSubtitle = "Information Security Engineer // Researcher // CTF Player"
+  homeSubtitle = ""
   
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = false
@@ -71,7 +71,7 @@ disableHugoGeneratorInject = false
   justifyContent = true  # Set "text-align: justify" to .content.
 
   # Default theme "light" or "dark"
-  defaultTheme = "light"
+  defaultTheme = "dark"
   themeColor = "#0c0c0d"
   enableThemeToggle = false
 
@@ -81,7 +81,7 @@ disableHugoGeneratorInject = false
     msapplication = "#0c0c0d"
 
   [params.logo]
-    logoText     = "$ echo 'hello'"
+    logoText     = "$ cd /"
     logoHomeLink = "/"
     # Set true to remove the logo cursor entirely.
     # logoCursorDisabled = false
@@ -100,8 +100,8 @@ disableHugoGeneratorInject = false
     url  = "https://github.com/jamiepoli"
 
   [[params.social]]
-    name = "hackerone"
-    url  =  "https://hackerone.com/jamvie"
+    name = "linkedin"
+    url  =  "https://www.linkedin.com/in/jamiepoli/"
 
   [[params.social]]
     name = "twitter"
@@ -120,3 +120,7 @@ disableHugoGeneratorInject = false
     identifier = "categories"
     name       = "Categories"
     url        = "categories/"
+  [[menu.main]]
+    identifier = "tags"
+    name       = "Tags"
+    url        = "tags/"
