@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>misc on Vie</title>
+    <title>misc on VIE</title>
     <link>https://jamvie.net/tags/misc/</link>
-    <description>Recent content in misc on Vie</description>
+    <description>Recent content in misc on VIE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
@@ -16,16 +16,6 @@
       <guid>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-introspective/</guid>
       <description>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&amp;rsquo;s first CTF to hit the scene.
 For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels.</description>
-    </item>
-    
-    <item>
-      <title>Common Web Exploits: A Guide for Recon</title>
-      <link>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</link>
-      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</guid>
-      <description>This is mainly used as a helpful recon guide to determine what vulnerabilities are available to you as an ethical hacker or CTFer. I&amp;rsquo;ve spent quite a bit of time researching these vulnerabilities and spotting their telltale signs, and I hope to share them here. These are common or more unique vulnerabilities that I have seen, executed, and researched while doing CTFs.
-Disclaimer: This article is not exhaustive, and is not intended to replace any research you would perform on your own.</description>
     </item>
     
     <item>
@@ -45,15 +35,6 @@ Disclaimer: This article is not exhaustive, and is not intended to replace any r
       <guid>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</guid>
       <description>Comic from XKCD.
 I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
-    </item>
-    
-    <item>
-      <title>Commonly Used Software</title>
-      <link>https://jamvie.net/posts/2020/04/commonly-used-software/</link>
-      <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/04/commonly-used-software/</guid>
-      <description>&lt;p&gt;I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.&lt;/p&gt;</description>
     </item>
     
     <item>

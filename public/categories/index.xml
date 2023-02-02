@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Vie</title>
+    <title>Categories on VIE</title>
     <link>https://jamvie.net/categories/</link>
-    <description>Recent content in Categories on Vie</description>
+    <description>Recent content in Categories on VIE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
@@ -23,15 +23,6 @@
       <pubDate>Tue, 16 Aug 2022 13:37:54 -0700</pubDate>
       
       <guid>https://jamvie.net/categories/miscellaneous/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>instructional</title>
-      <link>https://jamvie.net/categories/instructional/</link>
-      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/categories/instructional/</guid>
       <description></description>
     </item>
     

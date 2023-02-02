@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>sqli on Vie</title>
+    <title>sqli on VIE</title>
     <link>https://jamvie.net/tags/sqli/</link>
-    <description>Recent content in sqli on Vie</description>
+    <description>Recent content in sqli on VIE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
@@ -25,16 +25,6 @@
       <guid>https://jamvie.net/posts/2021/02/dicectf-2021/</guid>
       <description>Babier CSP The challenge takes after justCTF&amp;rsquo;s similarly named challenge. We&amp;rsquo;re given an index.js file:
 const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`} &amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?</description>
-    </item>
-    
-    <item>
-      <title>Common Web Exploits: A Guide for Recon</title>
-      <link>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</link>
-      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</guid>
-      <description>This is mainly used as a helpful recon guide to determine what vulnerabilities are available to you as an ethical hacker or CTFer. I&amp;rsquo;ve spent quite a bit of time researching these vulnerabilities and spotting their telltale signs, and I hope to share them here. These are common or more unique vulnerabilities that I have seen, executed, and researched while doing CTFs.
-Disclaimer: This article is not exhaustive, and is not intended to replace any research you would perform on your own.</description>
     </item>
     
     <item>

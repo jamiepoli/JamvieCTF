@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>miscellaneous on Vie</title>
+    <title>miscellaneous on VIE</title>
     <link>https://jamvie.net/categories/miscellaneous/</link>
-    <description>Recent content in miscellaneous on Vie</description>
+    <description>Recent content in miscellaneous on VIE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
@@ -46,15 +46,6 @@ For our very first, we wanted to keep it local. This made it very different from
       <guid>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</guid>
       <description>Comic from XKCD.
 I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
-    </item>
-    
-    <item>
-      <title>Commonly Used Software</title>
-      <link>https://jamvie.net/posts/2020/04/commonly-used-software/</link>
-      <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/04/commonly-used-software/</guid>
-      <description>&lt;p&gt;I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.&lt;/p&gt;</description>
     </item>
     
     <item>

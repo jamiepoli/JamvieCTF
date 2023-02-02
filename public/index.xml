@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Vie</title>
+    <title>VIE</title>
     <link>https://jamvie.net/</link>
-    <description>Recent content on Vie</description>
+    <description>Recent content on VIE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
     <lastBuildDate>Thu, 01 Sep 2022 14:50:08 -0600</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>MapleCTF 2022: Vie&#39;s challenges</title>
+      <title>MapleCTF 2022    : Vie&#39;s challenges</title>
       <link>https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/</link>
       <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
       
@@ -103,15 +103,6 @@ DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. E
     </item>
     
     <item>
-      <title>Commonly Used Software 2: Electric Boogaloo</title>
-      <link>https://jamvie.net/posts/2021/04/commonly-used-software-2-electric-boogaloo/</link>
-      <pubDate>Wed, 07 Apr 2021 23:10:50 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/04/commonly-used-software-2-electric-boogaloo/</guid>
-      <description>I figured I would make an update to this post from long ago, back when I first made this site. It&amp;rsquo;s kinda funny (and a lil cringy) to look back on it now given how I ended up completely deviating from that list and use an entirely new suite of tools. Actually, one year into CTFs and I&amp;rsquo;d consider my kit to be far smaller than it originally was. Funny how that works, no?</description>
-    </item>
-    
-    <item>
       <title>Bo1lersCTF 2021: Lorem_Ipsum</title>
       <link>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</link>
       <pubDate>Sun, 04 Apr 2021 03:12:16 -0600</pubDate>
@@ -120,253 +111,6 @@ DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. E
       <description>Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &amp;ldquo;animal&amp;rdquo;-ified versions of the famous lorem ipsum placeholder text.
 Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?
 This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens.</description>
-    </item>
-    
-    <item>
-      <title>UTCTF 2021</title>
-      <link>https://jamvie.net/posts/2021/03/utctf-2021/</link>
-      <pubDate>Sun, 14 Mar 2021 17:17:38 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/03/utctf-2021/</guid>
-      <description>Lightning Round The first few web challenges were pretty trivial so I&amp;rsquo;ll do super quick, 2-sentence descriptions on how to solve them.
-Source it! Inspect source. You&amp;rsquo;ll find it.
-Oinker Make an oink with the exact same content and realize that each oink has an allocated place in the webpage&amp;rsquo;s directory. (Example - inputting alert(1); leads to oink endpoint 64). Go to \oink\2 to get the flag.
-Fastfox (easy way) Intended (hard) solution was escalating a JIT bug, which I will definitely research more of so expect part 2 ;) but the easy way was determining what functions were available in the scope of Bob&amp;rsquo;s jsshell.</description>
-    </item>
-    
-    <item>
-      <title>DiceCTF 2021</title>
-      <link>https://jamvie.net/posts/2021/02/dicectf-2021/</link>
-      <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/02/dicectf-2021/</guid>
-      <description>Babier CSP The challenge takes after justCTF&amp;rsquo;s similarly named challenge. We&amp;rsquo;re given an index.js file:
-const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`} &amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?</description>
-    </item>
-    
-    <item>
-      <title>justCTF[*] 2020 - A Collection of Web Problems</title>
-      <link>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</link>
-      <pubDate>Sun, 31 Jan 2021 23:05:20 -0700</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</guid>
-      <description>This last weekend was justCTF 2020 (delayed last year so it was held this year :P), held by justCatTheFish. Although I was focused between this and some other work, I was able to look through a few of the web challenges and will document them here.
-Forgotten Name I found this on a total fluke. I wasn&amp;rsquo;t paying attention to the challenge much but the description was compelling:
-I&amp;rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&amp;rsquo;s network, and so instead thought about the nature of their subdomains.</description>
-    </item>
-    
-    <item>
-      <title>Common Web Exploits: A Guide for Recon</title>
-      <link>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</link>
-      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</guid>
-      <description>This is mainly used as a helpful recon guide to determine what vulnerabilities are available to you as an ethical hacker or CTFer. I&amp;rsquo;ve spent quite a bit of time researching these vulnerabilities and spotting their telltale signs, and I hope to share them here. These are common or more unique vulnerabilities that I have seen, executed, and researched while doing CTFs.
-Disclaimer: This article is not exhaustive, and is not intended to replace any research you would perform on your own.</description>
-    </item>
-    
-    <item>
-      <title>Insecure Deserialization: Introduction</title>
-      <link>https://jamvie.net/posts/2020/12/insecure-deserialization-introduction/</link>
-      <pubDate>Tue, 22 Dec 2020 14:38:40 -0700</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/12/insecure-deserialization-introduction/</guid>
-      <description>Insecure deserialization is a prolific vulnerability that provides a pretty straightforward gateway into unintended RCE - if you&amp;rsquo;re not careful. As of late, I&amp;rsquo;ve seen more and more CTFs employ this bug, and more real-word bug bounties deal with this kind of exploit. I figure I could provide a quick introduction into them, and hopefully ensure a few people secure their applications from this.
-Context What Even is Serialization? My CPSC210 class I learned the fundamentals of object-oriented programming and the concept of complex abstractions above simple data structures: From simple arrays to instances of objects or classes, with fields and properties holding specific type values.</description>
-    </item>
-    
-    <item>
-      <title>DragonCTF 2020: Harmony Chat</title>
-      <link>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</link>
-      <pubDate>Sun, 22 Nov 2020 14:33:48 -0700</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</guid>
-      <description>A writeup for the first web problem, &amp;ldquo;Harmony Chat&amp;rdquo;, in DragonCTF 2020. A very fun and interesting challenge!
-TL;DR Application is vulnerable to RCE via insecure deserialization on the /csp-report endpoint Use FTP active mode to SSRF a post request to /csp-report that would open a reverse shell on the application&amp;rsquo;s HTTP server Cat flag for profit Let&amp;rsquo;s Begin! The Harmony Chat is a Discord-esque chat app where you can /register an account and create channels.</description>
-    </item>
-    
-    <item>
-      <title>Hack.lu 2020: Confessions</title>
-      <link>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</link>
-      <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</guid>
-      <description>This is a writeup for &amp;ldquo;Confessions&amp;rdquo;, the first web challenge I solved. I was luckily able to finish this challenge in a couple hours, so I could focus my attention to the other super interesting web problems. Confessions was a nice dive into some simple GraphQL manipulation and baby crypto.
-Let&amp;rsquo;s Begin! The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it.</description>
-    </item>
-    
-    <item>
-      <title>Trend Micro CTF: Raimund Genes Quals 2020</title>
-      <link>https://jamvie.net/posts/2020/10/trend-micro-ctf-raimund-genes-quals-2020/</link>
-      <pubDate>Sun, 04 Oct 2020 13:12:06 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/10/trend-micro-ctf-raimund-genes-quals-2020/</guid>
-      <description>Last year, before I became an active participant in Maple Bacon, the team went on to participate in and land a top 10 position in Trend Micro 2019 Qualifiers, later going on to compete in the finals of that year. When the 2020 serving came up this weekend, I wanted to keep with tradition and maintain the pattern - and so we landed a top 10 position and will be going on ahead to the 2020 finals :)</description>
-    </item>
-    
-    <item>
-      <title>VolgaCTF Finals 2020</title>
-      <link>https://jamvie.net/posts/2020/09/volgactf-finals-2020/</link>
-      <pubDate>Sat, 19 Sep 2020 20:57:15 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/09/volgactf-finals-2020/</guid>
-      <description>&lt;p&gt;A reflection on VolgaCTF Finals, which I participated in with my team. We were the only North American team participating in the event, and for a good portion of the CTF, we held 1st place! Unfortunately, that didn&amp;rsquo;t last for the end of the competition.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>GoogleCTF 2020: Pasteurize</title>
-      <link>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</link>
-      <pubDate>Sun, 23 Aug 2020 17:35:14 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/</guid>
-      <description>This is the first challenge I worked on. I will soon upload a post on the second one. I completed this challenge with the help of my team mentor!
-Let&amp;rsquo;s Begin! The challenge lets us load into the DOM whatever we want through this pastebin-esque function. When you make a note, you have an option to share it with a &amp;ldquo;TjMike&amp;rdquo; Entity. Sign of XSS/CSRF attacks?
-My input, &amp;ldquo;uwu&amp;rdquo;, is shoved into a javascript string variable called &amp;rsquo;note&amp;rsquo;.</description>
-    </item>
-    
-    <item>
-      <title>HacktivityCon CTF: Bullseye</title>
-      <link>https://jamvie.net/posts/2020/08/hacktivitycon-ctf-bullseye/</link>
-      <pubDate>Sun, 09 Aug 2020 18:48:52 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/08/hacktivitycon-ctf-bullseye/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s clear to see from the content of my blog that my expertise lies in web-based exploits.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Cross-Site Request Forgery: Introduction</title>
-      <link>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</link>
-      <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</guid>
-      <description>Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&amp;rsquo;re the reason you shouldn&amp;rsquo;t click suspicious links, even if the URL sort of sounds legitimate.
-This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.</description>
-    </item>
-    
-    <item>
-      <title>Cryptography and P vs. NP: A Basic Outline</title>
-      <link>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</link>
-      <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</guid>
-      <description>Comic from XKCD.
-I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
-    </item>
-    
-    <item>
-      <title>RedPwnCTF 2020, Part 3</title>
-      <link>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</link>
-      <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</guid>
-      <description>Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &amp;ldquo;Viper&amp;rdquo;.
-Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
-When we create our viper, its name is its viperId, which is a UUID.
-The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create.</description>
-    </item>
-    
-    <item>
-      <title>RedPwnCTF 2020, part 2</title>
-      <link>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</link>
-      <pubDate>Sun, 28 Jun 2020 21:19:19 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</guid>
-      <description>Part 2 of my writeup series for RedPwnCTF 2020!
-Let&amp;rsquo;s Begin! Tux-Fanpage points: 464 Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request if(!path || !strip(path)){ res.</description>
-    </item>
-    
-    <item>
-      <title>RedPwnCTF 2020</title>
-      <link>https://jamvie.net/posts/2020/06/redpwnctf-2020/</link>
-      <pubDate>Thu, 25 Jun 2020 16:26:44 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020/</guid>
-      <description>RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
-Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty.</description>
-    </item>
-    
-    <item>
-      <title>2020 HackASat Quals</title>
-      <link>https://jamvie.net/posts/2020/06/2020-hackasat-quals/</link>
-      <pubDate>Wed, 03 Jun 2020 21:47:00 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/06/2020-hackasat-quals/</guid>
-      <description>I participated in HackASat Quals with my team earlier in May. This was a unique CTF, as it had a category of astrodynamic mathematical problems that pertained to the geometry of earth-orbiting objects. I love math, so I actually quite enjoyed this category! 2 teammates and I collaborated together to solve a specific problem known as &amp;ldquo;I Like to Watch.&amp;rdquo; I also went through it myself and am going to discuss my solution to it.</description>
-    </item>
-    
-    <item>
-      <title>CSAW 2019: Unagi</title>
-      <link>https://jamvie.net/posts/2020/05/csaw-2019-unagi/</link>
-      <pubDate>Thu, 21 May 2020 01:22:16 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/05/csaw-2019-unagi/</guid>
-      <description>Back in 2019 I really got into CTFs as a matter of honing my security skills. They were fun to do and enriched my knowledge of cybersecurity - so I got into it pretty quickly.
-This was among the first of the challenges I did while under my team, Maple Bacon. At the time, I had plenty experience with SQL injections and XSS attacks, but not nearly enough experience with another common vulnerability: XXE attacks.</description>
-    </item>
-    
-    <item>
-      <title>DE1ctf 2020: Hard_Pentest_1 and Animal Crossing</title>
-      <link>https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/</link>
-      <pubDate>Thu, 07 May 2020 15:20:38 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/</guid>
-      <description>&lt;p&gt;The intersection of web-based challenges and other challenges should be expected to be seen in CTFs, but yet still I&amp;rsquo;m always surprised when I see it in action.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Plaidctf 2020: Contrived Web Problem</title>
-      <link>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</link>
-      <pubDate>Tue, 28 Apr 2020 00:48:12 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</guid>
-      <description>&lt;p&gt;This was a CTF I unfortunately didn&amp;rsquo;t have the time for, as I was busy doing finals in April :(. My team let me know about this cool and unique problem, and I&amp;rsquo;m glad they did!&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Commonly Used Software</title>
-      <link>https://jamvie.net/posts/2020/04/commonly-used-software/</link>
-      <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/04/commonly-used-software/</guid>
-      <description>&lt;p&gt;I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CONfidence 2020: CatWeb</title>
-      <link>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</link>
-      <pubDate>Thu, 23 Apr 2020 00:46:19 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</guid>
-      <description>&lt;p&gt;I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>UTctf 2020: Epic Admin Pwn</title>
-      <link>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</link>
-      <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</guid>
-      <description>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</description>
-    </item>
-    
-    <item>
-      <title>Jamvie&#39;s first post</title>
-      <link>https://jamvie.net/posts/2020/04/jamvies-first-post/</link>
-      <pubDate>Mon, 20 Apr 2020 21:27:12 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/04/jamvies-first-post/</guid>
-      <description>Hi, and welcome to my CTF blog. I&amp;rsquo;m just a software dev with a hobby for CTFs, and I thought a blog would be a good way to stash all my long-archived writeups for CTF challenges I participated in. I&amp;rsquo;m by no means an expert on the topic, but if someone stumbles upon here and gains a newfound interest in cybersecurity, that would be pretty cool.
-Over the next few weeks I will upload my old writeups for some CTFs that occurred this year and last, so stay tuned!</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://jamvie.net/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://jamvie.net/about/</guid>
-      <description>About Me First leader of Maple Bacon DEFCON 30 Winner with team MMM UBC Grad Currently: Information Security Engineer @ Google </description>
     </item>
     
   </channel>

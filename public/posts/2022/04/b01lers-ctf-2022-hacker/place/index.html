@@ -21,7 +21,7 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
 
     <title>
         
-            B01lers CTF 2022: hacker/place :: Vie 
+            B01lers CTF 2022: hacker/place :: VIE 
         
     </title>
 
@@ -36,16 +36,13 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
 
 
 
-
     <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
     <link rel="manifest" href="https://jamvie.net/site.webmanifest">
-    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#0c0c0d">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="">
     <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
-    <meta name="msapplication-TileColor" content="#0c0c0d">
-    <meta name="theme-color" content="">
-
+    <meta name="msapplication-TileColor" content="">
 
 
 <meta itemprop="name" content="B01lers CTF 2022: hacker/place">
@@ -80,7 +77,10 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
 
     </head>
 
-    <body class="dark-theme">
+    
+        <body>
+    
+    
         <div class="container">
             <header class="header">
     <span class="header__inner">
@@ -88,7 +88,7 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
     <div class="logo">
         
             <span class="logo__mark">></span>
-            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__text">$ cd /</span>
             <span class="logo__cursor" style=
                   "
                    background-color:#a4312b;
@@ -102,7 +102,7 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
         <span class="header__right">
             
                 <nav class="menu">
-    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li><li><a href="https://jamvie.net/tags/">Tags</a></li>
     </ul>
 </nav>
 
@@ -114,12 +114,6 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
                 </span>
             
 
-            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
-  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
-</svg>
-</span>
         </span>
     </span>
 
@@ -141,24 +135,32 @@ if (!doNotTrack) {
 
             <div class="content">
                 
-    <main class="post">
+  <main class="post">
 
-        <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        4 minutes
 
-            
+        
+      </p>
+    </div>
 
-            </p>
-        </div>
+    <article>
+      <h1 class="post-title">
+        <a href="https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/">B01lers CTF 2022: hacker/place</a>
+      </h1>
 
-        <article>
-            <h1 class="post-title">
-                <a href="https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/">B01lers CTF 2022: hacker/place</a>
-            </h1>
-                <hr />
-                <aside id="toc">
-                <div class="toc-title">Table of Contents</div>
-                    <nav id="TableOfContents">
+      
+
+      
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
   <ul>
     <li><a href="#thoughts">Thoughts</a></li>
     <li><a href="#writeup">Writeup</a>
@@ -170,13 +172,13 @@ if (!doNotTrack) {
     </li>
   </ul>
 </nav>
-                </aside>
-                <hr />
+        </aside>
+        <hr />
 
-            
+      
 
-            <div class="post-content">
-                <h2 id="thoughts">Thoughts</h2>
+      <div class="post-content">
+        <h2 id="thoughts">Thoughts</h2>
 <p>This year&rsquo;s b01lers CTF was a great one for Maple Bacon, given that we came in first. A fantastic development, especially since last year we landed in 7th, so we&rsquo;ve certainly improved a great deal since then.</p>
 <p>While the balance of problems was skewed, the CTF was overall an enjoyable experience. It was nice to delve into the different problems outside of web (whilst waiting for the one (1) web challenge to release), which reminded me I really need to touch up on my reversing skills, a 2022 new year resolution that I wanted to get into. Thankfully the year&rsquo;s not over yet, so I still have plenty of time.</p>
 <h2 id="writeup">Writeup</h2>
@@ -212,50 +214,89 @@ if (!doNotTrack) {
 <p>Therefore, we can choose a pixel that&rsquo;s watched by the bot, change it (using a valid colour), and let the bot change it back. Then, we can change the pixel back, but this time change the colour to a link to our server. The logic will thus send our payload to the bot first without verifying the colour. Of course, afterwards the colour check in the 2nd try-catch will fail us, and our payload will not be broadcast to the rest of the people on the canvas.</p>
 <p>Once we&rsquo;ve managed to make the app send our payload to the bot, we will get a request to our server with the header containing the secret needed to sign our own JWT tokens. Simply make your JWT “admin” token, access <code>/flag</code>, and receive your hard-earned goddamned-web-challenge flag.</p>
 
-            </div>
-        </article>
+      </div>
+    </article>
 
-        <hr />
+    <hr />
 
-        <div class="post-info">
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/writeups">writeups</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span>
-                </p>
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>807 Words</p>
+        <span class="tag"><a href="https://jamvie.net/tags/writeups/">writeups</a></span>
+        <span class="tag"><a href="https://jamvie.net/tags/web/">web</a></span>
+        
+    </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-04-26 20:59 -0600</p>
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://jamvie.net/categories/writeups/">writeups</a></span>
+        
+    </p>
+
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        807 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2022-04-26 20:59 -0600
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">NahamCon CTF 2022</span>
+                </a>
+            </span>
+            
+
+            
+            <span class="button next">
+                <a href="https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-introspective/">
+                    <span class="button__text">MapleCTF UBC ver. Introspective</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
         </div>
+    </div>
 
-        
-            <div class="pagination">
-                <div class="pagination__title">
-                    <span class="pagination__title-h"></span>
-                    <hr />
-                </div>
 
-                <div class="pagination__buttons">
-                    
-                        <span class="button previous">
-                            <a href="https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/">
-                                <span class="button__icon">←</span>
-                                <span class="button__text">NahamCon CTF 2022</span>
-                            </a>
-                        </span>
-                    
+    
 
-                    
-                        <span class="button next">
-                            <a href="https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-introspective/">
-                                <span class="button__text">MapleCTF UBC ver. Introspective</span>
-                                <span class="button__icon">→</span>
-                            </a>
-                        </span>
-                    
-                </div>
-            </div>
-        
-    </main>
+    
+
+  </main>
 
             </div>
 
@@ -264,17 +305,12 @@ if (!doNotTrack) {
     <div class="footer__inner">
         <div class="footer__content">
             <span>&copy; 2023</span>
-            
-                <span><a href="https://jamvie.net">Vie</a></span>
-            
             <span>CC Attribution-NonCommercial 4.0 International License</span>
             <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
         </div>
     </div>
     <div class="footer__inner">
         <div class="footer__content">
-            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
-            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
         </div>
     </div>
 </footer>
@@ -286,21 +322,7 @@ if (!doNotTrack) {
 
 
 
-
-<script type="text/javascript" src="https://jamvie.net/bundle.min.188af889e916d7182e7bf4af7bed9ff4c9b70dd61a69188cb044d25745a4ffc32b82cbec846336503520a7716e619cb46848931205cfa3176a691ff9152d4947.js" integrity="sha512-GIr4iekW1xgue/Sve&#43;2f9Mm3DdYaaRiMsETSV0Wk/8MrgsvshGM2UDUgp3FuYZy0aEiTEgXPoxdqaR/5FS1JRw=="></script>
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-176711986-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.cf7fb2a9e24608a783e05e4472da2fdf008293289de1ad88d1cba5c143e7e414496dd33b6a228e92f8461ce0c8cbad3c9f9847e73e46dfbce0463393ddd1733a.js" integrity="sha512-z3&#43;yqeJGCKeD4F5Ectov3wCCkyid4a2I0culwUPn5BRJbdM7aiKOkvhGHODIy608n5hH5z5G37zgRjOT3dFzOg=="></script>
 
 
 

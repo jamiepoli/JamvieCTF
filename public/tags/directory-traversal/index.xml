@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>directory-traversal on Vie</title>
+    <title>directory-traversal on VIE</title>
     <link>https://jamvie.net/tags/directory-traversal/</link>
-    <description>Recent content in directory-traversal on Vie</description>
+    <description>Recent content in directory-traversal on VIE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
@@ -17,16 +17,6 @@
       <description>Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &amp;ldquo;animal&amp;rdquo;-ified versions of the famous lorem ipsum placeholder text.
 Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?
 This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens.</description>
-    </item>
-    
-    <item>
-      <title>Common Web Exploits: A Guide for Recon</title>
-      <link>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</link>
-      <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</guid>
-      <description>This is mainly used as a helpful recon guide to determine what vulnerabilities are available to you as an ethical hacker or CTFer. I&amp;rsquo;ve spent quite a bit of time researching these vulnerabilities and spotting their telltale signs, and I hope to share them here. These are common or more unique vulnerabilities that I have seen, executed, and researched while doing CTFs.
-Disclaimer: This article is not exhaustive, and is not intended to replace any research you would perform on your own.</description>
     </item>
     
     <item>

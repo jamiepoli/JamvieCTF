@@ -95,9 +95,6 @@
     <loc>https://jamvie.net/tags/reversing/</loc>
     <lastmod>2021-04-11T00:07:54-06:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/posts/2021/04/commonly-used-software-2-electric-boogaloo/</loc>
-    <lastmod>2021-04-07T23:10:50-06:00</lastmod>
-  </url><url>
     <loc>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</loc>
     <lastmod>2021-04-04T03:12:16-06:00</lastmod>
   </url><url>
@@ -115,21 +112,6 @@
   </url><url>
     <loc>https://jamvie.net/posts/2021/01/justctf-2020-a-collection-of-web-problems/</loc>
     <lastmod>2021-01-31T23:05:20-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</loc>
-    <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/tags/instructional/</loc>
-    <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/categories/instructional/</loc>
-    <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/tags/xxe/</loc>
-    <lastmod>2021-01-26T12:04:52-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/posts/2020/12/insecure-deserialization-introduction/</loc>
-    <lastmod>2020-12-22T14:38:40-07:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/</loc>
     <lastmod>2020-11-22T14:33:48-07:00</lastmod>
@@ -160,9 +142,6 @@
   </url><url>
     <loc>https://jamvie.net/tags/pwn/</loc>
     <lastmod>2020-08-09T18:48:52-06:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</loc>
-    <lastmod>2020-07-27T19:07:51-06:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/tags/algorithms/</loc>
     <lastmod>2020-07-14T00:22:00-06:00</lastmod>
@@ -197,14 +176,14 @@
     <loc>https://jamvie.net/posts/2020/05/csaw-2019-unagi/</loc>
     <lastmod>2020-05-21T01:22:16-06:00</lastmod>
   </url><url>
+    <loc>https://jamvie.net/tags/xxe/</loc>
+    <lastmod>2020-05-21T01:22:16-06:00</lastmod>
+  </url><url>
     <loc>https://jamvie.net/posts/2020/05/de1ctf-2020-hard_pentest_1-and-animal-crossing/</loc>
     <lastmod>2020-05-07T15:20:38-06:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/posts/2020/04/plaidctf-2020-contrived-web-problem/</loc>
     <lastmod>2020-04-28T00:48:12-06:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/posts/2020/04/commonly-used-software/</loc>
-    <lastmod>2020-04-26T01:30:30-06:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</loc>
     <lastmod>2020-04-23T00:46:19-06:00</lastmod>

