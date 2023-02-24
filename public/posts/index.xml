@@ -6,8 +6,256 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-        <lastBuildDate>Thu, 01 Sep 2022 14:50:08 -0600</lastBuildDate>
+        <lastBuildDate>Tue, 21 Feb 2023 15:25:54 -0700</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>PBCTF 2023 : JAZZY x VIE CHALS</title>
+            <link>https://jamvie.net/posts/2023/02/pbctf-2023-jazzy-x-vie-chals/</link>
+            <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
+            
+            <guid>https://jamvie.net/posts/2023/02/pbctf-2023-jazzy-x-vie-chals/</guid>
+            <description>I was a guest challenge writer for perfect blue&amp;rsquo;s CTF held mid February. We play-tested each others chals :P
+MAKIMA Challenge Description Makima simps check in here
+I&amp;rsquo;m actually a Power stan. I just needed an excuse for people to look at my Makima drawing.
+TL;DR Hide php in image, making a PHP/image polyglot X-Accel-Header redirection through CDN to reach internal .php files and access /uploads/your_img.png/lol.php to execute PHP The important parts The default.</description>
+            <content type="html"><![CDATA[<p>I was a guest challenge writer for perfect blue&rsquo;s CTF held mid February. We play-tested each others chals :P</p>
+<h2 id="makima">MAKIMA</h2>
+<h3 id="challenge-description">Challenge Description</h3>
+<blockquote>
+<p>Makima simps check in here</p>
+</blockquote>
+<p>I&rsquo;m actually a Power stan. I just needed an excuse for people to look at my Makima drawing.</p>
+
+    <img src="/images/pb2023_MAKIMA.png"  alt="Makima"  class="center"  style="border-radius: 8px;"  />
+
+
+<h3 id="tldr">TL;DR</h3>
+<ul>
+<li>Hide php in image, making a PHP/image polyglot</li>
+<li>X-Accel-Header redirection through CDN to reach internal <code>.php</code> files and access <code>/uploads/your_img.png/lol.php</code> to execute PHP</li>
+</ul>
+<h3 id="the-important-parts">The important parts</h3>
+<p>The <code>default.conf</code>, which is the config used for the nginx proxy server, has an RCE vulnerability:</p>
+<pre tabindex="0"><code>#default.conf
+    location ~ \.php$ {
+        internal;
+        include fastcgi_params;
+        fastcgi_intercept_errors on;
+        fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+    }
+</code></pre><p>Any path ending in <code>.php</code> is passed to the fastcgi PHP interpreter which executes the file (with quirks). If such a site allows you to upload your own files, you can upload an arbitrary <code>.php</code> file and navigate to it in order to pass it to the interpreter and achieve RCE. This is especially bad due to <a href="(https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#passing-uncontrolled-requests-to-php)">fastcgi&rsquo;s well-known &ldquo;fix path&rdquo; quirk</a>:</p>
+<blockquote>
+<p>For instance, if a request is made for /forum/avatar/1232.jpg/file.php which does not exist but if /forum/avatar/1232.jpg does, the PHP interpreter will process /forum/avatar/1232.jpg instead. If this contains embedded PHP code, this code will be executed accordingly.</p>
+</blockquote>
+<p>Additionally, <code>.php</code> locations are all <code>internal</code> meaning that they&rsquo;re only accessible via internal (within server system) redirects.</p>
+<p>The reason we can access index.php is due to this tiny snippet:</p>
+<pre tabindex="0"><code>    location / {
+        index index.php;
+    }
+</code></pre><p><code>index</code> is an internal rewrite of the index file index.php.</p>
+<hr>
+<p>The PHP code that handles uploading and file submission actually makes requests through a CDN proxy in <code>file_get_contents</code>:</p>
+<pre tabindex="0"><code>if(isset($_POST[&#34;url&#34;])){ 
+    $cdn_url = &#39;http://localhost:8080/cdn/&#39; . $_POST[&#34;url&#34;];
+    $img = @file_get_contents($cdn_url);
+    $f = finfo_open();
+    $mime_type = finfo_buffer($f, $img, FILEINFO_MIME_TYPE);
+    $fileName = &#39;uploads/&#39; . substr(md5(rand()), 0, 13);
+    $success = makeimg($img, $fileName, $mime_type);
+    if ($success !== 0) {
+        $msg = $success;
+    }
+} 
+</code></pre><p>And in the <code>default.conf</code> all <code>/cdn/</code> requests are proxied to a flask application running on port 8081:</p>
+<pre tabindex="0"><code>   location /cdn/ {
+        allow 127.0.0.1/32;
+        deny all;
+        proxy_pass http://cdn;
+    }
+</code></pre><p>The CDN handler is defined as follows:</p>
+<pre tabindex="0"><code>@app.route(&#34;/cdn/&lt;path:url&gt;&#34;)
+def cdn(url):
+    mimes = [&#34;image/png&#34;, &#34;image/jpeg&#34;, &#34;image/gif&#34;, &#34;image/webp&#34;]
+    r = requests.get(url, stream=True)
+    if r.headers[&#34;Content-Type&#34;] not in mimes:
+        return &#34;????&#34;, 400
+    img_resp = make_response(r.raw.read(), 200)
+    for header in r.headers:
+        if header == &#34;Date&#34; or header == &#34;Server&#34;:
+            continue
+        img_resp.headers[header] = r.headers[header]
+    return img_resp
+</code></pre><p>This verifies that the URL supplied actually resolves to a filestream with the correct mimetype. The raw bytes are sent back as the response.</p>
+<p>So we have 3 things to consider:</p>
+<ul>
+<li>Unsafe fast-cgi handling of <code>.php</code> files - if <code>/uploads/img.jpg/lol.php</code> is accessed and a <code>lol.php</code> doesn&rsquo;t exist in that path but <code>/uploads/img.jpg</code> does, fastcgi will attempt to interpret the image as code.</li>
+<li>Ability to upload only images through a CDN - the CDN verifies the requested URL leads to an image, before passing it back the image uploader.</li>
+<li>The fastcgi is behind an internal directive so it&rsquo;s not publicly accessible.</li>
+</ul>
+<h3 id="hiding-code-in-an-image--php-image-polyglot">Hiding code in an image // PHP image polyglot</h3>
+<p>The code only accepts (and, ostensibly, recieves) images, and attempts to compress given bytestreams as a specific image format (<code>.png</code>, <code>.jpg</code>, <code>.webp</code>, <code>.gif</code>) before saving it to the filesystem. But are we able to add arbitrary data to the image?</p>
+<p>This still needs to be an image to pass all the previous checks in the CDN, and needs to be a valid image. Otherwise, the PHP GD library will complain and fail to save to filesystem.</p>
+<p>We know that FastCGI will happily process an image into its interpreter, so encoding a shell into such a picture would be the way to go.</p>
+<p>Note that I gave 4 options. Let me know which image format you used :&gt;</p>
+<ul>
+<li>
+<p>PNG - You can hide your PHP code in either the PLTE chunks or IDAT chunks of the image, PLTE being important header data and IDAT being the literal pixels comprising the picture. I believe the PLTE chunks were easier to embed into, as a Synacktiv blog post will outline.</p>
+</li>
+<li>
+<p>JPEG - You can encode a minishell which, using Huffman tables, decodes into valid code. Embed it at the beginning of the image, and pad your payload with JPEG MCU bits (Minimum Code Unit) then cut off any strangler bits at the end.</p>
+</li>
+<li>
+<p>GIF - You can embed a minishell in the small space of null bytes that are always present in the gif header, which persists across compressions/resizes. This is the easiest way, although the margin is small and may require some PHP golfing.</p>
+</li>
+</ul>
+<p>I believe most people either chose the <code>png</code> route or the <code>gif</code> route, the former because of the Synacktiv article and the latter because it was simpler to do. I thought about restricting format to <em>just</em> jpeg, the hardest one imo, but decided not to.</p>
+<h3 id="x-accel-redirect-through-the-cdn">X-Accel-Redirect through the cdn</h3>
+<p>The <code>internal</code> directive is, at first glance, problematic for us since that means we can&rsquo;t directly access <code>/uploads/pic.png/doesntexist.php</code>. It&rsquo;ll be an external request so nginx will simply 404 us. We instead need it to instead force a internal redirect on a succesful response.</p>
+<p>This is where the CDN proxy comes into play, as it is an upstream (through nginx&rsquo;s <code>proxy-pass</code> directive) and therefore able to do internal re-routing.</p>
+<p>Luckily for us, nginx features a fancy header called <code>X-Accel-Redirect</code> - a response header which tells the recieving server that the request should be re-routed to whatever the value is in that header (usually a URI). If nginx sees this response header, it will cause an internal redirect to the specified resource. So we can instead specify <code>X-Accel-Redirect</code> since the CDN copies all response headers into the resulting response thrown back to the upload server:</p>
+<pre tabindex="0"><code>    img_resp = make_response(r.raw.read(), 200)
+    for header in r.headers:
+        if header == &#34;Date&#34; or header == &#34;Server&#34;:
+            continue
+        img_resp.headers[header] = r.headers[header]
+</code></pre><p>And have its value be that of <code>/uploads/imgyouuploaded.png/doesntexist.php</code> to execute the code within your image!</p>
+<p>NOTE: In this way, the CDN proxy gets redirected, not us - so we won&rsquo;t actually see the results of that redirect. But that&rsquo;s fine, we don&rsquo;t need to see our code being run, it just needs to run. :&gt;</p>
+<h3 id="step-by-step">Step-by-step</h3>
+<ol>
+<li>
+<p>Create an image, with PHP code hidden in the bytes, and host it on a server you control (below I have attached a gif example here that has <code>&lt;?php touch(&quot;/tmp/lol&quot;)?&gt;</code> embedded within).</p>
+</li>
+<li>
+<p>Send over your server url to Makima (the image upload server), the CDN proxy will recieve and pass it back so she can save it to disk. Take note of the provided filename.</p>
+</li>
+<li>
+<p>Your PHP/image polyglot is on the server now. Have your server return an <code>X-Accel-Redirect</code> response header with the value <code>/uploads/your_img.gif/owa.php</code>, and request it again so the CDN copies it, and nginx will redirect the proxy to that URI which triggers FastCGI.</p>
+</li>
+<li>
+<p>FastCGI won&rsquo;t find <code>/uploads/your_img.gif/owa.php</code> but it will find <code>/uploads/your_img.gif</code> so it interprets that instead. Your PHP code will run.</p>
+</li>
+<li>
+<p>FLAG! <code>pbctf{actually_power_is_the_better_character}</code></p>
+</li>
+</ol>
+<h2 id="xsps">XSPS</h2>
+<p>XSPS was Jazzy&rsquo;s challenge which was the last web released in pbctf 2023.</p>
+<h3 id="challenge-description-1">Challenge Description</h3>
+<blockquote>
+<p>The Notes app is back again</p>
+</blockquote>
+<h3 id="tldr-1">TL;DR</h3>
+<ul>
+<li>CSRF admin to change notes for HTML injection</li>
+<li>DOM-clobber <code>body</code></li>
+<li>Control <code>href</code> to note with iframes</li>
+<li>Detect frame count for xs-leak</li>
+</ul>
+<h3 id="the-important-parts-1">The important parts</h3>
+<p>The general idea of the app:</p>
+<ul>
+<li>Classic notes app, you can make note with a title and &ldquo;highlight&rdquo; one to be featured on the home page</li>
+<li>Notes are stored via cookies</li>
+<li>You can search for notes based on the content of the body</li>
+</ul>
+<hr>
+<p>There is a restrictive CSP, plus even firther restricting scripts to only nonce:</p>
+<pre tabindex="0"><code>@app.after_request
+def add_CSP(response):
+    response.headers[&#39;Content-Security-Policy&#39;] = f&#34;default-src &#39;self&#39;; script-src &#39;nonce-{g.nonce}&#39;&#34;
+    return response
+</code></pre><p>And the bot in the challenge has HTTPOnly cookies. So maybe no XSS - but hey, there&rsquo;s no CSRF protections. So&hellip;</p>
+<hr>
+<p>There is a <code>static/main/js</code> file which handles some client-side events, but the most notable one being what occurs when the window loads up:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>window.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//init
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">highlighted_note</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">get_higlighted_note</span>();
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;search_result&#39;</span>);
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_content</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;search_content&#39;</span>)
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_open</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;search_open&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//highlight note
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;highlighted&#39;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">highlighted_note</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//search handler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;search_button&#39;</span>).<span style="color:#a6e22e">onclick</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">search_click</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>There is functionality that allows you to search the content of submitted notes, based on hte client-side JS above.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">search_name</span>(<span style="color:#a6e22e">search_data</span>){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">should_open</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">search_data</span>[<span style="color:#e6db74">&#39;open&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">search_data</span>[<span style="color:#e6db74">&#39;query&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">notes</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">get_all_notes</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">found_note</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">notes</span>.<span style="color:#a6e22e">find</span>((<span style="color:#a6e22e">val</span>) =&gt; <span style="color:#a6e22e">val</span>.<span style="color:#a6e22e">note</span>.<span style="color:#a6e22e">toString</span>().<span style="color:#a6e22e">startsWith</span>(<span style="color:#a6e22e">query</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">found_note</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">undefined</span>){
+</span></span><span style="display:flex;"><span>        document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">href</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span>        document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">text</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;NOT FOUND&#39;</span>
+</span></span><span style="display:flex;"><span>        document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;&lt;br&gt;&#39;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">href</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`note/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">found_note</span>.<span style="color:#a6e22e">name</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">text</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;FOUND&#39;</span>
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;&lt;br&gt;&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">should_open</span>)document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">click</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">search_click</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">search_name</span>({<span style="color:#e6db74">&#39;query&#39;</span><span style="color:#f92672">:</span>document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_content</span>.<span style="color:#a6e22e">value</span>, <span style="color:#e6db74">&#39;open&#39;</span> <span style="color:#f92672">:</span> document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_open</span>.<span style="color:#a6e22e">checked</span>})
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="csrf---html-injection">CSRF -&gt; HTML injection</h3>
+<p>First and foremost, the CSP is annoying but it allows for iframes. There is additionally 0 CSRF protection - use this to your advantage to make the admin bot navigate to your site and CSRF them to change/update notes where the content contains iframes. How do we leverage this to leak the flag?</p>
+<h3 id="dom-clobbering-windowbody">DOM-Clobbering window.body</h3>
+<p>You can inject an iframe with a <code>srcdoc</code> element - combine this with the client-side functionality above and see that you can DOM-clobber the <code>body</code> element of window through your iframe&rsquo;s <code>srcdoc</code>. This leads to overriding <code>document.body</code>.</p>
+<p>Doing so clobbers all the variables of <code>document.body</code>, allowing you greater control over the variables that were set in <code>window.onload</code>&rsquo;s function in <code>main.js</code>. More specifically - <code>search_result</code>.</p>
+<p>When the search button is clicked, <code>search_click()</code> is called which subsequently calls <code>search_name()</code> with an object as the argument - consisting of 2 properties: <code>query</code> being the value of <code>document.body.search_content.value</code> and <code>open</code> being the value of <code>document.body.search_open.checked</code>.</p>
+<pre tabindex="0"><code>async function search_name(search_data){
+    let should_open = search_data[&#39;open&#39;] \\document.body.search_open.checked`
+    let query = search_data[&#39;query&#39;] \\document.body.search_content.value
+
+    let notes = await get_all_notes();
+
+    let found_note = notes.find((val) =&gt; val.note.toString().startsWith(query));
+    if(found_note == undefined){
+        document.body.search_result.href = &#39;&#39;;
+        document.body.search_result.text = &#39;NOT FOUND&#39;
+        document.body.search_result.innerHTML += &#39;&lt;br&gt;&#39;
+    }
+
+    document.body.search_result.href = `note/${found_note.name}`;
+    document.body.search_result.text = &#39;FOUND&#39;
+    document.body.search_result.innerHTML += &#39;&lt;br&gt;&#39;
+    if(should_open)document.body.search_result.click();
+}
+</code></pre><p>Note that the <code>document.body.search_result.href</code> is set to a relative path (if found) of <code>note/${found_note.name}</code>. Then, it&rsquo;s navigated to via <code>if(should_open)document.body.search_result.click();</code>. Since we can inject iframes of our choosing, we are able to set the base URI within the iframe&rsquo;s srcdoc, giving us control over what note is pointed to.</p>
+<h3 id="ifriframesames">Ifr&lt;Iframes&gt;ames</h3>
+<p>The ability to control the <code>href</code> that the user navigates to sets up our XS-leak - allowing us to navigate to notes of our choosing. We could point the admin to a note containing more iframes, giving us our preferred gadget to leak the flag character by character. We do this by setting up a <code>base href</code> attribute in the srcdoc of the iframe that&rsquo;s also DOM-clobbering the body element, letting us control what note an admin visits.</p>
+<p>When <code>if(should_open)document.body.search_result.click();</code> occurs, the <code>click()</code> would set <code>_target</code> to that of an iframe (&lsquo;iframe B&rsquo;) that you control within the srcdoc of your first iframe (&lsquo;iframe A&rsquo;). Iframe B can then be detected to have more subframes within, giving you an XS-Leak.</p>
+<h3 id="step-by-step-1">Step-by-step</h3>
+<ol>
+<li>
+<p>Create CSRF to POST a new note with multiple iframes in it - set it to the name of the flag&rsquo;s note (which should just be &ldquo;flag&rdquo;). Do NOT highlight this note.</p>
+</li>
+<li>
+<p>Open a window of the home page, you&rsquo;ll need it for later, and give it a unique name (&ldquo;windowA&rdquo;).</p>
+</li>
+<li>
+<p>CSRF another note, which contains your iframe that has srcdoc which DOM-clobbers <code>body</code> and <code>search_result</code> (note name doesn&rsquo;t matter). Highlight this note.</p>
+</li>
+<li>
+<p>Open a window, but use the same name as before (&ldquo;windowA&rdquo;) with the location being <code>xsps.chal.perfect.blue#the_b64'ed_JSON_object</code> (the JSON object having properties open=true and query=the substring of the flag you&rsquo;re guessing) to call the search function.</p>
+</li>
+<li>
+<p>Check that the number of frames present in that window are equal to the number of frames in the first flag note that you made. If the condition is true, the character you guessed is in the flag. If not, the character isn&rsquo;t in the flag.</p>
+</li>
+<li>
+<p>Repeat until flag: <code>pbctf{V_5w33p1ng_n0t3s_und3r_4_r4d10_s1l3nT_RuG}</code></p>
+</li>
+</ol>
+]]></content>
+        </item>
         
         <item>
             <title>MapleCTF 2022    : Vie&#39;s challenges</title>

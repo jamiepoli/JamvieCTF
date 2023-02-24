@@ -7,7 +7,61 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Thu, 01 Sep 2022 14:50:08 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Feb 2023 15:25:54 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>dom-clobber</title>
+      <link>https://jamvie.net/tags/dom-clobber/</link>
+      <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/dom-clobber/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>html-injection</title>
+      <link>https://jamvie.net/tags/html-injection/</link>
+      <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/html-injection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>php</title>
+      <link>https://jamvie.net/tags/php/</link>
+      <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSRF</title>
+      <link>https://jamvie.net/tags/ssrf/</link>
+      <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/ssrf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeups</title>
+      <link>https://jamvie.net/tags/writeups/</link>
+      <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/writeups/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xs-leak</title>
+      <link>https://jamvie.net/tags/xs-leak/</link>
+      <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
+      
+      <guid>https://jamvie.net/tags/xs-leak/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>FTP</title>
       <link>https://jamvie.net/tags/ftp/</link>
@@ -36,65 +90,11 @@
     </item>
     
     <item>
-      <title>SSRF</title>
-      <link>https://jamvie.net/tags/ssrf/</link>
-      <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/ssrf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>tls-poison</title>
       <link>https://jamvie.net/tags/tls-poison/</link>
       <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
       
       <guid>https://jamvie.net/tags/tls-poison/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>web</title>
-      <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writeups</title>
-      <link>https://jamvie.net/tags/writeups/</link>
-      <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/writeups/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>arduino</title>
-      <link>https://jamvie.net/tags/arduino/</link>
-      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/arduino/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSRF</title>
-      <link>https://jamvie.net/tags/csrf/</link>
-      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/csrf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sqli</title>
-      <link>https://jamvie.net/tags/sqli/</link>
-      <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/sqli/</guid>
       <description></description>
     </item>
     
