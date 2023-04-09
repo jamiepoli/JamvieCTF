@@ -1,5 +1,5 @@
 baseURL = "https://jamvie.net"
-#title   = "VIE"
+title   = "VIE"
 languageCode = "en-us"
 theme = "hugo-theme-hello-friend-ng-vie"
 
@@ -91,7 +91,7 @@ disableHugoGeneratorInject = false
     # logoCursorAnimate  = "2s"
 
   [params.portrait]
-    path = "img/VVV.png"
+    path = "img/rubber_duckvie.png"
     alt = "Portrait"
 
   # Social icons
