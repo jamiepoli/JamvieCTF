@@ -1,5 +1,5 @@
 baseURL = "https://jamvie.net"
-title   = "VIE"
+#title   = "VIE"
 languageCode = "en-us"
 theme = "hugo-theme-hello-friend-ng-vie"
 
@@ -55,7 +55,7 @@ disableHugoGeneratorInject = false
   # Metadata mostly used in document's head
   description = "Vie"
   keywords = ""
-  images = ["img/V.png"]
+  images = ["img/rubber_duckvie.png"]
 
   homeSubtitle = ""
   
@@ -91,7 +91,7 @@ disableHugoGeneratorInject = false
     # logoCursorAnimate  = "2s"
 
   [params.portrait]
-    path = "img/rubber_duckvie.png"
+    path = "img/VVV.png"
     alt = "Portrait"
 
   # Social icons
