@@ -120,3 +120,8 @@ disableHugoGeneratorInject = false
     identifier = "tags"
     name       = "Tags"
     url        = "tags/"
+  [[menu.main]]
+    identifier = "ctf_chals"
+    name       = "CTF Chals"
+    url        = "chals/"
+

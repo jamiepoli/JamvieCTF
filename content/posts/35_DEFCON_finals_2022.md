@@ -15,7 +15,6 @@ My team, Maple Bacon, collaborated with CMU's CTF team PPP and Theori.io's CTF t
 
 ## The Beginning
 
-{{< tweet user="mmm_ctf_team" id="1556393647532376065" >}}
 
 Discussions about the merge had occurred earlier in the year - I triangulate it to a month or so before I found myself in Athens, Greece attending ICC. This is important to mention as I heard many people speculate about the existence of MMM and whether or not it was formed as a response to something. The answer is no, the reasoning was very simple: we wanted to play together! Unfortunately, there wasn't much of a complex reason, we simply had a desire to team up and have fun in Vegas.
 
@@ -43,7 +42,7 @@ GoogleCTF felt like a good barometer to determine what our strengths were, both 
 
 ## DEFCON
 
-{{< tweet user="vie_please" id="1557707626233794560" position="center">}}
+
 
 ### Day 0
 
@@ -129,7 +128,6 @@ The final day after the end of the contest was a free-for-all in terms of stuff 
 
 Later that night we saw the other teams at the afterparty, shoutout to *perfect r✪✪✪t x organizers*, where we mingled and formed plenty new friendships :> special shoutout to team Sauercloud for giving me the matrix gigachad sticker which has a new home on my laptop. One of us also distributed small rubber ducks to the afterparty, and I know this because for a brief 5 minutes the floor was just filled with sounds of rubber ducky squeaks. 
 
-{{< tweet user="vie_please" id="1560009205481803777" position="center">}}
 
 ## Final Thoughts
 
