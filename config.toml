@@ -101,7 +101,7 @@ disableHugoGeneratorInject = false
 
   [[params.social]]
     name = "twitter"
-    url  =  "https://twitter.com/vie_please"
+    url  =  "https://twitter.com/vie_pls"
     
 [menu]
   [[menu.main]]
