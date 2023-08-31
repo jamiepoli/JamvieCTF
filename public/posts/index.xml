@@ -6,8 +6,115 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-        <lastBuildDate>Tue, 21 Feb 2023 15:25:54 -0700</lastBuildDate>
+        <lastBuildDate>Thu, 31 Aug 2023 00:00:00 +0000</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>DEFCON 31: Retrospective</title>
+            <link>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</link>
+            <pubDate>Thu, 31 Aug 2023 00:00:00 +0000</pubDate>
+            
+            <guid>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</guid>
+            <description>Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &amp;ldquo;CSAW 2019&amp;rdquo; with UBC&amp;rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.
+To be completely frank, I solved the challenge after googling &amp;ldquo;XML vulnerability&amp;rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag.</description>
+            <content type="html"><![CDATA[<h2 id="beginning">Beginning</h2>
+<p>Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &ldquo;CSAW 2019&rdquo; with UBC&rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.</p>
+<p>To be completely frank, I solved the challenge after googling &ldquo;XML vulnerability&rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag. I was happy, but I also thought, &ldquo;what the <em>hell</em> did I achieve? what did the payload do? What did I learn?&rdquo; and I couldn&rsquo;t come up with an answer I was satisfied with. I really just googled information about XML vulenrabilities, found an XXE payload, and threw it hoping to see if something would change (I didn&rsquo;t even know what XXE stood for). Granted, I still needed to modify the payload. Unagi required more effort than just a copy-paste. But overall, my first experience was largely juvenile and I was still as naive as I was pre CSAW 2019.</p>
+<p>I remained curious in CTFs the following year, but didn&rsquo;t really play in them as much until I was complaining to a friend of mine about something entirely different - Super Smash Bros. I really liked the game, I was playing in it so much I was considering playing it competitively (nothing too serious really came out of that) but I wanted something else to satisfy my competitive nature. So my friend suggested DEF CON.</p>
+<blockquote>
+<p>V: &ldquo;Like the alarm codes?&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>L: &ldquo;Okay, <em>yeah</em>, but I&rsquo;m talking about the hacking competition.&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>V: &ldquo;Hacking? Yea, like CTFs? I&rsquo;m familiar.&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>L: &ldquo;Uh huh, like the movie <em>Hackers</em>. You know, the one with Angelina Jolie?&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>V: &ldquo;Wait, Angelina Jolie was in a movie called <em>Hackers</em>?&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>L: &ldquo;You&rsquo;re missing the point. Have you ever considered CTFs to help with your competitive nature?&rdquo;</p>
+</blockquote>
+<p>I knew the CTF scene, not that well, but I knew it. I played in a CTF with MB, and I thought about what my friend said. I figured, sure, why not?</p>
+<p>I attended my first few meetings with them, exploring CTFs, starting with PicoCTF under prof. Robert Xiao&rsquo;s advice. Pico was considerably easier than CSAW, generous with hints and well-scoped for people to learn something new in security. I took my time, taking a couple days to solve all. The series of SQLi challenges, when I came across them, gave me a challenge at the time. But when I solved them, I was elated - happy, cause submitting a flag felt really, really good.</p>
+<p>Debriefing on the Pico challenges after submitting all of the web ones, Robert Xiao talked about DEF CON. I had minor context from my own research and from what my friend told me, but hearing him talk about it and all the cool challenges he saw was inspiring. DEF CON CTF seemed interesting, challenging, but importantly - <em>fun</em>. I wanted to participate.</p>
+<p>Recall that at the time that I resolved to participate, I barely knew what an XXE was, nor did I play in any harder challenges outside of Pico and one (1) CSAW challenge. So, was the goal of DEF CON attainable? Not anytime soon at that point in time. I gave myself a comfortable margin of 7 years. If I could be in Vegas for DEF CON 7 years from then (2020), I&rsquo;d be set.</p>
+<p>That was 3 years ago.</p>
+
+    <img src="/images/MMM_2023.jpg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<h2 id="maple-bacon">Maple Bacon</h2>
+
+    <img src="/images/DEFCON31_MB.jpeg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I&rsquo;d really like to first explain some things pre-DEFCON 31 Finals. You may notice during the quals, MMM wasn&rsquo;t there - Parliament of Ducks was. That was actually <strong>our, Maple Bacon&rsquo;s,</strong> decision.</p>
+<p>I&rsquo;m not dumb. I knew that last year, the announcement of the merge between The Duck, PPP and us was a shock, simply because 1/3rd of that merge was not as highly-regarded as the other two. I know that. PPP has several different championships under their name, and Theori (The Duck) is a security powerhouse, an extension of one of PPP&rsquo;s co-founders Bpak. So what was Maple Bacon doing there? At the time of DEF CON 30 I was the leader of Maple Bacon, and like I said, I&rsquo;m not dumb. I knew what others thought of the merge. I knew that Maple Bacon came into their first DEF CON with 0 prior DEF CON wins. I knew people would talk. But I was the leader. So I also knew that my team was determined, ambitious, and capable. They were nervous, maybe a little green, but I saw all of their progress and development, ever since the <em>inception of the team</em>. <strong>I was there for all of it</strong>. I knew they were <em>good</em>. And clearly, so did PPP and The Duck.</p>
+<p>Sorry for the soap opera paragraph. Back to the original question.</p>
+<p>We were the unlikeliest team to show up in said merge. The answer, given the context, is simple. We wanted to be taken seriously (yes, even after DEF CON 30 victory). And during quals, we wanted to show that we were just as ready for DEF CON as others. We had less than 15 people play during quals. It sucks that we missed the qualifying threshold, but for a very brief moment, I think we made other teams do a double take for a good portion of those quals. If other teams had, at one point, felt a brief but palpable shock at our existence on the scoreboard, that&rsquo;s a success for me. Doing our best with far less people than many other teams, and having that reflected in our quals performance, felt pretty good.</p>
+<p>Since I graduated from UBC, Maple Bacon has transferred into new leadership. I&rsquo;m certainly still involved but in a much smaller capacity. However, I must&rsquo;ve done something alright if they&rsquo;re still going strong today. DEF CON isn&rsquo;t their only win, and it isn&rsquo;t the only big CTF they&rsquo;ve done incredibly well in. Like I said, I know my team, and I see with my own eyes the sights they&rsquo;re setting and the hard work they&rsquo;re putting in. They&rsquo;ve earned the respect they have recieved.</p>
+<h2 id="defcon-prep">DEFCON: PREP</h2>
+<p>Thursday, prep day. I arrived in Vegas a little earlier, and managed to get quite a few things accomplished. I met some old friends and new people, from co-workers to other CTF players I really admire and respect. Synced up with my team for the night, and got everything - tooling, roles, infrastructure setup - organized.</p>
+<p>Later that night I went to the Chandelier bar at the Cosmopolitan hotel, and had the <em>Secret Menu</em> drink called the &ldquo;Verbena&rdquo;, which, <em>IFYKYK</em>, and oh my god I did not and what a shock to my senses that was.</p>
+<p>
+    <img src="/images/Chandelier.jpg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>At least the bar was pretty though</em></p>
+<h2 id="defcon-day-i">DEFCON: DAY I</h2>
+
+    <img src="/images/DC31_Banner.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I was on the floor the first day and helped set things up. Last year, I was expecting a similar setup of round tables in a single room, so it was quite a nice surprise to see a far larger area for us, with nicer setups for each team. I think others have echoed similar sentiments but the CTF gave you 0 free time to check out the rest of DEF CON, which is a damn shame cause I really wanted to see some of my co-workers over at AI Village. Cest la&rsquo; Vie.</p>
+<h2 id="defcon-day-ii">DEFCON: DAY II</h2>
+<p>
+    <img src="/images/vieodore.jpg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>In case you forget our names.</em></p>
+<p>After the network closed on day 1 we were informed of the fact that no challenges will be retired for the rest of the CTF. This was a pretty significant change to the meta, since we would have to keep looking for deeper bugs in day 1 chals while also balancing looking for bugs for future challenges. The night between day 1 and day 2 was a sleepless one for most of us, and very surprisingly I found myself busy with a web challenge released towards the end of day 1.</p>
+<p>Day 2 starts and we started coming across connectivity issues, which was later revealed to be container misconfigurations that affected several other teams. While frustrating, I think we&rsquo;re all used to testing exploits locally so luckily that didn&rsquo;t affect our workflow too much. Besides rationing connections, a bunch more challenges were released and the ennui of it all was definitely starting to settle in. While we managed to have all challenges accounted for, the balancing act definitely had its effects on us.</p>
+<h2 id="defcon-day-iii">DEFCON: DAY III</h2>
+
+    <img src="/images/MMM_braincell.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>
+    <img src="/images/pie_flavor.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>DEF CON DAY 3 :]</em></p>
+<p>About 6-ish hours of sleep (which is ALOT for DEF CON days) later, day 3 starts and I was dual-wielding patch-busting and LLM prompt injection, which is a brand new sentence if I&rsquo;ve ever seen one. There was an LLM KotH challenge that had players submit attack and defense prompts to get other team&rsquo;s LLMs to spit out a provided secret. It&rsquo;s a nice challenge, certainly applicable to the landscape of AI today.</p>
+<p>Near the end of day 3 we were mostly fixated on the last LiveCTF match between us (Jinmo) and Hypeboy, and it was nerve-wracking, to say the least. It was a race against time to figure out why the exploit wasn&rsquo;t working remotely even though it was fine locally, which we later discover was a network hiccup - anyway, the match continued into sudden death, with Jinmo clutching and securing us LiveCTF 1st place.</p>
+<p>
+    <img src="/images/jinmo_mmm.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>Creds to Zaratec</em></p>
+
+    <img src="/images/DC31_scoreboard.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>What a beautiful scoreboard.</p>
+<h3 id="awards-ceremony">AWARDS CEREMONY</h3>
+
+    <img src="/images/dc31_awards_ceremony.jpg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Getting a black badge feels surreal. It feels additionally more surreal thinking about where I started and how I got here. I spent a significant part of my life catching up to people I admired. I used to have my future set for an artistic career and I perpetually felt in the shadow of other artists I learned from. All throughout college I was insecure of the fact that I had 0 direction nor pre-requisite coding ability compared to my peers, and felt like I had to spend my free time learning what the fuck multi-threading was just to feel normal around my friends. It&rsquo;s the same feeling in the CTF scene. Alot of people have, and probably will, doubt my ability. I was happy about learning what SQLi stood for around the same time others in the scene were doing much, much more. And I&rsquo;ll be honest, I&rsquo;m not sure I&rsquo;m done &ldquo;catching up&rdquo;. But at the very least, I don&rsquo;t feel like I have to anymore. I don&rsquo;t feel the same impulses to compare myself against others. I want to &ldquo;catch-up&rdquo; because there&rsquo;s still a world of vulnerabilities I would love to learn about, for myself.</p>
+<h2 id="epilogue">Epilogue</h2>
+<p>I remember in the later part of 2020, around November, Maple Bacon and I played in DragonCTF 2020. At that point in time just several months ago I had graduated from PicoCTF to regular CTFs, but DragonCTF was a significant leap of difficulty then what I was used to. I wasn&rsquo;t really expecting to solve anything in DragonCTF 2020, but then I did. <a href="https://maplebacon.org/2020/11/dragonctf2020-harmony_chat/">Harmony Chat</a>, which still holds a special place in my heart. I remember thinking &ldquo;Wow. Just a few months and I&rsquo;ve learnt so much. What else will I be able to achieve in the CTF space?&rdquo;</p>
+<p>3 years ago, I learnt about the world of CTFs, trying out problems in PicoCTF and learning stuff about SQLi, XSS, simple stack bofs, and the like.</p>
+<p>This year, I claimed a black badge at DEF CON 31. I authored multiple web challenges, covering topics from TLS poisoning to TypeScript pop chains. I&rsquo;m a security engineer. I&rsquo;ve upgraded from XSS bugs to things like complex v8 speculative optimizational vulnerabilities, novel SSRF techniques, and so much more.</p>
+<p>I&rsquo;m quite happy with the progress I&rsquo;ve made so far. I&rsquo;m quite happy with the progress that Maple Bacon has made so far. I love my team, Maple Bacon and MMM, no matter how cheesy that sounds. Looking towards the future has never been so bright.</p>
+]]></content>
+        </item>
         
         <item>
             <title>PBCTF 2023 : JAZZY x VIE CHALS</title>
@@ -124,9 +231,13 @@ def cdn(url):
 <p>NOTE: In this way, the CDN proxy gets redirected, not us - so we won&rsquo;t actually see the results of that redirect. But that&rsquo;s fine, we don&rsquo;t need to see our code being run, it just needs to run. :&gt;</p>
 <h3 id="step-by-step">Step-by-step</h3>
 <ol>
-<li>
-<p>Create an image, with PHP code hidden in the bytes, and host it on a server you control (below I have attached a gif example here that has <code>&lt;?php touch(&quot;/tmp/lol&quot;)?&gt;</code> embedded within).</p>
-</li>
+<li>Create an image, with PHP code hidden in the bytes, and host it on a server you control (below I have attached a gif example here that has <code>&lt;?php touch(&quot;/tmp/lol&quot;)?&gt;</code> embedded within).</li>
+</ol>
+
+    <img src="/images/leol.gif"  alt="gif/php"  class="center"  style="border-radius: 8px;"  />
+
+
+<ol start="2">
 <li>
 <p>Send over your server url to Makima (the image upload server), the CDN proxy will recieve and pass it back so she can save it to disk. Take note of the provided filename.</p>
 </li>
@@ -161,7 +272,7 @@ def cdn(url):
 <li>You can search for notes based on the content of the body</li>
 </ul>
 <hr>
-<p>There is a restrictive CSP, plus even firther restricting scripts to only nonce:</p>
+<p>There is a restrictive CSP, plus even further restricting scripts to only nonce:</p>
 <pre tabindex="0"><code>@app.after_request
 def add_CSP(response):
     response.headers[&#39;Content-Security-Policy&#39;] = f&#34;default-src &#39;self&#39;; script-src &#39;nonce-{g.nonce}&#39;&#34;
@@ -169,43 +280,43 @@ def add_CSP(response):
 </code></pre><p>And the bot in the challenge has HTTPOnly cookies. So maybe no XSS - but hey, there&rsquo;s no CSRF protections. So&hellip;</p>
 <hr>
 <p>There is a <code>static/main/js</code> file which handles some client-side events, but the most notable one being what occurs when the window loads up:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>window.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span>(){
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//init
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">highlighted_note</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">get_higlighted_note</span>();
-</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;search_result&#39;</span>);
-</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_content</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;search_content&#39;</span>)
-</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_open</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;search_open&#39;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//highlight note
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;highlighted&#39;</span>).<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">highlighted_note</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//search handler
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;search_button&#39;</span>).<span style="color:#a6e22e">onclick</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">search_click</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>There is functionality that allows you to search the content of submitted notes, based on hte client-side JS above.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">search_name</span>(<span style="color:#a6e22e">search_data</span>){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">should_open</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">search_data</span>[<span style="color:#e6db74">&#39;open&#39;</span>]
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">search_data</span>[<span style="color:#e6db74">&#39;query&#39;</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">notes</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">get_all_notes</span>();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">found_note</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">notes</span>.<span style="color:#a6e22e">find</span>((<span style="color:#a6e22e">val</span>) =&gt; <span style="color:#a6e22e">val</span>.<span style="color:#a6e22e">note</span>.<span style="color:#a6e22e">toString</span>().<span style="color:#a6e22e">startsWith</span>(<span style="color:#a6e22e">query</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">found_note</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">undefined</span>){
-</span></span><span style="display:flex;"><span>        document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">href</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
-</span></span><span style="display:flex;"><span>        document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">text</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;NOT FOUND&#39;</span>
-</span></span><span style="display:flex;"><span>        document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;&lt;br&gt;&#39;</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">href</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`note/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">found_note</span>.<span style="color:#a6e22e">name</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
-</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">text</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;FOUND&#39;</span>
-</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">innerHTML</span> <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;&lt;br&gt;&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#a6e22e">should_open</span>)document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_result</span>.<span style="color:#a6e22e">click</span>();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">search_click</span>(){
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">search_name</span>({<span style="color:#e6db74">&#39;query&#39;</span><span style="color:#f92672">:</span>document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_content</span>.<span style="color:#a6e22e">value</span>, <span style="color:#e6db74">&#39;open&#39;</span> <span style="color:#f92672">:</span> document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">search_open</span>.<span style="color:#a6e22e">checked</span>})
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="csrf---html-injection">CSRF -&gt; HTML injection</h3>
+<pre tabindex="0"><code>window.onload = async function(){
+    //init
+    document.body.highlighted_note = await get_higlighted_note();
+    document.body.search_result = document.getElementById(&#39;search_result&#39;);
+    document.body.search_content = document.getElementById(&#39;search_content&#39;)
+    document.body.search_open = document.getElementById(&#39;search_open&#39;)
+
+    //highlight note
+    document.getElementById(&#39;highlighted&#39;).innerHTML = document.body.highlighted_note;
+
+    //search handler
+    document.getElementById(&#39;search_button&#39;).onclick = search_click;
+}
+</code></pre><p>There is functionality that allows you to search the content of submitted notes, based on the client-side JS above.</p>
+<pre tabindex="0"><code>async function search_name(search_data){
+    let should_open = search_data[&#39;open&#39;]
+    let query = search_data[&#39;query&#39;]
+
+    let notes = await get_all_notes();
+
+    let found_note = notes.find((val) =&gt; val.note.toString().startsWith(query));
+    if(found_note == undefined){
+        document.body.search_result.href = &#39;&#39;;
+        document.body.search_result.text = &#39;NOT FOUND&#39;
+        document.body.search_result.innerHTML += &#39;&lt;br&gt;&#39;
+    }
+
+    document.body.search_result.href = `note/${found_note.name}`;
+    document.body.search_result.text = &#39;FOUND&#39;
+    document.body.search_result.innerHTML += &#39;&lt;br&gt;&#39;
+    if(should_open)document.body.search_result.click();
+}
+
+async function search_click(){
+    search_name({&#39;query&#39;:document.body.search_content.value, &#39;open&#39; : document.body.search_open.checked})
+}
+</code></pre><h3 id="csrf---html-injection">CSRF -&gt; HTML injection</h3>
 <p>First and foremost, the CSP is annoying but it allows for iframes. There is additionally 0 CSRF protection - use this to your advantage to make the admin bot navigate to your site and CSRF them to change/update notes where the content contains iframes. How do we leverage this to leak the flag?</p>
 <h3 id="dom-clobbering-windowbody">DOM-Clobbering window.body</h3>
 <p>You can inject an iframe with a <code>srcdoc</code> element - combine this with the client-side functionality above and see that you can DOM-clobber the <code>body</code> element of window through your iframe&rsquo;s <code>srcdoc</code>. This leads to overriding <code>document.body</code>.</p>
@@ -506,13 +617,10 @@ def add_CSP(response):
             <guid>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</guid>
             <description>Man.
 My team, Maple Bacon, collaborated with CMU&amp;rsquo;s CTF team PPP and Theori.io&amp;rsquo;s CTF team The Duck, forming Maple Mallard Magistrates as a merger to participate in DEF CON finals.
-The Beginning @PlaidCTF, @theori_io (The Duck), and @maplebaconctf are joining forces to play DEFCON as Maple Mallard Magistrates. Some PPP members also play on The Duck &amp;amp; Maple Bacon, so this allows all of us to keep playing on the same team.</description>
+The Beginning Discussions about the merge had occurred earlier in the year - I triangulate it to a month or so before I found myself in Athens, Greece attending ICC. This is important to mention as I heard many people speculate about the existence of MMM and whether or not it was formed as a response to something.</description>
             <content type="html"><![CDATA[<p>Man.</p>
 <p>My team, Maple Bacon, collaborated with CMU&rsquo;s CTF team PPP and Theori.io&rsquo;s CTF team The Duck, forming Maple Mallard Magistrates as a merger to participate in DEF CON finals.</p>
 <h2 id="the-beginning">The Beginning</h2>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/PlaidCTF?ref_src=twsrc%5Etfw">@PlaidCTF</a>, <a href="https://twitter.com/theori_io?ref_src=twsrc%5Etfw">@theori_io</a> (The Duck), and <a href="https://twitter.com/maplebaconctf?ref_src=twsrc%5Etfw">@maplebaconctf</a> are joining forces to play DEFCON as Maple Mallard Magistrates. Some PPP members also play on The Duck &amp; Maple Bacon, so this allows all of us to keep playing on the same team. See you all at DEFCON finals!</p>&mdash; Maple Mallard Magistrates (@mmm_ctf_team) <a href="https://twitter.com/mmm_ctf_team/status/1556393647532376065?ref_src=twsrc%5Etfw">August 7, 2022</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 <p>Discussions about the merge had occurred earlier in the year - I triangulate it to a month or so before I found myself in Athens, Greece attending ICC. This is important to mention as I heard many people speculate about the existence of MMM and whether or not it was formed as a response to something. The answer is no, the reasoning was very simple: we wanted to play together! Unfortunately, there wasn&rsquo;t much of a complex reason, we simply had a desire to team up and have fun in Vegas.</p>
 <h2 id="preparation">Preparation</h2>
 <p>Shortly after the creation of MMM, general preparations were underway to figure out how to best tackle DEFCON 30. Travel logistics, skill logistics, everything. We wanted to see if there was a way to train altogether in prep for the event, and obviously the best way to do that was to try out in CTFs together, pre-DEFCON. One <em>slight</em> issue though: The merge was a secret. We couldn&rsquo;t use our full name, since that would likely give away the teams that composed us. It wasn&rsquo;t a big deal, but we just knew that if we did well in a CTF, then certainly some teams would pick up on this mysterious MMM and wonder who it was. Speculation was inevitable.</p>
@@ -529,9 +637,6 @@ The Beginning @PlaidCTF, @theori_io (The Duck), and @maplebaconctf are joining f
 
 
 <h2 id="defcon">DEFCON</h2>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">MB is defcon-bound baybeeeee <a href="https://t.co/fPfNDcP6nb">pic.twitter.com/fPfNDcP6nb</a></p>&mdash; Vie (@vie_please) <a href="https://twitter.com/vie_please/status/1557707626233794560?ref_src=twsrc%5Etfw">August 11, 2022</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 <h3 id="day-0">Day 0</h3>
 <p>Prep began on the Thursday, August 11, before the start of the competition. Our hotel was close to the conference room to allow for those going to the floor on any given day convenience when travelling back and forth. We managed to arrive pretty early on this day, so we had some free time to explore Vegas before we began planning.</p>
 <p><a href="https://meowwolf.com/visit/las-vegas">Omega Mart by Meow Wolf</a> seemed like a great destination to spend some time in - it&rsquo;s an immersive and surreal art exhibition set in a grocery store. It was very weird, but very fun. I also got my new favourite hat from the gift shop~</p>
@@ -605,9 +710,6 @@ This being my first DEFCON, I unfortunately don&rsquo;t have anything to compare
 
 <p>The final day after the end of the contest was a free-for-all in terms of stuff to do. Since we had the rest of the day to ourselves, many of us wandered around or went sightseeing in Vegas for a bit after the conclusion of DEFCON. Some of us went ahead and had an MMM pool ppparty, since hey we might as well use the pool while we&rsquo;re here :p</p>
 <p>Later that night we saw the other teams at the afterparty, shoutout to <em>perfect r✪✪✪t x organizers</em>, where we mingled and formed plenty new friendships :&gt; special shoutout to team Sauercloud for giving me the matrix gigachad sticker which has a new home on my laptop. One of us also distributed small rubber ducks to the afterparty, and I know this because for a brief 5 minutes the floor was just filled with sounds of rubber ducky squeaks.</p>
-<blockquote class="twitter-tweet"><p lang="und" dir="ltr">Ty <a href="https://twitter.com/r0bre?ref_src=twsrc%5Etfw">@r0bre</a> :&gt; <a href="https://t.co/m61EyNvglz">pic.twitter.com/m61EyNvglz</a></p>&mdash; Vie (@vie_please) <a href="https://twitter.com/vie_please/status/1560009205481803777?ref_src=twsrc%5Etfw">August 17, 2022</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 <h2 id="final-thoughts">Final Thoughts</h2>
 <p>DEFCON 30 was an interesting and wild ride, all things considered. As I&rsquo;ve said before, I&rsquo;m new to the scene so I&rsquo;m by no means able to talk about this event in any authoritative capacity, so this blog posts comes off less as a general feedback note and more an introspection into what went down during. This was Nautilus Institute&rsquo;s first DEFCON as organizers of the event, and I&rsquo;m certain they have already recieved a wealth of feedback, most of which are sentiments I agree on in terms of infra handling, challenge deployment and whatnot. I, like many others, experienced first-hand a few frustrating issues during the CTF, which I believe they have taken note of and are compiling to guide them for next year. I can&rsquo;t imagine the enormous undertaking it must have been to tackle a world-reknown CTF such as DEFCON, and I am very grateful that they have volunteered and stepped up to the plate for it.</p>
 <p>As a whole, I&rsquo;m happy and grateful for the opportunity given to me and to MB to be a part of MMM. I&rsquo;ve formulated solid friendships and met some really amazing people, and I can&rsquo;t have imagined even a year ago that my CTF journey would make its way to Vegas. I have learnt alot from this year&rsquo;s DEFCON, and I&rsquo;m excited to see what next year will have in store for us.</p>

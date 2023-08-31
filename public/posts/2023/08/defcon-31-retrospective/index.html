@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Vie ">
+<meta name="description" content="Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &amp;ldquo;CSAW 2019&amp;rdquo; with UBC&amp;rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.
+To be completely frank, I solved the challenge after googling &amp;ldquo;XML vulnerability&amp;rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag." />
+<meta name="keywords" content=", defcon" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2023/08/defcon-31-retrospective/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+<link rel="manifest" href="https://jamvie.net/site.webmanifest">
+<link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+
+
+    <title>
+        
+            DEFCON 31: Retrospective :: VIE 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.535bae1ccfa4f49e2cd0c8cecdece0708a1ec5b561a08b8f0f6ea9254d639b2c.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="DEFCON 31: Retrospective">
+<meta itemprop="description" content="Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &ldquo;CSAW 2019&rdquo; with UBC&rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.
+To be completely frank, I solved the challenge after googling &ldquo;XML vulnerability&rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag."><meta itemprop="datePublished" content="2023-08-31T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-08-31T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2001"><meta itemprop="image" content="https://jamvie.net/images/MMM_2023.jpg">
+<meta itemprop="keywords" content="defcon," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/images/MMM_2023.jpg"/>
+
+<meta name="twitter:title" content="DEFCON 31: Retrospective"/>
+<meta name="twitter:description" content="Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &ldquo;CSAW 2019&rdquo; with UBC&rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.
+To be completely frank, I solved the challenge after googling &ldquo;XML vulnerability&rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag."/>
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2023-08-31 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#a4312b;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/chals/">CTF Chals</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li><li><a href="https://jamvie.net/tags/">Tags</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        10 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://jamvie.net/posts/2023/08/defcon-31-retrospective/">DEFCON 31: Retrospective</a>
+      </h1>
+
+      
+
+      
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#beginning">Beginning</a></li>
+    <li><a href="#maple-bacon">Maple Bacon</a></li>
+    <li><a href="#defcon-prep">DEFCON: PREP</a></li>
+    <li><a href="#defcon-day-i">DEFCON: DAY I</a></li>
+    <li><a href="#defcon-day-ii">DEFCON: DAY II</a></li>
+    <li><a href="#defcon-day-iii">DEFCON: DAY III</a>
+      <ul>
+        <li><a href="#awards-ceremony">AWARDS CEREMONY</a></li>
+      </ul>
+    </li>
+    <li><a href="#epilogue">Epilogue</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
+
+      
+
+      <div class="post-content">
+        <h2 id="beginning">Beginning</h2>
+<p>Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &ldquo;CSAW 2019&rdquo; with UBC&rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.</p>
+<p>To be completely frank, I solved the challenge after googling &ldquo;XML vulnerability&rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag. I was happy, but I also thought, &ldquo;what the <em>hell</em> did I achieve? what did the payload do? What did I learn?&rdquo; and I couldn&rsquo;t come up with an answer I was satisfied with. I really just googled information about XML vulenrabilities, found an XXE payload, and threw it hoping to see if something would change (I didn&rsquo;t even know what XXE stood for). Granted, I still needed to modify the payload. Unagi required more effort than just a copy-paste. But overall, my first experience was largely juvenile and I was still as naive as I was pre CSAW 2019.</p>
+<p>I remained curious in CTFs the following year, but didn&rsquo;t really play in them as much until I was complaining to a friend of mine about something entirely different - Super Smash Bros. I really liked the game, I was playing in it so much I was considering playing it competitively (nothing too serious really came out of that) but I wanted something else to satisfy my competitive nature. So my friend suggested DEF CON.</p>
+<blockquote>
+<p>V: &ldquo;Like the alarm codes?&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>L: &ldquo;Okay, <em>yeah</em>, but I&rsquo;m talking about the hacking competition.&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>V: &ldquo;Hacking? Yea, like CTFs? I&rsquo;m familiar.&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>L: &ldquo;Uh huh, like the movie <em>Hackers</em>. You know, the one with Angelina Jolie?&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>V: &ldquo;Wait, Angelina Jolie was in a movie called <em>Hackers</em>?&rdquo;</p>
+</blockquote>
+<blockquote>
+<p>L: &ldquo;You&rsquo;re missing the point. Have you ever considered CTFs to help with your competitive nature?&rdquo;</p>
+</blockquote>
+<p>I knew the CTF scene, not that well, but I knew it. I played in a CTF with MB, and I thought about what my friend said. I figured, sure, why not?</p>
+<p>I attended my first few meetings with them, exploring CTFs, starting with PicoCTF under prof. Robert Xiao&rsquo;s advice. Pico was considerably easier than CSAW, generous with hints and well-scoped for people to learn something new in security. I took my time, taking a couple days to solve all. The series of SQLi challenges, when I came across them, gave me a challenge at the time. But when I solved them, I was elated - happy, cause submitting a flag felt really, really good.</p>
+<p>Debriefing on the Pico challenges after submitting all of the web ones, Robert Xiao talked about DEF CON. I had minor context from my own research and from what my friend told me, but hearing him talk about it and all the cool challenges he saw was inspiring. DEF CON CTF seemed interesting, challenging, but importantly - <em>fun</em>. I wanted to participate.</p>
+<p>Recall that at the time that I resolved to participate, I barely knew what an XXE was, nor did I play in any harder challenges outside of Pico and one (1) CSAW challenge. So, was the goal of DEF CON attainable? Not anytime soon at that point in time. I gave myself a comfortable margin of 7 years. If I could be in Vegas for DEF CON 7 years from then (2020), I&rsquo;d be set.</p>
+<p>That was 3 years ago.</p>
+
+    <img src="https://jamvie.net/images/MMM_2023.jpg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<h2 id="maple-bacon">Maple Bacon</h2>
+
+    <img src="https://jamvie.net/images/DEFCON31_MB.jpeg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I&rsquo;d really like to first explain some things pre-DEFCON 31 Finals. You may notice during the quals, MMM wasn&rsquo;t there - Parliament of Ducks was. That was actually <strong>our, Maple Bacon&rsquo;s,</strong> decision.</p>
+<p>I&rsquo;m not dumb. I knew that last year, the announcement of the merge between The Duck, PPP and us was a shock, simply because 1/3rd of that merge was not as highly-regarded as the other two. I know that. PPP has several different championships under their name, and Theori (The Duck) is a security powerhouse, an extension of one of PPP&rsquo;s co-founders Bpak. So what was Maple Bacon doing there? At the time of DEF CON 30 I was the leader of Maple Bacon, and like I said, I&rsquo;m not dumb. I knew what others thought of the merge. I knew that Maple Bacon came into their first DEF CON with 0 prior DEF CON wins. I knew people would talk. But I was the leader. So I also knew that my team was determined, ambitious, and capable. They were nervous, maybe a little green, but I saw all of their progress and development, ever since the <em>inception of the team</em>. <strong>I was there for all of it</strong>. I knew they were <em>good</em>. And clearly, so did PPP and The Duck.</p>
+<p>Sorry for the soap opera paragraph. Back to the original question.</p>
+<p>We were the unlikeliest team to show up in said merge. The answer, given the context, is simple. We wanted to be taken seriously (yes, even after DEF CON 30 victory). And during quals, we wanted to show that we were just as ready for DEF CON as others. We had less than 15 people play during quals. It sucks that we missed the qualifying threshold, but for a very brief moment, I think we made other teams do a double take for a good portion of those quals. If other teams had, at one point, felt a brief but palpable shock at our existence on the scoreboard, that&rsquo;s a success for me. Doing our best with far less people than many other teams, and having that reflected in our quals performance, felt pretty good.</p>
+<p>Since I graduated from UBC, Maple Bacon has transferred into new leadership. I&rsquo;m certainly still involved but in a much smaller capacity. However, I must&rsquo;ve done something alright if they&rsquo;re still going strong today. DEF CON isn&rsquo;t their only win, and it isn&rsquo;t the only big CTF they&rsquo;ve done incredibly well in. Like I said, I know my team, and I see with my own eyes the sights they&rsquo;re setting and the hard work they&rsquo;re putting in. They&rsquo;ve earned the respect they have recieved.</p>
+<h2 id="defcon-prep">DEFCON: PREP</h2>
+<p>Thursday, prep day. I arrived in Vegas a little earlier, and managed to get quite a few things accomplished. I met some old friends and new people, from co-workers to other CTF players I really admire and respect. Synced up with my team for the night, and got everything - tooling, roles, infrastructure setup - organized.</p>
+<p>Later that night I went to the Chandelier bar at the Cosmopolitan hotel, and had the <em>Secret Menu</em> drink called the &ldquo;Verbena&rdquo;, which, <em>IFYKYK</em>, and oh my god I did not and what a shock to my senses that was.</p>
+<p>
+    <img src="https://jamvie.net/images/Chandelier.jpg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>At least the bar was pretty though</em></p>
+<h2 id="defcon-day-i">DEFCON: DAY I</h2>
+
+    <img src="https://jamvie.net/images/DC31_Banner.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I was on the floor the first day and helped set things up. Last year, I was expecting a similar setup of round tables in a single room, so it was quite a nice surprise to see a far larger area for us, with nicer setups for each team. I think others have echoed similar sentiments but the CTF gave you 0 free time to check out the rest of DEF CON, which is a damn shame cause I really wanted to see some of my co-workers over at AI Village. Cest la&rsquo; Vie.</p>
+<h2 id="defcon-day-ii">DEFCON: DAY II</h2>
+<p>
+    <img src="https://jamvie.net/images/vieodore.jpg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>In case you forget our names.</em></p>
+<p>After the network closed on day 1 we were informed of the fact that no challenges will be retired for the rest of the CTF. This was a pretty significant change to the meta, since we would have to keep looking for deeper bugs in day 1 chals while also balancing looking for bugs for future challenges. The night between day 1 and day 2 was a sleepless one for most of us, and very surprisingly I found myself busy with a web challenge released towards the end of day 1.</p>
+<p>Day 2 starts and we started coming across connectivity issues, which was later revealed to be container misconfigurations that affected several other teams. While frustrating, I think we&rsquo;re all used to testing exploits locally so luckily that didn&rsquo;t affect our workflow too much. Besides rationing connections, a bunch more challenges were released and the ennui of it all was definitely starting to settle in. While we managed to have all challenges accounted for, the balancing act definitely had its effects on us.</p>
+<h2 id="defcon-day-iii">DEFCON: DAY III</h2>
+
+    <img src="https://jamvie.net/images/MMM_braincell.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>
+    <img src="https://jamvie.net/images/pie_flavor.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>DEF CON DAY 3 :]</em></p>
+<p>About 6-ish hours of sleep (which is ALOT for DEF CON days) later, day 3 starts and I was dual-wielding patch-busting and LLM prompt injection, which is a brand new sentence if I&rsquo;ve ever seen one. There was an LLM KotH challenge that had players submit attack and defense prompts to get other team&rsquo;s LLMs to spit out a provided secret. It&rsquo;s a nice challenge, certainly applicable to the landscape of AI today.</p>
+<p>Near the end of day 3 we were mostly fixated on the last LiveCTF match between us (Jinmo) and Hypeboy, and it was nerve-wracking, to say the least. It was a race against time to figure out why the exploit wasn&rsquo;t working remotely even though it was fine locally, which we later discover was a network hiccup - anyway, the match continued into sudden death, with Jinmo clutching and securing us LiveCTF 1st place.</p>
+<p>
+    <img src="https://jamvie.net/images/jinmo_mmm.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<em>Creds to Zaratec</em></p>
+
+    <img src="https://jamvie.net/images/DC31_scoreboard.png"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>What a beautiful scoreboard.</p>
+<h3 id="awards-ceremony">AWARDS CEREMONY</h3>
+
+    <img src="https://jamvie.net/images/dc31_awards_ceremony.jpg"  alt="MMM"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Getting a black badge feels surreal. It feels additionally more surreal thinking about where I started and how I got here. I spent a significant part of my life catching up to people I admired. I used to have my future set for an artistic career and I perpetually felt in the shadow of other artists I learned from. All throughout college I was insecure of the fact that I had 0 direction nor pre-requisite coding ability compared to my peers, and felt like I had to spend my free time learning what the fuck multi-threading was just to feel normal around my friends. It&rsquo;s the same feeling in the CTF scene. Alot of people have, and probably will, doubt my ability. I was happy about learning what SQLi stood for around the same time others in the scene were doing much, much more. And I&rsquo;ll be honest, I&rsquo;m not sure I&rsquo;m done &ldquo;catching up&rdquo;. But at the very least, I don&rsquo;t feel like I have to anymore. I don&rsquo;t feel the same impulses to compare myself against others. I want to &ldquo;catch-up&rdquo; because there&rsquo;s still a world of vulnerabilities I would love to learn about, for myself.</p>
+<h2 id="epilogue">Epilogue</h2>
+<p>I remember in the later part of 2020, around November, Maple Bacon and I played in DragonCTF 2020. At that point in time just several months ago I had graduated from PicoCTF to regular CTFs, but DragonCTF was a significant leap of difficulty then what I was used to. I wasn&rsquo;t really expecting to solve anything in DragonCTF 2020, but then I did. <a href="https://maplebacon.org/2020/11/dragonctf2020-harmony_chat/">Harmony Chat</a>, which still holds a special place in my heart. I remember thinking &ldquo;Wow. Just a few months and I&rsquo;ve learnt so much. What else will I be able to achieve in the CTF space?&rdquo;</p>
+<p>3 years ago, I learnt about the world of CTFs, trying out problems in PicoCTF and learning stuff about SQLi, XSS, simple stack bofs, and the like.</p>
+<p>This year, I claimed a black badge at DEF CON 31. I authored multiple web challenges, covering topics from TLS poisoning to TypeScript pop chains. I&rsquo;m a security engineer. I&rsquo;ve upgraded from XSS bugs to things like complex v8 speculative optimizational vulnerabilities, novel SSRF techniques, and so much more.</p>
+<p>I&rsquo;m quite happy with the progress I&rsquo;ve made so far. I&rsquo;m quite happy with the progress that Maple Bacon has made so far. I love my team, Maple Bacon and MMM, no matter how cheesy that sounds. Looking towards the future has never been so bright.</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://jamvie.net/tags/defcon/">defcon</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        2001 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2023-08-30 20:00 -0400
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://jamvie.net/posts/2023/02/pbctf-2023-jazzy-x-vie-chals/">
+                    <span class="button__text">PBCTF 2023 : JAZZY x VIE CHALS</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2023</span>
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.cf7fb2a9e24608a783e05e4472da2fdf008293289de1ad88d1cba5c143e7e414496dd33b6a228e92f8461ce0c8cbad3c9f9847e73e46dfbce0463393ddd1733a.js" integrity="sha512-z3&#43;yqeJGCKeD4F5Ectov3wCCkyid4a2I0culwUPn5BRJbdM7aiKOkvhGHODIy608n5hH5z5G37zgRjOT3dFzOg=="></script>
+
+
+
+    </body>
+</html>

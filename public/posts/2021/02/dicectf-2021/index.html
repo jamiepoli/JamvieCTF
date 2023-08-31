@@ -49,10 +49,10 @@ const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;
 <meta itemprop="description" content="Babier CSP The challenge takes after justCTF&rsquo;s similarly named challenge. We&rsquo;re given an index.js file:
 const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`} &lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?"><meta itemprop="datePublished" content="2021-02-07T19:06:12-07:00" />
 <meta itemprop="dateModified" content="2021-02-07T19:06:12-07:00" />
-<meta itemprop="wordCount" content="2261"><meta itemprop="image" content="https://jamvie.net/img/V.png"/>
+<meta itemprop="wordCount" content="2261"><meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png"/>
 <meta itemprop="keywords" content="writeups,xss,sqli,web,prototype-pollution,csrf," />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://jamvie.net/img/V.png"/>
+<meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png"/>
 
 <meta name="twitter:title" content="DiceCTF 2021"/>
 <meta name="twitter:description" content="Babier CSP The challenge takes after justCTF&rsquo;s similarly named challenge. We&rsquo;re given an index.js file:
@@ -102,7 +102,7 @@ const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#
         <span class="header__right">
             
                 <nav class="menu">
-    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li><li><a href="https://jamvie.net/tags/">Tags</a></li>
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/chals/">CTF Chals</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li><li><a href="https://jamvie.net/tags/">Tags</a></li>
     </ul>
 </nav>
 
