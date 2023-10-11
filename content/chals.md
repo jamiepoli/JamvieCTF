@@ -13,6 +13,9 @@ I've been writing challenges since 2022, which is not a long time, but all of my
 * [Art Gallery](https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/#art-gallery-3-solves)
     * TLS poison -> FTP -> Redis SSRF chain for deserialization RCE
 
+* [Art Gallery](https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/#art-gallery-3-solves)
+    * POST-based img-tag XSSI -> ESI injection -> img-creation primitive oracle -> XS-leak 
+
 ## PBCTF
 
 * [Makima](posts/2023/02/pbctf-2023-jazzy-x-vie-chals/#makima)
