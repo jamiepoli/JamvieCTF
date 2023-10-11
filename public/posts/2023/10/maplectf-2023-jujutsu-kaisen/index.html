@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Vie ">
+<meta name="description" content="MapleCTF&amp;rsquo;s 2nd annual CTF was held at the same time as Hackceler8 weekend, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&amp;rsquo;t reccommend.
+This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen." />
+<meta name="keywords" content=", xs-leak, writeups, esi, web" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+<link rel="manifest" href="https://jamvie.net/site.webmanifest">
+<link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+
+
+    <title>
+        
+            MAPLECTF 2023: JUJUTSU KAISEN :: VIE 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.535bae1ccfa4f49e2cd0c8cecdece0708a1ec5b561a08b8f0f6ea9254d639b2c.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="MAPLECTF 2023: JUJUTSU KAISEN">
+<meta itemprop="description" content="MapleCTF&rsquo;s 2nd annual CTF was held at the same time as Hackceler8 weekend, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&rsquo;t reccommend.
+This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen."><meta itemprop="datePublished" content="2023-10-10T19:53:16+08:00" />
+<meta itemprop="dateModified" content="2023-10-10T19:53:16+08:00" />
+<meta itemprop="wordCount" content="2475"><meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png"/>
+<meta itemprop="keywords" content="xs-leak,writeups,esi,web," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png"/>
+
+<meta name="twitter:title" content="MAPLECTF 2023: JUJUTSU KAISEN"/>
+<meta name="twitter:description" content="MapleCTF&rsquo;s 2nd annual CTF was held at the same time as Hackceler8 weekend, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&rsquo;t reccommend.
+This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen."/>
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2023-10-10 19:53:16 &#43;0800 &#43;0800" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#a4312b;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/chals/">CTF Chals</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li><li><a href="https://jamvie.net/tags/">Tags</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        12 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/">MAPLECTF 2023: JUJUTSU KAISEN</a>
+      </h1>
+
+      
+
+      
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#the-graphql-filters">THE GRAPHQL FILTERS</a></li>
+    <li><a href="#hiding-things-in-pngs-and-varnish-xml-parsing">HIDING THINGS IN PNGS AND VARNISH XML PARSING</a></li>
+    <li><a href="#edge-side-includes">EDGE-SIDE INCLUDES</a></li>
+    <li><a href="#csrf-the-bot">CSRF THE BOT</a></li>
+    <li><a href="#service-workers">SERVICE WORKERS</a></li>
+    <li><a href="#altogether-now">ALTOGETHER NOW</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
+
+      
+
+      <div class="post-content">
+        <p>MapleCTF&rsquo;s 2nd annual CTF was held at the same time as Hackceler8 weekend, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which <em>I don&rsquo;t reccommend</em>.</p>
+<p>This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen. The first 2 I won&rsquo;t detail writeups as they&rsquo;re beginner-friendly and there already exist plenty of writeups for them. The latter one I will detail an author writeup for.</p>
+<p>JJK is my first soiree into some sort of full client-side web challenge. I&rsquo;m really not a client-side person so I had to do some self-education to make sure I really understood these topics before I tested them out in this challenge. I would like to thank Ming/Disna for helping test the challenge and making the solve for it.</p>
+<p>This writeup assumes knowledge of client-side attacks and certain specifications of web APIs. I don&rsquo;t go into detail with some of the topics here outside of the direct solve, you&rsquo;ll need to do some extra reading if you don&rsquo;t have that context.</p>
+<h2 id="tldr">TL;DR</h2>
+<p>POST-based img-tag XSSI -&gt; ESI injection -&gt; img-creation primitive oracle -&gt; xs-leak</p>
+<p>The main point of this challenge was using a graphQL regex filter to force an oracle out of pictures with ESI tags embedded in them.</p>
+<h2 id="overview">Overview</h2>
+<p>The app is a private JJK database, featuring some of the characters I like in Gege Akutami&rsquo;s Jujutsu Kaisen. Comments in the src and the initialization of the Dockerfile indicates that a random character in the database will have injected into their &ldquo;notes&rdquo; column the value of the flag. In order to get it, you will need to somehow access that random character&rsquo;s notes column.</p>
+<p>Without going into detail of every file in there, I will highlight the parts of the src that make this exploit work.</p>
+<p><em>/cache_money/default.vcl</em></p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">vcl 4.1;
+import std;
+
+backend app_backend {
+    .host = &#34;jjk_app&#34;;
+    .port = &#34;9080&#34;;   
+}
+
+backend db_backend {
+    .host = &#34;jjk_db&#34;;
+    .port = &#34;9090&#34;;   
+}
+
+acl internal {
+    &#34;localhost&#34;;
+    &#34;192.168.0.0/16&#34;;
+    &#34;172.0.0.0/8&#34;;
+}
+
+sub vcl_backend_response {
+    set beresp.do_esi = true; &lt;------- A
+}
+
+sub vcl_recv {
+    if (req.http.host ~ &#34;jjk_db&#34; &amp;&amp; std.ip(client.ip, &#34;17.17.17.17&#34;) ~ internal) {
+        set req.backend_hint = db_backend; &lt;-------- B
+    } else {
+        set req.backend_hint = app_backend;
+    }
+}
+</code></pre><p>Point A is a configuration in Varnish cache&rsquo;s vcl that states the cache should parse any file with a <code>&lt;</code> present in it as XML. This includes things that <em>don&rsquo;t</em> have typical XML structures, such as images or text files. This is further reinforced in the <code>docker-compose.yml</code> file:</p>
+<p><em>docker-compose.yml</em></p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">version: &#39;3.9&#39;
+
+services:
+  jjk_app:
+    restart: on-failure
+    build: ./app
+    # ports:
+    #   - &#39;9080:9080&#39;
+    depends_on:
+      - &#34;jjk_db&#34;
+    environment:
+      - ADMIN_NAME=placeholder
+      - ADMIN_PASSWORD=placeholder
+  jjk_db:
+    restart: on-failure
+    build: ./db
+    # ports:
+    #   - &#39;9090:9090&#39;
+  varnish:
+    image: varnish:stable
+    container_name: varnish
+    volumes:
+      - &#34;./cache_money/default.vcl:/etc/varnish/default.vcl&#34;
+        # ports:
+        # - &#34;80:80&#34;
+    tmpfs:
+      - /var/lib/varnish:exec
+    environment:
+      - VARNISH_SIZE=2G  
+    command: &#34;-p feature=+esi_disable_xml_check&#34; &lt;------------- HERE
+    depends_on:
+      - &#34;jjk_app&#34;
+  bot:
+    build: ./bot/
+    init: true
+    environment:
+      - CHALL_DOMAIN=https://jujutsu-kaisen-2.ctf.maplebacon.org # replaced with real domain on remote
+      - ADMIN_USERNAME=placeholder
+      - ADMIN_PASSWORD=placeholder
+    depends_on:
+      - redis
+  redis:
+    image: redis:6.0-alpine
+  # CTF NOTE: This mimics the load balancer we have for all hosted challs. enable it on local for testing. don&#39;t attack plz
+  nginx:
+    build: ./nginx/
+    container_name: nginx
+    ports:
+      - &#39;443:443&#39;
+    depends_on:
+      - &#34;jjk_app&#34;
+</code></pre><p>The command <code>&quot;-p feature=+esi_disable_xml_check&quot;</code> enables the loose XML parsing from the container side.</p>
+<p>Gong back to the <code>default.vcl</code>, B is a special rule that sets any requests to a &ldquo;jjk_db&rdquo; to the database endpoint instead of the app&rsquo;s, as the vcl defines the upstream server of Varnish as the app&rsquo;s. This comes in handy later.</p>
+<p><em>/db/typedefs.py</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> graphene
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> graphene <span style="color:#f92672">import</span> relay
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> graphene_sqlalchemy <span style="color:#f92672">import</span> SQLAlchemyObjectType
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> graphene_sqlalchemy_filter <span style="color:#f92672">import</span> FilterSet
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> models <span style="color:#f92672">import</span> CharactersModel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CharactersFilter</span>(FilterSet):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>: <span style="color:#75715e">## &lt;------------------- C</span>
+</span></span><span style="display:flex;"><span>        model <span style="color:#f92672">=</span> CharactersModel
+</span></span><span style="display:flex;"><span>        fields <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;name&#39;</span>: [<span style="color:#f92672">...</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;cursed_technique&#39;</span>: [<span style="color:#f92672">...</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;occupation&#39;</span>: [<span style="color:#f92672">...</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;notes&#39;</span>: [<span style="color:#f92672">...</span>],
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CharactersTypeDef</span>(SQLAlchemyObjectType):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Meta</span>:
+</span></span><span style="display:flex;"><span>        model <span style="color:#f92672">=</span> CharactersModel
+</span></span><span style="display:flex;"><span>        interfaces <span style="color:#f92672">=</span> (relay<span style="color:#f92672">.</span>Node,)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## For mutations</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CharacterFields</span>:
+</span></span><span style="display:flex;"><span>    id <span style="color:#f92672">=</span> graphene<span style="color:#f92672">.</span>Int()
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> graphene<span style="color:#f92672">.</span>String()
+</span></span><span style="display:flex;"><span>    occupation <span style="color:#f92672">=</span> graphene<span style="color:#f92672">.</span>String()
+</span></span><span style="display:flex;"><span>    cursed_technique <span style="color:#f92672">=</span> graphene<span style="color:#f92672">.</span>String()
+</span></span><span style="display:flex;"><span>    img_file <span style="color:#f92672">=</span> graphene<span style="color:#f92672">.</span>String()
+</span></span><span style="display:flex;"><span>    notes <span style="color:#f92672">=</span> graphene<span style="color:#f92672">.</span>String()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AddCharacterFields</span>(graphene<span style="color:#f92672">.</span>InputObjectType, CharacterFields):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><p>Point C is where a filter is defined for use in the graphQL endpoint in the application. The filterset, which is defined by a 3rd-party library called <code>graphene_sqlalchemy_filter</code>, utilizes regex-esque (it&rsquo;s not actually fully regex) filters that can be used on 4 different columns: <code>name</code>, <code>cursed_technique</code>, <code>occupation</code>, and <code>notes</code>. The last column is of importance as that is where the flag will exist.</p>
+<p><em>app/app.y</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">upload_handler</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;GET&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#34;newchar.html&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;POST&#34;</span>:
+</span></span><span style="display:flex;"><span>        name <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)
+</span></span><span style="display:flex;"><span>        occupation <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;occupation&#39;</span>)
+</span></span><span style="display:flex;"><span>        cursed_technique <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;cursed_technique&#39;</span>)
+</span></span><span style="display:flex;"><span>        notes <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;notes&#39;</span>)
+</span></span><span style="display:flex;"><span>        upload <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>files<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;file&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> upload <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#34;error.html&#34;</span>, error<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;You can&#39;t upload an empty file!&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        ext <span style="color:#f92672">=</span> upload<span style="color:#f92672">.</span>filename<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;.&#34;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ext <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;png&#34;</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#34;error.html&#34;</span>, error<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;I see what you&#39;re trying to do.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        filename <span style="color:#f92672">=</span> secure_filename(os<span style="color:#f92672">.</span>urandom(<span style="color:#ae81ff">42</span>)<span style="color:#f92672">.</span>hex())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        mutation <span style="color:#f92672">=</span> MUTATION<span style="color:#f92672">.</span>format(name<span style="color:#f92672">=</span>name, occupation<span style="color:#f92672">=</span>occupation, cursed_technique<span style="color:#f92672">=</span>cursed_technique, notes<span style="color:#f92672">=</span>notes, ct<span style="color:#f92672">=</span>cursed_technique)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(GRAPHQL_ENDPOINT, json<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;query&#34;</span>: mutation, <span style="color:#e6db74">&#34;variables&#34;</span>: <span style="color:#66d9ef">None</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (r<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;data&#34;</span>][<span style="color:#e6db74">&#34;addNewCharacter&#34;</span>][<span style="color:#e6db74">&#39;status&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#66d9ef">True</span>):
+</span></span><span style="display:flex;"><span>            upload<span style="color:#f92672">.</span>save(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;uploads/</span><span style="color:#e6db74">{</span>filename<span style="color:#e6db74">}</span><span style="color:#e6db74">.</span><span style="color:#e6db74">{</span>ext<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> redirect(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;/view/</span><span style="color:#e6db74">{</span>filename<span style="color:#e6db74">}</span><span style="color:#e6db74">.</span><span style="color:#e6db74">{</span>ext<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#34;error.html&#34;</span>, error<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Something went wrong when trying to upload through graphql!&#34;</span>)
+</span></span></code></pre></div><p>This is the route that handles the creation of new characters. You have the option to upload files, but they&rsquo;re extension-checked as png images. Notably, if you upload a character, you&rsquo;re then <strong>redirected to that image.</strong></p>
+<p>I won&rsquo;t go into the code too deep, but there is also an admin bot that logs in as me, then navigates to a user-defined URL. The cookies are not CSRF-safe.</p>
+<p>You now have all the components of the challenge needed to figure out the solve. Let&rsquo;s go ahead to see how that looks.</p>
+<h2 id="the-graphql-filters">THE GRAPHQL FILTERS</h2>
+<p>The filters used in graphQL are totally fine and safe on their own. But the way that this app is coded, the filters create an opportunity to make an oracle-based attack. Since I put the flag in the notes column of one particular JJK character, a filter such as this:</p>
+<pre tabindex="0"><code>{
+    getCharacters(
+        filters: {
+            notesLike: &#34;%FLAG_SO_FAR%&#34;
+        }) {
+        edges {
+            node {
+                name,
+                notes
+            }
+        } 
+    }
+}
+</code></pre><p>Will leak the flag char by char.</p>
+<h2 id="hiding-things-in-pngs-and-varnish-xml-parsing">HIDING THINGS IN PNGS AND VARNISH XML PARSING</h2>
+<p>I&rsquo;ve used this technique before in my previous challenge, <em>Makima</em>. The IDAT chunks of a <code>.png</code> image are critical (read: you can&rsquo;t make a png without them) as they define the actual bytes that comprise the pixels that make an image. IDAT chunks are the output datastream of the compression algorithm stipulated by the <code>.png</code>&rsquo;s IHDR chunk, another critical metadata chunk. There can be numerous IDAT chunks, naturally, depending on the size of any given image, and behind the lens, they&rsquo;re just a bunch of bytes&hellip;</p>
+
+    <img src="https://jamvie.net/images/IHDR_IDAT.png"  alt="IHDR AND IDAT"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>With some readable text defining where a chunk starts and another ends.</p>
+<p>Now, I coded the app to ensure that only <code>.png</code> images are uploaded into the database. But remember that Varnish has been configured to parse ANY file (regardless of type) as XML if a <code>&lt;</code> is present within - so that means we find ourselves in an image manipulation scheme.</p>
+<p>Like I said before, the IDAT chunks of a <code>.png</code> defines the actual image. You can also, just, <em>hide</em> bytes in those chunks and smuggle them in whilst still having a valid <code>.png</code>, as long as the critical chunks (defined in the png specification) are present and not mangled in any way. Do you get an actual image? No, probably not. But if you hide in the byte for a <code>&lt;</code> in there, Varnish will think it&rsquo;s XML.</p>
+<p>So great, you got an opportunity to parse XML in an image but what do you do with it?</p>
+<h2 id="edge-side-includes">EDGE-SIDE INCLUDES</h2>
+<p>Before I talk about ESI tags, I&rsquo;ll talk about things that won&rsquo;t work with the primitive we have with images.</p>
+<p>XXE&rsquo;s don&rsquo;t work, because you actually never see the output of your XXE command since you never see the character you add again. This is because the user only has capabilities to add new characters (more on that in a sec), and there&rsquo;s only one user, Vie (me, well, the bot) and there&rsquo;s no other users to log in to or register in.</p>
+<p>So, sure, you can parse XML but you don&rsquo;t see the output. Not a super useful primitive for us if we wanted to actually see stuff. So what next?</p>
+<p>Edge-Side Includes are a cache feature that speeds up dynamic web content retrieval. It&rsquo;s a markup language with XML flavour. According to Wikipedia, ESIs serve the purpose of improving scaling of an application as they&rsquo;re meant to be blazing fast mechanisms to generate content. Varnish can utilize, parse and render ESI tags as well as many other caching solutions.</p>
+<p>Edge-Side Includes also have different features, such as a specific &ldquo;includes&rdquo; directive: inclusion of page fragments, which stipulate to the upstream server where to retrieve that content from.</p>
+<p><em>Where</em> to retrieve that content from. This smells like an SSRF attack.</p>
+<p>Recall a little earlier point B in the overview: &ldquo;B is a special rule that sets any requests to a &ldquo;jjk_db&rdquo; to the database endpoint instead of the app&rsquo;s, as the vcl defines the upstream server of Varnish as the app&rsquo;s&rdquo;. If you do a little debugging while working through the challenge, you will observe that an ESI tag with the inclusion directive to a specified website will simply make a request to that website, and put in the host header the value of that server. This plays really nicely with the custom rule observed in the <code>default.vcl</code> configuration, meaning that we can SSRF the database endpoint through an ESI tag processed by Varnish. Or, more specifically, we can SSRF the database endpoint through an ESI tag embedded in the IDAT chunks of a <code>.png</code> image that is processed by Varnish with the loose XML parsing feature explicitly enabled.</p>
+<p>We&rsquo;ve gone through a lot. The exploit path is now clear: Create images programmatically such that you embed your graphql filter payload in the images you make, then upload them into the database and request for that content again to trigger Varnish and the ESI parsing. Do this in a loop, updating your filter with each correctly-guessed character in the flag. This is all well and good, but we still have a few details to iron out.</p>
+<h2 id="csrf-the-bot">CSRF THE BOT</h2>
+<p>The bot, Vie/me, logs in and then navigates to a URL. It can also be observed that the bot&rsquo;s cookies are not protected from CSRF attacks. Combining our knowledge of our exploit above, the &ldquo;upload&rdquo; part is not actually done by us, but done by the bot that is CSRF&rsquo;ed by us. Great, sounds good. One problem though - When the bot gets the redirect to the image after uploading a new character, that image will contain the results of the filter that has our flag oracle. <em>We still can&rsquo;t see that, though.</em> The bot is redirected regardless of a valid/invalid image, so is there actually no oracle to be used?</p>
+<p>Let&rsquo;s talk a little bit about this oracle. So, no, you will never see the output of that image, when parsed by Varnish. Your next best thing is to go the XS-Leaks route. A redirect happens when the image is uploaded, but it can be valid/invalid. What can make a <code>.png</code> image invalid? Lots of things, but the one thing we can do easily is mangling the IDAT chunks and creating an image with a size disagreeable with the metadata. When that happens, the image refuses to load, naturally. Now, we can do that pretty easily with ESI tags.</p>
+<p>Recall that ESI tags are used to help scaling by rendering generated content when assembling webpages. An ESI tag with the inclusion directive will render the result of wherever that inclusion directive went into the file it&rsquo;s in. So, say that you have a succesfull graphql filter result, from correctly guessing a character in the flag. The length of that valid result will be longer than the length of a result of an invalid guess in the filter. You can additionally pad the length further by requesting for other fields to reflected in graphql, so you get an extra long response. This response gets rendered in the image, in place of where the ESI tag was. The extra bytes that get filled in can then mangle and warp the size of the image, making it invalid, and it therefore won&rsquo;t load. On the flip side, an incorrect guess yields a shorter result, so not that long of a response that is rendered where the ESI tag was in the image, and potentially not mangling the image size as much.</p>
+<p>That&rsquo;s our primitive. We can now create a valid/invalid images and detect if the load was succesful, giving us a reliable and stable XS-Leak.</p>
+<h2 id="service-workers">SERVICE WORKERS</h2>
+<p>We now need a way to programmatically make the admin bot upload characters with an image primitive, then detect the result of that image load. We can do this with Service Workers.</p>
+<p>Without going into detail, Service Workers are a modern web API that really improve the offline experience of webpages, but in my challenge they&rsquo;re used to intercept requests.</p>
+<p>We use SWs here to trigger a POST request instead of a GET request. Why?</p>
+<p>Our payload is an image, and we are detecting if whether or not it loaded or error&rsquo;ed out. Since only the admin visiting our site sees the actual image or not, we need to detect the loading using scripting to detect an <code>onload</code> or <code>onerror</code> event when an <code>&lt;img src=&quot;UPLOAD ENDPOINT&quot;&gt;</code> loads. But <code>img</code> tags are only ever generic GET requests, so you must use a registered SW to intercept that request and convert it into a POST to actually upload your image. When the redirect occurs, your <code>&lt;img&gt;</code> source will either load or not load.</p>
+<h2 id="altogether-now">ALTOGETHER NOW</h2>
+<p>Create a script to programmatically embed ESI tags which reach the db endpoint with the graphql filter in the query parameters into the IDAT chunks of an image. Make the admin bot navigate to your site where it hosts that script and loads an <code>&lt;img src=&quot;UPLOAD ENDPOINT&quot;&gt;</code> where a registered SW will intercept it into a POST request and upload your ESI&rsquo;d image. When the redirect occurs, observe if whether or not your <code>&lt;img&gt;</code> tag succesfully loaded or error&rsquo;ed to determine if the flag guess you made was correct. Repeat this process until you get a flag. <a href="https://github.com/ubcctf/maple-ctf-2023-public/tree/main/web/jujutsu-kaisen-2/solve">Full source of solve is in here</a>. Special thanks to Ming!</p>
+<p>I made this challenge with the intention of it being solved in a full day, to a full day and a half. Of course, due to some issues such as the jjk_db endpoint being public-facing which was not what I wanted, a few unintended solutions existed. Such is life, but i hope that the intended solution is interesting enough to the readers here.</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://jamvie.net/tags/xs-leak/">xs-leak</a></span>
+        <span class="tag"><a href="https://jamvie.net/tags/writeups/">writeups</a></span>
+        <span class="tag"><a href="https://jamvie.net/tags/esi/">esi</a></span>
+        <span class="tag"><a href="https://jamvie.net/tags/web/">web</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        2475 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2023-10-10 20:53 &#43;0900
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://jamvie.net/posts/2023/08/defcon-31-retrospective/">
+                    <span class="button__text">DEFCON 31: Retrospective</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2023</span>
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.cf7fb2a9e24608a783e05e4472da2fdf008293289de1ad88d1cba5c143e7e414496dd33b6a228e92f8461ce0c8cbad3c9f9847e73e46dfbce0463393ddd1733a.js" integrity="sha512-z3&#43;yqeJGCKeD4F5Ectov3wCCkyid4a2I0culwUPn5BRJbdM7aiKOkvhGHODIy608n5hH5z5G37zgRjOT3dFzOg=="></script>
+
+
+
+    </body>
+</html>

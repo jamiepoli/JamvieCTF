@@ -1,6 +1,6 @@
 ---
 title: "MAPLECTF 2023: JUJUTSU KAISEN"
-date: 2023-10-11T19:53:16+08:00
+date: 2023-10-10T19:53:16+08:00
 draft: false
 toc: true
 images:

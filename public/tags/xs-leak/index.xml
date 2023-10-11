@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Tue, 21 Feb 2023 15:25:54 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/xs-leak/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Oct 2023 19:53:16 +0800</lastBuildDate><atom:link href="https://jamvie.net/tags/xs-leak/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MAPLECTF 2023: JUJUTSU KAISEN</title>
+      <link>https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/</link>
+      <pubDate>Tue, 10 Oct 2023 19:53:16 +0800</pubDate>
+      
+      <guid>https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/</guid>
+      <description>MapleCTF&amp;rsquo;s 2nd annual CTF was held at the same time as Hackceler8 weekend, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&amp;rsquo;t reccommend.
+This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen.</description>
+    </item>
+    
     <item>
       <title>PBCTF 2023 : JAZZY x VIE CHALS</title>
       <link>https://jamvie.net/posts/2023/02/pbctf-2023-jazzy-x-vie-chals/</link>
