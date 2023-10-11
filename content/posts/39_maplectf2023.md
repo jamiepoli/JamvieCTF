@@ -15,7 +15,7 @@ MapleCTF's 2nd annual CTF was held at the same time as Hackceler8 preparation we
 
 This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen. The first 2 I won't detail writeups as they're beginner-friendly and there already exist plenty of writeups for them. The latter one I will detail an author writeup for. 
 
-JJK is my first soiree into some sort of full client-side web challenge. I'm really not a client-side person so I had to do some self-education to make sure I really understood these topics before I tested them out in this challenge. I would like to thank Ming/Disna for helping test the challenge and making the solve for it.
+JJK is my first soiree into some sort of full client-side web challenge. I'm really not a client-side person so I had to do some self-education to make sure I really understood these topics before I tested them out in this challenge. I would like to thank Ming/Disna for helping test the challenge and making the solve for it, and to my partner for their knowledge and wisdom that helped me make it.
 
 This writeup assumes knowledge of client-side attacks and certain specifications of web APIs. I don't go into detail with some of the topics here outside of the direct solve, you'll need to do some extra reading if you don't have that context. 
 
