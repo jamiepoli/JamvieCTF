@@ -11,7 +11,7 @@ tags:
   - web
 ---
 
-MapleCTF's 2nd annual CTF was held at the same time as Hackceler8 weekend, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which _I don't reccommend_. 
+MapleCTF's 2nd annual CTF was held at the same time as Hackceler8 preparation week, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which _I don't recommend_. 
 
 This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen. The first 2 I won't detail writeups as they're beginner-friendly and there already exist plenty of writeups for them. The latter one I will detail an author writeup for. 
 
