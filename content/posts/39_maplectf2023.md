@@ -20,7 +20,7 @@ JJK is my first soiree into some sort of full client-side web challenge. I'm rea
 This writeup assumes knowledge of client-side attacks and certain specifications of web APIs. I don't go into detail with some of the topics here outside of the direct solve, you'll need to do some extra reading if you don't have that context. 
 
 ## TL;DR
-POST-based img-tag XSSI -> ESI injection -> img-creation primitive oracle -> xs-leak 
+POST-based img-tag XSSI -> ESI injection -> img-creation primitive oracle -> XS-leak 
 
 The main point of this challenge was using a graphQL regex filter to force an oracle out of pictures with ESI tags embedded in them.
 

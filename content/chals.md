@@ -26,7 +26,7 @@ I've been writing challenges since 2022, which is not a long time, but all of my
 * [Veggie Soda](https://github.com/google/google-ctf/tree/master/2023/web-vegsoda)
     * CSRF bypass to TypeScript type-confusion deserialization, causing pop chain-esque effects to pop XSS
 
-## HTB BUSINESS CTF: THE GREAT ESCAPE
+## HTB 
 
 * [Redwave](https://www.hackthebox.com/events/htb-business-ctf-2023)
     * Golang -> Ruby JSON parsing differential + SSRF bypass with header parsing differential + Ruby deserialization RCE
