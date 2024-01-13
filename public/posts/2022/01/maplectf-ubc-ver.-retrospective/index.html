@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Vie ">
+<meta name="description" content="Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&amp;rsquo;s first CTF to hit the scene.
+For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels." />
+<meta name="keywords" content=", untagged" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+<link rel="manifest" href="https://jamvie.net/site.webmanifest">
+<link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+
+
+    <title>
+        
+            MapleCTF UBC ver. Retrospective :: VIE 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.535bae1ccfa4f49e2cd0c8cecdece0708a1ec5b561a08b8f0f6ea9254d639b2c.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="MapleCTF UBC ver. Retrospective">
+<meta itemprop="description" content="Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&rsquo;s first CTF to hit the scene.
+For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels."><meta itemprop="datePublished" content="2022-01-30T22:00:18-08:00" />
+<meta itemprop="dateModified" content="2022-01-30T22:00:18-08:00" />
+<meta itemprop="wordCount" content="2954"><meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png"/>
+<meta itemprop="keywords" content="untagged," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png"/>
+
+<meta name="twitter:title" content="MapleCTF UBC ver. Retrospective"/>
+<meta name="twitter:description" content="Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&rsquo;s first CTF to hit the scene.
+For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels."/>
+
+
+
+
+
+    <meta property="article:section" content="retrospectives" />
+
+
+
+    <meta property="article:published_time" content="2022-01-30 22:00:18 -0800 -0800" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#a4312b;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/chals/">CTF Chals</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li><li><a href="https://jamvie.net/tags/">Tags</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        14 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/">MapleCTF UBC ver. Retrospective</a>
+      </h1>
+
+      
+
+      
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-ctf-in-general">The CTF in general</a>
+      <ul>
+        <li><a href="#challenge-difficulty">Challenge difficulty</a></li>
+        <li><a href="#teams">Teams</a></li>
+        <li><a href="#organization-of-the-event">Organization of the event</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-business-side-of-things">The Business Side of Things</a>
+      <ul>
+        <li><a href="#you-just-activated-my-project-manager-card">You just activated my Project Manager card</a></li>
+      </ul>
+    </li>
+    <li><a href="#infrastructure">Infrastructure</a>
+      <ul>
+        <li><a href="#no-i-dont-know-what-k8s-is-and-at-this-point-im-too-scared-to-ask">No I don&rsquo;t know what k8s is and at this point I&rsquo;m too scared to ask</a></li>
+        <li><a href="#aws-ec2-very-cool">AWS EC2, very cool</a></li>
+      </ul>
+    </li>
+    <li><a href="#challenge-design">Challenge design</a>
+      <ul>
+        <li><a href="#web-bacon">Web Bacon</a></li>
+        <li><a href="#misc-bacon">Misc Bacon</a></li>
+      </ul>
+    </li>
+    <li><a href="#lessons-learned">Lessons Learned</a>
+      <ul>
+        <li><a href="#stats">Stats</a></li>
+      </ul>
+    </li>
+    <li><a href="#wrapping-it-up">Wrapping it up</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
+
+      
+
+      <div class="post-content">
+        <p>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&rsquo;s first CTF to hit the scene.</p>
+<p>For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels.</p>
+<h2 id="the-ctf-in-general">The CTF in general</h2>
+<p>The nature of the audience dictated a few design choices for the CTF as a whole:</p>
+<h3 id="challenge-difficulty">Challenge difficulty</h3>
+<p>As mentioned earlier, the UBC version of MapleCTF was projected to be a beginner-friendly event. The main reasoning behind this was to make this CTF an entrypoint for UBC people hesitant to join based on percieved skill level. We (Maple Bacon) were hoping to convince people to get into cybersecurity more. We tried to make sure that our challenges all had some logical way of solving them, which didn&rsquo;t take too much technical effort - googling was encouraged, and we hoped that people didn&rsquo;t feel like they needed to know everything to succeed in this event.</p>
+<p>At the same time, we still wanted to be creative and create unique challenges which were difficult compared to our accessible ones. While many challenges and ideas were cut, we managed to figure out unique ways to engineer different problems and vulnerable programs.</p>
+<h3 id="teams">Teams</h3>
+<p>Because this was mainly an introductory event with a sprinkling of advanced problems, we needed a way to gently guide beginners into the event past completing all the accessible challenges. Our idea was the notion of &ldquo;superteams&rdquo; - 2 larger mega parties that a team of people would affiliate under, and which their points would be aggregated to the mega party&rsquo;s point total. This would, hopefully, convince even newcomers to try and hack their way through as many problems as they can, and still feel as though they had made a dent on the event; seeing their points added to a super team&rsquo;s total. We also figured this could allow teams within the same mega party to collaborate with each other and share tips and tricks. This was a success, we saw many teams under the same party give out general hints that helped newcomers learn something new, tackling other problems past what they felt comfortable with.</p>
+<p>The mega-party idea will probably not carry over to the international version, since we aren&rsquo;t as concerned with being beginner-friendly for it. However, should we run another UBC version, we&rsquo;ll likely flesh this idea out further and see what other new things we can innovate with it.</p>
+<h3 id="organization-of-the-event">Organization of the event</h3>
+<h4 id="scoring">Scoring</h4>
+<p>Scoring was static and the reasoning for that was to not confuse newcomers on their first CTF. We lost alot of granularity with determining challenge difficulty (more on that later), but we figured that having static scores were easier for us to seperate which challenges were &ldquo;beginner&rdquo; and which weren&rsquo;t.</p>
+<p>There are limitations to this - the first one, as mentioned before, was the static scoring made quantifying challenge difficulty harder than it should be. I thought one of my challenges was really hard, until I saw that it had a high amount of solves, roughly equal to a few easy-intermediate challenges around. This skewed scoring - I had 2 challenges both worth 400 points, but one had 10 solves while the other had 2.</p>
+<p>Another limitation was perception. Perhaps a challenge wasn&rsquo;t actually as hard as it first comes off - but no one bothered with it since it was stacked at a specific point value. In my experience, I rarely look at point value anymore and concern myself with total amount of solves - but this is based on me trying out a few CTFs and learning that solve count is more accurate than point value (which is a plus for dynamic scoring). Newcomers will not have this same perception right away when looking at a challenge.</p>
+<h4 id="discord">Discord</h4>
+<p>We used discord as the main point of communication between players and organizers. We set teams up with a private team channel so that they could freely discuss their answers among their teammates and @ one of the organizers in there without fear of leaking solutions. This was a bit of overhead for us to deal with as we found that we had hundreds of teams joining in (so hundreds of team channels to sift through), but the overall experience of the private team channels seemed to be satisfactory and we may consider refining the idea should MapleCTF UBC happen again.</p>
+<h4 id="hints">Hints</h4>
+<p>Any challenge marked as &ldquo;beginner&rdquo; players were allowed to ask us for hints on. We had 2 specific groups of challenges: the ones you could ask for hints for, and the ones you couldn&rsquo;t. Hint giving was allowed for this event, again due to the nature of this CTF, and we saw many people utilize it to their advantage. We set a hard boundary and refused to provide any hints for any challenges which didn&rsquo;t possess the &ldquo;beginner&rdquo; tag.</p>
+<p>Even though we did our best to provide accessible problems, we still knew people wouldn&rsquo;t start the CTF on the exact same baseline. Hint giving was another solution to remedy that - we were open on gently guiding players to the solution for certain challenges. Obviously, we also didn&rsquo;t want this mechanic to be abused to the point where we would walk people through the solution holding their hand, so we still exercised restraint in providing help.</p>
+<p>I personally believe that the mechanic worked out - people did ask for help but they definitely solved challenges on their own. We simply saw the hints as a gentle nudge in the right direction for them.</p>
+<p>Suffice it to say, we obviously won&rsquo;t be upholding this hint giving policy for the international version.</p>
+<h2 id="the-business-side-of-things">The Business Side of Things</h2>
+<p>MapleCTF UBC had no chance of happening if it wasn&rsquo;t for the company sponsors, <a href="https://www.arista.com/en/">Arista Networks</a> and <a href="https://www.teck.com/">Teck Resources</a>.</p>
+<p>In order to synergize with the needs of the company, we offered our sponsors a chance to collaborate with us on releasing a challenge in MapleCTF which catered to the specific needs or tech stack of their company. We additionally gave the company representatives the ability to discuss themselves and answer any questions - we were able to treat the CTF as a networking event for potential candidates and the company sponsors, allowing both Arista and Teck more benefits from sponsoring us.</p>
+<h3 id="you-just-activated-my-project-manager-card">You just activated my Project Manager card</h3>
+<p>When it came down to brass tacks I decided to step to the plate to coordinate the event at a macro level. My expertise in web-based exploits basically guaranteed that I would also have a large role in creating the web problems, so doing that <em>while</em> also managing the event as a whole was such a task that I didn&rsquo;t think I could complete.</p>
+<p>Keep in mind I still had work and school to do alongside planning - observing all of these working parts come together in unison was rewarding, but it took an enormous amount of my attention. For the later months of 2021 I became busy with challenge design, company sponsor interfacing, and other administrative overhead I didn&rsquo;t expect. Some things that I learned as an event manager:</p>
+<h4 id="youll-get-into-the-habit-of-chasing-people-around">You&rsquo;ll get into the habit of chasing people around</h4>
+<p>Thankfully I have a very responsive team of capable people working alongside me on the CTF, so it wasn&rsquo;t a huge issue to ask people every now and then to do specific tasks.</p>
+<p>But I still had to chase a few people down and ask them to fulfill whatever role they had. Most small spats and issues were resolved quickly and without conflict, although there was still a bit of overhead that came from making sure people did what they were assigned.</p>
+<h4 id="networking">Networking</h4>
+<p>We collaborated with a few executive members from the UBC CSSS, due to the fact that they had a considerable reach over the technical community in our campus. We also reached out to other clubs that we felt would be interested in this event - our ACM/ICPC competitive programming club, for example, is a very strong team with impressive backgrounds in math and algorithms (<a href="https://www.cs.ubc.ca/news/2019/04/ubc-team-ranked-41st-world-acm-international-collegiate-programming-contest">they&rsquo;re also very well known in their respective discipline</a>). We advertised with them and also reached out to <a href="https://www.nwhacks.io/">nwHacks</a>, Western Canada&rsquo;s largest hackathon, for potential players there. Thankfully, UBC has a thriving technical scene and we took advantage of that for this event.</p>
+<h4 id="ya-like-emails">Ya like emails?</h4>
+<p>I essentially found myself being the main point of contact for many things regarding the event. I was interfacing with companies, checking in with the challenge authors for up-to-date information on the problems, and also reaching out to the infra team to visualize a timeline for when the services should be up and running. Being a very type A person made things a bit easier to manage as I had a system of time management and was able to incorporate these different tasks and front-facing meetings into my schedule seamlessly. But organization aside, I found that I soon became the person to talk to for anything MapleCTF-related: questions about the challenges, workshops, administrative discussions, company meetings, etc etc. Having these different roles meant I was never truly &ldquo;off&rdquo; for MapleCTF: constantly working on and making sure all systems were ok in every department.</p>
+<h4 id="scope-creep">Scope creep</h4>
+<p>This was our first CTF so I was expecting some of our more novel ideas to fall short come the time of the event. At least from my end, plenty of challenge ideas that I had were scrapped for numerous reasons (I didn&rsquo;t have enough time, the exploit seemed infeasible for the difficulty scope of the event, I just didn&rsquo;t like the challenge lol, etc etc). There were also several ideas or concepts that we incroporated into the event that were simplified for the sake of <a href="https://en.wikipedia.org/wiki/KISS_principle">KISS</a>. We really did alot for our first CTF, and none of us wanted more work on top of our already stacked schedules.</p>
+<h2 id="infrastructure">Infrastructure</h2>
+<p>Our infrastructure utilized AWS, kubernetes, github actions, CTFd and grafana.</p>
+<h3 id="no-i-dont-know-what-k8s-is-and-at-this-point-im-too-scared-to-ask">No I don&rsquo;t know what k8s is and at this point I&rsquo;m too scared to ask</h3>
+<p>Utilizing k8s made continuous container deployment easy. The additional k8s kops tool when combined with our AWS infrastructure simplified alot of stuff for us - making challenge deployment quick and easy and also giving us the opportunity to quickly roll out patches or restart deployment in seconds. Our infra guy created a highly scalable solution which could be added to if needed. Thankfully, not too many spats happened throughout the competition so we didn&rsquo;t have to worry too much about the whole thing going down.</p>
+<h3 id="aws-ec2-very-cool">AWS EC2, very cool</h3>
+<p>We used mid-size AWS EC2 vms in order to host our challenges. We had a running total of 56 challenges, with about 40 of them requiring containerizing on our infra. Thankfully, we had no issues with dockerizing our challenges and it was the easiest container service to get into.</p>
+<p>Our vms were split up by category: rev/pwn, web, crypto. We decided to categorize the vms this way since it made the most sense to us, and allowed us to scale the vms depending on the needs of the category. Web, for example, were simplistic in nature and didn&rsquo;t really need a hefty amount of compute for. This could change come the international version, but overall we allowed ourselves to be generous in this category but found that we didn&rsquo;t necessarily need to be.</p>
+<h2 id="challenge-design">Challenge design</h2>
+<p>Short writeups/solutions to my web problems can be found <a href="https://github.com/ubcctf/maple-ctf-ubc-2022/tree/master/web">here</a>.</p>
+<h3 id="web-bacon">Web Bacon</h3>
+<p>It was a bit hard to create a series of ramp-up challenges for web since the sorts of things you can do in this field were broad. I decided to at least create a few challenges which would logically follow after one another based on a specific exploit: XSS, and that seemed to be succesful. The largest issue I had with my challenges was a matter of understanding if certain challenges were actually easy or not - a specific problem that I envisioned, &ldquo;Poem Me&rdquo;, had far fewer solves than anticipated. While I had people test the challenges out before they made it into production, there was still an inherent bias that the QA had because they at least had seen a couple CTFs beforehand. They had a frame of reference - but how did my challenge look to those without one?</p>
+<p>I made alot of design choices to try and simplify the web problems to a level where I felt people could hack at them, have fun, and gain something out of the experience. I knew that engineering difficulty was already a complex thing to do, and doing something like forcing a player to <em>guess</em> what the vulnerability was for a challenge was definitely not my intended strategy. In fact, I had hoped that guesswork would be kept to a minimum when it came to challenge-making.</p>
+<p>I truly believe that in the real world, there is an amount of intuition and inference that you would need to make which may or may not completely follow from the trains of thought that a CTF would lead you down - in some cases, I feel it&rsquo;s inevitable. However, I didn&rsquo;t want to really teach people how to <em>guess</em> - I wanted to teach people how to correctly audit a security bug and showcase their skills in exploiting it. I felt as though that there were 2 different lessons one could teach and I wasn&rsquo;t all that concerned with teaching the former.</p>
+<p>In some cases, I tried to make things obvious or nudge players towards the solution through certain things (comments in code, using really old versions of libraries, etc etc). However, I felt as though some of my mid-level challenges were not truly intermediate in percieved difficulty.</p>
+<p>Valentina, for example, could be solved by looking at the library version of one of its packages, and formulating an exploit from there. But this was a novel approach for some, accounting for the low solves in the challenge.</p>
+<p>Will this be an issue for the international version? I&rsquo;m not sure. I will have more freedom to exercise my creativity over the types of challenges I&rsquo;ll make - which could mean more difficult challenges, but perhaps the main issue with difficulty just came down to the scoring. Due to how we made scoring static as to simplify the meta of the CTF for newcomers, it meant I had to just hope that my guess at the score value was equally matched with the subjective difficulty of the challenge I made. I imagine that with dynamic scoring, much of the granularity involved with challenge difficulty will sort itself out.</p>
+<h3 id="misc-bacon">Misc Bacon</h3>
+<p>I created 3 jail challenges based on Python. Lesson here? Jails are hard to make - in the sense that the number of unintended solutions that could come up is <strong>astounding</strong>. The jails were the challenges that had multiple flavours of solutions to them, contributing to a higher than normal solve count, and skewing the score values. Pyjail 2, for example, was worth the same amount of points as Valentina 1, but Valentina had about 30% of the solve numbers in Pyjail 2.</p>
+<p>Admittedly I was somewhat expecting a few unintended solutions but my mistake was in assuming that not many people would get creative - many people did, in fact, get <strong>very creative</strong> and found a bunch of different ways to bypass the blacklists in my jail problems. I&rsquo;m not upset at any one of them - in fact, the novel solutions I saw some people come up with were truly unique and incredible. This was, however, a point against me as I wasn&rsquo;t fully expecting the different solutions.</p>
+<p>A few people did mention to me that they liked the pyjail problems, so I think next time I do a jail problem I&rsquo;ll score it lower (or dynamically).</p>
+<h2 id="lessons-learned">Lessons Learned</h2>
+<p>While I still believe that the justification for a static scoring system was valid, I also believe that dynamic scoring is far easier to deal with and helps to avoid situations where I overestimate and underestimate the difficulty of my challenges - both situations which happened in MapleCTF. While I managed to avoid the misjudgement for all my challenges (only 1 seemed to be easier than I thought, and a different 1 seemed harder than I thought), I&rsquo;d like to avoid any situations where the scores could be skewed based on point values of challenges completed. For that, I believe that dynamic scoring would be the way to go to remedy this.</p>
+<p>Additionally, it helps to be more generous in the distribution of tasks. Early on I had adopted much of the responsibilities myself and while I won&rsquo;t deny the small part of me that likes the thrill of completing every task on her own, I also won&rsquo;t deny the tremendous overhead I experienced when I decided to put more on my plate than I could finish.</p>
+<h3 id="stats">Stats</h3>
+<p>Our score distribution was pretty much skewed to the left, as we somewhat expected:</p>
+
+    <img src="https://jamvie.net/images/MapleUBC_ScoreDist.png"  alt="score distribution"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Most people solved a few of the beginner challenges and decided to stop there.</p>
+<p>When it came to the individual challenges:</p>
+
+    <img src="https://jamvie.net/images/MapleUBC_SolvePercent.png"  alt="solve percentage"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Our beginner challenges all had solve counts close together - our harder challenges only had 1-3 solves.</p>
+<h2 id="wrapping-it-up">Wrapping it up</h2>
+<p>MapleCTF UBC was a huge undertaking that I definitely couldn&rsquo;t have done without my team. It was a massively rewarding event which helped developed my own skills as both a CTF player and software engineer, and I hope to utilize these skills with the lessons learned to create a great international version that all can hack away and enjoy.</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://jamvie.net/tags/untagged/">untagged</a></span>
+        
+    </p>
+
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://jamvie.net/categories/retrospectives/">retrospectives</a></span>
+        
+    </p>
+
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        2954 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2022-01-31 01:00 -0500
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">B01lers CTF 2022: hacker/place</span>
+                </a>
+            </span>
+            
+
+            
+            <span class="button next">
+                <a href="https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/">
+                    <span class="button__text">ASIS Quals 2021: Lovely Nonce</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2024</span>
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.cf7fb2a9e24608a783e05e4472da2fdf008293289de1ad88d1cba5c143e7e414496dd33b6a228e92f8461ce0c8cbad3c9f9847e73e46dfbce0463393ddd1733a.js" integrity="sha512-z3&#43;yqeJGCKeD4F5Ectov3wCCkyid4a2I0culwUPn5BRJbdM7aiKOkvhGHODIy608n5hH5z5G37zgRjOT3dFzOg=="></script>
+
+
+
+    </body>
+</html>

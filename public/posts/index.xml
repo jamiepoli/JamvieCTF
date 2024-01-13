@@ -6,8 +6,49 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-        <lastBuildDate>Tue, 10 Oct 2023 19:53:16 +0800</lastBuildDate>
+        <lastBuildDate>Sat, 06 Jan 2024 22:23:05 -0500</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>A case for documentation</title>
+            <link>https://jamvie.net/posts/2024/01/a-case-for-documentation/</link>
+            <pubDate>Sat, 06 Jan 2024 22:23:05 -0500</pubDate>
+            
+            <guid>https://jamvie.net/posts/2024/01/a-case-for-documentation/</guid>
+            <description>I am aware that the main target audience of my tiny blog are CTF players looking for my writeups and other like-minded security researchers exploring topics I like. But my 2024 resolution was to relive and unite my artistic persona that I spent most of my teen years curating, and marrying that to the security career life I live now. Part of my fine arts training involved a good deal of literature.</description>
+            <content type="html"><![CDATA[<p><em>I am aware that the main target audience of my tiny blog are CTF players looking for my writeups and other like-minded security researchers exploring topics I like. But my 2024 resolution was to relive and unite my artistic persona that I spent most of my teen years curating, and marrying that to the security career life I live now. Part of my fine arts training involved a good deal of literature. I wanted to write some random stuff really badly, and this post came out of that desire, I understand it&rsquo;s out of left field especially given the content of my other work here. If people like this I&rsquo;d be happy to intersperse more of this into my usual stuff of writeups and security research.</em></p>
+<h2 id="leaving-behind-a-paper-trail-makes-it-easy-to-backtrack-and-review">Leaving behind a paper trail makes it easy to backtrack and review!</h2>
+<p>When you have documentation in your projects, if you make a mistake - you can easily review what went wrong by referring to the notes you&rsquo;ve made. This makes it easy to backtrack and come up with a solution to fix mistakes if they come, improving developer experience!</p>
+<p>In Canadian grade school, I was a stereotypical art kid and spent a good amount of time during any creative projects in class going <em>all in</em>. There was an artistic project that required us to recreate a scene from a book we were reading, and I happened to doodle some sketches related to the scene I wanted to draw.</p>
+<p>Another kid saw those sketches and complemented me. I said thank you. I asked for permission to go to the bathroom and when I came back, one of those sketches were missing - the kid that complemented me put it into their own work, passing it off as theirs. They were getting compliments about it, about my work, on <em>their project</em>.</p>
+<p><em>how dare they how dare they how dare they how dare they</em>. I spent the next couple hours of that class angrily writing my name onto every sketch that I made. I went to the bathroom again to cry out of frustration.</p>
+<p>Was this what it meant to work hard in the vicinity of others who didn&rsquo;t? Did it matter if you were passionate, if someone thought of you so beneath them that your work was up for grabs? And who would contest them? Who would challenge them? If not for me realizing their blatant attempt to disregard me in my own work, would anyone really notice? I was awkward and quiet. No one would advocate for me. At 9, I had this adorable spiral into an existential crisis of understanding.</p>
+<p><em>I learned about attribution that day in a sad way. Artists, and plenty other people in different disciplines get their work stolen alot more frequently than one would think. There&rsquo;s a soul-crushing and disheartening nature to the sad realization that all the hard work you put in your projects, things you&rsquo;re passionate about, has been taken advantage of. A genuine lack of respect for that effort. I needed to document my ownership of my work. I needed documentation for attribution.</em></p>
+<h2 id="sometimes-the-answer-was-covered-in-something-you-documented-hidden-in-plain-sight">Sometimes the answer was covered in something you documented, hidden in plain-sight!</h2>
+<p>Have you ever answered a question or found a solution to recurring problem, only to come across that problem again and searched frantically for your previous work on it? If you document your projects, it streamlines this process immensely!</p>
+<p>&hellip;</p>
+<p>When I was a kid, I grew up playing videogames. I had a Sony Playstation, the very first generation, and a small CRT that I played on. I played Spyro: Year of The Dragon, extensively. I remember struggling in the tutorial level, when the cheetah character Hunter was teaching you how to hover in order to reach unique areas in the low-poly maps. After grade school would end for the day I would play and eventually figure out how to quickly mash the correct button to hover mid-flight as Spyro, allowing me to progress into the game. I remember being so elated that I drew a doodle of the dragon to celebrate. What I should&rsquo;ve done was, maybe, write down the correct button combo to easily achieve the hover, or something, as whenever I would return to the game I would constantly forget how to perform that mechanic and I&rsquo;d lose game hours over it. I looked over to my drawing. A simple Spyro-lookalike with my name, in big - result of my existential crisis from last situation - scribbled under his wing. I didn&rsquo;t have instructions.</p>
+<p><em>I have a good memory. It has served me well all throughout academia. But I can&rsquo;t remember everything. No one can. Sometimes, for CTF challenges, I&rsquo;ll forget snippets of code and payloads that would work in other scenarios. I needed some sort of repository to remember these snippets for me. If you ever wrote down the cheat codes to GTA San Andreas on a piece of paper beside your console, you will know what I mean. I needed to document my shortcuts. I can&rsquo;t remember them all.</em></p>
+<h2 id="documentation-is-paying-it-forward---other-people-looking-at-your-work-will-be-able-to-pick-it-up-easily-where-you-left-off">Documentation is paying it forward - other people looking at your work will be able to pick it up easily where you left off.</h2>
+<p>This is especially the case for open-source, where projects are a collaborative effort! If you want to ensure the longevity of your projects, it is good to have documentation so others can easily figure out what your project is about, how it works, and can pick up on ta-</p>
+<p>I remember before moving to the States to start my big girl job, staying at my parents house and my mom helping me clean out some of my things. In the basement, my old Playstation One sat in a corner of a wall tangent to the stairs, placed on top of a box. It was still connected to the CRT. I plugged the TV and Playstation onto power, popped open the lid, and saw that the decades old Spyro game was still in the compartment. I closed the disk lid and powered the PS one on. The TV flickered, a brief flash of yellow and blue and red, and the very familiar orange diamond of the Playstation One startup screen appeared. It was glitchy, and faded - the cathode ray tubes were <em>old</em> old, after all - but the logo flickered, and my excited self took the controller in hand. But all it did was flicker - once, twice, then black. I stared at my reflection in the TV, expressionless. Too much time has passed. Either there was an issue with the TV or an issue with the Playstation. I wasn&rsquo;t an expert in either to figure out what went wrong. I placed the controller back on the floor and got up to continue packing.</p>
+<hr>
+<p>&ldquo;Didnt the Spyro games get remade? In 2018?&rdquo; My friend told me, over lunch one day. &ldquo;Yea, but it&rsquo;s not enough.&rdquo; I replied.</p>
+<p>A: &ldquo;How so?&rdquo;</p>
+<p>V: &ldquo;I&rsquo;m not sure how to describe it. It just <em>is</em>.&rdquo;</p>
+<p>A: &ldquo;Appropriately vague.&rdquo;</p>
+<p>V: &ldquo;I know. I just want to play the original game again.&rdquo;</p>
+<p>A: &ldquo;What about emulation?&rdquo;</p>
+<p>V: &ldquo;I&rsquo;ve tried a bunch. None worked super well for me. Idk, maybe I was using them wrong. The instructions and official guides are vague. I need an actual FAQ, or list of instructions, idk, <em>something</em>, some actual documentation.&rdquo;</p>
+<h2 id="documentation-makes-you-a-better-developer">Documentation makes you a better developer.</h2>
+<p>I played in a CTF sometime in April of 2020 where I didn&rsquo;t solve the challenge during the competition. At this point, I was about 4 months into the scene so I was well aware of how things worked and just waited around for a writeup to appear. I waited for a bit, until <em>one</em> - eventually - appeared. Happy, I took a read through it. It was written in Chinese, which wasn&rsquo;t an issue, Google Translate is a thing, and the writeup was <strong>amazing</strong> and <strong>informative</strong> and <strong>incredible</strong> and I didn&rsquo;t get it at all. It assumed pre-requisite knowledge of other contexts before explaining the main point of the bug. Things that were probably really obvious to seasoned CTF players, but a complete fucking alien language to me at that time. The writeup didn&rsquo;t commit a sin. I, plainly, just didn&rsquo;t understand its concepts (Chinese notwithstanding). It frustrated me to no end. I sunk hours, of essentially wasted time, into it. Now that a writeup is available, it&rsquo;s literally <em>too fucking smart for me to get??</em></p>
+<p>I spent the following next couple of days playing with the challenge locally. Relentlessly poking and prodding at it. Adding print statements everywhere. Deleting chunks of code and re-adding them to see what would happen. Copy-pasting documentation of certain areas in the comments so I could refer to it. I solved it days later. I wrote my own writeup for it, a personal one that I haven&rsquo;t shared, that explains the concepts like I&rsquo;m 5. I thank the original author of the first writeup I saw. I created another one to catch me up to speed if I ever forgot the basics again.</p>
+<p>Later, I researched. Blogs of security researchers that I was inspired by, news articles, other writeups of other challenges. I compiled their links. Prettified them and slapped them into my Notion. Created a database of Things. I told myself I would learn faster than what my anxieties were holding against me. I didn&rsquo;t allow myself the opportunity to be confused.</p>
+<p>When I was finished, I played some God of War (2018) to unwind. I noticed that the Spyro remake was on sale in the Playstation store.</p>
+<p>I ended up playing. It was a package of the 3 original Spyro games of the late 90&rsquo;s to early 2000&rsquo;s. I sat down one evening and powered on the Playstation 4. Navigated to the game on the dashboard. I re-learned how to hover.</p>
+<p>This time, I wrote it down.</p>
+]]></content>
+        </item>
         
         <item>
             <title>MAPLECTF 2023: JUJUTSU KAISEN</title>
@@ -19,10 +60,10 @@
 This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen.</description>
             <content type="html"><![CDATA[<p>MapleCTF&rsquo;s 2nd annual CTF was held at the same time as Hackceler8 preparation week, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which <em>I don&rsquo;t recommend</em>.</p>
 <p>This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen. The first 2 I won&rsquo;t detail writeups as they&rsquo;re beginner-friendly and there already exist plenty of writeups for them. The latter one I will detail an author writeup for.</p>
-<p>JJK is my first soiree into some sort of full client-side web challenge. I&rsquo;m really not a client-side person so I had to do some self-education to make sure I really understood these topics before I tested them out in this challenge. I would like to thank Ming/Disna for helping test the challenge and making the solve for it.</p>
+<p>JJK is my first soiree into some sort of full client-side web challenge. I&rsquo;m really not a client-side person so I had to do some self-education to make sure I really understood these topics before I tested them out in this challenge. I would like to thank Ming/Disna for helping test the challenge and making the solve for it, and to my partner for their knowledge and wisdom that helped me make it.</p>
 <p>This writeup assumes knowledge of client-side attacks and certain specifications of web APIs. I don&rsquo;t go into detail with some of the topics here outside of the direct solve, you&rsquo;ll need to do some extra reading if you don&rsquo;t have that context.</p>
 <h2 id="tldr">TL;DR</h2>
-<p>POST-based img-tag XSSI -&gt; ESI injection -&gt; img-creation primitive oracle -&gt; xs-leak</p>
+<p>POST-based img-tag XSSI -&gt; ESI injection -&gt; img-creation primitive oracle -&gt; XS-leak</p>
 <p>The main point of this challenge was using a graphQL regex filter to force an oracle out of pictures with ESI tags embedded in them.</p>
 <h2 id="overview">Overview</h2>
 <p>The app is a private JJK database, featuring some of the characters I like in Gege Akutami&rsquo;s Jujutsu Kaisen. Comments in the src and the initialization of the Dockerfile indicates that a random character in the database will have injected into their &ldquo;notes&rdquo; column the value of the flag. In order to get it, you will need to somehow access that random character&rsquo;s notes column.</p>
@@ -1122,11 +1163,11 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
         </item>
         
         <item>
-            <title>MapleCTF UBC ver. Introspective</title>
-            <link>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-introspective/</link>
+            <title>MapleCTF UBC ver. Retrospective</title>
+            <link>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/</link>
             <pubDate>Sun, 30 Jan 2022 22:00:18 -0800</pubDate>
             
-            <guid>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-introspective/</guid>
+            <guid>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/</guid>
             <description>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&amp;rsquo;s first CTF to hit the scene.
 For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels.</description>
             <content type="html"><![CDATA[<p>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&rsquo;s first CTF to hit the scene.</p>

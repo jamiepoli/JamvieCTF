@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Vie ">
+<meta name="description" content="I am aware that the main target audience of my tiny blog are CTF players looking for my writeups and other like-minded security researchers exploring topics I like. But my 2024 resolution was to relive and unite my artistic persona that I spent most of my teen years curating, and marrying that to the security career life I live now. Part of my fine arts training involved a good deal of literature." />
+<meta name="keywords" content=", untagged" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2024/01/a-case-for-documentation/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+<link rel="manifest" href="https://jamvie.net/site.webmanifest">
+<link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+
+
+    <title>
+        
+            A case for documentation :: VIE 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.535bae1ccfa4f49e2cd0c8cecdece0708a1ec5b561a08b8f0f6ea9254d639b2c.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="A case for documentation">
+<meta itemprop="description" content="I am aware that the main target audience of my tiny blog are CTF players looking for my writeups and other like-minded security researchers exploring topics I like. But my 2024 resolution was to relive and unite my artistic persona that I spent most of my teen years curating, and marrying that to the security career life I live now. Part of my fine arts training involved a good deal of literature."><meta itemprop="datePublished" content="2024-01-06T22:23:05-05:00" />
+<meta itemprop="dateModified" content="2024-01-06T22:23:05-05:00" />
+<meta itemprop="wordCount" content="1648"><meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png"/>
+<meta itemprop="keywords" content="untagged," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png"/>
+
+<meta name="twitter:title" content="A case for documentation"/>
+<meta name="twitter:description" content="I am aware that the main target audience of my tiny blog are CTF players looking for my writeups and other like-minded security researchers exploring topics I like. But my 2024 resolution was to relive and unite my artistic persona that I spent most of my teen years curating, and marrying that to the security career life I live now. Part of my fine arts training involved a good deal of literature."/>
+
+
+
+
+
+    <meta property="article:section" content="creative" />
+
+
+
+    <meta property="article:published_time" content="2024-01-06 22:23:05 -0500 EST" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#a4312b;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/chals/">CTF Chals</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li><li><a href="https://jamvie.net/tags/">Tags</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+        </span>
+    </span>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-176711986-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        8 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://jamvie.net/posts/2024/01/a-case-for-documentation/">A case for documentation</a>
+      </h1>
+
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <p><em>I am aware that the main target audience of my tiny blog are CTF players looking for my writeups and other like-minded security researchers exploring topics I like. But my 2024 resolution was to relive and unite my artistic persona that I spent most of my teen years curating, and marrying that to the security career life I live now. Part of my fine arts training involved a good deal of literature. I wanted to write some random stuff really badly, and this post came out of that desire, I understand it&rsquo;s out of left field especially given the content of my other work here. If people like this I&rsquo;d be happy to intersperse more of this into my usual stuff of writeups and security research.</em></p>
+<h2 id="leaving-behind-a-paper-trail-makes-it-easy-to-backtrack-and-review">Leaving behind a paper trail makes it easy to backtrack and review!</h2>
+<p>When you have documentation in your projects, if you make a mistake - you can easily review what went wrong by referring to the notes you&rsquo;ve made. This makes it easy to backtrack and come up with a solution to fix mistakes if they come, improving developer experience!</p>
+<p>In Canadian grade school, I was a stereotypical art kid and spent a good amount of time during any creative projects in class going <em>all in</em>. There was an artistic project that required us to recreate a scene from a book we were reading, and I happened to doodle some sketches related to the scene I wanted to draw.</p>
+<p>Another kid saw those sketches and complemented me. I said thank you. I asked for permission to go to the bathroom and when I came back, one of those sketches were missing - the kid that complemented me put it into their own work, passing it off as theirs. They were getting compliments about it, about my work, on <em>their project</em>.</p>
+<p><em>how dare they how dare they how dare they how dare they</em>. I spent the next couple hours of that class angrily writing my name onto every sketch that I made. I went to the bathroom again to cry out of frustration.</p>
+<p>Was this what it meant to work hard in the vicinity of others who didn&rsquo;t? Did it matter if you were passionate, if someone thought of you so beneath them that your work was up for grabs? And who would contest them? Who would challenge them? If not for me realizing their blatant attempt to disregard me in my own work, would anyone really notice? I was awkward and quiet. No one would advocate for me. At 9, I had this adorable spiral into an existential crisis of understanding.</p>
+<p><em>I learned about attribution that day in a sad way. Artists, and plenty other people in different disciplines get their work stolen alot more frequently than one would think. There&rsquo;s a soul-crushing and disheartening nature to the sad realization that all the hard work you put in your projects, things you&rsquo;re passionate about, has been taken advantage of. A genuine lack of respect for that effort. I needed to document my ownership of my work. I needed documentation for attribution.</em></p>
+<h2 id="sometimes-the-answer-was-covered-in-something-you-documented-hidden-in-plain-sight">Sometimes the answer was covered in something you documented, hidden in plain-sight!</h2>
+<p>Have you ever answered a question or found a solution to recurring problem, only to come across that problem again and searched frantically for your previous work on it? If you document your projects, it streamlines this process immensely!</p>
+<p>&hellip;</p>
+<p>When I was a kid, I grew up playing videogames. I had a Sony Playstation, the very first generation, and a small CRT that I played on. I played Spyro: Year of The Dragon, extensively. I remember struggling in the tutorial level, when the cheetah character Hunter was teaching you how to hover in order to reach unique areas in the low-poly maps. After grade school would end for the day I would play and eventually figure out how to quickly mash the correct button to hover mid-flight as Spyro, allowing me to progress into the game. I remember being so elated that I drew a doodle of the dragon to celebrate. What I should&rsquo;ve done was, maybe, write down the correct button combo to easily achieve the hover, or something, as whenever I would return to the game I would constantly forget how to perform that mechanic and I&rsquo;d lose game hours over it. I looked over to my drawing. A simple Spyro-lookalike with my name, in big - result of my existential crisis from last situation - scribbled under his wing. I didn&rsquo;t have instructions.</p>
+<p><em>I have a good memory. It has served me well all throughout academia. But I can&rsquo;t remember everything. No one can. Sometimes, for CTF challenges, I&rsquo;ll forget snippets of code and payloads that would work in other scenarios. I needed some sort of repository to remember these snippets for me. If you ever wrote down the cheat codes to GTA San Andreas on a piece of paper beside your console, you will know what I mean. I needed to document my shortcuts. I can&rsquo;t remember them all.</em></p>
+<h2 id="documentation-is-paying-it-forward---other-people-looking-at-your-work-will-be-able-to-pick-it-up-easily-where-you-left-off">Documentation is paying it forward - other people looking at your work will be able to pick it up easily where you left off.</h2>
+<p>This is especially the case for open-source, where projects are a collaborative effort! If you want to ensure the longevity of your projects, it is good to have documentation so others can easily figure out what your project is about, how it works, and can pick up on ta-</p>
+<p>I remember before moving to the States to start my big girl job, staying at my parents house and my mom helping me clean out some of my things. In the basement, my old Playstation One sat in a corner of a wall tangent to the stairs, placed on top of a box. It was still connected to the CRT. I plugged the TV and Playstation onto power, popped open the lid, and saw that the decades old Spyro game was still in the compartment. I closed the disk lid and powered the PS one on. The TV flickered, a brief flash of yellow and blue and red, and the very familiar orange diamond of the Playstation One startup screen appeared. It was glitchy, and faded - the cathode ray tubes were <em>old</em> old, after all - but the logo flickered, and my excited self took the controller in hand. But all it did was flicker - once, twice, then black. I stared at my reflection in the TV, expressionless. Too much time has passed. Either there was an issue with the TV or an issue with the Playstation. I wasn&rsquo;t an expert in either to figure out what went wrong. I placed the controller back on the floor and got up to continue packing.</p>
+<hr>
+<p>&ldquo;Didnt the Spyro games get remade? In 2018?&rdquo; My friend told me, over lunch one day. &ldquo;Yea, but it&rsquo;s not enough.&rdquo; I replied.</p>
+<p>A: &ldquo;How so?&rdquo;</p>
+<p>V: &ldquo;I&rsquo;m not sure how to describe it. It just <em>is</em>.&rdquo;</p>
+<p>A: &ldquo;Appropriately vague.&rdquo;</p>
+<p>V: &ldquo;I know. I just want to play the original game again.&rdquo;</p>
+<p>A: &ldquo;What about emulation?&rdquo;</p>
+<p>V: &ldquo;I&rsquo;ve tried a bunch. None worked super well for me. Idk, maybe I was using them wrong. The instructions and official guides are vague. I need an actual FAQ, or list of instructions, idk, <em>something</em>, some actual documentation.&rdquo;</p>
+<h2 id="documentation-makes-you-a-better-developer">Documentation makes you a better developer.</h2>
+<p>I played in a CTF sometime in April of 2020 where I didn&rsquo;t solve the challenge during the competition. At this point, I was about 4 months into the scene so I was well aware of how things worked and just waited around for a writeup to appear. I waited for a bit, until <em>one</em> - eventually - appeared. Happy, I took a read through it. It was written in Chinese, which wasn&rsquo;t an issue, Google Translate is a thing, and the writeup was <strong>amazing</strong> and <strong>informative</strong> and <strong>incredible</strong> and I didn&rsquo;t get it at all. It assumed pre-requisite knowledge of other contexts before explaining the main point of the bug. Things that were probably really obvious to seasoned CTF players, but a complete fucking alien language to me at that time. The writeup didn&rsquo;t commit a sin. I, plainly, just didn&rsquo;t understand its concepts (Chinese notwithstanding). It frustrated me to no end. I sunk hours, of essentially wasted time, into it. Now that a writeup is available, it&rsquo;s literally <em>too fucking smart for me to get??</em></p>
+<p>I spent the following next couple of days playing with the challenge locally. Relentlessly poking and prodding at it. Adding print statements everywhere. Deleting chunks of code and re-adding them to see what would happen. Copy-pasting documentation of certain areas in the comments so I could refer to it. I solved it days later. I wrote my own writeup for it, a personal one that I haven&rsquo;t shared, that explains the concepts like I&rsquo;m 5. I thank the original author of the first writeup I saw. I created another one to catch me up to speed if I ever forgot the basics again.</p>
+<p>Later, I researched. Blogs of security researchers that I was inspired by, news articles, other writeups of other challenges. I compiled their links. Prettified them and slapped them into my Notion. Created a database of Things. I told myself I would learn faster than what my anxieties were holding against me. I didn&rsquo;t allow myself the opportunity to be confused.</p>
+<p>When I was finished, I played some God of War (2018) to unwind. I noticed that the Spyro remake was on sale in the Playstation store.</p>
+<p>I ended up playing. It was a package of the 3 original Spyro games of the late 90&rsquo;s to early 2000&rsquo;s. I sat down one evening and powered on the Playstation 4. Navigated to the game on the dashboard. I re-learned how to hover.</p>
+<p>This time, I wrote it down.</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://jamvie.net/tags/untagged/">untagged</a></span>
+        
+    </p>
+
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://jamvie.net/categories/creative/">creative</a></span>
+        
+    </p>
+
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        1648 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2024-01-06 22:23 -0500
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/">
+                    <span class="button__text">MAPLECTF 2023: JUJUTSU KAISEN</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2024</span>
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.cf7fb2a9e24608a783e05e4472da2fdf008293289de1ad88d1cba5c143e7e414496dd33b6a228e92f8461ce0c8cbad3c9f9847e73e46dfbce0463393ddd1733a.js" integrity="sha512-z3&#43;yqeJGCKeD4F5Ectov3wCCkyid4a2I0culwUPn5BRJbdM7aiKOkvhGHODIy608n5hH5z5G37zgRjOT3dFzOg=="></script>
+
+
+
+    </body>
+</html>

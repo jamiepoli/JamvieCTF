@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>untagged on VIE</title>
+    <link>https://jamvie.net/tags/untagged/</link>
+    <description>Recent content in untagged on VIE</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
+    <lastBuildDate>Sat, 06 Jan 2024 22:23:05 -0500</lastBuildDate><atom:link href="https://jamvie.net/tags/untagged/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A case for documentation</title>
+      <link>https://jamvie.net/posts/2024/01/a-case-for-documentation/</link>
+      <pubDate>Sat, 06 Jan 2024 22:23:05 -0500</pubDate>
+      
+      <guid>https://jamvie.net/posts/2024/01/a-case-for-documentation/</guid>
+      <description>I am aware that the main target audience of my tiny blog are CTF players looking for my writeups and other like-minded security researchers exploring topics I like. But my 2024 resolution was to relive and unite my artistic persona that I spent most of my teen years curating, and marrying that to the security career life I live now. Part of my fine arts training involved a good deal of literature.</description>
+    </item>
+    
+    <item>
+      <title>DEFCON 31: Retrospective</title>
+      <link>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</link>
+      <pubDate>Thu, 31 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</guid>
+      <description>Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &amp;ldquo;CSAW 2019&amp;rdquo; with UBC&amp;rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.
+To be completely frank, I solved the challenge after googling &amp;ldquo;XML vulnerability&amp;rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag.</description>
+    </item>
+    
+    <item>
+      <title>DEFCON 30: Retrospective</title>
+      <link>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</link>
+      <pubDate>Tue, 16 Aug 2022 13:37:54 -0700</pubDate>
+      
+      <guid>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</guid>
+      <description>Man.
+My team, Maple Bacon, collaborated with CMU&amp;rsquo;s CTF team PPP and Theori.io&amp;rsquo;s CTF team The Duck, forming Maple Mallard Magistrates as a merger to participate in DEF CON finals.
+The Beginning Discussions about the merge had occurred earlier in the year - I triangulate it to a month or so before I found myself in Athens, Greece attending ICC. This is important to mention as I heard many people speculate about the existence of MMM and whether or not it was formed as a response to something.</description>
+    </item>
+    
+    <item>
+      <title>MapleCTF UBC ver. Retrospective</title>
+      <link>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/</link>
+      <pubDate>Sun, 30 Jan 2022 22:00:18 -0800</pubDate>
+      
+      <guid>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/</guid>
+      <description>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&amp;rsquo;s first CTF to hit the scene.
+For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels.</description>
+    </item>
+    
+  </channel>
+</rss>

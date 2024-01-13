@@ -1,7 +1,7 @@
 ---
 title: "A case for documentation"
 date: 2024-01-06T22:23:05-05:00
-draft: true
+draft: false
 toc: false
 images:
 tags:
