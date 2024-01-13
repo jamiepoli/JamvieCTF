@@ -5,10 +5,9 @@ draft: true
 comments: false
 images:
 categories:
-  - miscellaneous
+  - retrospectives
 tags: 
-  - misc
-  - wrapped
+  - untagged
 ---
 
 Wow, everyone's following along on Spotify's year-wrapped idea. ~~Data collection is so neat guys :)~~

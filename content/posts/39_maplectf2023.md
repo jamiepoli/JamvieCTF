@@ -9,6 +9,8 @@ tags:
   - writeups
   - esi
   - web
+categories:
+  - writeups 
 ---
 
 MapleCTF's 2nd annual CTF was held at the same time as Hackceler8 preparation week, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which _I don't recommend_. 

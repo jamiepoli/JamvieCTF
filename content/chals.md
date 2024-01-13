@@ -23,7 +23,7 @@ I've been writing challenges since 2022, which is not a long time, but all of my
 
 ## GOOGLE CTF
 
-* [Veggie Soda](https://github.com/google/google-ctf/tree/master/2023/web-vegsoda)
+* [Veggie Soda](https://github.com/google/google-ctf/tree/master/2023/quals/web-vegsoda)
     * CSRF bypass to TypeScript type-confusion deserialization, causing pop chain-esque effects to pop XSS
 
 ## HTB 

@@ -1,14 +1,14 @@
 ---
-title: "MapleCTF UBC ver. Introspective"
+title: "MapleCTF UBC ver. Retrospective"
 date: 2022-01-30T22:00:18-08:00
 draft: false
 comments: false
 toc: true
 images:
 categories:
-  - miscellaneous
+  - retrospectives
 tags: 
-  - misc
+  - untagged
 ---
 
 Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon's first CTF to hit the scene. 

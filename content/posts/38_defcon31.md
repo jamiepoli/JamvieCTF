@@ -5,7 +5,9 @@ draft: false
 toc: true
 images: ["images/MMM_2023.jpg"]
 tags:
-  - defcon
+  - untagged
+categories:
+  - retrospectives 
 ---
 
 
