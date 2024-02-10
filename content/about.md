@@ -19,6 +19,6 @@ I like:
 * Climbing
 
 I have:
-* Led art direction of Hackceler8 2023
-* Created a bunch of CTF challenges
-* Been on the program comittee of Usenix WOOT 2024
+* Led art direction of [Hackceler8 2023](https://www.youtube.com/watch?v=HFeD4kYcW7A)
+* Created a bunch of [CTF challenges](/chals)
+* Been on the program comittee of [Usenix WOOT 2024](https://www.usenix.org/conference/woot24#organizers)
