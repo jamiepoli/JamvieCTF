@@ -7,7 +7,43 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sat, 06 Jan 2024 22:23:05 -0500</lastBuildDate><atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Jul 2024 10:29:46 -0400</lastBuildDate><atom:link href="https://jamvie.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bun</title>
+      <link>https://jamvie.net/tags/bun/</link>
+      <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
+      
+      <guid>https://jamvie.net/tags/bun/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>prototype-pollution</title>
+      <link>https://jamvie.net/tags/prototype-pollution/</link>
+      <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
+      
+      <guid>https://jamvie.net/tags/prototype-pollution/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://jamvie.net/tags/web/</link>
+      <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
+      
+      <guid>https://jamvie.net/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeups</title>
+      <link>https://jamvie.net/tags/writeups/</link>
+      <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
+      
+      <guid>https://jamvie.net/tags/writeups/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>untagged</title>
       <link>https://jamvie.net/tags/untagged/</link>
@@ -23,24 +59,6 @@
       <pubDate>Tue, 10 Oct 2023 19:53:16 +0800</pubDate>
       
       <guid>https://jamvie.net/tags/esi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>web</title>
-      <link>https://jamvie.net/tags/web/</link>
-      <pubDate>Tue, 10 Oct 2023 19:53:16 +0800</pubDate>
-      
-      <guid>https://jamvie.net/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writeups</title>
-      <link>https://jamvie.net/tags/writeups/</link>
-      <pubDate>Tue, 10 Oct 2023 19:53:16 +0800</pubDate>
-      
-      <guid>https://jamvie.net/tags/writeups/</guid>
       <description></description>
     </item>
     
@@ -77,24 +95,6 @@
       <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
       
       <guid>https://jamvie.net/tags/php/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SSRF</title>
-      <link>https://jamvie.net/tags/ssrf/</link>
-      <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
-      
-      <guid>https://jamvie.net/tags/ssrf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>FTP</title>
-      <link>https://jamvie.net/tags/ftp/</link>
-      <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
-      
-      <guid>https://jamvie.net/tags/ftp/</guid>
       <description></description>
     </item>
     

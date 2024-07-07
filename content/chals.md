@@ -26,6 +26,12 @@ I've been writing challenges since 2022, which is not a long time, but all of my
 * [Veggie Soda](https://github.com/google/google-ctf/tree/master/2023/quals/web-vegsoda)
     * CSRF bypass to TypeScript type-confusion deserialization, causing pop chain-esque effects to pop XSS
 
+* [Grand Prix Heaven](https://github.com/google/google-ctf/tree/master/2024/quals/web-grandprixheaven)
+    *  Loose `[A-z]` regex check to URL-bypass a jpeg image endpoint with XSS data in the EXIF metadata, rendered unto a custom HTML template with parseInt() quirks to bypass csp
+
+* [HEAT](https://github.com/google/google-ctf/tree/master/2024/quals/pwn-heat)
+    *  V8 1day sandbox escape
+
 ## HTB 
 
 * [Redwave](https://www.hackthebox.com/events/htb-business-ctf-2023)
