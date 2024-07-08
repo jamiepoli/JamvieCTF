@@ -1,6 +1,6 @@
 # About Me
 
-{{< image src="/img/viecowboyhat.png" alt="v" position="center" style="border-radius: 8px; max-width: 50%; max-height: 50%;" >}}
+{{< image src="/img/viehaw.png" alt="v" position="center" style="border-radius: 8px; max-width: 40%; max-height: 10400%;" >}}
 
 I am:
 * Vie, pronounced V-ee, V-aye is fine too
