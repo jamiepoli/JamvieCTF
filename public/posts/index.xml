@@ -15,9 +15,8 @@
             <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
             
             <guid>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</guid>
-            <description>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.
-SPECS start.sh The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&amp;rsquo;t restart, and retry again in a perpetual loop.</description>
-            <content type="html"><![CDATA[<p>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &ldquo;Prisoner-Processor&rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.</p>
+            <description>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!</description>
+            <content type="html"><![CDATA[<p>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &ldquo;Prisoner-Processor&rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!</p>
 <h2 id="specs">SPECS</h2>
 <h3 id="startsh">start.sh</h3>
 <p>The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&rsquo;t restart, and retry again in a perpetual loop.</p>
@@ -181,7 +180,7 @@ paths lets you declare how TypeScript should resolve an import in your require/i
 <p>Here are some things that make it different from regular JSON:</p>
 <ol>
 <li>It can support comment syntax like <code>/**/</code> which technically shouldn&rsquo;t be allowed in JSON formats.</li>
-<li>It allows <code>//</code> to be used as a key. I think??</li>
+<li>Yaml allows <code>//</code> to be used as a key and naturally, Bun will ignore whatever comes after it</li>
 <li>You can give it a valid JSON structure, then invalid JSON, and the compiler won&rsquo;t complain.</li>
 </ol>
 <p>Anyway, the following &ldquo;JSON&rdquo; is a valid, readable and parsable <code>tsconfig.json</code>.</p>

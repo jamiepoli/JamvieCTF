@@ -14,8 +14,7 @@
       <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
       
       <guid>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</guid>
-      <description>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.
-SPECS start.sh The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&amp;rsquo;t restart, and retry again in a perpetual loop.</description>
+      <description>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!</description>
     </item>
     
   </channel>

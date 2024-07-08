@@ -5,8 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Vie ">
-<meta name="description" content="DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.
-SPECS start.sh The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&amp;rsquo;t restart, and retry again in a perpetual loop." />
+<meta name="description" content="DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!" />
 <meta name="keywords" content=", writeups, web, prototype-pollution, bun" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#0c0c0d" />
@@ -46,17 +45,15 @@ SPECS start.sh The start.sh script is more sus than other conventional start.sh 
 
 
 <meta itemprop="name" content="DUCTF 2024: Prisoner Processor">
-<meta itemprop="description" content="DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &ldquo;Prisoner-Processor&rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.
-SPECS start.sh The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&rsquo;t restart, and retry again in a perpetual loop."><meta itemprop="datePublished" content="2024-07-07T10:29:46-04:00" />
+<meta itemprop="description" content="DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &ldquo;Prisoner-Processor&rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!"><meta itemprop="datePublished" content="2024-07-07T10:29:46-04:00" />
 <meta itemprop="dateModified" content="2024-07-07T10:29:46-04:00" />
-<meta itemprop="wordCount" content="2229"><meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png"/>
+<meta itemprop="wordCount" content="2263"><meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png"/>
 <meta itemprop="keywords" content="writeups,web,prototype-pollution,bun," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png"/>
 
 <meta name="twitter:title" content="DUCTF 2024: Prisoner Processor"/>
-<meta name="twitter:description" content="DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &ldquo;Prisoner-Processor&rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.
-SPECS start.sh The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&rsquo;t restart, and retry again in a perpetual loop."/>
+<meta name="twitter:description" content="DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &ldquo;Prisoner-Processor&rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!"/>
 
 
 
@@ -184,7 +181,7 @@ if (!doNotTrack) {
       
 
       <div class="post-content">
-        <p>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &ldquo;Prisoner-Processor&rdquo;, the hardest web challenge available. My teammate Angus and I solved this together.</p>
+        <p>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &ldquo;Prisoner-Processor&rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!</p>
 <h2 id="specs">SPECS</h2>
 <h3 id="startsh">start.sh</h3>
 <p>The start.sh script is more sus than other conventional start.sh scripts as it will attempt to restart the server 5 times, then copy a backup to the app folder if it couldn&rsquo;t restart, and retry again in a perpetual loop.</p>
@@ -348,7 +345,7 @@ paths lets you declare how TypeScript should resolve an import in your require/i
 <p>Here are some things that make it different from regular JSON:</p>
 <ol>
 <li>It can support comment syntax like <code>/**/</code> which technically shouldn&rsquo;t be allowed in JSON formats.</li>
-<li>It allows <code>//</code> to be used as a key. I think??</li>
+<li>Yaml allows <code>//</code> to be used as a key and naturally, Bun will ignore whatever comes after it</li>
 <li>You can give it a valid JSON structure, then invalid JSON, and the compiler won&rsquo;t complain.</li>
 </ol>
 <p>Anyway, the following &ldquo;JSON&rdquo; is a valid, readable and parsable <code>tsconfig.json</code>.</p>
@@ -497,7 +494,7 @@ paths lets you declare how TypeScript should resolve an import in your require/i
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        2229 Words
+        2263 Words
       </p>
 
       <p>
