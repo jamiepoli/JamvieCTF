@@ -6,7 +6,7 @@ I am:
 * Vie, pronounced V-ee, V-aye is fine too
 * Currently: Information Security Engineer @ Google Red Team
 * Ex-leader [Maple Bacon](https://ubcctf.github.io/) // currently, CTF Player [MMM](https://github.com/mmm-team) and Maple Bacon
-* DEFCON 30 + DEFCON 31 Winner with team MMM
+* DEFCON 30 + DEFCON 31 + DEFCON 32 Winner with team MMM
 * UBC Alumni
 
 I like:
