@@ -23,3 +23,4 @@ I have:
 * Created a bunch of [CTF challenges](/chals)
 * Been on the program comittee of [Usenix WOOT 2024](https://www.usenix.org/conference/woot24#organizers)
 * Done a talk at [Area41 2024](https://www.youtube.com/watch?v=sMiFeCDqX50&ab_channel=DEFCONSwitzerland)
+* Done workshops for Google init.g Vegas and São Paulo
