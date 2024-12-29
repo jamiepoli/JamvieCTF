@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Vie ">
+<meta name="description" content="In 2009, a group students at the Carnegie Mellon University formed a computer security club known as the Plaid Parliament of Pwning, abbreviated to PPP, to participate in Capture the Flag contests. The team saw numerous successes throughout their tenure, and many of the CMU folks with their roots in PPP went on to succeed professionally in cybersecurity-related careers.
+2 such members went on to co-create Theori.io, a leading platform of security solutions covering everything from security education to audits and consulting." />
+<meta name="keywords" content=", untagged" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2024/12/def-con-32-retrospective-end-of-the-year-recap/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+<link rel="manifest" href="https://jamvie.net/site.webmanifest">
+<link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+
+
+    <title>
+        
+            DEF CON 32 Retrospective, end of the year recap :: VIE 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.535bae1ccfa4f49e2cd0c8cecdece0708a1ec5b561a08b8f0f6ea9254d639b2c.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+
+  <meta itemprop="name" content="DEF CON 32 Retrospective, end of the year recap">
+  <meta itemprop="description" content="In 2009, a group students at the Carnegie Mellon University formed a computer security club known as the Plaid Parliament of Pwning, abbreviated to PPP, to participate in Capture the Flag contests. The team saw numerous successes throughout their tenure, and many of the CMU folks with their roots in PPP went on to succeed professionally in cybersecurity-related careers.
+2 such members went on to co-create Theori.io, a leading platform of security solutions covering everything from security education to audits and consulting.">
+  <meta itemprop="datePublished" content="2024-12-29T10:29:46-04:00">
+  <meta itemprop="dateModified" content="2024-12-29T10:29:46-04:00">
+  <meta itemprop="wordCount" content="4242">
+  <meta itemprop="image" content="https://jamvie.net/img/pixelvie.png">
+  <meta itemprop="keywords" content="Untagged">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jamvie.net/img/pixelvie.png">
+  <meta name="twitter:title" content="DEF CON 32 Retrospective, end of the year recap">
+  <meta name="twitter:description" content="In 2009, a group students at the Carnegie Mellon University formed a computer security club known as the Plaid Parliament of Pwning, abbreviated to PPP, to participate in Capture the Flag contests. The team saw numerous successes throughout their tenure, and many of the CMU folks with their roots in PPP went on to succeed professionally in cybersecurity-related careers.
+2 such members went on to co-create Theori.io, a leading platform of security solutions covering everything from security education to audits and consulting.">
+
+
+
+
+
+    <meta property="article:section" content="retrospectives" />
+
+
+
+    <meta property="article:published_time" content="2024-12-29 10:29:46 -0400 -0400" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /</span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#a4312b;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/chals/">CTF Chals</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li><li><a href="https://jamvie.net/tags/">Tags</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+        </span>
+    </span>
+
+    
+  
+    
+      
+    
+  
+
+
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        20 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://jamvie.net/posts/2024/12/def-con-32-retrospective-end-of-the-year-recap/">DEF CON 32 Retrospective, end of the year recap</a>
+      </h1>
+
+      
+
+      
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-do-you-pronounce-vie">How do you pronounce Vie?</a></li>
+    <li><a href="#youre-a-web-main---how-do-you-feel-about-the-lack-of-web-representation-in-def-con">You&rsquo;re a web main - how do you feel about the lack of web representation in DEF CON?</a></li>
+    <li><a href="#def-con-was-in-august-youre-a-little-late">DEF CON was in August. You&rsquo;re a little late!</a></li>
+    <li><a href="#tell-me-more-about-def-con">Tell me more about DEF CON.</a>
+      <ul>
+        <li><a href="#thursday">Thursday</a></li>
+        <li><a href="#friday">Friday</a></li>
+        <li><a href="#saturday">Saturday</a></li>
+        <li><a href="#sunday">Sunday</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-does-one-get-better-at-ctfs-to-play-in-def-con">How does one get better at CTFs to play in DEF CON?</a>
+      <ul>
+        <li><a href="#so-if-i-hyperfocus-on-it-i-can-get-to-def-con-too">So if I hyperfocus on it, I can get to DEF CON too?</a></li>
+      </ul>
+    </li>
+    <li><a href="#cool-anything-else">Cool, anything else?</a></li>
+    <li><a href="#new-years-resolutions">New Year&rsquo;s Resolutions</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
+
+      
+
+      <div class="post-content">
+        <p>In 2009, a group students at the Carnegie Mellon University formed a computer security club known as the <a href="https://pwning.net/about/">Plaid Parliament of Pwning</a>, abbreviated to PPP, to participate in Capture the Flag contests. The team saw numerous successes throughout their tenure, and many of the CMU folks with their roots in PPP went on to succeed professionally in cybersecurity-related careers.</p>
+<p>2 such members went on to co-create <a href="https://theori.io/">Theori.io</a>, a leading platform of security solutions covering everything from security education to audits and consulting. Their presence exists in both South Korea and USA, and they have their own CTF team, <a href="https://github.com/theori-io/ctf/tree/master">The Duck</a>, that dominates leaderboards whenever they play.</p>
+<p>Up north, professor Robert Xiao, after completing his PhD at CMU, went on to become an assistant professor at the University of British Columbia in Vancouver, Canada. A seasoned CTF player, he brought more visibility into the world of CTFs to UBC, founding and creating the team <a href="https://maplebacon.org/about/">Maple Bacon</a>.</p>
+<p>Without alot of the support I got at Maple Bacon and MMM, I don&rsquo;t think I would be where I&rsquo;m at today. That&rsquo;s a fact I think about often and keep close to me. It has now been almost 2 years since I graduated UBC, and about 4ish years since I got into CTFs as a whole. If you know me, than you would know I was once an artist in a past life. I think it&rsquo;s natural for me to compare my artistic journey to my hacker one and see the differences and similarities between the two, <a href="https://www.youtube.com/watch?v=sMiFeCDqX50">which I have talked about before</a>. But one difference was that as an artist I was alone.</p>
+<p>It kinda helped, I think, the isolation. With no one else to bother you, you only focus on what is in front of you: the canvas. I also know that you can only go so far on your own, at least in my case. I approached CTFs the same way I did with art, and it definitely led to some early successes - alot of the skills are transferrable (not, like, the painting skills. Obviously. I mean the more abstract &ldquo;thinking out of the box&rdquo; skills. Fuck it, you get what I mean). I think what got me farther was the fact that I <em>wasn&rsquo;t</em> alone. When you have a group of hard working people around you, you&rsquo;re naturally ingratiated to be just as hard-working yourself. Maybe that mentality helped tremendously with our 3rd consecutive <a href="https://nautilus.institute/">DEF CON</a> win this year.</p>
+
+    <img src="https://jamvie.net/images/MMM_hattrick.JPG"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>I&rsquo;m really late with this, I&rsquo;m aware. I&rsquo;ve sort of combined this with a psuedo-retrospective end of year recap just so I don&rsquo;t have to release multiple different blog posts at once all covering similar principles. I&rsquo;ll try and format this blog post based on a selection of questions I&rsquo;m frequently asked.</p>
+<h2 id="how-do-you-pronounce-vie">How do you pronounce Vie?</h2>
+<p>Vie</p>
+<h2 id="youre-a-web-main---how-do-you-feel-about-the-lack-of-web-representation-in-def-con">You&rsquo;re a web main - how do you feel about the lack of web representation in DEF CON?</h2>
+<p>I can do more than web stuff</p>
+<h2 id="def-con-was-in-august-youre-a-little-late">DEF CON was in August. You&rsquo;re a little late!</h2>
+<p>Hey thanks for noticing. 2024 kind of kicked my ass. I don&rsquo;t feel like trauma dumping on main here so I&rsquo;ll leave the details out and say that 2024 was a year I survived, instead of thrived. But that&rsquo;s alright, imo. Sometimes you forget who the fuck you are and you need some time and self-care to remember who the fuck you are. Sorry I&rsquo;m late.</p>
+<h2 id="tell-me-more-about-def-con">Tell me more about DEF CON.</h2>
+<h3 id="thursday">Thursday</h3>
+<p>DEF CON being at the LVCC was annoying in terms of needing to carpool to get to the convention, as opposed to walking there from our hotels, but this is ultimately a first-world complaint and something I forgot about during the entire CTF.</p>
+<p>I love Vegas. It&rsquo;s a pretty city. I spent the first day hanging out with MMM, getting shit set up, and getting my badge from the convention center. I went to Nobu for a fancy dinner and damn, I gotta say, the miso black cod is worth the hype.</p>
+
+    <img src="https://jamvie.net/images/misoblackcod.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<h3 id="friday">Friday</h3>
+<p>Before getting super involved in DEF CON, I was also present in Vegas for a special talk at <a href="https://www.unlv.edu/announcement/howard-r-hughes-college-engineering/google-sponsors-initgvegas-student-event-unlv">Google&rsquo;s init.g event</a>. I did a talk covering some red teaming concepts with Zeta, which went pretty well! <a href="https://www.youtube.com/watch?v=fPt6fJDjKKM">Here&rsquo;s a video where LiveOverflow shared some Android hacking tips, as part of init.g</a>.</p>
+
+    <img src="https://jamvie.net/images/DEFCON_BADGE.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>I really liked the badges that they did for this year. You can turn the cat shape upside down to have an ergonomic gaming controller and play the game in the badge challenge.</p>
+
+    <img src="https://jamvie.net/images/DEFCON32_black.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>The black badge variant was also very cool: laced with gold and swarovski crystals, and I think radioactive isotope? Someone fact check me on that I can&rsquo;t remember.</p>
+<p>In a massively good move, patches submitted to the CTF infrastructure would be rejected before being uploaded to the public docker registry if the patch failed the SLA CI/CD tests. This was huge, removing the SLA component in the general scoring formula (making it rely solely on attack, defense, liveCTF and KoTH) and having it be tests that our patch would have to pass removed alot of potential headache of downed services or other SLA-failing issues we dealt with in the past. Naturally we wouldn&rsquo;t know what the tests were actually doing cause then patch-making would be easy, but this simple switch saved us some headaches we were accustomed to getting in previous years.</p>
+<p>In an attack defense CTF, whoever first bloods gets a massive advantage, and that was not us. Several teams managed to pop off exploits before us and that meant a whirlwind Friday as our first day. There were 8 A/D challenges:</p>
+<ul>
+<li>bizbee</li>
+<li>lazelle</li>
+<li>codewords</li>
+<li>backflip</li>
+<li>cloud-cache &ndash;&gt; I looked at this one the most</li>
+<li>helium</li>
+<li>bisbeebee</li>
+<li>sokoban, released on day 1 and retired day 3.</li>
+</ul>
+<p>We also had a KoTH challenge with LLMs: llmship, which had since been a thing from 2022, and I assume is just going to be a mainstay from here on out. This challenge seemed to be a callback to <a href="https://ctfradi.ooo/2020/10/06/005-ropship-ai-with-antonio-and-ppp.html">ropship AI</a>, but with actual AI (LLMs). Unfortunately, LLM challenges involve randomness that sort of prioritizes prompts on a metric completely unknown and random to us, and it felt like we were very unlucky with this challenge.</p>
+<p>Friday left us a bit wrought out, but we maintained our determination into the next day.</p>
+<h3 id="saturday">Saturday</h3>
+<p>I was really busy and wasn&rsquo;t able to hang out with some coworkers, but this day I went down to the floor and got some photos taken of the new venue. LVCC is awfully nice and I do appreciate how spacious the place was.</p>
+<p>Here&rsquo;s the situation: for a while, we (MMM) were at 5th place for a good chunk of the day. In spite of our numbers alot of us were running around patching, identifying vulns, and otherwise getting confused why patches were getting rejected. DEF CON always brings the best so we were expecting a fight, and dare I say, we were getting burned out.</p>
+<p>I don&rsquo;t have much else to say for this day, just that we were still working hard but getting frustrated at the little fires we had to put out. We ended Saturday in 2nd place, but we all knew we wanted only one position.</p>
+<h3 id="sunday">Sunday</h3>
+<p>In a phenomena I can only describe as a Collective Dislike Of The Circumstances We Were In, each and every single one of us at MMM all unanimously agreed to stand on business. I do find it sort of poetic that we all simultaneously said &ldquo;fuck burnout, we&rsquo;re not burning out&rdquo; and made a synergetic system of identifying vulnerabilities in the challenges, then multi-threaded patch and exploit creation at DEF CON.</p>
+<p>For me, I was with the group in defense, pushing out and reviewing patches, which went pretty well imo.</p>
+<p>KoTH was still our weakpoint, we were wrangling with the previous LLM challenge&rsquo;s apparent randomness and at a certain point we collected our L for that. We better diverted our attention towards gaps in our system of exploit development, patch development, and so on.</p>
+
+    <img src="https://jamvie.net/images/award_ceremony.jpg"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>Clutching first place on Sunday was a great feeling. We got our hat trick and I&rsquo;m more than happy to celebrate that. Here are some random funny snippets of the end that I really like:</p>
+
+    <img src="https://jamvie.net/images/MMM_activities.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+
+    <img src="https://jamvie.net/images/captain_vie.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+
+    <img src="https://jamvie.net/images/scoreboard_dc32.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<h2 id="how-does-one-get-better-at-ctfs-to-play-in-def-con">How does one get better at CTFs to play in DEF CON?</h2>
+<p>I&rsquo;ve seen an uptick in people asking me what curated list of tips are relevant to get oneself to DEF CON. It&rsquo;s a reasonable ask and it&rsquo;s one that I don&rsquo;t have a reasonable answer for. I tried to coalesce some of my thoughts and tips on it into a tweet thread a while ago but after some consolidation of resources, I have a <em>slightly</em> (?) better (??) answer for it.</p>
+<p>Fellow CTF player and my good friend, <a href="https://zeta-two.com/">ZetaTwo</a>, said it best: you should learn enough about the other categories of CTFs outside of your main to get to a good enough level to solve those categories at a medium level, whilst you focus on building out the skills needed for your main category.</p>
+<p>It can take some time to learn, depending on the person. If you&rsquo;re someone who doesn&rsquo;t like low-level stuff than binary exploits and reverse engineering require concepts of computer memory and operating systems that will feel alien to you. (Hey good thing there&rsquo;s, like, a free <a href="https://www.hextree.io/">set of</a> <a href="https://pwn.college/">educational</a> <a href="https://dreamhack.io/">materials</a> for that). Or if you&rsquo;re not one for number theory than you&rsquo;re not gonna like the RSA problems in cryptography (Hey good thing there&rsquo;s a free set of <a href="https://cryptopals.com/">educational</a> <a href="https://cryptohack.org/">resources so on and so forth</a>). Or if you don&rsquo;t like JavaScript, PHP, server-client paradigms, obscure client-side quirks about the browser, you&rsquo;re not gonna like web (HEY <a href="https://picoctf.org/">GOOD</a> <a href="https://webhacking.kr/">THING THERE&rsquo;S</a>-). My point being, ZetaTwo&rsquo;s advice is solid advice and the one that I try to follow when I learn new things. It&rsquo;s just not a particularly trivial bit of advice to follow.</p>
+<p>(But what good would the advice be if it was easy? Was winning DEF CON easy? No, it wasn&rsquo;t. Nothing worth doing in life comes easy. I didn&rsquo;t bust my ass for near 20 years of my life learning how to best shade in an apple with oil paints to come out of it saying it was easy. I still have callouses around the pads of my palms that gripped the brush, they&rsquo;re never going away. Who says that learning something you love doing would be easy? It&rsquo;s easy when you look back and do the easy challenges, ones that you struggled on previously, or paint the simple things. But I don&rsquo;t wanna paint fuckin apples all day. I don&rsquo;t wanna solve easy XSS <code>element.innerHTML = &quot;your exact URL query&quot;</code> all day. I want a challenge because that&rsquo;s where the fun is. Have you ever turned on god mode when you play Skyrim? If you played Skyrim throughout its entirety while on god mode, that shit would get boring really really quick. There&rsquo;s no skill progression, no failing and trying again, no adjusting of strategy, you just one-shot everyone while you T-pose your way to Alduin face-down holding a pot like OKAAAyYY dragonborn that&rsquo;s not fun. Turn off the goddamn god mode. You learn and derive fun from the challenge of it all. Why does everyone like Soulsborne games? EXACTLY. When it&rsquo;s easy for too long it&rsquo;s boring. Elden Ring was so good.</p>
+<p>Oh my god. What was I talking about earlier? CTFs right)</p>
+<p>In my opinion, Z2&rsquo;s advice is two-pronged: get used to the concept of &ldquo;challenging&rdquo;, and also round out your skills to build yourself up. The thing is, if you come across adversary while you learn a new skill, or if you come across challenge you feel like you can&rsquo;t overcome, that&rsquo;s a Really Good Thing actually. I&rsquo;d make the extremely anecdotal source-I-made-it-the-fuck-up argument here that you need both a consistent reward base (so solving and getting the flag in CTF challenges) and a portion of negative stimuli and failure (<em>not</em> solve a CTF challenge and learn why) to improve your skills. After all, how do you know where to break your ceiling if you don&rsquo;t know where your ceiling is?</p>
+<p>Azeria of <a href="https://azeria-labs.com/">AzeriaLabs</a> has this blog post that I like to look to when I want to Learn A New Thing: <a href="https://azeria-labs.com/the-process-of-mastering-a-skill/">The Process of Mastering a Skill</a>. She goes into good, researched detail about the science behind learning a new skill (go and read the whole article. It&rsquo;s really good):</p>
+<blockquote>
+<p>Today we know that it’s not magic. It’s this specific form of practice. If you look at the so-called “geniuses” throughout history, time and again the common factor is not innate talent, but just that they each put countless hours into mastering their craft long before arriving at their respective breakthroughs.</p>
+</blockquote>
+<p>As an aside, people often praise my artistic capabilities as talent. Like, okay? We can make the argument that I expressed a desire to draw and doodle at a very young age - that could be defined as talent. But talent doesn&rsquo;t explain the progression of the toddler&rsquo;s doodle to now. So over the course of 2 decades (I can&rsquo;t stress this enough I spent 20 years of my life learning this craft, 20 YEARS like you&rsquo;d think I would be drawing Baroque realism all over the place but no instead I fight computers for a living) I went to art classes, got tutoring, did lessons, and practiced art on my off time outside of my schoolwork. Talent got me my first step and consistent habit got me the rest of the fuckin way there.</p>
+<p>So, am I going to spend the next couple of mins of this post evangelizing grind culture and HaRD WOrk? No, not really, either. But I am going to state a pattern I&rsquo;m observing:</p>
+<p>Here is a <a href="https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/">post</a> that I made at the beginning of my CTF journey. It&rsquo;s, TL;DR, an XSS problem which uses quirks in the qs parsing library to bypass XSS sanitization. I think I spent the first 24 hours of GoogleCTF on it? I didn&rsquo;t solve the other one, cause it was beyond my capability.</p>
+<p>Here&rsquo;s a <a href="https://github.com/google/google-ctf/tree/main/2023/quals/web-vegsoda">GoogleCTF problem</a> I made 3 years later about employing type-confusions to chain a series of class functions together to bypass XSS sanitization alongside a CSRF bypass with different HTTP methods. Notice how the challenge from 2020 involves the same general point of XSS sanitization - except now I actually knew what I was talking about in the year I made my challenge. Pasteurize, the challenge from 2020, taught me very important concepts of XSS sanitization, type confusions, and parsing differentials, ALL 3 things that were very useful during my development of Veggie Soda. I couldn&rsquo;t have done Veggie Soda without struggling through Pasteurize.</p>
+<p>From the years 2020 - 2023 I wasn&rsquo;t doing fuck-all, I was learning. I learned alot of parsing differentials and XSS sanitization that day in GoogleCTF 2020. But at that point, Pasteurize was the hardest challenge I knew at the time. In the 3 years of progression I learned about different things through different <a href="https://jamvie.net/posts/2020/11/dragonctf-2020-harmony-chat/">challenges</a> that <a href="https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/">confronted me</a> at <a href="https://jamvie.net/posts/2022/08/defcon-30-retrospective/">the goalpost I was</a> and only <a href="https://jamvie.net/posts/2023/08/defcon-31-retrospective/">allowed me a solve</a> if I ventured out towards the next goalpost.</p>
+<h3 id="so-if-i-hyperfocus-on-it-i-can-get-to-def-con-too">So if I hyperfocus on it, I can get to DEF CON too?</h3>
+<p>Hm.</p>
+<p>Here&rsquo;s another anecdote: At UBC, the computer science major has gotten so popular as of late that entry to the major is competitive. At UBC, you apply to join a faculty (Arts or Science, if you want CS). After your first year, you declare a major. For most majors, it&rsquo;s simple enough to declare it and get on with picking your requisite classes - but for certain majors, you need to apply and see if you&rsquo;ll get accepted against the general average. This general average is the average of the other students applying for the major - if you&rsquo;re above that average you&rsquo;re likely to get in. If you&rsquo;re below, well.</p>
+<p>Over the years this competitive average has gotten higher and higher. And the concentration of students interested in computer science is higher than it was when I started. I see why a competitive average was needed. Alot of good schools in Canada employ similar strategies to optimize for the student that they feel can succeed in their computer science programs. I can imagine that, while not exactly the same, the barrier of entry to computer science is similarly hard for universities across the world. It makes sense.</p>
+<p>I also see it yield a very particular environment for a particular type of Extremely Anxious, Hyperfocused Student. If you want a good chance at getting into the CS major, you need good grades, obviously. If you want to really optimize your chances than you&rsquo;re probably going to look for the courses that are &ldquo;easy&rdquo; to take but still relevant to what you&rsquo;re going to study for in CS. This means enrolling in the courses that are the least amount of work needed to get the highest grade possible - for example, you tend to see many CS students at UBC take Philosophy 220, because it covers much of the same ground as Computer Science 121. Both courses cover logic, just under different pretenses. A CPSC 121 student won&rsquo;t really be covering new ground in PHIL 220 and vice-versa.</p>
+<p>In your first year, if you want to get into CPSC, you need to get the high grades. It&rsquo;s &ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;easy&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo; to get high grades if you take &ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;easy&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo; and <strong>relevant</strong> courses. And the cycle sorta continues. If you want to participate in the Science or Arts CS co-op program, you need a specific average. So you will continue minmaxxing for high grades on &ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;easy&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo; and <strong>relevant</strong> courses. This means that you get really good at taking tests and studying for specific concepts in material. It&rsquo;s good to get the full picture but it&rsquo;s efficient to read out the paragraphs that explain the specific problem you&rsquo;re trying to solve.</p>
+<p>At a certain point, the material for upper-level courses shifts. The general expectation of the CS student at this point is to instead focus on a skillset that they feel most useful to them. In your 4th year, you&rsquo;re not going to have the time nor energy to be able to try all the <strong>relevant</strong> courses anymore, and also, <em>fucking most of them are NOT</em> &ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;easy&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;. Maybe some of them are but that is a more subjective take over anything else.</p>
+<p>Alot of CPSC students will happily reccommend their favourite upper-level courses and often use words to describe the course&rsquo;s merits on how interesting it is, how dynamic it is, how relevant it is to the world, how much they like the professor, or how unique and cool the material is. You will still see some comments on the general difficulty of the course but that goes into lesser relevance over raving about how cool they thought the course material was.</p>
+<p>You&rsquo;re still going to have to take tests in your upper-level courses duh, but this time, UBC is hoping you&rsquo;ve chosen the upper-level courses that you don&rsquo;t mind going the extra mile for. The courses that, you know, you would read more into the textbook for. I don&rsquo;t think that&rsquo;s a hard ask of a 4th year student to choose the courses that they actually want to delve into the material for. UBC is hoping that, alongside all of those skills you developed minmaxing for high grades on &ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;&ldquo;easy&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo;&rdquo; courses, you also developed skills of curiosity and a healthy respect for the desire to develop a robust skillset. Let me be clear: that is a mindset you should have been developing on your own, outside of class. This is relevant because the real world cares less and less about your GPA minmaxxing ratio. It cares if you have the ability to solve problems you&rsquo;ve never seen before, with skills you built from twisting material you learn into new scenarios for your own curiosity. The real world is not a standardized test.</p>
+<p>So if you &ldquo;study&rdquo; for DEF CON like a standardized test, I think you&rsquo;ll get much of the base points <em>in theory</em>. But in practice, DEF CON isn&rsquo;t a standardized test. And neither was Hackceler8. And neither was my interview process. And neither is my job. The generalized skill of learning how to take a test is a different thing over learning how to build your skills that allow you to succeed in intense events (as a side note can you imagine if there was standardized test taking as a weird olympic sport? Oh my GOD all my &ldquo;gifted as a child&rdquo; peers RISE UP).</p>
+<p>You need to build skills that reward curiosity and are rewarded by active and consistent question-asking, ambition, and a genuine pursuit for knowledge. You need to build skills that have you look at the unknown with excitement and apprehension - not giving up at first sight of adversary. My colleagues say it best: if hacking was easy, <strong>everyone would do it</strong>.</p>
+<p>Anyway. In relation to qualifying for big events like Hackceler8, DEF CON, SECCON, the proof is in the pudding - you put consistent effort in the things that you are genuinely curious about. You have to broaden your horizons by getting dirty into the material you want to earnestly learn. You dont just get there by solving a CTF challenge and checking the box, you get there by deeply investing in the topics that the CTF challenge demands you to understand. If you have solved an XSS sanitization bypass, I expect you to be able to tell me more about the web API standards, DOMpurify, and XSS DOM sinks and sources, or even beyond: service workers, event handlers, server-side XSS - if you actually marinated with the challenge. And if you&rsquo;re not genuinely curious about it, it will be hard to scratch up the will and determination to keep learning.</p>
+<p>You don&rsquo;t <em>just</em> learn reverse engineering, you&rsquo;re also learning things like rapidly prototyping environments to replicate the vulnerability you want to exploit. You don&rsquo;t <em>just</em> learn web exploits, you&rsquo;re also learning how different web APIs in the window interact with and potentially fuck up security boundaries. My advice, summed up, is to stand on business. You&rsquo;re not just learning about how to solve a CTF challenge, you&rsquo;re learning about all the concepts that lead up to it. <em>Be curious</em>. Explore and answer the questions that pop up in your head, on your own. Don&rsquo;t be afraid to be wrong. Don&rsquo;t be afraid to tackle a challenge you don&rsquo;t know anything about. Just understand that investing in your curiosity and delving deeper into your own interests is, like any investment, one that takes time. Spend less time trying to learn things passively, or going over material you have mastered already. We&rsquo;re not trying to solve the same kind of problem here, nor are we studying for a test - you don&rsquo;t need to memorize definitions exactly to get points. Start getting into this habit: <strong>Try a CTF challenge, and don&rsquo;t even consider looking at a writeup until you have deconstructed every piece of code in the challenge</strong>. Ask ALL of the questions: &ldquo;what is this API? What does this keyword mean? What is this? What is that? What happens if I do this?&rdquo; - if your brain asks the question, your brain commits the answer to memory alot easier. As someone who spent 2 decades (<strong>20 FUCKING YEARS OF MY LIFE</strong>), I should know. Good things take time, and time rewards curiosity. Time is also consistent, so you should be too.</p>
+<h2 id="cool-anything-else">Cool, anything else?</h2>
+<p>Uhh. I did Hackceler8 2024 commentary and game design again. That was really fun. Here&rsquo;s a few photos from Spain (where Hackceler8 took place this year):</p>
+
+    <img src="https://jamvie.net/images/malaga_cathedral.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+
+    <img src="https://jamvie.net/images/MALAGA.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+
+    <img src="https://jamvie.net/images/HCL8.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>I really do like documenting the things I did in the wake of a shit year because it does remind me that 2024 was still a good year of growth. Here are some of my favorite things from 2024:</p>
+<ul>
+<li>MMM hat trick at DEF CON, winning the last 3 consecutively</li>
+<li>Making and expanding upon Hackceler8 2024, which is a feat I can&rsquo;t claim full credit for, I am very thankful to be working with a talented group of literally the best security people I have ever met</li>
+<li>Kendrick won his Drake v. Kendrick beef</li>
+<li>I did a talk at Area41 talking about how an artist became a hacker which covers alot of the points I talked about here already</li>
+</ul>
+<h2 id="new-years-resolutions">New Year&rsquo;s Resolutions</h2>
+<p>ᶦᵈᵏ ᵈᵘᵈᵉ ᶦ ᵏᶦⁿᵈᵃ ʲᵘˢᵗ ʷᵃⁿᵗ ᵃ ᵇʳᵉᵃᵏ</p>
+<p>I&rsquo;d like to be more proactive about some of the projects that I wasn&rsquo;t able to keep track of this year. I set the pathway stones down for some things I wanted to do for a really long time, so I&rsquo;m treating 2024 as a filler arc and hoping 2025 I actually do remember who the fuck I am and get to achieving some milestones.</p>
+<p>I said earlier that I spent most of my time becoming an artist completely on my own. I don&rsquo;t think I&rsquo;d go back to dedicating more years to it, but I do think I would be happy to spend a little more time in the CTF community, probably because I have great people around me.</p>
+<p>Maybe that&rsquo;s my advice. Just, like, find a really cool team of really cool people who are not just your CTF teammates but are also your friends. I think that helps a lot.</p>
+<p>Anyway, goodbye 2024.</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://jamvie.net/tags/untagged/">untagged</a></span>
+        
+    </p>
+
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://jamvie.net/categories/retrospectives/">retrospectives</a></span>
+        
+    </p>
+
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        4242 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2024-12-29 07:29 -0700
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/">
+                    <span class="button__text">DUCTF 2024: Prisoner Processor</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2024</span>
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.63e1cd4087b02bc78961fcab2aaf77e957e2227557c73ab774f1cc4a9db0645e90d2403ca03e55eb0887e432e82aea10afe7f125052af6dd46cfea148ecbc663.js" integrity="sha512-Y&#43;HNQIewK8eJYfyrKq936VfiInVXxzq3dPHMSp2wZF6Q0kA8oD5V6wiH5DLoKuoQr&#43;fxJQUq9t1Gz&#43;oUjsvGYw=="></script>
+
+
+
+    </body>
+</html>

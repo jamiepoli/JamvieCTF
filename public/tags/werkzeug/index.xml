@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>werkzeug on VIE</title>
+    <title>Werkzeug on VIE</title>
     <link>https://jamvie.net/tags/werkzeug/</link>
-    <description>Recent content in werkzeug on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Werkzeug on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 04 Apr 2021 03:12:16 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/werkzeug/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Apr 2021 03:12:16 -0600</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/werkzeug/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bo1lersCTF 2021: Lorem_Ipsum</title>
       <link>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</link>
       <pubDate>Sun, 04 Apr 2021 03:12:16 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</guid>
-      <description>Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &amp;ldquo;animal&amp;rdquo;-ified versions of the famous lorem ipsum placeholder text.
-Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?
-This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens.</description>
+      <description>Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &amp;ldquo;animal&amp;rdquo;-ified versions of the famous lorem ipsum placeholder text.&#xA;Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?&#xA;This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens.</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>prototype-pollution on VIE</title>
+    <title>Prototype-Pollution on VIE</title>
     <link>https://jamvie.net/tags/prototype-pollution/</link>
-    <description>Recent content in prototype-pollution on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Prototype-Pollution on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 07 Jul 2024 10:29:46 -0400</lastBuildDate><atom:link href="https://jamvie.net/tags/prototype-pollution/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Jul 2024 10:29:46 -0400</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/prototype-pollution/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DUCTF 2024: Prisoner Processor</title>
       <link>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</link>
       <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
-      
       <guid>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</guid>
       <description>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!</description>
     </item>
-    
     <item>
       <title>MapleCTF 2022    : Vie&#39;s challenges</title>
       <link>https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/</link>
       <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/</guid>
       <description>MapleCTF 2022 ran this year to great success, which is fantastic given the tight timeframe we were operating on shortly after coming back from DEFCON 30. We held a beginner-friendly, UBC-local version back in January, so our endgame for this version was to make more creative and harder challenges that people hopefully enjoyed. I wrote 3 web challenges for this CTF: honksay, Viene Library and Art Gallery, the latter 2 I will detail here.</description>
     </item>
-    
     <item>
       <title>DiceCTF 2021</title>
       <link>https://jamvie.net/posts/2021/02/dicectf-2021/</link>
       <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2021/02/dicectf-2021/</guid>
-      <description>Babier CSP The challenge takes after justCTF&amp;rsquo;s similarly named challenge. We&amp;rsquo;re given an index.js file:
-const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`} &amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?</description>
+      <description>Babier CSP The challenge takes after justCTF&amp;rsquo;s similarly named challenge. We&amp;rsquo;re given an index.js file:&#xA;const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`} &amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?</description>
     </item>
-    
   </channel>
 </rss>

@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Vie ">
-<meta name="description" content="Babier CSP The challenge takes after justCTF&amp;rsquo;s similarly named challenge. We&amp;rsquo;re given an index.js file:
-const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`} &amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?" />
+<meta name="description" content="Babier CSP The challenge takes after justCTF&rsquo;s similarly named challenge. We&rsquo;re given an index.js file:
+const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`} &lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?" />
 <meta name="keywords" content=", writeups, xss, sqli, web, prototype-pollution, csrf" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#0c0c0d" />
@@ -45,18 +45,21 @@ const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="DiceCTF 2021">
-<meta itemprop="description" content="Babier CSP The challenge takes after justCTF&rsquo;s similarly named challenge. We&rsquo;re given an index.js file:
-const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`} &lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?"><meta itemprop="datePublished" content="2021-02-07T19:06:12-07:00" />
-<meta itemprop="dateModified" content="2021-02-07T19:06:12-07:00" />
-<meta itemprop="wordCount" content="2261"><meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png"/>
-<meta itemprop="keywords" content="writeups,xss,sqli,web,prototype-pollution,csrf," />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png"/>
 
-<meta name="twitter:title" content="DiceCTF 2021"/>
-<meta name="twitter:description" content="Babier CSP The challenge takes after justCTF&rsquo;s similarly named challenge. We&rsquo;re given an index.js file:
-const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`} &lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?"/>
+  <meta itemprop="name" content="DiceCTF 2021">
+  <meta itemprop="description" content="Babier CSP The challenge takes after justCTF’s similarly named challenge. We’re given an index.js file:
+const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`} &lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?">
+  <meta itemprop="datePublished" content="2021-02-07T19:06:12-07:00">
+  <meta itemprop="dateModified" content="2021-02-07T19:06:12-07:00">
+  <meta itemprop="wordCount" content="2261">
+  <meta itemprop="image" content="https://jamvie.net/img/pixelvie.png">
+  <meta itemprop="keywords" content="Writeups,Xss,Sqli,Web,Prototype-Pollution,Csrf">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jamvie.net/img/pixelvie.png">
+  <meta name="twitter:title" content="DiceCTF 2021">
+  <meta name="twitter:description" content="Babier CSP The challenge takes after justCTF’s similarly named challenge. We’re given an index.js file:
+const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#34;); const config = require(&#34;./config.js&#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&#39;base64&#39;); const template = name =&gt; ` &lt;html&gt; ${name === &#39;&#39; ? &#39;&#39;: `&lt;h1&gt;${name}&lt;/h1&gt;`} &lt;a href=&#39;#&#39; id=elem&gt;View Fruit&lt;/a&gt; &lt;script nonce=${NONCE}&gt; elem.onclick = () =&gt; { location = &#34;/?">
 
 
 
@@ -66,7 +69,7 @@ const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#
 
 
 
-    <meta property="article:published_time" content="2021-02-07 19:06:12 -0700 -0700" />
+    <meta property="article:published_time" content="2021-02-07 19:06:12 -0700 MST" />
 
 
 
@@ -118,18 +121,13 @@ const express = require(&#39;express&#39;); const crypto = require(&#34;crypto&#
     </span>
 
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-176711986-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+  
+    
+      
+    
+  
+
+
 </header>
 
 
@@ -482,7 +480,7 @@ This means that if we try to inject single quotes ourselves to try a classic sql
           <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
         
-          2021-02-07 21:06 -0500
+          2021-02-07 19:06 -0700
         
 
          
@@ -519,8 +517,6 @@ This means that if we try to inject single quotes ourselves to try a classic sql
 
     
 
-    
-
   </main>
 
             </div>
@@ -547,7 +543,7 @@ This means that if we try to inject single quotes ourselves to try a classic sql
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.cf7fb2a9e24608a783e05e4472da2fdf008293289de1ad88d1cba5c143e7e414496dd33b6a228e92f8461ce0c8cbad3c9f9847e73e46dfbce0463393ddd1733a.js" integrity="sha512-z3&#43;yqeJGCKeD4F5Ectov3wCCkyid4a2I0culwUPn5BRJbdM7aiKOkvhGHODIy608n5hH5z5G37zgRjOT3dFzOg=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.63e1cd4087b02bc78961fcab2aaf77e957e2227557c73ab774f1cc4a9db0645e90d2403ca03e55eb0887e432e82aea10afe7f125052af6dd46cfea148ecbc663.js" integrity="sha512-Y&#43;HNQIewK8eJYfyrKq936VfiInVXxzq3dPHMSp2wZF6Q0kA8oD5V6wiH5DLoKuoQr&#43;fxJQUq9t1Gz&#43;oUjsvGYw=="></script>
 
 
 

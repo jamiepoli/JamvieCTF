@@ -1,41 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>misc on VIE</title>
+    <title>Misc on VIE</title>
     <link>https://jamvie.net/tags/misc/</link>
-    <description>Recent content in misc on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Misc on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sat, 19 Sep 2020 20:57:15 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Sep 2020 20:57:15 -0600</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/misc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>VolgaCTF Finals 2020</title>
       <link>https://jamvie.net/posts/2020/09/volgactf-finals-2020/</link>
       <pubDate>Sat, 19 Sep 2020 20:57:15 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/09/volgactf-finals-2020/</guid>
       <description>&lt;p&gt;A reflection on VolgaCTF Finals, which I participated in with my team. We were the only North American team participating in the event, and for a good portion of the CTF, we held 1st place! Unfortunately, that didn&amp;rsquo;t last for the end of the competition.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Cryptography and P vs. NP: A Basic Outline</title>
       <link>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</link>
       <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</guid>
-      <description>Comic from XKCD.
-I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
+      <description>Comic from XKCD.&#xA;I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
     </item>
-    
     <item>
       <title>Jamvie&#39;s first post</title>
       <link>https://jamvie.net/posts/2020/04/jamvies-first-post/</link>
       <pubDate>Mon, 20 Apr 2020 21:27:12 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/04/jamvies-first-post/</guid>
-      <description>Hi, and welcome to my CTF blog. I&amp;rsquo;m just a software dev with a hobby for CTFs, and I thought a blog would be a good way to stash all my long-archived writeups for CTF challenges I participated in. I&amp;rsquo;m by no means an expert on the topic, but if someone stumbles upon here and gains a newfound interest in cybersecurity, that would be pretty cool.
-Over the next few weeks I will upload my old writeups for some CTFs that occurred this year and last, so stay tuned!</description>
+      <description>Hi, and welcome to my CTF blog. I&amp;rsquo;m just a software dev with a hobby for CTFs, and I thought a blog would be a good way to stash all my long-archived writeups for CTF challenges I participated in. I&amp;rsquo;m by no means an expert on the topic, but if someone stumbles upon here and gains a newfound interest in cybersecurity, that would be pretty cool.&#xA;Over the next few weeks I will upload my old writeups for some CTFs that occurred this year and last, so stay tuned!</description>
     </item>
-    
   </channel>
 </rss>

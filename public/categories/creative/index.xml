@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>creative on VIE</title>
+    <title>Creative on VIE</title>
     <link>https://jamvie.net/categories/creative/</link>
-    <description>Recent content in creative on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Creative on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sat, 06 Jan 2024 22:23:05 -0500</lastBuildDate><atom:link href="https://jamvie.net/categories/creative/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Jan 2024 22:23:05 -0500</lastBuildDate>
+    <atom:link href="https://jamvie.net/categories/creative/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A case for documentation</title>
       <link>https://jamvie.net/posts/2024/01/a-case-for-documentation/</link>
       <pubDate>Sat, 06 Jan 2024 22:23:05 -0500</pubDate>
-      
       <guid>https://jamvie.net/posts/2024/01/a-case-for-documentation/</guid>
       <description>I am aware that the main target audience of my tiny blog are CTF players looking for my writeups and other like-minded security researchers exploring topics I like. But my 2024 resolution was to relive and unite my artistic persona that I spent most of my teen years curating, and marrying that to the security career life I live now. Part of my fine arts training involved a good deal of literature.</description>
     </item>
-    
   </channel>
 </rss>

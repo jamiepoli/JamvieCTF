@@ -1,50 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>sqli on VIE</title>
+    <title>Sqli on VIE</title>
     <link>https://jamvie.net/tags/sqli/</link>
-    <description>Recent content in sqli on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Sqli on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Mon, 02 May 2022 12:40:52 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/sqli/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 May 2022 12:40:52 -0700</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/sqli/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NahamCon CTF 2022</title>
       <link>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</link>
       <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</guid>
       <description>Just in Time Maple Bacon played in NahamCon CTF 2022 this past weekend, which came as a surprise - we were fully planning on focusing our efforts onto AngstromCTF which overlapped, however, NahamCon CTF proved to be interesting and good-quality so a last-minute decision was made to participate in both. AngstromCTF is still underway, but in the awkward passage of time between my last week and weekend, I played in NahamCon CTF for a little bit of practice.</description>
     </item>
-    
     <item>
       <title>DiceCTF 2021</title>
       <link>https://jamvie.net/posts/2021/02/dicectf-2021/</link>
       <pubDate>Sun, 07 Feb 2021 19:06:12 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2021/02/dicectf-2021/</guid>
-      <description>Babier CSP The challenge takes after justCTF&amp;rsquo;s similarly named challenge. We&amp;rsquo;re given an index.js file:
-const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`} &amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?</description>
+      <description>Babier CSP The challenge takes after justCTF&amp;rsquo;s similarly named challenge. We&amp;rsquo;re given an index.js file:&#xA;const express = require(&amp;#39;express&amp;#39;); const crypto = require(&amp;#34;crypto&amp;#34;); const config = require(&amp;#34;./config.js&amp;#34;); const app = express() const port = process.env.port || 3000; const SECRET = config.secret; const NONCE = crypto.randomBytes(16).toString(&amp;#39;base64&amp;#39;); const template = name =&amp;gt; ` &amp;lt;html&amp;gt; ${name === &amp;#39;&amp;#39; ? &amp;#39;&amp;#39;: `&amp;lt;h1&amp;gt;${name}&amp;lt;/h1&amp;gt;`} &amp;lt;a href=&amp;#39;#&amp;#39; id=elem&amp;gt;View Fruit&amp;lt;/a&amp;gt; &amp;lt;script nonce=${NONCE}&amp;gt; elem.onclick = () =&amp;gt; { location = &amp;#34;/?</description>
     </item>
-    
     <item>
       <title>RedPwnCTF 2020</title>
       <link>https://jamvie.net/posts/2020/06/redpwnctf-2020/</link>
       <pubDate>Thu, 25 Jun 2020 16:26:44 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020/</guid>
-      <description>RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.
-Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty.</description>
+      <description>RedPwnCTF 2020 is a beginner to intermediate CTF that&amp;rsquo;s accessible to high school and college students. The CTF featured a range of easy to harder problems, which provided both a good introduction into CTFs and an opportunity to stretch your pre-established skills. I solved through a good portion of the web problems, and will document a few of the ones here.&#xA;Let&amp;rsquo;s Begin! The problems are in no way ordered in terms of difficulty.</description>
     </item>
-    
     <item>
       <title>UTctf 2020: Epic Admin Pwn</title>
       <link>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</link>
       <pubDate>Wed, 22 Apr 2020 00:46:19 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/04/utctf-2020-epic-admin-pwn/</guid>
       <description>I particpated in UTCTF with my team in March 2020, held and operated by the University of Texas ISSS. My team and I solved a very fun SQLi-based attack! This challenge helped me to refine my python skills cause the lord knows I needed it, as well as reinforced my knowledge about SQL-based attacks. This is the first web challenge I solved in the CTF, and admittedly the one that I enjoyed the most to do.</description>
     </item>
-    
   </channel>
 </rss>

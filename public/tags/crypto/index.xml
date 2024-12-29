@@ -1,41 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>crypto on VIE</title>
+    <title>Crypto on VIE</title>
     <link>https://jamvie.net/tags/crypto/</link>
-    <description>Recent content in crypto on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Crypto on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/crypto/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Oct 2020 22:34:34 -0600</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/crypto/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hack.lu 2020: Confessions</title>
       <link>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</link>
       <pubDate>Sun, 25 Oct 2020 22:34:34 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/10/hack.lu-2020-confessions/</guid>
-      <description>This is a writeup for &amp;ldquo;Confessions&amp;rdquo;, the first web challenge I solved. I was luckily able to finish this challenge in a couple hours, so I could focus my attention to the other super interesting web problems. Confessions was a nice dive into some simple GraphQL manipulation and baby crypto.
-Let&amp;rsquo;s Begin! The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it.</description>
+      <description>This is a writeup for &amp;ldquo;Confessions&amp;rdquo;, the first web challenge I solved. I was luckily able to finish this challenge in a couple hours, so I could focus my attention to the other super interesting web problems. Confessions was a nice dive into some simple GraphQL manipulation and baby crypto.&#xA;Let&amp;rsquo;s Begin! The confessions webpage was a message-generation application that would hash (in sha-256) your message based on the title and content of it.</description>
     </item>
-    
     <item>
       <title>Trend Micro CTF: Raimund Genes Quals 2020</title>
       <link>https://jamvie.net/posts/2020/10/trend-micro-ctf-raimund-genes-quals-2020/</link>
       <pubDate>Sun, 04 Oct 2020 13:12:06 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/10/trend-micro-ctf-raimund-genes-quals-2020/</guid>
       <description>Last year, before I became an active participant in Maple Bacon, the team went on to participate in and land a top 10 position in Trend Micro 2019 Qualifiers, later going on to compete in the finals of that year. When the 2020 serving came up this weekend, I wanted to keep with tradition and maintain the pattern - and so we landed a top 10 position and will be going on ahead to the 2020 finals :)</description>
     </item>
-    
     <item>
       <title>Cryptography and P vs. NP: A Basic Outline</title>
       <link>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</link>
       <pubDate>Tue, 14 Jul 2020 00:22:00 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/07/cryptography-and-p-vs.-np-a-basic-outline/</guid>
-      <description>Comic from XKCD.
-I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
+      <description>Comic from XKCD.&#xA;I am not an expert in either cryptography nor algorithm analysis. However, ever since a very rewarding advanced algorithm analysis class, one question has always dwelled in my mind: what would &amp;ldquo;P=NP&amp;rdquo; mean for cryptography? I had heard that such a statement, &amp;ldquo;P=NP&amp;rdquo; is controversial in the world of security. Learning about algorithm complexity has certainly shed quite a bit of light on the topic. As a cybersecurity researcher, I was compelled to satisfy my curiosity and answer that question for myself.</description>
     </item>
-    
   </channel>
 </rss>

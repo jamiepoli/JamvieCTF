@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>esi on VIE</title>
+    <title>Esi on VIE</title>
     <link>https://jamvie.net/tags/esi/</link>
-    <description>Recent content in esi on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Esi on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Tue, 10 Oct 2023 19:53:16 +0800</lastBuildDate><atom:link href="https://jamvie.net/tags/esi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Oct 2023 19:53:16 +0800</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/esi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MAPLECTF 2023: JUJUTSU KAISEN</title>
       <link>https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/</link>
       <pubDate>Tue, 10 Oct 2023 19:53:16 +0800</pubDate>
-      
       <guid>https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/</guid>
-      <description>MapleCTF&amp;rsquo;s 2nd annual CTF was held at the same time as Hackceler8 preparation week, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&amp;rsquo;t recommend.
-This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen.</description>
+      <description>MapleCTF&amp;rsquo;s 2nd annual CTF was held at the same time as Hackceler8 preparation week, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&amp;rsquo;t recommend.&#xA;This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen.</description>
     </item>
-    
   </channel>
 </rss>

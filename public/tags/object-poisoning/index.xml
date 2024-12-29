@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>object-poisoning on Vie</title>
-    <link>https://jamvie.net/tags/object-poisoning/</link>
-    <description>Recent content in object-poisoning on Vie</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Object-Poisoning on VIE</title>
+    <link>http://localhost:1313/tags/object-poisoning/</link>
+    <description>Recent content in Object-Poisoning on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Mon, 24 Aug 2020 20:17:24 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/object-poisoning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Aug 2020 20:17:24 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/object-poisoning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GoogleCTF 2020: All the Little Things, Post-CTF Reflection</title>
-      <link>https://jamvie.net/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/</link>
+      <link>http://localhost:1313/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/</link>
       <pubDate>Mon, 24 Aug 2020 20:17:24 -0600</pubDate>
-      
-      <guid>https://jamvie.net/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/</guid>
+      <guid>http://localhost:1313/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/</guid>
       <description>&lt;p&gt;The 2nd challenge I worked on, titled &amp;ldquo;All the little things&amp;rdquo;. Frustratingly, I didn&amp;rsquo;t solve this challenge. I was about &lt;strong&gt;85%&lt;/strong&gt; of the way there!&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

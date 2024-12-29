@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>cache-poison on VIE</title>
+    <title>Cache-Poison on VIE</title>
     <link>https://jamvie.net/tags/cache-poison/</link>
-    <description>Recent content in cache-poison on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Cache-Poison on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Thu, 02 Jul 2020 01:56:16 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/cache-poison/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Jul 2020 01:56:16 -0600</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/cache-poison/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RedPwnCTF 2020, Part 3</title>
       <link>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</link>
       <pubDate>Thu, 02 Jul 2020 01:56:16 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/07/redpwnctf-2020-part-3/</guid>
-      <description>Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &amp;ldquo;Viper&amp;rdquo;.
-Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:
-When we create our viper, its name is its viperId, which is a UUID.
-The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create.</description>
+      <description>Part 3 of my writeup series for RedPwnCTF 2020! I checked out the web challenge known as &amp;ldquo;Viper&amp;rdquo;.&#xA;Let&amp;rsquo;s Begin! Snakes are my favourite animal. And now, you can easily create ASCII-text snakes with the handy services provided by RedPwn:&#xA;When we create our viper, its name is its viperId, which is a UUID.&#xA;The source code is available for us in this challenge as well. The main file, server.js, defines multiple endpoints - but the one that caught my eye immediately was GET /admin/create.</description>
     </item>
-    
   </channel>
 </rss>

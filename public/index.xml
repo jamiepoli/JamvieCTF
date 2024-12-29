@@ -4,108 +4,80 @@
     <title>VIE</title>
     <link>https://jamvie.net/</link>
     <description>Recent content on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 07 Jul 2024 10:29:46 -0400</lastBuildDate><atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Dec 2024 10:29:46 -0400</lastBuildDate>
+    <atom:link href="https://jamvie.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DEF CON 32 Retrospective, end of the year recap</title>
+      <link>https://jamvie.net/posts/2024/12/def-con-32-retrospective-end-of-the-year-recap/</link>
+      <pubDate>Sun, 29 Dec 2024 10:29:46 -0400</pubDate>
+      <guid>https://jamvie.net/posts/2024/12/def-con-32-retrospective-end-of-the-year-recap/</guid>
+      <description>In 2009, a group students at the Carnegie Mellon University formed a computer security club known as the Plaid Parliament of Pwning, abbreviated to PPP, to participate in Capture the Flag contests. The team saw numerous successes throughout their tenure, and many of the CMU folks with their roots in PPP went on to succeed professionally in cybersecurity-related careers.&#xA;2 such members went on to co-create Theori.io, a leading platform of security solutions covering everything from security education to audits and consulting.</description>
+    </item>
     <item>
       <title>DUCTF 2024: Prisoner Processor</title>
       <link>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</link>
       <pubDate>Sun, 07 Jul 2024 10:29:46 -0400</pubDate>
-      
       <guid>https://jamvie.net/posts/2024/07/ductf-2024-prisoner-processor/</guid>
       <description>DUCTF 2024 has concluded this summer, and I decided to take a look at it with Maple Bacon and solve a few challenges. This is specifically a writeup for &amp;ldquo;Prisoner-Processor&amp;rdquo;, the hardest web challenge available. My teammate Angus and I solved this together. It was a great challenge and ventured into alot of interesting things about Bun and TypeScript, so kudos to the authors for making such an interesting challenge!</description>
     </item>
-    
     <item>
       <title>A case for documentation</title>
       <link>https://jamvie.net/posts/2024/01/a-case-for-documentation/</link>
       <pubDate>Sat, 06 Jan 2024 22:23:05 -0500</pubDate>
-      
       <guid>https://jamvie.net/posts/2024/01/a-case-for-documentation/</guid>
       <description>I am aware that the main target audience of my tiny blog are CTF players looking for my writeups and other like-minded security researchers exploring topics I like. But my 2024 resolution was to relive and unite my artistic persona that I spent most of my teen years curating, and marrying that to the security career life I live now. Part of my fine arts training involved a good deal of literature.</description>
     </item>
-    
     <item>
       <title>MAPLECTF 2023: JUJUTSU KAISEN</title>
       <link>https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/</link>
       <pubDate>Tue, 10 Oct 2023 19:53:16 +0800</pubDate>
-      
       <guid>https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/</guid>
-      <description>MapleCTF&amp;rsquo;s 2nd annual CTF was held at the same time as Hackceler8 preparation week, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&amp;rsquo;t recommend.
-This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen.</description>
+      <description>MapleCTF&amp;rsquo;s 2nd annual CTF was held at the same time as Hackceler8 preparation week, so for a brief couple of days in Japan I was busy helping organize 2 ctfs at once, which I don&amp;rsquo;t recommend.&#xA;This year, I decided to spice things up with my chals, my vie chals, by incorporating a fun prize for whichever team manages to solve all of my challenges.I had 3 challenges: JaVieScript, Blade Runner, and Jujutsu Kaisen.</description>
     </item>
-    
     <item>
       <title>DEFCON 31: Retrospective</title>
       <link>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</link>
       <pubDate>Thu, 31 Aug 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</guid>
-      <description>Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &amp;ldquo;CSAW 2019&amp;rdquo; with UBC&amp;rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.
-To be completely frank, I solved the challenge after googling &amp;ldquo;XML vulnerability&amp;rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag.</description>
+      <description>Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &amp;ldquo;CSAW 2019&amp;rdquo; with UBC&amp;rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.&#xA;To be completely frank, I solved the challenge after googling &amp;ldquo;XML vulnerability&amp;rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag.</description>
     </item>
-    
     <item>
       <title>PBCTF 2023 : JAZZY x VIE CHALS</title>
       <link>https://jamvie.net/posts/2023/02/pbctf-2023-jazzy-x-vie-chals/</link>
       <pubDate>Tue, 21 Feb 2023 15:25:54 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2023/02/pbctf-2023-jazzy-x-vie-chals/</guid>
-      <description>I was a guest challenge writer for perfect blue&amp;rsquo;s CTF held mid February. We play-tested each others chals :P
-MAKIMA Challenge Description Makima simps check in here
-I&amp;rsquo;m actually a Power stan. I just needed an excuse for people to look at my Makima drawing.
-TL;DR Hide php in image, making a PHP/image polyglot X-Accel-Header redirection through CDN to reach internal .php files and access /uploads/your_img.png/lol.php to execute PHP The important parts The default.</description>
+      <description>I was a guest challenge writer for perfect blue&amp;rsquo;s CTF held mid February. We play-tested each others chals :P&#xA;MAKIMA Challenge Description Makima simps check in here&#xA;I&amp;rsquo;m actually a Power stan. I just needed an excuse for people to look at my Makima drawing.&#xA;TL;DR Hide php in image, making a PHP/image polyglot X-Accel-Header redirection through CDN to reach internal .php files and access /uploads/your_img.png/lol.php to execute PHP The important parts The default.</description>
     </item>
-    
     <item>
       <title>MapleCTF 2022    : Vie&#39;s challenges</title>
       <link>https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/</link>
       <pubDate>Thu, 01 Sep 2022 14:50:08 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/09/maplectf-2022-vies-challenges/</guid>
       <description>MapleCTF 2022 ran this year to great success, which is fantastic given the tight timeframe we were operating on shortly after coming back from DEFCON 30. We held a beginner-friendly, UBC-local version back in January, so our endgame for this version was to make more creative and harder challenges that people hopefully enjoyed. I wrote 3 web challenges for this CTF: honksay, Viene Library and Art Gallery, the latter 2 I will detail here.</description>
     </item>
-    
     <item>
       <title>DEFCON 30: Retrospective</title>
       <link>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</link>
       <pubDate>Tue, 16 Aug 2022 13:37:54 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</guid>
-      <description>Man.
-My team, Maple Bacon, collaborated with CMU&amp;rsquo;s CTF team PPP and Theori.io&amp;rsquo;s CTF team The Duck, forming Maple Mallard Magistrates as a merger to participate in DEF CON finals.
-The Beginning Discussions about the merge had occurred earlier in the year - I triangulate it to a month or so before I found myself in Athens, Greece attending ICC. This is important to mention as I heard many people speculate about the existence of MMM and whether or not it was formed as a response to something.</description>
+      <description>Man.&#xA;My team, Maple Bacon, collaborated with CMU&amp;rsquo;s CTF team PPP and Theori.io&amp;rsquo;s CTF team The Duck, forming Maple Mallard Magistrates as a merger to participate in DEF CON finals.&#xA;The Beginning Discussions about the merge had occurred earlier in the year - I triangulate it to a month or so before I found myself in Athens, Greece attending ICC. This is important to mention as I heard many people speculate about the existence of MMM and whether or not it was formed as a response to something.</description>
     </item>
-    
     <item>
       <title>NahamCon CTF 2022</title>
       <link>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</link>
       <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</guid>
       <description>Just in Time Maple Bacon played in NahamCon CTF 2022 this past weekend, which came as a surprise - we were fully planning on focusing our efforts onto AngstromCTF which overlapped, however, NahamCon CTF proved to be interesting and good-quality so a last-minute decision was made to participate in both. AngstromCTF is still underway, but in the awkward passage of time between my last week and weekend, I played in NahamCon CTF for a little bit of practice.</description>
     </item>
-    
     <item>
       <title>B01lers CTF 2022: hacker/place</title>
       <link>https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/</link>
       <pubDate>Tue, 26 Apr 2022 19:59:24 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/04/b01lers-ctf-2022-hacker/place/</guid>
-      <description>Thoughts This year&amp;rsquo;s b01lers CTF was a great one for Maple Bacon, given that we came in first. A fantastic development, especially since last year we landed in 7th, so we&amp;rsquo;ve certainly improved a great deal since then.
-While the balance of problems was skewed, the CTF was overall an enjoyable experience. It was nice to delve into the different problems outside of web (whilst waiting for the one (1) web challenge to release), which reminded me I really need to touch up on my reversing skills, a 2022 new year resolution that I wanted to get into.</description>
+      <description>Thoughts This year&amp;rsquo;s b01lers CTF was a great one for Maple Bacon, given that we came in first. A fantastic development, especially since last year we landed in 7th, so we&amp;rsquo;ve certainly improved a great deal since then.&#xA;While the balance of problems was skewed, the CTF was overall an enjoyable experience. It was nice to delve into the different problems outside of web (whilst waiting for the one (1) web challenge to release), which reminded me I really need to touch up on my reversing skills, a 2022 new year resolution that I wanted to get into.</description>
     </item>
-    
-    <item>
-      <title>MapleCTF UBC ver. Retrospective</title>
-      <link>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/</link>
-      <pubDate>Sun, 30 Jan 2022 22:00:18 -0800</pubDate>
-      
-      <guid>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/</guid>
-      <description>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&amp;rsquo;s first CTF to hit the scene.
-For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels.</description>
-    </item>
-    
   </channel>
 </rss>

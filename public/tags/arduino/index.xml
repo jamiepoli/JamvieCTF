@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>arduino on VIE</title>
+    <title>Arduino on VIE</title>
     <link>https://jamvie.net/tags/arduino/</link>
-    <description>Recent content in arduino on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Arduino on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Mon, 02 May 2022 12:40:52 -0700</lastBuildDate><atom:link href="https://jamvie.net/tags/arduino/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 May 2022 12:40:52 -0700</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/arduino/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NahamCon CTF 2022</title>
       <link>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</link>
       <pubDate>Mon, 02 May 2022 12:40:52 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/05/nahamcon-ctf-2022/</guid>
       <description>Just in Time Maple Bacon played in NahamCon CTF 2022 this past weekend, which came as a surprise - we were fully planning on focusing our efforts onto AngstromCTF which overlapped, however, NahamCon CTF proved to be interesting and good-quality so a last-minute decision was made to participate in both. AngstromCTF is still underway, but in the awkward passage of time between my last week and weekend, I played in NahamCon CTF for a little bit of practice.</description>
     </item>
-    
   </channel>
 </rss>

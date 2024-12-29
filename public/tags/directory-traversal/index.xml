@@ -1,43 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>directory-traversal on VIE</title>
+    <title>Directory-Traversal on VIE</title>
     <link>https://jamvie.net/tags/directory-traversal/</link>
-    <description>Recent content in directory-traversal on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Directory-Traversal on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Sun, 04 Apr 2021 03:12:16 -0600</lastBuildDate><atom:link href="https://jamvie.net/tags/directory-traversal/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Apr 2021 03:12:16 -0600</lastBuildDate>
+    <atom:link href="https://jamvie.net/tags/directory-traversal/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bo1lersCTF 2021: Lorem_Ipsum</title>
       <link>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</link>
       <pubDate>Sun, 04 Apr 2021 03:12:16 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2021/04/bo1lersctf-2021-lorem_ipsum/</guid>
-      <description>Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &amp;ldquo;animal&amp;rdquo;-ified versions of the famous lorem ipsum placeholder text.
-Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?
-This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens.</description>
+      <description>Lorem_Ipsum gave nothing but a simple homepage that allowed you to see &amp;ldquo;animal&amp;rdquo;-ified versions of the famous lorem ipsum placeholder text.&#xA;Choose among the available animals, and notice a GET query parameter that looks something like ?animal=dogs. What if you gave it text garbage instead of an expected animal?&#xA;This is a Werkzeug debugger! What fun, since Werkzeug in development mode will give you a python console with every traceback that is reported to you when something wrong happens.</description>
     </item>
-    
     <item>
       <title>RedPwnCTF 2020, part 2</title>
       <link>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</link>
       <pubDate>Sun, 28 Jun 2020 21:19:19 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/06/redpwnctf-2020-part-2/</guid>
-      <description>Part 2 of my writeup series for RedPwnCTF 2020!
-Let&amp;rsquo;s Begin! Tux-Fanpage points: 464 Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:
-const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request if(!path || !strip(path)){ res.</description>
+      <description>Part 2 of my writeup series for RedPwnCTF 2020!&#xA;Let&amp;rsquo;s Begin! Tux-Fanpage points: 464 Ignoring the 1990&amp;rsquo;s aesthetic of the page, observe the provided script:&#xA;const express = require(&amp;#39;express&amp;#39;) const path = require(&amp;#39;path&amp;#39;) const app = express() //Don&amp;#39;t forget to redact from published source const flag = &amp;#39;[REDACTED]&amp;#39; app.get(&amp;#39;/&amp;#39;, (req, res) =&amp;gt; { res.redirect(&amp;#39;/page?path=index.html&amp;#39;) }) app.get(&amp;#39;/page&amp;#39;, (req, res) =&amp;gt; { let path = req.query.path //Handle queryless request if(!path || !strip(path)){ res.</description>
     </item>
-    
     <item>
       <title>CONfidence 2020: CatWeb</title>
       <link>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</link>
       <pubDate>Thu, 23 Apr 2020 00:46:19 -0600</pubDate>
-      
       <guid>https://jamvie.net/posts/2020/04/confidence-2020-catweb/</guid>
       <description>&lt;p&gt;I participated in CONfidence CTF 2020 teasers in March of this year. I was focusing mainly on this problem, and it really helped me broaden my skills in JSON-related attacks! I have never seen many JSON injections before this, so this was welcome practise.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

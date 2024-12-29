@@ -1,43 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>retrospectives on VIE</title>
+    <title>Retrospectives on VIE</title>
     <link>https://jamvie.net/categories/retrospectives/</link>
-    <description>Recent content in retrospectives on VIE</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Retrospectives on VIE</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>CC Attribution-NonCommercial 4.0 International License</copyright>
-    <lastBuildDate>Thu, 31 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://jamvie.net/categories/retrospectives/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Dec 2024 10:29:46 -0400</lastBuildDate>
+    <atom:link href="https://jamvie.net/categories/retrospectives/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DEF CON 32 Retrospective, end of the year recap</title>
+      <link>https://jamvie.net/posts/2024/12/def-con-32-retrospective-end-of-the-year-recap/</link>
+      <pubDate>Sun, 29 Dec 2024 10:29:46 -0400</pubDate>
+      <guid>https://jamvie.net/posts/2024/12/def-con-32-retrospective-end-of-the-year-recap/</guid>
+      <description>In 2009, a group students at the Carnegie Mellon University formed a computer security club known as the Plaid Parliament of Pwning, abbreviated to PPP, to participate in Capture the Flag contests. The team saw numerous successes throughout their tenure, and many of the CMU folks with their roots in PPP went on to succeed professionally in cybersecurity-related careers.&#xA;2 such members went on to co-create Theori.io, a leading platform of security solutions covering everything from security education to audits and consulting.</description>
+    </item>
     <item>
       <title>DEFCON 31: Retrospective</title>
       <link>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</link>
       <pubDate>Thu, 31 Aug 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://jamvie.net/posts/2023/08/defcon-31-retrospective/</guid>
-      <description>Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &amp;ldquo;CSAW 2019&amp;rdquo; with UBC&amp;rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.
-To be completely frank, I solved the challenge after googling &amp;ldquo;XML vulnerability&amp;rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag.</description>
+      <description>Beginning Back in October of 2019, I was attending my 3rd/4th? year at UBC, where I tried to play in a beginner-friendly CTF known as &amp;ldquo;CSAW 2019&amp;rdquo; with UBC&amp;rsquo;s team: Maple Bacon. Particularly, I tried out a challenge called Unagi, which, having spent an eternity on, I managed to solve after hours of wrangling with the problem.&#xA;To be completely frank, I solved the challenge after googling &amp;ldquo;XML vulnerability&amp;rdquo; and trying out payloads - really, just, throwing payloads and modifying them to tailor the challenge - until one stuck and I got the flag.</description>
     </item>
-    
     <item>
       <title>DEFCON 30: Retrospective</title>
       <link>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</link>
       <pubDate>Tue, 16 Aug 2022 13:37:54 -0700</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/08/defcon-30-retrospective/</guid>
-      <description>Man.
-My team, Maple Bacon, collaborated with CMU&amp;rsquo;s CTF team PPP and Theori.io&amp;rsquo;s CTF team The Duck, forming Maple Mallard Magistrates as a merger to participate in DEF CON finals.
-The Beginning Discussions about the merge had occurred earlier in the year - I triangulate it to a month or so before I found myself in Athens, Greece attending ICC. This is important to mention as I heard many people speculate about the existence of MMM and whether or not it was formed as a response to something.</description>
+      <description>Man.&#xA;My team, Maple Bacon, collaborated with CMU&amp;rsquo;s CTF team PPP and Theori.io&amp;rsquo;s CTF team The Duck, forming Maple Mallard Magistrates as a merger to participate in DEF CON finals.&#xA;The Beginning Discussions about the merge had occurred earlier in the year - I triangulate it to a month or so before I found myself in Athens, Greece attending ICC. This is important to mention as I heard many people speculate about the existence of MMM and whether or not it was formed as a response to something.</description>
     </item>
-    
     <item>
       <title>MapleCTF UBC ver. Retrospective</title>
       <link>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/</link>
       <pubDate>Sun, 30 Jan 2022 22:00:18 -0800</pubDate>
-      
       <guid>https://jamvie.net/posts/2022/01/maplectf-ubc-ver.-retrospective/</guid>
-      <description>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&amp;rsquo;s first CTF to hit the scene.
-For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels.</description>
+      <description>Jan 21-28 marked the inaugural MapleCTF: UBC version, Maple Bacon&amp;rsquo;s first CTF to hit the scene.&#xA;For our very first, we wanted to keep it local. This made it very different from most other CTFs that one would be used to. We treated this as a beginner event - hoping to introduce the UBC community to the concept, well aware that we would have to cater to varying skill levels.</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Vie ">
-<meta name="description" content="The 2nd challenge I worked on, titled &amp;ldquo;All the little things&amp;rdquo;. Frustratingly, I didn&amp;rsquo;t solve this challenge. I was about 85% of the way there!
+<meta name="description" content="The 2nd challenge I worked on, titled &ldquo;All the little things&rdquo;. Frustratingly, I didn&rsquo;t solve this challenge. I was about 85% of the way there!
 " />
 <meta name="keywords" content=", HTML-injection, xss, web, object-poisoning" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#0c0c0d" />
-<link rel="canonical" href="https://jamvie.net/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/" />
+<link rel="canonical" href="http://localhost:1313/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/" />
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
 
 
     <title>
         
-            GoogleCTF 2020: All the Little Things, Post-CTF Reflection :: Vie 
+            GoogleCTF 2020: All the Little Things, Post-CTF Reflection :: VIE 
         
     </title>
 
@@ -26,32 +32,32 @@
 
 
 
-<link rel="stylesheet" href="https://jamvie.net/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+<link rel="stylesheet" href="http://localhost:1313/main.535bae1ccfa4f49e2cd0c8cecdece0708a1ec5b561a08b8f0f6ea9254d639b2c.css">
 
 
 
-
-    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
-    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
-    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#0c0c0d">
-    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
-    <meta name="msapplication-TileColor" content="#0c0c0d">
-    <meta name="theme-color" content="">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+    <link rel="manifest" href="http://localhost:1313/site.webmanifest">
+    <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="http://localhost:1313/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
 
 
 
-<meta itemprop="name" content="GoogleCTF 2020: All the Little Things, Post-CTF Reflection">
-<meta itemprop="description" content="The 2nd challenge I worked on, titled &ldquo;All the little things&rdquo;. Frustratingly, I didn&rsquo;t solve this challenge. I was about 85% of the way there!"><meta itemprop="datePublished" content="2020-08-24T20:17:24-06:00" />
-<meta itemprop="dateModified" content="2020-08-24T20:17:24-06:00" />
-<meta itemprop="wordCount" content="1100"><meta itemprop="image" content="https://jamvie.net/img/V.png"/>
-<meta itemprop="keywords" content="HTML-injection,xss,web,object-poisoning," />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://jamvie.net/img/V.png"/>
+  <meta itemprop="name" content="GoogleCTF 2020: All the Little Things, Post-CTF Reflection">
+  <meta itemprop="description" content="The 2nd challenge I worked on, titled “All the little things”. Frustratingly, I didn’t solve this challenge. I was about 85% of the way there!">
+  <meta itemprop="datePublished" content="2020-08-24T20:17:24-06:00">
+  <meta itemprop="dateModified" content="2020-08-24T20:17:24-06:00">
+  <meta itemprop="wordCount" content="1100">
+  <meta itemprop="image" content="http://localhost:1313/img/pixelvie.png">
+  <meta itemprop="keywords" content="Html-Injection,Xss,Web,Object-Poisoning">
 
-<meta name="twitter:title" content="GoogleCTF 2020: All the Little Things, Post-CTF Reflection"/>
-<meta name="twitter:description" content="The 2nd challenge I worked on, titled &ldquo;All the little things&rdquo;. Frustratingly, I didn&rsquo;t solve this challenge. I was about 85% of the way there!"/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/pixelvie.png">
+  <meta name="twitter:title" content="GoogleCTF 2020: All the Little Things, Post-CTF Reflection">
+  <meta name="twitter:description" content="The 2nd challenge I worked on, titled “All the little things”. Frustratingly, I didn’t solve this challenge. I was about 85% of the way there!">
 
 
 
@@ -72,18 +78,21 @@
 
     </head>
 
-    <body class="dark-theme">
+    
+        <body>
+    
+    
         <div class="container">
             <header class="header">
     <span class="header__inner">
-        <a href="https://jamvie.net/" style="text-decoration: none;">
+        <a href="http://localhost:1313/" style="text-decoration: none;">
     <div class="logo">
         
             <span class="logo__mark">></span>
-            <span class="logo__text">$ echo &#39;hello&#39;</span>
+            <span class="logo__text">$ cd /</span>
             <span class="logo__cursor" style=
                   "
-                   background-color:#fd262d;
+                   background-color:#a4312b;
                    ">
             </span>
         
@@ -94,7 +103,7 @@
         <span class="header__right">
             
                 <nav class="menu">
-    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li>
+    <ul class="menu__inner"><li><a href="http://localhost:1313/about/">About Me</a></li><li><a href="http://localhost:1313/categories/">Categories</a></li><li><a href="http://localhost:1313/chals/">CTF Chals</a></li><li><a href="http://localhost:1313/posts/">Posts</a></li><li><a href="http://localhost:1313/tags/">Tags</a></li>
     </ul>
 </nav>
 
@@ -106,58 +115,55 @@
                 </span>
             
 
-            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
-  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
-</svg>
-</span>
         </span>
     </span>
 
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-176711986-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+  
+    
+      
+    
+  
+
+
 </header>
 
 
             <div class="content">
                 
-    <main class="post">
+  <main class="post">
 
-        <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minutes
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        6 minutes
 
-            
+        
+      </p>
+    </div>
 
-            </p>
-        </div>
+    <article>
+      <h1 class="post-title">
+        <a href="http://localhost:1313/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/">GoogleCTF 2020: All the Little Things, Post-CTF Reflection</a>
+      </h1>
 
-        <article>
-            <h1 class="post-title">
-                <a href="https://jamvie.net/posts/2020/08/googlectf-2020-all-the-little-things-post-ctf-reflection/">GoogleCTF 2020: All the Little Things, Post-CTF Reflection</a>
-            </h1>
+      
 
-            
+      
 
-            <div class="post-content">
-                <p>The 2nd challenge I worked on, titled &ldquo;All the little things&rdquo;. Frustratingly, I didn&rsquo;t solve this challenge. I was about <strong>85%</strong> of the way there!</p>
+      
+
+      <div class="post-content">
+        <p>The 2nd challenge I worked on, titled &ldquo;All the little things&rdquo;. Frustratingly, I didn&rsquo;t solve this challenge. I was about <strong>85%</strong> of the way there!</p>
 <p>This is less of a writeup and instead a discussion on what I did in the problem and a reflection on the 2020 offering of GoogleCTF.</p>
 <h2 id="lets-begin">Let&rsquo;s Begin!</h2>
 <p>Right off the bat, clicking on <code>/login</code> we have a very interesting login page that only takes your username and a profile image sourced as an http link. I spent some time wondering if an xss payload delivery was in order that way but it turned out to be a dead end.</p>
 <p>Logging in as any user lets us access a new endpoint called <code>/settings</code>. Aside from the available options to change your name, profile picture and theme (light or dark), lets inspect the HTML:</p>
 
-    <img src="https://jamvie.net/images/google2020lilthingsdebug.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
+    <img src="http://localhost:1313/images/google2020lilthingsdebug.png"  alt="Login"  class="center"  style="border-radius: 8px;"  />
 
 
 <p>Theres an interesting comment. Add it to our settings URL and we get an additional DEBUG form! Additionally, an extra script known as <code>debug.js</code> gets loaded in static:</p>
@@ -253,7 +259,7 @@ if (!doNotTrack) {
 <p>So we can manipulate the theme javascript callback to instead do whatever we want, and perhaps we can abuse the callback and chain together multiple ones. I would normally use <code>script</code> tags to achieve that, but injecting them is prohibited under the site&rsquo;s Content-Security Policy:</p>
 <pre tabindex="0"><code>default-src &#39;none&#39;;script-src &#39;self&#39; &#39;nonce-fe8dc57053b61e71&#39;;img-src https: http:;connect-src &#39;self&#39;;style-src &#39;self&#39;;base-uri &#39;none&#39;;form-action &#39;self&#39;;font-src https://fonts.googleapis.com
 </code></pre><p>This stumped me for a while. We&rsquo;ll return to this later.</p>
-<p>Another thing of note is that you can make notes either public or private - if you make them public, they get added into the pasteurize web server from the previous challenge, which has a known xss vulnerability (<a href="https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize">see previous post</a>).</p>
+<p>Another thing of note is that you can make notes either public or private - if you make them public, they get added into the pasteurize web server from the previous challenge, which has a known xss vulnerability (<a href="http://localhost:1313/posts/2020/08/googlectf-2020-pasteurize">see previous post</a>).</p>
 <p>This challenge implies we need to access a private note that holds the flag, and the description of the challenge also hints that TJMike from previous is also logged into this server. So, the idea would be to use the debug capabilities and rename the <code>window.name</code> to perform an injection attack and grab the relevant note ID, and then redirect him to the note and somehow read the contents from there. But how?</p>
 <p>So this is where I got stuck. Unfortunately, I didn&rsquo;t have enough time to figure out the challenge before GoogleCTF ended. I had the right idea - chain multiple callbacks on <code>theme.cb</code> to malform the window contents, and deliver a payload through the pasteurize way. Here&rsquo;s what I missed:</p>
 <ol>
@@ -271,50 +277,89 @@ if (!doNotTrack) {
 <p>I&rsquo;m glad that I tried this challenge out, and I&rsquo;m equally glad that I saw how close I actually was to the solution. Although it&rsquo;s bittersweet to figure out the solution shortly after the CTF ended, I&rsquo;m still quite happy with myself for catching on to the exploit relatively quickly and formulating a solution that was 4/5ths of the way there. A few months ago, I would have been totally stumped on this problem.</p>
 <p>GoogleCTF 2020 was challenging, and I will continue to participate in harder and harder CTFs as I go. The road to self-improvement of my skills as an ethical hacker is nowhere close to conclusion, which is an exciting and slightly intimidating prospect. This was the first offering of GoogleCTF I participated in, since having started to seriously and consistently participate in CTFs in January of this year. This challenge was good practise, and I learned valuable lessons about the structure of javascript objects in HTML! I&rsquo;m going to continue developing my skills, and hopefully continue to solve harder and harder challenges.</p>
 <p>Jam</p>
-            </div>
-        </article>
+      </div>
+    </article>
 
-        <hr />
+    <hr />
 
-        <div class="post-info">
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://jamvie.net/tags/html-injection">HTML-injection</a></span><span class="tag"><a href="https://jamvie.net/tags/xss">xss</a></span><span class="tag"><a href="https://jamvie.net/tags/web">web</a></span><span class="tag"><a href="https://jamvie.net/tags/object-poisoning">object-poisoning</a></span>
-                </p>
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1100 Words</p>
+        <span class="tag"><a href="http://localhost:1313/tags/html-injection/">HTML-injection</a></span>
+        <span class="tag"><a href="http://localhost:1313/tags/xss/">xss</a></span>
+        <span class="tag"><a href="http://localhost:1313/tags/web/">web</a></span>
+        <span class="tag"><a href="http://localhost:1313/tags/object-poisoning/">object-poisoning</a></span>
+        
+    </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-08-24 20:17 -0600</p>
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="http://localhost:1313/categories/miscellaneous/">miscellaneous</a></span>
+        
+    </p>
+
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        1100 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2020-08-24 20:17 -0600
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="http://localhost:1313/posts/2020/09/volgactf-finals-2020/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">VolgaCTF Finals 2020</span>
+                </a>
+            </span>
+            
+
+            
+            <span class="button next">
+                <a href="http://localhost:1313/posts/2020/08/googlectf-2020-pasteurize/">
+                    <span class="button__text">GoogleCTF 2020: Pasteurize</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
         </div>
+    </div>
 
-        
-            <div class="pagination">
-                <div class="pagination__title">
-                    <span class="pagination__title-h"></span>
-                    <hr />
-                </div>
 
-                <div class="pagination__buttons">
-                    
-                        <span class="button previous">
-                            <a href="https://jamvie.net/posts/2020/09/volgactf-finals-2020/">
-                                <span class="button__icon">←</span>
-                                <span class="button__text">VolgaCTF Finals 2020</span>
-                            </a>
-                        </span>
-                    
+    
 
-                    
-                        <span class="button next">
-                            <a href="https://jamvie.net/posts/2020/08/googlectf-2020-pasteurize/">
-                                <span class="button__text">GoogleCTF 2020: Pasteurize</span>
-                                <span class="button__icon">→</span>
-                            </a>
-                        </span>
-                    
-                </div>
-            </div>
-        
-    </main>
+  </main>
 
             </div>
 
@@ -322,18 +367,13 @@ if (!doNotTrack) {
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2022</span>
-            
-                <span><a href="https://jamvie.net">Vie</a></span>
-            
+            <span>&copy; 2024</span>
             <span>CC Attribution-NonCommercial 4.0 International License</span>
-            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+            <span> <a href="http://localhost:1313/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
         </div>
     </div>
     <div class="footer__inner">
         <div class="footer__content">
-            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
-            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
         </div>
     </div>
 </footer>
@@ -345,21 +385,7 @@ if (!doNotTrack) {
 
 
 
-
-<script type="text/javascript" src="https://jamvie.net/bundle.min.af5a3e743efae0c74305dc03080fb4bd5ae8f1a60160b3599ab59639ad6c182d763fb4238e72a726f48319ad132a4cdc9cd51fac5462e8a25dc0ba096f547038.js" integrity="sha512-r1o&#43;dD764MdDBdwDCA&#43;0vVro8aYBYLNZmrWWOa1sGC12P7QjjnKnJvSDGa0TKkzcnNUfrFRi6KJdwLoJb1RwOA=="></script>
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-176711986-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+<script type="text/javascript" src="http://localhost:1313/bundle.min.63e1cd4087b02bc78961fcab2aaf77e957e2227557c73ab774f1cc4a9db0645e90d2403ca03e55eb0887e432e82aea10afe7f125052af6dd46cfea148ecbc663.js" integrity="sha512-Y&#43;HNQIewK8eJYfyrKq936VfiInVXxzq3dPHMSp2wZF6Q0kA8oD5V6wiH5DLoKuoQr&#43;fxJQUq9t1Gz&#43;oUjsvGYw=="></script>
 
 
 

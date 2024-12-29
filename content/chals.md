@@ -16,10 +16,13 @@ I've been writing challenges since 2022, which is not a long time, but all of my
 * [JUJUTSU KAISEN](https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/)
     * POST-based img-tag XSSI -> ESI injection -> img-creation primitive oracle -> XS-leak 
 
-## PBCTF
+## PBCTF // BWCTF
 
 * [Makima](posts/2023/02/pbctf-2023-jazzy-x-vie-chals/#makima)
     * FastCGI PHP and nginx path resolution for PHP RCE combined with `X-Accel-Redirect` header SSRF
+
+* Sandevistan
+    * Golang method confusion to overwrite `/proc/self/mem` for runtime RCE
 
 ## GOOGLE CTF
 
@@ -36,3 +39,8 @@ I've been writing challenges since 2022, which is not a long time, but all of my
 
 * [Redwave](https://www.hackthebox.com/events/htb-business-ctf-2023)
     * Golang -> Ruby JSON parsing differential + SSRF bypass with header parsing differential + Ruby deserialization RCE
+
+## CSAW
+
+* Charlie's Angels
+    * Arbitrary property definition in JavaScript to overwrite and clobber yaml files into python files with HTTP client gadgets

@@ -44,24 +44,27 @@
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="Trend Micro CTF: Raimund Genes Quals 2020">
-<meta itemprop="description" content="Last year, before I became an active participant in Maple Bacon, the team went on to participate in and land a top 10 position in Trend Micro 2019 Qualifiers, later going on to compete in the finals of that year. When the 2020 serving came up this weekend, I wanted to keep with tradition and maintain the pattern - and so we landed a top 10 position and will be going on ahead to the 2020 finals :)"><meta itemprop="datePublished" content="2020-10-04T13:12:06-06:00" />
-<meta itemprop="dateModified" content="2020-10-04T13:12:06-06:00" />
-<meta itemprop="wordCount" content="1686"><meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png"/>
-<meta itemprop="keywords" content="reversing,android,OSINT,crypto," />
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png"/>
 
-<meta name="twitter:title" content="Trend Micro CTF: Raimund Genes Quals 2020"/>
-<meta name="twitter:description" content="Last year, before I became an active participant in Maple Bacon, the team went on to participate in and land a top 10 position in Trend Micro 2019 Qualifiers, later going on to compete in the finals of that year. When the 2020 serving came up this weekend, I wanted to keep with tradition and maintain the pattern - and so we landed a top 10 position and will be going on ahead to the 2020 finals :)"/>
+  <meta itemprop="name" content="Trend Micro CTF: Raimund Genes Quals 2020">
+  <meta itemprop="description" content="Last year, before I became an active participant in Maple Bacon, the team went on to participate in and land a top 10 position in Trend Micro 2019 Qualifiers, later going on to compete in the finals of that year. When the 2020 serving came up this weekend, I wanted to keep with tradition and maintain the pattern - and so we landed a top 10 position and will be going on ahead to the 2020 finals :)">
+  <meta itemprop="datePublished" content="2020-10-04T13:12:06-06:00">
+  <meta itemprop="dateModified" content="2020-10-04T13:12:06-06:00">
+  <meta itemprop="wordCount" content="1686">
+  <meta itemprop="image" content="https://jamvie.net/img/pixelvie.png">
+  <meta itemprop="keywords" content="Reversing,Android,OSINT,Crypto">
 
-
-
-
-
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jamvie.net/img/pixelvie.png">
+  <meta name="twitter:title" content="Trend Micro CTF: Raimund Genes Quals 2020">
+  <meta name="twitter:description" content="Last year, before I became an active participant in Maple Bacon, the team went on to participate in and land a top 10 position in Trend Micro 2019 Qualifiers, later going on to compete in the finals of that year. When the 2020 serving came up this weekend, I wanted to keep with tradition and maintain the pattern - and so we landed a top 10 position and will be going on ahead to the 2020 finals :)">
 
 
-    <meta property="article:published_time" content="2020-10-04 13:12:06 -0600 -0600" />
+
+
+
+
+
+    <meta property="article:published_time" content="2020-10-04 13:12:06 -0600 MDT" />
 
 
 
@@ -113,18 +116,13 @@
     </span>
 
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-176711986-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
+  
+    
+      
+    
+  
+
+
 </header>
 
 
@@ -252,27 +250,27 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
 <pre tabindex="0"><code>Unlock KEY3 by sending the right text message. 
 </code></pre><p>This requires some explanation on the architecture of text messages in an android phone.</p>
 <p>SMS messages are kept in a relational database - specifically, sqlite. In the APK&rsquo;s observer class, we see some interesting checking going on:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v5</span><span style="color:#f92672">,</span> v2<span style="color:#f92672">},</span> Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;-&gt;</span>getColumnName<span style="color:#f92672">(</span>I<span style="color:#f92672">)</span>Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v5</span>, v2}, Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor;<span style="color:#f92672">-&gt;</span>getColumnName(I)Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    move<span style="color:#f92672">-</span>result<span style="color:#f92672">-</span>object v5
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span>virtual <span style="color:#f92672">{</span>v4<span style="color:#f92672">,</span> v5<span style="color:#f92672">},</span> Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String<span style="color:#f92672">;-&gt;</span>equals<span style="color:#f92672">(</span>Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>Object<span style="color:#f92672">;)</span>Z
+</span></span><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span>virtual {v4, v5}, Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String;<span style="color:#f92672">-&gt;</span>equals(Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>Object;)Z
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    move<span style="color:#f92672">-</span>result v4
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">-</span>eqz v4<span style="color:#f92672">,</span> <span style="color:#f92672">:</span>cond_a8
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">-</span>eqz v4, :cond_a8
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    iget<span style="color:#f92672">-</span>object v4<span style="color:#f92672">,</span> p0<span style="color:#f92672">,</span> Lcom<span style="color:#f92672">/</span>trendmicro<span style="color:#f92672">/</span>keybox<span style="color:#f92672">/</span>Observer<span style="color:#f92672">;-&gt;</span>cursor<span style="color:#f92672">:</span>Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    iget<span style="color:#f92672">-</span>object v4, p0, Lcom<span style="color:#f92672">/</span>trendmicro<span style="color:#f92672">/</span>keybox<span style="color:#f92672">/</span>Observer;<span style="color:#f92672">-&gt;</span>cursor:Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    iget<span style="color:#f92672">-</span>object v5<span style="color:#f92672">,</span> p0<span style="color:#f92672">,</span> Lcom<span style="color:#f92672">/</span>trendmicro<span style="color:#f92672">/</span>keybox<span style="color:#f92672">/</span>Observer<span style="color:#f92672">;-&gt;</span>cursor<span style="color:#f92672">:</span>Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    iget<span style="color:#f92672">-</span>object v5, p0, Lcom<span style="color:#f92672">/</span>trendmicro<span style="color:#f92672">/</span>keybox<span style="color:#f92672">/</span>Observer;<span style="color:#f92672">-&gt;</span>cursor:Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span><span style="color:#f92672">-</span>string v6<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;type&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span><span style="color:#f92672">-</span>string v6, <span style="color:#e6db74">&#34;type&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v5</span><span style="color:#f92672">,</span> v6<span style="color:#f92672">},</span> Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;-&gt;</span>getColumnIndex<span style="color:#f92672">(</span>Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String<span style="color:#f92672">;)</span>I
+</span></span><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v5</span>, v6}, Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor;<span style="color:#f92672">-&gt;</span>getColumnIndex(Ljava<span style="color:#f92672">/</span>lang<span style="color:#f92672">/</span>String;)I
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    move<span style="color:#f92672">-</span>result v5
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v4</span><span style="color:#f92672">,</span> v5<span style="color:#f92672">},</span> Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor<span style="color:#f92672">;-&gt;</span>getInt<span style="color:#f92672">(</span>I<span style="color:#f92672">)</span>I
+</span></span><span style="display:flex;"><span>    invoke<span style="color:#f92672">-</span><span style="color:#66d9ef">interface</span> <span style="color:#960050;background-color:#1e0010">{</span><span style="color:#a6e22e">v4</span>, v5}, Landroid<span style="color:#f92672">/</span>database<span style="color:#f92672">/</span>Cursor;<span style="color:#f92672">-&gt;</span>getInt(I)I
 </span></span></code></pre></div><p>What&rsquo;s happening here? Well, long story short, when we send an SMS message, the app will access the SMS sqlite database and iterate through the columns of that database, and match the content of the text message to the column name. If there&rsquo;s a match, then the app will unlock the 3rd key for us. This must mean that the string needed to decrypt the third key bit must be one of the column names!</p>
 
     <img src="https://jamvie.net/images/Key3Decrypt.png"  alt="key3"  class="center"  style="border-radius: 8px;"  />
@@ -356,7 +354,7 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
           <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
         
-          2020-10-04 15:12 -0400
+          2020-10-04 13:12 -0600
         
 
          
@@ -393,8 +391,6 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
 
     
 
-    
-
   </main>
 
             </div>
@@ -421,7 +417,7 @@ But the full hint for key 1 didn&rsquo;t reveal anything else. That was the whol
 
 
 
-<script type="text/javascript" src="https://jamvie.net/bundle.min.cf7fb2a9e24608a783e05e4472da2fdf008293289de1ad88d1cba5c143e7e414496dd33b6a228e92f8461ce0c8cbad3c9f9847e73e46dfbce0463393ddd1733a.js" integrity="sha512-z3&#43;yqeJGCKeD4F5Ectov3wCCkyid4a2I0culwUPn5BRJbdM7aiKOkvhGHODIy608n5hH5z5G37zgRjOT3dFzOg=="></script>
+<script type="text/javascript" src="https://jamvie.net/bundle.min.63e1cd4087b02bc78961fcab2aaf77e957e2227557c73ab774f1cc4a9db0645e90d2403ca03e55eb0887e432e82aea10afe7f125052af6dd46cfea148ecbc663.js" integrity="sha512-Y&#43;HNQIewK8eJYfyrKq936VfiInVXxzq3dPHMSp2wZF6Q0kA8oD5V6wiH5DLoKuoQr&#43;fxJQUq9t1Gz&#43;oUjsvGYw=="></script>
 
 
 
