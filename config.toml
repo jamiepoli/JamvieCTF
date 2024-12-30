@@ -81,7 +81,7 @@ disableHugoGeneratorInject = false
     msapplication = "#0c0c0d"
 
   [params.logo]
-    logoText     = "$ cd /"
+    logoText     = "$ vie /"
     logoHomeLink = "/"
     # Set true to remove the logo cursor entirely.
     # logoCursorDisabled = false
