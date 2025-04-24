@@ -1,6 +1,10 @@
-# My challenges
+# Challenges
 
 I've been writing challenges since 2022, which is not a long time, but all of my challenges have more or less been scattered throughout the wind. This is my attempt to consolidate the ones I wrote. 
+
+## PLAIDCTF
+* VIEHAW (writeup pending)
+    * Game-ified hack inspired by [Skyrim's restoration loop hack](https://elderscrolls.fandom.com/wiki/Forum:Skyrim:Alchemy/Enchanting_Loop), coupled with SSRF -> RCE with pickle on Graphite
 
 ## MAPLECTF
 
@@ -16,13 +20,6 @@ I've been writing challenges since 2022, which is not a long time, but all of my
 * [JUJUTSU KAISEN](https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/)
     * POST-based img-tag XSSI -> ESI injection -> img-creation primitive oracle -> XS-leak 
 
-## PBCTF // BWCTF
-
-* [Makima](posts/2023/02/pbctf-2023-jazzy-x-vie-chals/#makima)
-    * FastCGI PHP and nginx path resolution for PHP RCE combined with `X-Accel-Redirect` header SSRF
-
-* Sandevistan
-    * Golang method confusion to overwrite `/proc/self/mem` for runtime RCE
 
 ## GOOGLE CTF
 
@@ -44,3 +41,11 @@ I've been writing challenges since 2022, which is not a long time, but all of my
 
 * Charlie's Angels
     * Arbitrary property definition in JavaScript to overwrite and clobber yaml files into python files with HTTP client gadgets
+
+## PBCTF // BWCTF
+
+* [Makima](posts/2023/02/pbctf-2023-jazzy-x-vie-chals/#makima)
+    * FastCGI PHP and nginx path resolution for PHP RCE combined with `X-Accel-Redirect` header SSRF
+
+* Sandevistan
+    * Golang method confusion to overwrite `/proc/self/mem` for runtime RCE
