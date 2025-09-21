@@ -20,7 +20,6 @@ I've been writing challenges since 2022, which is not a long time, but all of my
 * [JUJUTSU KAISEN](https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/)
     * POST-based img-tag XSSI -> ESI injection -> img-creation primitive oracle -> XS-leak 
 
-
 ## GOOGLE CTF
 
 * [Veggie Soda](https://github.com/google/google-ctf/tree/master/2023/quals/web-vegsoda)

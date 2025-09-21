@@ -24,6 +24,7 @@ Things that I did:
         * DEFCON 30
         * DEFCON 31
         * DEFCON 32
+        * DEFCON 33
 
 * **Hackceler8**
     * Lead art designer and developer
