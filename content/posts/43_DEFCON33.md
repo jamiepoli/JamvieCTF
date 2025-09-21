@@ -122,7 +122,7 @@ Axis was a web challenge written in erlang, but provisioned as an erlang binary 
 
 ### End Day Two
 
-We got kicked out of LiveCTF pretty earliy so our point delta would look different without the boost of points. This year's stealth ports meant that every other point-gaining attribute got a massive scale up, so losing out of LiveCTF top 3 meant that our lead wasn't as big as we thought it was. This was concerning - the delta between first and second place was smaller than we thought. Furthermore, the last day of Sunday was, idk, 3 hours long? We couldn't spend those remaining hours doing fuck-all. Last night, and last few years, we encouraged and had a system of people who slept while others worked, on shift. This day, we all collectively said fuck it. All of us were up. 
+We got kicked out of LiveCTF pretty early so our point delta would look different without the boost of points. This year's stealth ports meant that every other point-gaining attribute got a massive scale up, so losing out of LiveCTF top 3 meant that our lead wasn't as big as we thought it was. This was concerning - the delta between first and second place was smaller than we thought. Furthermore, the last day of Sunday was, idk, 3 hours long? We couldn't spend those remaining hours doing fuck-all. Last night, and last few years, we encouraged and had a system of people who slept while others worked, on shift. This day, we all collectively said fuck it. All of us were up. 
 
 ## Day Three - Sunday
 
