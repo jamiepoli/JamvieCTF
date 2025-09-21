@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="I&rsquo;m currently writing this while in Barcelona, Spain, as I realize during my vacation this is probably one of the few times I can actually utilize to start up writing again. This will be a technical writeup for my challenge, Viehaw, from PlaidCTF 2025.
+I&rsquo;ve been friends with PPP for a while considering our happy union of MMM. My CTF career also grew up on some early PlaidCTF challenges - a healthy diet of GoogleCTF, CSAW, PicoCTF, DragonCTF, PlaidCTF and HXPCTF really helped grow my skills." />
+<meta name="keywords" content=", untagged" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="http://localhost:1313/posts/2025/04/plaidctf-2025-viehaw/" />
+<link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+
+
+    <title>
+        
+            PLAIDCTF 2025: VIEHAW!! :: VIE 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="http://localhost:1313/main.535bae1ccfa4f49e2cd0c8cecdece0708a1ec5b561a08b8f0f6ea9254d639b2c.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="http://localhost:1313/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+    <link rel="manifest" href="http://localhost:1313/site.webmanifest">
+    <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="http://localhost:1313/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+
+  <meta itemprop="name" content="PLAIDCTF 2025: VIEHAW!!">
+  <meta itemprop="description" content="I’m currently writing this while in Barcelona, Spain, as I realize during my vacation this is probably one of the few times I can actually utilize to start up writing again. This will be a technical writeup for my challenge, Viehaw, from PlaidCTF 2025.
+I’ve been friends with PPP for a while considering our happy union of MMM. My CTF career also grew up on some early PlaidCTF challenges - a healthy diet of GoogleCTF, CSAW, PicoCTF, DragonCTF, PlaidCTF and HXPCTF really helped grow my skills.">
+  <meta itemprop="datePublished" content="2025-04-24T21:43:22+02:00">
+  <meta itemprop="dateModified" content="2025-04-24T21:43:22+02:00">
+  <meta itemprop="wordCount" content="540">
+  <meta itemprop="image" content="http://localhost:1313/img/rubber_duckvie.png">
+  <meta itemprop="keywords" content="Untagged">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/img/rubber_duckvie.png">
+  <meta name="twitter:title" content="PLAIDCTF 2025: VIEHAW!!">
+  <meta name="twitter:description" content="I’m currently writing this while in Barcelona, Spain, as I realize during my vacation this is probably one of the few times I can actually utilize to start up writing again. This will be a technical writeup for my challenge, Viehaw, from PlaidCTF 2025.
+I’ve been friends with PPP for a while considering our happy union of MMM. My CTF career also grew up on some early PlaidCTF challenges - a healthy diet of GoogleCTF, CSAW, PicoCTF, DragonCTF, PlaidCTF and HXPCTF really helped grow my skills.">
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2025-04-24 21:43:22 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="http://localhost:1313/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">v$ </span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#a4312b;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="http://localhost:1313/about/">About Me</a></li><li><a href="http://localhost:1313/categories/">Categories</a></li><li><a href="http://localhost:1313/chals/">CTF Chals</a></li><li><a href="http://localhost:1313/posts/">Posts</a></li><li><a href="http://localhost:1313/tags/">Tags</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+        </span>
+    </span>
+
+    
+  
+    
+      
+    
+  
+
+
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        3 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="http://localhost:1313/posts/2025/04/plaidctf-2025-viehaw/">PLAIDCTF 2025: VIEHAW!!</a>
+      </h1>
+
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <p>I&rsquo;m currently writing this while in Barcelona, Spain, as I realize during my vacation this is probably one of the few times I can actually utilize to start up writing again. This will be a technical writeup for my challenge, Viehaw, from PlaidCTF 2025.</p>
+<p>I&rsquo;ve been friends with PPP for a while considering our happy union of MMM. My CTF career also grew up on some early PlaidCTF challenges - a healthy diet of GoogleCTF, CSAW, PicoCTF, DragonCTF, PlaidCTF and HXPCTF really helped grow my skills. Presumably, the next steps are to make a challenge for DragonCTF (please come back bb) or PicoCTF or HXP, but we&rsquo;ll see.</p>
+<p>Viehaw is my most self-indulgent challenge yet</p>
+<h2 id="get-to-the-writeup-omg">Get to the writeup omg</h2>
+<p><em>For the purposes of this writeup, Vie is&hellip; obviously, me. I&rsquo;m going to speak about the entity &ldquo;Vie&rdquo; in first-person in this writeup.</em></p>
+<p>I challenge you to a duel at the Coyote Ugly saloon (which, btw, I don&rsquo;t think anyone got that reference? I watched that movie when I was way too young to be watching that). The game is rigged: my health is high, my skills unmatched, its wack.</p>
+<h3 id="graphite">Graphite</h3>
+<h3 id="skyrims-restoration-loop">Skyrim&rsquo;s Restoration Loop</h3>
+<p>Okay so, if you ever played Skyrim, you may be aware of this infamous restoration loop hack. For whatever reason, there exists a glitch where (under special circumstances) equipping and then un-equipping some set of armor that is supposed to grant you a stat buff while equipped will still hold a reference to the buff even if you remove the armor. Therefore, re-equipping that piece of armor will re-add the buff, giving you twice the benefits, or 3x or 4x or etc etc&hellip;</p>
+<p>Clever players found this bug and ended up utilizing it to buff their stats to high-heaven on console versions of Skyrim (and PC as well if you wanted to get god mode the way Todd unintended), letting them do cool things like punch a dragon to death or suplex the ebony warrior. The details are listed in this YouTube video if you&rsquo;re interested in learning more about it.</p>
+<p>The main principle of this glitch is basically this: the program forgets to properly remove a de-referenced buff, then proceeds to add the same buff again onto the player&rsquo;s &ldquo;effects stack&rdquo;, for lack of a better word. Players repeat the action to de-reference the buff in one check (armor is removed - check) but not the other (buff is removed - nope), allowing them to re-add it again. I tried to emulate the principle here, but of course because I coded this in TypeScript and I am bad at mastering the art of it, there existed many ECMAScript Fun And Cute Quirks that created a whole bunch of unintended solutions. Honestly, I found them all to be very unique and fun, so I&rsquo;m not too mad about it. I still have a whole bunch of other video-game inspired glitches that I can use for future challenges.</p>
+<p>Another goof I did was instantiate a single instance of me, instead of on-demand at the duel endpoint. This basically made me a raid boss, so people could drain my health continually without worry and I genuinely found that to be extremely fuckin hilarious so I&rsquo;m noting that here.</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="http://localhost:1313/tags/untagged/">untagged</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        540 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2025-04-24 21:43 &#43;0200
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="http://localhost:1313/posts/2025/08/defcon-33-retrospective/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">DEFCON 33: Retrospective</span>
+                </a>
+            </span>
+            
+
+            
+            <span class="button next">
+                <a href="http://localhost:1313/posts/2024/12/def-con-32-retrospective-end-of-the-year-recap/">
+                    <span class="button__text">DEF CON 32 Retrospective, end of the year recap</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2025</span>
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="http://localhost:1313/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="http://localhost:1313/bundle.min.63e1cd4087b02bc78961fcab2aaf77e957e2227557c73ab774f1cc4a9db0645e90d2403ca03e55eb0887e432e82aea10afe7f125052af6dd46cfea148ecbc663.js" integrity="sha512-Y&#43;HNQIewK8eJYfyrKq936VfiInVXxzq3dPHMSp2wZF6Q0kA8oD5V6wiH5DLoKuoQr&#43;fxJQUq9t1Gz&#43;oUjsvGYw=="></script>
+
+
+
+    </body>
+</html>

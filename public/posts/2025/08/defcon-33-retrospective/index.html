@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="1 CTF. 2 full days of hacking. 3 teams. 4 victories.
+When we won last year, our hat-trick, we were the first in DEF CON&rsquo;S history to do it. 3 consecutive victories, 8x3 (24) black badges awarded in 3 total years. I think it was safe to say that a reputation formed around us and naturally, speculation. PPP and The Duck already had their own reputations so it&rsquo;s not like the secrets and rumors and awe towards MMM came out of nowhere." />
+<meta name="keywords" content=", untagged" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#0c0c0d" />
+<link rel="canonical" href="https://jamvie.net/posts/2025/08/defcon-33-retrospective/" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+<link rel="manifest" href="https://jamvie.net/site.webmanifest">
+<link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+
+
+    <title>
+        
+            DEFCON 33: Retrospective :: VIE 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="https://jamvie.net/main.535bae1ccfa4f49e2cd0c8cecdece0708a1ec5b561a08b8f0f6ea9254d639b2c.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://jamvie.net/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://jamvie.net/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://jamvie.net/favicon-16x16.png">
+    <link rel="manifest" href="https://jamvie.net/site.webmanifest">
+    <link rel="mask-icon" href="https://jamvie.net/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="https://jamvie.net/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+
+  <meta itemprop="name" content="DEFCON 33: Retrospective">
+  <meta itemprop="description" content="1 CTF. 2 full days of hacking. 3 teams. 4 victories.
+When we won last year, our hat-trick, we were the first in DEF CON’S history to do it. 3 consecutive victories, 8x3 (24) black badges awarded in 3 total years. I think it was safe to say that a reputation formed around us and naturally, speculation. PPP and The Duck already had their own reputations so it’s not like the secrets and rumors and awe towards MMM came out of nowhere.">
+  <meta itemprop="datePublished" content="2025-08-11T16:30:33-07:00">
+  <meta itemprop="dateModified" content="2025-08-11T16:30:33-07:00">
+  <meta itemprop="wordCount" content="2594">
+  <meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png">
+  <meta itemprop="keywords" content="Untagged">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png">
+  <meta name="twitter:title" content="DEFCON 33: Retrospective">
+  <meta name="twitter:description" content="1 CTF. 2 full days of hacking. 3 teams. 4 victories.
+When we won last year, our hat-trick, we were the first in DEF CON’S history to do it. 3 consecutive victories, 8x3 (24) black badges awarded in 3 total years. I think it was safe to say that a reputation formed around us and naturally, speculation. PPP and The Duck already had their own reputations so it’s not like the secrets and rumors and awe towards MMM came out of nowhere.">
+
+
+
+
+
+    <meta property="article:section" content="retrospectives" />
+
+
+
+    <meta property="article:published_time" content="2025-08-11 16:30:33 -0700 -0700" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://jamvie.net/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">v$ </span>
+            <span class="logo__cursor" style=
+                  "
+                   background-color:#a4312b;
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://jamvie.net/about/">About Me</a></li><li><a href="https://jamvie.net/categories/">Categories</a></li><li><a href="https://jamvie.net/chals/">CTF Chals</a></li><li><a href="https://jamvie.net/posts/">Posts</a></li><li><a href="https://jamvie.net/tags/">Tags</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+        </span>
+    </span>
+
+    
+  
+    
+      
+    
+  
+
+
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        13 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://jamvie.net/posts/2025/08/defcon-33-retrospective/">DEFCON 33: Retrospective</a>
+      </h1>
+
+      
+
+      
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pregame">PREGAME</a></li>
+    <li><a href="#day-one---friday">Day One - Friday</a>
+      <ul>
+        <li><a href="#koth-attestedfun">KOTH: attestedfun</a></li>
+        <li><a href="#end-day-one">End Day One</a></li>
+      </ul>
+    </li>
+    <li><a href="#day-two---saturday">Day Two - Saturday</a>
+      <ul>
+        <li><a href="#koth-hs">KOTH: hs</a></li>
+        <li><a href="#ad-axis">AD: axis</a></li>
+        <li><a href="#end-day-two">End Day Two</a></li>
+      </ul>
+    </li>
+    <li><a href="#day-three---sunday">Day Three - Sunday</a>
+      <ul>
+        <li><a href="#afterparty">Afterparty</a></li>
+      </ul>
+    </li>
+    <li><a href="#to-nautilus-institute">To Nautilus Institute</a></li>
+    <li><a href="#closing-photos">Closing Photos</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
+
+      
+
+      <div class="post-content">
+        <p>1 CTF. 2 full days of hacking. 3 teams. 4 victories.</p>
+
+    <img src="https://jamvie.net/images/DC2025_MMM.JPG"  class="center"  style="border-radius: 8px; height: 75%; width: 75%;"  />
+
+
+<p>When we won last year, our hat-trick, we were the first in DEF CON&rsquo;S history to do it. 3 consecutive victories, 8x3 (24) black badges awarded in 3 total years. I think it was safe to say that a reputation formed around us and naturally, speculation. PPP and The Duck already had their own reputations so it&rsquo;s not like the secrets and rumors and awe towards MMM came out of nowhere. However, it&rsquo;s not like MMM was the only team that did well enough to have a reputation in the CTF community.</p>
+<p>Any team that has managed to qualify for DEF CON is a strong and worthy team. Each one with decorated legacies and reputations, formed from other victories and vulnerabilities found. Every team had their powerhouses, and none of them were discounted. We didn&rsquo;t have a notion of a &ldquo;weak&rdquo; team, here in MMM. And as such, we treated each and every one of our competitors with their respect that is due. This also meant that the concept of &ldquo;going easy&rdquo; is not in our lexicon, and never will be. Each team we encountered in DEF CON was a worthy and powerful rival. So we didn&rsquo;t hold back. My opinion piece on DEF CON came a little late, probably later than it could have to influence some people&rsquo;s opinions on this matter. But, I think after about 5 years of CTF, and idk how many more to count, I&rsquo;ll admit I gave up on the idea of ensuring that I&rsquo;ve impressed every single CTFer I&rsquo;ve met in my life. I worked hard. I played hard. Discount that how you will.</p>
+<h2 id="pregame">PREGAME</h2>
+<p>I arrived on the Wednesday, August 6th, to try and at least enjoy Vegas a little bit since the consecutive 5 days after will give me no relief or reprieve. So, I don&rsquo;t really have a lot of technical stuff to discuss here, so I&rsquo;ll indulge and spend some time talking about the things I did.</p>
+<p>First, I met up with a teammate and we spent the whole day together, getting oriented around Vegas after an early room check-in. I got tacos and tequila at Chayo&rsquo;s near the Vegas strip, then picked up some other teammates who also came early and hung out with them for the rest of the night. It was really sad - Chayo&rsquo;s has a mechanical bull in the back that I really wanted to go on but it was closed down that day :(</p>
+
+    <img src="https://jamvie.net/images/dc2025_chayo.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>Thursday was when most others were in Vegas, and I decided to get some breakfast with teammate at the Paris hotel at Mon Ami. The rest of Thursday was prep. We set up our tooling, debriefed on what each and every team member&rsquo;s roles and responsibilities would be, and coordinated other logistics.</p>
+<p>This was our 4th year coming to DEFCON, and we held no reservations. Our last win last year was hard-fought and we expected a harder fight with more aggressive teams. The Thursday debrief set the scene to ensure that regardless of what the outcome was, we would give it our all.</p>
+<h2 id="day-one---friday">Day One - Friday</h2>
+
+    <img src="https://jamvie.net/images/dc2025.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>DEF CON&rsquo;s usual light banner, this time in a giant E.</p>
+<p>OH 3 FOR 33</p>
+
+    <img src="https://jamvie.net/images/dc2025_area.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>Friday I was at the floor, and had a fun time trying to figure out networking logistics. At the beginning of the game there seemed to be some ethernet cable issue with our setup that thankfully, a bunch of the organizers came to try and help with. I think we lost precious minutes at the start of the game but the rest of the days forward made up for that.</p>
+<p>Nautilus Institute&rsquo;s last organized DEF CON introduced a (new to me, old to others in MMM) mechanic called &ldquo;stealth ports&rdquo;. Each challenge, on each player&rsquo;s box, had 2 ports running the same service. Port A&rsquo;s traffic was recorded and provided to us in pcaps. Port B&rsquo;s wasn&rsquo;t. The flags sourced from port A were of a very high point weight than that of port B. You therefore had an interesting metagame with stealth ports: you could hide a potentially valuable exploit by hitting teams through stealth ports but lose a SIGNIFICANT amount of points (75% decrease), or you could expose your exploit and allow others to potentially copy it from the exploit, but gain full points that way. This introduced a very welcome layer of strategy onto us that we tried to use throughout the game.</p>
+<p>Aside from disappearing wifi and new meta discussions of stealth ports, I also had the opportunity to enjoy some challenges - one of which was the first King of the Hill: Attestedfun.</p>
+<h3 id="koth-attestedfun">KOTH: attestedfun</h3>
+
+    <img src="https://jamvie.net/images/dc2025_af_phone.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>The first KOTH challenge, attestedfun, was very interesting. I don&rsquo;t think I&rsquo;ve ever had a challenge that involved a phsyical phone for interactions with, so Nautilus Institute takes the cake for this one.</p>
+<p>The premise was simple, after reverse-engineering a server you&rsquo;re given (on the floor) a physical android phone with nothing on it (factory reset). You use it to interact with an app that&rsquo;s just a text box on a green screen. Typing anything in it forced you to watch (at 90 volume cause yall are SICK) either steamboat willie or rave gandalf in its entirety. When the troll was over, the app spat back a seemingly base64-encoded string to you.</p>
+<p>After I recieved the phone on the floor, I set it up and downloaded the companion APK. In case there was anything special needed for the phone, I got a few measures to add frida into the app for dynamic instrumentation, and at one point we rooted the phone, but reversed it when we realized we didn&rsquo;t need to.</p>
+<p>The actual meat of the challenge was in the rust server. It was a gigantic binary that we manually reversed, and some portions of it are still confusing to decipher. Anyway, in the first iteration of this challenge, there were the following problems:</p>
+<pre tabindex="0"><code>b1
+biosig1
+biochain1
+biochain2
+biochain3
+biocert1
+biocert2
+biocert3
+biochall1
+biobstate1
+pcsig1
+pcsig2
+pcchain1
+pcchain2
+pcchain3
+pccert1
+pccert2
+pccert3
+pcchall1
+pcbstate1
+di0
+di1
+di2
+di3
+di4
+</code></pre>
+    <img src="https://jamvie.net/images/dc2025_af_app.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>The rough idea of attestedfun was to reverse the logic behind each challenge and perform the requisite actions to satisfy them, on the phone. I could go into greater detail into a seperate blog post about this, as attributes of it were really cool. What wasn&rsquo;t cool was having to, intermittently every 5ish mins, hear steamboat goddamn shit-ass willie in its entirety for the rest of the game. I stand before Christ with how close I was (very close) to losing my shit (very very close).</p>
+
+    <img src="https://jamvie.net/images/dc2025_af_app_2.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<h3 id="end-day-one">End Day One</h3>
+
+    <img src="https://jamvie.net/images/dc2025_sleep.JPG"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>Conclusion of day 1 ended with us on top, with a steady lead. However, we&rsquo;ve been through this 3 times already. We knew that first looks are decieving. In spite of our lead we didn&rsquo;t slow down - the next night would be sleepless for most of us.</p>
+
+    <img src="https://jamvie.net/images/dc2025_yeet.JPG"  class="center"  style="border-radius: 8px; height: 100%; width: 100%;"  />
+
+
+<h2 id="day-two---saturday">Day Two - Saturday</h2>
+<p>Saturday was business as usual! We woke up, most of us, and span our exploits found overnight ready into our thrower. While we started with a lead, we also knew how easy it would have been to end without one. Saturday was also the day I focused on and looked at 2 additional challenges: hs and axis.</p>
+<h3 id="koth-hs">KOTH: hs</h3>
+<p>I was not a fan of this KoTH, my main feedback being that it doesn&rsquo;t &ldquo;look&rdquo; like a KoTH.</p>
+<p>My understanding of a King of The Hill challenge was that of one with a moving goalpost in relation to other teams. You are therefore forced to perform iterative optimizations reactionary to what other optimizations other teams are doing, to maintain a top position. This is why KoTH challs have their own scoreboard to measure these nuances in said optimizations.</p>
+<p>The first problem I had with this KoTH was the <em><strong>lack</strong></em> of a scoreboard. It is unclear to me if there was supposed to be one in the first place, or if it was added on later, but regardless the initial few hours that hs was live it was totally unknown to teams how we were doing in relation to each other. This felt like an important aspect of any KoTH that wasn&rsquo;t reflected here.</p>
+<p>HOWEVER, one could make the argument that a scoreboard wasn&rsquo;t necessarily needed as once you solved a prompt/got a flag, you were done for the rest of the challenge, which brings me to my 2nd problem: there was no &ldquo;optimization&rdquo; to be had.</p>
+<p>A KoTH should be able to provide some active, engaging set of &ldquo;tasks&rdquo; to do per tick. Once you found the flags in hs, you didn&rsquo;t have to do anything else. You could passively gain points after figuring out 1 needed prompt for 1 needed flag. This removes some of the properties of what makes a KoTH so great. Hs felt more like a jeopardy challenge shoehorned into DEF CON, over a challenge specifically tailored to accomodate consistent tinkering upon optimizations for the problem. I think this would have landed better as a jeopardy challenge during quals, or maybe an attack-defense challenge with tweaks, but it just didn&rsquo;t make sense as a KoTH challenge. We dedicated minimal resources to this as the ROI on this challenge was tiny, and dwindling faster than other challenges. Our priority landed on those other challenges.</p>
+<h3 id="ad-axis">AD: axis</h3>
+<p>Axis was a web challenge written in erlang, but provisioned as an erlang binary so we needed to reverse it. The reversing was probably the most interesting part, as the web component here was more straightforward. The code of Axis was recycled from previous challenges: <a href="https://github.com/Nautilus-Institute/quals-2023/tree/main/rawwater">rawwater</a> from the 2023 quals and <a href="https://github.com/Nautilus-Institute/quals-2024/tree/5e15c5e1a2cb100f86c22e759536327e23af5bf8/gilroy">gilroy</a> from the 2024 quals. Snippets of the reversed binary revealed dead source code that served as a sort of template from both challenges that came before. Some of these dead code bits created rabbit holes, but we did have a jumping off point to base some of our exploits on. Most of said exploits were SQLi, as the challenge allowed you to modify fields in other tables of the SQL database: <code>vie', name = (select flag from flags) || '</code>. Creating forms also allowed you to view these table fields for flag viewing purposes.</p>
+<h3 id="end-day-two">End Day Two</h3>
+<p>We got kicked out of LiveCTF pretty earliy so our point delta would look different without the boost of points. This year&rsquo;s stealth ports meant that every other point-gaining attribute got a massive scale up, so losing out of LiveCTF top 3 meant that our lead wasn&rsquo;t as big as we thought it was. This was concerning - the delta between first and second place was smaller than we thought. Furthermore, the last day of Sunday was, idk, 3 hours long? We couldn&rsquo;t spend those remaining hours doing fuck-all. Last night, and last few years, we encouraged and had a system of people who slept while others worked, on shift. This day, we all collectively said fuck it. All of us were up.</p>
+<h2 id="day-three---sunday">Day Three - Sunday</h2>
+<p>I don&rsquo;t have much to say here since the day lasted 3 hours - basically. I guess I have more to say on the afterparty, but that comes later.</p>
+<p>We concluded Sunday throwing everything we got. Fuck stealth ports - just throw whatever we had. For the last bit of the game lasting 3 hours, it admittedly was pretty intense. Bpak got the call for our victory and we were requested for our 8 black badge recipients. On MB&rsquo;s side, we chose some people who showed an intense dedication during the game itself, and to the CTF team as a whole.</p>
+
+    <img src="https://jamvie.net/images/dc2025_awardsceremony.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>The black badges this year were cool - the lanyard was an intricate hand-beaded design with a brass cast of this year&rsquo;s design.</p>
+
+    <img src="https://jamvie.net/images/dc2025_blackbadge.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<h3 id="afterparty">Afterparty</h3>
+<p>Unlike previous years, this year&rsquo;s afterparty took place in a (?) compound (??) of multiple houses with a general backyard area (???) centering them. The afterparty was, as usual, very fun. I spent most of my time with my teammates but it was genuinely lovely to see all of my other CTF friends there too. The party is the ONE time I get to have to see alot of said friends around, as I&rsquo;m not really venturing around meeting other CTF players during active competition times. A lovely shoutout to some cool people I met from mhackeroni, KuK Hofhackerei, and of course Dicegang (SuperDiceCode) and Shellphish.</p>
+<p>
+    <img src="https://jamvie.net/images/bluepichu_vie_yeehaw.JPEG"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<em>Bluepichu and Vie say yeehaw</em></p>
+<h2 id="to-nautilus-institute">To Nautilus Institute</h2>
+<p>4 years. I understand that for some of you, this was not your first rodeo.</p>
+<p>Your breakthrough year of 2022 was controversial, to say the least. Many CTF teams have various thoughts about how DEF CON was organized during your reign. I won&rsquo;t discount the valid cirticism that they may hold, BUT I will ignore the less-valid criticism that were thinly-veiled insults, that shit isn&rsquo;t productive. In fact, I&rsquo;m sure you&rsquo;ve heard it all already. Many teams, especially the ones who played in the CTF this year, have also organized their own CTFs, so some points of feedback are coming from wiser places than others.</p>
+<p>But every CTF is different. And I also know (in fact, perhaps am very aware) that you recieved 10 complaints to every 1 compliment directed at you. You&rsquo;ve shouldered the task of a fucking <strong>thankless</strong> job for 4 years. Everyone wants DEF CON CTF, and nobody wants to organize it. It&rsquo;s as if we all implicitly know that if we&rsquo;d take up the mantle we&rsquo;d open ourselves to more hate than love, because teams clamor up and desperately fight with their fangs out during quals for a chance to hit Vegas. We all <em>think</em> we&rsquo;d do a better job, but there will always be something to hate. You have run <em>the</em> CTF, the CTF that has the allure of a siren to the community. Everyone has opinions on it.</p>
+<p>I&rsquo;ve been on the other side as well. Organizing a big, high-stakes CTF means you&rsquo;re given an ocean of responsibility that&rsquo;s easy to drown in. I won&rsquo;t absolve you of mistakes you may have made, but I know I don&rsquo;t have even the smallest shred of understanding of the ocean you were in anyway - <em>and I help with GoogleCTF</em>, a similarly gigantic high-stakes CTF.</p>
+<p>To Nautilus Institute, I see you. I see the work you&rsquo;ve put in, and know that the only thing that was propelling DEF CON CTF forward was the absolute dedication to the craft that could have only come from a principled love for the hacking community. It takes some real guts to stand tall in spite of getting shit on for a CTF you feel like you&rsquo;ve dedicated actual years of your life to, even if the criticism was valid (yes, I have valid feedback, and I hope I have communicated that effectively earlier). I know what its like to sacrifice your nights to keep a server running and then ignore the hateful messages <em>in the same hour</em>, I commend you for the ironclad guard you would have needed to withstand that. That kind of determination and drive to push yourself (even when you might kill yourself doing so) comes very rarely, and is worth its weight in gold. I&rsquo;ve been in your shoes. I see you.</p>
+<p>Goodbye, thank you for the blood and sweat and tears that created 4 years worth of hacking, and goodluck to the next organizer.</p>
+<h2 id="closing-photos">Closing Photos</h2>
+
+    <img src="https://jamvie.net/images/dc2025_sharkjason.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>Jason (Kirkland Green Tea) packed a shark costume and wore it for our team photo.</p>
+<!-- raw HTML omitted -->
+
+    <img src="https://jamvie.net/images/vieboatwillie.png"  class="center"  style="border-radius: 8px; height: 100%; width: 100%;"  />
+
+
+<p>Vie Boat Willie</p>
+<!-- raw HTML omitted -->
+
+    <img src="https://jamvie.net/images/dc2025_mbshirt.png"  class="center"  style="border-radius: 8px; height: 50%; width: 50%;"  />
+
+
+<p>We got Maple Bacon custom shirts :)</p>
+<!-- raw HTML omitted -->
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://jamvie.net/tags/untagged/">untagged</a></span>
+        
+    </p>
+
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://jamvie.net/categories/retrospectives/">retrospectives</a></span>
+        
+    </p>
+
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        2594 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2025-08-12 01:30 &#43;0200
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://jamvie.net/posts/2024/12/def-con-32-retrospective-end-of-the-year-recap/">
+                    <span class="button__text">DEF CON 32 Retrospective, end of the year recap</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2025</span>
+            <span>CC Attribution-NonCommercial 4.0 International License</span>
+            <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="https://jamvie.net/bundle.min.63e1cd4087b02bc78961fcab2aaf77e957e2227557c73ab774f1cc4a9db0645e90d2403ca03e55eb0887e432e82aea10afe7f125052af6dd46cfea148ecbc663.js" integrity="sha512-Y&#43;HNQIewK8eJYfyrKq936VfiInVXxzq3dPHMSp2wZF6Q0kA8oD5V6wiH5DLoKuoQr&#43;fxJQUq9t1Gz&#43;oUjsvGYw=="></script>
+
+
+
+    </body>
+</html>

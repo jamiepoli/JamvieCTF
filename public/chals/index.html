@@ -4,12 +4,11 @@
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Vie ">
-<meta name="description" content="My challenges I&rsquo;ve been writing challenges since 2022, which is not a long time, but all of my challenges have more or less been scattered throughout the wind. This is my attempt to consolidate the ones I wrote.
-MAPLECTF Honksay
+<meta name="author" content="">
+<meta name="description" content="Challenges I&rsquo;ve been writing challenges since 2022, which is not a long time, but all of my challenges have more or less been scattered throughout the wind. This is my attempt to consolidate the ones I wrote.
+PLAIDCTF VIEHAW (writeup pending) Game-ified hack inspired by Skyrim&rsquo;s restoration loop hack, coupled with SSRF -&gt; RCE with pickle on Graphite MAPLECTF Honksay
 XSS with object bypass Viene Library
-Prototype Pollution to leverage PUT request-based header overrides in Ruby Art Gallery
-TLS poison -&gt; FTP -&gt; Redis SSRF chain for deserialization RCE JUJUTSU KAISEN" />
+Prototype Pollution to leverage PUT request-based header overrides in Ruby Art Gallery" />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="#0c0c0d" />
@@ -50,22 +49,20 @@ TLS poison -&gt; FTP -&gt; Redis SSRF chain for deserialization RCE JUJUTSU KAIS
 
 
   <meta itemprop="name" content="VIE">
-  <meta itemprop="description" content="My challenges I’ve been writing challenges since 2022, which is not a long time, but all of my challenges have more or less been scattered throughout the wind. This is my attempt to consolidate the ones I wrote.
-MAPLECTF Honksay
+  <meta itemprop="description" content="Challenges I’ve been writing challenges since 2022, which is not a long time, but all of my challenges have more or less been scattered throughout the wind. This is my attempt to consolidate the ones I wrote.
+PLAIDCTF VIEHAW (writeup pending) Game-ified hack inspired by Skyrim’s restoration loop hack, coupled with SSRF -&gt; RCE with pickle on Graphite MAPLECTF Honksay
 XSS with object bypass Viene Library
-Prototype Pollution to leverage PUT request-based header overrides in Ruby Art Gallery
-TLS poison -&gt; FTP -&gt; Redis SSRF chain for deserialization RCE JUJUTSU KAISEN">
-  <meta itemprop="wordCount" content="205">
+Prototype Pollution to leverage PUT request-based header overrides in Ruby Art Gallery">
+  <meta itemprop="wordCount" content="225">
   <meta itemprop="image" content="https://jamvie.net/img/rubber_duckvie.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://jamvie.net/img/rubber_duckvie.png">
   <meta name="twitter:title" content="VIE">
-  <meta name="twitter:description" content="My challenges I’ve been writing challenges since 2022, which is not a long time, but all of my challenges have more or less been scattered throughout the wind. This is my attempt to consolidate the ones I wrote.
-MAPLECTF Honksay
+  <meta name="twitter:description" content="Challenges I’ve been writing challenges since 2022, which is not a long time, but all of my challenges have more or less been scattered throughout the wind. This is my attempt to consolidate the ones I wrote.
+PLAIDCTF VIEHAW (writeup pending) Game-ified hack inspired by Skyrim’s restoration loop hack, coupled with SSRF -&gt; RCE with pickle on Graphite MAPLECTF Honksay
 XSS with object bypass Viene Library
-Prototype Pollution to leverage PUT request-based header overrides in Ruby Art Gallery
-TLS poison -&gt; FTP -&gt; Redis SSRF chain for deserialization RCE JUJUTSU KAISEN">
+Prototype Pollution to leverage PUT request-based header overrides in Ruby Art Gallery">
 
 
 
@@ -150,8 +147,16 @@ TLS poison -&gt; FTP -&gt; Redis SSRF chain for deserialization RCE JUJUTSU KAIS
             
 
             <div class="post-content">
-                <h1 id="my-challenges">My challenges</h1>
+                <h1 id="challenges">Challenges</h1>
 <p>I&rsquo;ve been writing challenges since 2022, which is not a long time, but all of my challenges have more or less been scattered throughout the wind. This is my attempt to consolidate the ones I wrote.</p>
+<h2 id="plaidctf">PLAIDCTF</h2>
+<ul>
+<li>VIEHAW (writeup pending)
+<ul>
+<li>Game-ified hack inspired by <a href="https://elderscrolls.fandom.com/wiki/Forum:Skyrim:Alchemy/Enchanting_Loop">Skyrim&rsquo;s restoration loop hack</a>, coupled with SSRF -&gt; RCE with pickle on Graphite</li>
+</ul>
+</li>
+</ul>
 <h2 id="maplectf">MAPLECTF</h2>
 <ul>
 <li>
@@ -176,21 +181,6 @@ TLS poison -&gt; FTP -&gt; Redis SSRF chain for deserialization RCE JUJUTSU KAIS
 <p><a href="https://jamvie.net/posts/2023/10/maplectf-2023-jujutsu-kaisen/">JUJUTSU KAISEN</a></p>
 <ul>
 <li>POST-based img-tag XSSI -&gt; ESI injection -&gt; img-creation primitive oracle -&gt; XS-leak</li>
-</ul>
-</li>
-</ul>
-<h2 id="pbctf--bwctf">PBCTF // BWCTF</h2>
-<ul>
-<li>
-<p><a href="posts/2023/02/pbctf-2023-jazzy-x-vie-chals/#makima">Makima</a></p>
-<ul>
-<li>FastCGI PHP and nginx path resolution for PHP RCE combined with <code>X-Accel-Redirect</code> header SSRF</li>
-</ul>
-</li>
-<li>
-<p>Sandevistan</p>
-<ul>
-<li>Golang method confusion to overwrite <code>/proc/self/mem</code> for runtime RCE</li>
 </ul>
 </li>
 </ul>
@@ -231,6 +221,21 @@ TLS poison -&gt; FTP -&gt; Redis SSRF chain for deserialization RCE JUJUTSU KAIS
 </ul>
 </li>
 </ul>
+<h2 id="pbctf--bwctf">PBCTF // BWCTF</h2>
+<ul>
+<li>
+<p><a href="posts/2023/02/pbctf-2023-jazzy-x-vie-chals/#makima">Makima</a></p>
+<ul>
+<li>FastCGI PHP and nginx path resolution for PHP RCE combined with <code>X-Accel-Redirect</code> header SSRF</li>
+</ul>
+</li>
+<li>
+<p>Sandevistan</p>
+<ul>
+<li>Golang method confusion to overwrite <code>/proc/self/mem</code> for runtime RCE</li>
+</ul>
+</li>
+</ul>
 
             </div>
         </article>
@@ -249,7 +254,7 @@ TLS poison -&gt; FTP -&gt; Redis SSRF chain for deserialization RCE JUJUTSU KAIS
                 <footer class="footer">
     <div class="footer__inner">
         <div class="footer__content">
-            <span>&copy; 2024</span>
+            <span>&copy; 2025</span>
             <span>CC Attribution-NonCommercial 4.0 International License</span>
             <span> <a href="https://jamvie.net/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
         </div>
